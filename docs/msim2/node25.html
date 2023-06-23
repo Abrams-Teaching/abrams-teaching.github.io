@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Example: Average Energy and Magnetization vs. Temperature</TITLE>
+<META NAME="description" CONTENT="Example: Average Energy and Magnetization vs. Temperature">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node26.html">
+<LINK REL="previous" HREF="node24.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node26.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html426"
+  HREF="node26.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html424"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html418"
+  HREF="node24.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html427"
+  HREF="node26.html">Suggested Exercises</A>
+<B> Up:</B> <A NAME="tex2html425"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html419"
+  HREF="node24.html">Main Program: Final Outputs</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000321200000000000000">
+Example: Average Energy and Magnetization vs. Temperature</A>
+</H3>
+
+<P>
+Let's run the code for an <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN>=40 lattice for the following values of temperature: 5.0, 4.0, 3.0,
+2.0, 1.0.  At each temperature, we'll run six separate simulations with a unique random number generator seed.  Fig.&nbsp;<A HREF="#fig:ising_ex">4</A> shows the average magnetization <!-- MATH
+ $\langle s_1\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$ \langle s_1\rangle $"></SPAN> and the average energy per spin <!-- MATH
+ $\langle e\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$ \langle e\rangle $"></SPAN> vs. temperature, with each simulation contributing a unique point.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:ising_ex"></A><A NAME="1525"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4:</STRONG>
+(Upper) Average magnetization <!-- MATH
+ $\langle s_1\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$ \langle s_1\rangle $"></SPAN> and (lower) average energy per spin <!-- MATH
+ $\langle e\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$ \langle e\rangle $"></SPAN> vs. temperature for a 40<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$ \times $"></SPAN>40 Ising lattice, computed using six independent 50,000-cycle Metropolis MC simulations with sampling intervals of 100 cycles.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="640" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./ising_ex.png"
+ ALT="Image ising_ex"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+What is happening here?  Clearly, as the temperature decreases, the average energy per spin approaches -2; this makes sense because the spins will tend to align with their neighbors.  However, when we look at the average magnetization, we see that <!-- MATH
+ $\langle s_1\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$ \langle s_1\rangle $"></SPAN> is zero at high temperatures but then can seemingly approach <EM>either</EM> +1 or -1 as the temperature goes down.  This is because of <EM>symmetry breaking</EM>: although either all-up or all-down is equally likely, once it falls toward one it won't ever climb back out and go to the other.  So we see <EM>some</EM> magnets go to all -1 and others to all +1.  
+
+<P>
+Symmetry-breaking is an important phenomenon in molecular simulations.  The impact is has is to prevent exploration of state space because of barriers that are only extremely rarely overcome when resolving state-to-state transitions microscopically.  In the low-<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> Ising magnet, the all-up and all-down states are equally likely, but once one is committed to, the other will never practically be explored.  Why is this significant?  Many systems have state spaces like this, where there are two or more high-probability regions separated by large regions of low probability.  Sampling based on local moves in state space can almost never overcome such barriers, meaning such simulations are likely never truly ergodic.  None of the MC simulations below about <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 2.2 for an Ising simulation are ergodic!
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html426"
+  HREF="node26.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html424"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html418"
+  HREF="node24.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html427"
+  HREF="node26.html">Suggested Exercises</A>
+<B> Up:</B> <A NAME="tex2html425"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html419"
+  HREF="node24.html">Main Program: Final Outputs</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

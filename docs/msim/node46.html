@@ -1,0 +1,571 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>A Computational Model: Dimer Isomerization</TITLE>
+<META NAME="description" CONTENT="A Computational Model: Dimer Isomerization">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node45.html">
+<LINK REL="up" HREF="node42.html">
+<LINK REL="next" HREF="node47.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html624"
+  HREF="node47.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html622"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html618"
+  HREF="node45.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html625"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<B> Up:</B> <A NAME="tex2html623"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html619"
+  HREF="node45.html">Sampling the Transition Path</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072400000000000000">
+A Computational Model:  Dimer Isomerization</A>
+</H3>
+
+<P>
+To show the power of transition path sampling, it is perhaps best to
+consider a simple example of a two-state system where the states are
+separated by an energy barrier.  This presentation is based on an
+exercise from the <A NAME="tex2html48"
+  HREF="http://molsim.chem.uva.nl/course/material.html">molecular simulation
+course</A>
+taught by
+Berend Smit and Daan Frankel in 2001, and uses a code called <TT>tps</TT>.  
+
+<P>
+Here, we consider dimer isomerization in a simple 2D liquid sample of
+<IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> 15 particles confined to a circle of radius <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$R$">.  Particles 1 and 2
+form the dimer.  The total potential energy is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U} = {\sum_{i<j}}^\prime U_{\rm WCA}\left(r_{ij}\right) + \sum_i U_{\rm wall}\left(r_i\right) + U_{12}\left(r_{12}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="320" HEIGHT="47" BORDER="0"
+ SRC="img846.png"
+ ALT="\begin{displaymath}
+\mathscr{U} = {\sum_{i&lt;j}}^\prime U_{\rm WCA}\left(r_{ij}\ri...
+...sum_i U_{\rm wall}\left(r_i\right) + U_{12}\left(r_{12}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(306)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The prime indicates that the 1-2 pair is excluded from this sum.  All
+particles interact with each other via a modified Lennard-Jones
+pairwise interaction known as the Weeks-Chandler-Andersen (WCA) potential:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+U_{\rm WCA}\left(r\right) = \left\{\begin{array}{ll}
+	4\left(r^{-12}-r^{-6}\right) + 1 & \mbox{$r < 2^{1/6}$}\\
+	0 & \mbox{$r > 2^{1/6}$}
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="305" HEIGHT="46" BORDER="0"
+ SRC="img847.png"
+ ALT="\begin{displaymath}
+U_{\rm WCA}\left(r\right) = \left\{\begin{array}{ll}
+4\left...
+...r &lt; 2^{1/6}$}\\
+0 &amp; \mbox{$r &gt; 2^{1/6}$}
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(307)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The WCA potential is fully repulsive, and cutoff where the force
+vanishes.  The particles interact with the circular wall via another
+WCA potential:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+U_{\rm wall}\left({\bf r}\right) = U_{\rm WCA}\left(R+2^{1/6}-r\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="226" HEIGHT="34" BORDER="0"
+ SRC="img848.png"
+ ALT="\begin{displaymath}
+U_{\rm wall}\left({\bf r}\right) = U_{\rm WCA}\left(R+2^{1/6}-r\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(308)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="11" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img849.png"
+ ALT="${\bf r}$"> is the vector position and <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$r$"> is the radial position
+(i.e., the circle is centered on the origin).  The dimer bond (between
+particles 1 and 2) is described by a two-well potential:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+U_{12}\left(r_{12}\right) = h\left[1-\frac{\left(r_{12}-w-2^{1/6}\right)^2}{w^2}\right]^2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="269" HEIGHT="59" BORDER="0"
+ SRC="img850.png"
+ ALT="\begin{displaymath}
+U_{12}\left(r_{12}\right) = h\left[1-\frac{\left(r_{12}-w-2^{1/6}\right)^2}{w^2}\right]^2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(309)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This potential has stable minima at <!-- MATH
+ $r_{12} = 2^{1/6}$
+ -->
+<IMG
+ WIDTH="74" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img851.png"
+ ALT="$r_{12} = 2^{1/6}$"> and <!-- MATH
+ $r_{12} =
+2^{1/6}+2w$
+ -->
+<IMG
+ WIDTH="113" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img852.png"
+ ALT="$r_{12} =
+2^{1/6}+2w$">.  Here, <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$h$"> defines the height of the potential energy
+barrier between two stable states as defined by this potential, and
+<IMG
+ WIDTH="16" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img853.png"
+ ALT="$w$"> defines the width of this barrier:
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="512" HEIGHT="384" ALIGN="CENTER"
+ SRC="tps_bond.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+The WCA and dimer potentials used in this case study.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+For now, we fix <IMG
+ WIDTH="16" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img853.png"
+ ALT="$w$"> at 0.25, and <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$R$"> at 3.0.  This gives an 
+areal particle number density <!-- MATH
+ $\rho = 0.53~\sigma^{-2}$
+ -->
+<IMG
+ WIDTH="94" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img854.png"
+ ALT="$\rho = 0.53&nbsp;\sigma^{-2}$">.
+
+<P>
+What is a reasonable order parameter for this system?  The bond
+length, naturally.  All configurations for which <IMG
+ WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img855.png"
+ ALT="$r_{12} &lt; 1.30$"> are
+defined to be in region <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">, and all configurations for which <IMG
+ WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img856.png"
+ ALT="$r_{12}
+&gt; 1.45$"> are defined be in region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.  It is important to note here
+that <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$h$"> is not a measure of the <EM>free energy barrier</EM> which
+determines the kinetic rate in this process.  To determine the free
+energy barrier, we need to construct the free energy profile,
+<!-- MATH
+ $F(r_{12}) = -k_BT\ln Q(r_{12})$
+ -->
+<IMG
+ WIDTH="178" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img857.png"
+ ALT="$F(r_{12}) = -k_BT\ln Q(r_{12})$">.  This type of restricted free energy
+is often termed a <EM>Landau</EM> free energy. 
+
+<P>
+Let's consider first a small potential barrier height, <IMG
+ WIDTH="42" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img858.png"
+ ALT="$h = 2$">.  For
+this height, we can compute <!-- MATH
+ $P(\lambda,t\rightarrow\infty)$
+ -->
+<IMG
+ WIDTH="91" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img859.png"
+ ALT="$P(\lambda,t\rightarrow\infty)$"> very
+accurately from a single long MD simulation (10,000,000 steps; <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$"> = 0.001; total energy 15&nbsp;<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">).  We see from the linear
+region of <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> that the rate constant appears to be <!-- MATH
+ $k_{AB} =
+4.04\times10^{-2}~\tau^{-1}$
+ -->
+<IMG
+ WIDTH="166" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img860.png"
+ ALT="$k_{AB} =
+4.04\times10^{-2}&nbsp;\tau^{-1}$">.  Now, let us perform transition path
+sampling MC on this system.
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="420" HEIGHT="378" ALIGN="CENTER"
+ SRC="ct_h=2.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> computed from a long MD simulation for barrier height <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$h$"> = 2.
+The total energy is set at 15&nbsp;<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+First, let's decide how long an interval <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> we need.  Clearly, <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$">
+appears to be linear up to <IMG
+ WIDTH="39" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img861.png"
+ ALT="$t = 2$">; following Dellago, we'll choose
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 2.0.&nbsp;<A NAME="tex2html46"
+  HREF="footnode.html#foot8292"><SUP>4</SUP></A> Now, we need to conduct two types of MC
+simulations:
+
+<OL>
+<LI>A single path sampling MC simulation to compute <!-- MATH
+ $\left<\dot{h}_B(t)\right>_{AB}$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img863.png"
+ ALT="$\left&lt;\dot{h}_B(t)\right&gt;_{AB}$"> and <!-- MATH
+ $\left<h_B(t^\prime)\right>_{AB}$
+ -->
+<IMG
+ WIDTH="79" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img864.png"
+ ALT="$\left&lt;h_B(t^\prime)\right&gt;_{AB}$"> for <!-- MATH
+ $0 < t,t^\prime < T$
+ -->
+<IMG
+ WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img865.png"
+ ALT="$0 &lt; t,t^\prime &lt; T$">.  We will conduct a simulation of <IMG
+ WIDTH="27" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img866.png"
+ ALT="$10^6$"> cycles.
+</LI>
+<LI>A set of umbrella sampling MC simulations on the following intervals
+for <IMG
+ WIDTH="25" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img867.png"
+ ALT="$r_{12}$">:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"></TD>
+<TD ALIGN="CENTER">min</TD>
+<TD ALIGN="CENTER">max</TD>
+</TR>
+<TR><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">0.00</TD>
+<TD ALIGN="CENTER">1.22</TD>
+</TR>
+<TR><TD ALIGN="CENTER">2</TD>
+<TD ALIGN="CENTER">1.20</TD>
+<TD ALIGN="CENTER">1.26</TD>
+</TR>
+<TR><TD ALIGN="CENTER">3</TD>
+<TD ALIGN="CENTER">1.24</TD>
+<TD ALIGN="CENTER">1.30</TD>
+</TR>
+<TR><TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">1.28</TD>
+<TD ALIGN="CENTER">1.45</TD>
+</TR>
+<TR><TD ALIGN="CENTER">5</TD>
+<TD ALIGN="CENTER">1.40</TD>
+<TD ALIGN="CENTER">2.45</TD>
+</TR>
+</TABLE>
+
+<P>
+When matching the histograms in each of these intervals and
+renormalizing, we obtain <!-- MATH
+ $P\left(r_{12},t=2\right)$
+ -->
+<IMG
+ WIDTH="94" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img868.png"
+ ALT="$P\left(r_{12},t=2\right)$">.  When we then
+integrate from <IMG
+ WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img869.png"
+ ALT="$r_{12} = 1.45$"> to <IMG
+ WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img870.png"
+ ALT="$r_{12} = 2.45$"> (region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">).
+</LI>
+</OL>
+We'll use the other default parameter values provided in <TT>tps</TT>.
+These include the maximum angle by which velocity vectors are rotated
+in a shooting move (<!-- MATH
+ $\Delta\phi = 0.6$
+ -->
+<IMG
+ WIDTH="68" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img871.png"
+ ALT="$\Delta\phi = 0.6$">&nbsp;rad), and the number of
+shifting moves per shooting move (95:5), and the number of
+<IMG
+ WIDTH="25" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img867.png"
+ ALT="$r_{12}$">-slices per window (200).
+
+<P>
+We see that <!-- MATH
+ $\left<\dot{h}_B(t)\right> = 0.22$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img872.png"
+ ALT="$\left&lt;\dot{h}_B(t)\right&gt; = 0.22$"> and
+<!-- MATH
+ $\left<h_B(2)\right> = 0.55$
+ -->
+<IMG
+ WIDTH="106" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img873.png"
+ ALT="$\left&lt;h_B(2)\right&gt; = 0.55$">.
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="420" HEIGHT="378" ALIGN="CENTER"
+ SRC="avhb_h=2.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<!-- MATH
+ $\left<h_B(t)\right>$
+ -->
+<IMG
+ WIDTH="55" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img34.png"
+ ALT="$\left &lt;h_B(t)\right &gt;$"> computed from a transition path sampling MC simulation for barrier height <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$h$"> = 2.
+The total energy is set at 15&nbsp;<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Now, the histogram:
+
+<P>
+We see that <!-- MATH
+ $\left<\dot{h}_B(t)\right> = 0.22$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img872.png"
+ ALT="$\left&lt;\dot{h}_B(t)\right&gt; = 0.22$"> and
+<!-- MATH
+ $\left<h_B(2)\right> = 0.55$
+ -->
+<IMG
+ WIDTH="106" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img873.png"
+ ALT="$\left&lt;h_B(2)\right&gt; = 0.55$">.
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="540" HEIGHT="378" ALIGN="CENTER"
+ SRC="p_h=2.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<IMG
+ WIDTH="64" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img35.png"
+ ALT="$P(r_{12},2)$"> computed from a transition path sampling MC simulation 
+and umbrella sampling, for barrier height <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$h$"> = 2.
+The total energy is set at 15&nbsp;<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Integrating over region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> yields <IMG
+ WIDTH="37" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img874.png"
+ ALT="$C(2)$"> = 0.09037.  Performing the
+requisite operations yields <!-- MATH
+ $k_{AB} = 0.0360~\tau^{-1}$
+ -->
+<IMG
+ WIDTH="129" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img875.png"
+ ALT="$k_{AB} = 0.0360&nbsp;\tau^{-1}$">, which
+compares well to the MD-calculated value <!-- MATH
+ $k_{AB} =
+4.04\times10^{-2}~\tau^{-1}$
+ -->
+<IMG
+ WIDTH="166" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img860.png"
+ ALT="$k_{AB} =
+4.04\times10^{-2}&nbsp;\tau^{-1}$">.
+
+<P>
+Repeating this entire procedure for <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$h$"> = 6 yields <!-- MATH
+ $k_{AB} =
+5.05\times 10^{-4}~\tau^{-1}$
+ -->
+<IMG
+ WIDTH="166" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img876.png"
+ ALT="$k_{AB} =
+5.05\times 10^{-4}&nbsp;\tau^{-1}$">.
+
+<P>
+[to be completed; runs currently executing, March 13, 2013]
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html624"
+  HREF="node47.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html622"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html618"
+  HREF="node45.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html625"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<B> Up:</B> <A NAME="tex2html623"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html619"
+  HREF="node45.html">Sampling the Transition Path</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

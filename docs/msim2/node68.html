@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Gromacs</TITLE>
+<META NAME="description" CONTENT="Gromacs">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node71.html">
+<LINK REL="previous" HREF="node67.html">
+<LINK REL="up" HREF="node67.html">
+<LINK REL="next" HREF="node69.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html882"
+  HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html880"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html874"
+  HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html883"
+  HREF="node69.html">A Box of Water</A>
+<B> Up:</B> <A NAME="tex2html881"
+  HREF="node67.html">Open-source Production MD: Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html875"
+  HREF="node67.html">Open-source Production MD: Gromacs</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00081000000000000000">
+Gromacs</A>
+</H2>
+
+<P>
+The Gromacs source code is available officially from <a href="www.gromacs.org">www.gromacs.org</a>, though some Linux distributions offer pre-compiled versions.  In most high-performance computing settings, Gromacs is compiled from source code in order to link in hardware-specific libraries for things like internode communication and compiler-specific math libraries.  For this introductory survey though, we can just run the precompiled version on a laptop.  (If you have macOS, you might have to compile Gromacs from source.)  In Ubuntu under WSL:
+
+<P>
+<PRE>
+$ sudo apt install gromacs
+</PRE>
+
+<P>
+Gromacs is a suite of tools that include an MD engine along with tools for system preparation and simulation analysis.  All tools are invoked using the pre-command `gmx`.  `gmx -help` will give a lot of information.
+
+<P>
+Before proceeding with a couple of practical examples, I must convey the importance of reading the documentation if you want to use Gromacs in your own research.  The <a href="manual.gromacs.org">official Gromacs documentation</a> is extensive, but accessible to beginners.  The <a href="mdtutorials.com">official tutorials</a> by Justin Lemkul are also a must if you want to learn how to use Gromacs.
+
+<P>
+Like any MD simulation, using Gromacs breaks down into three main steps:
+
+<OL>
+<LI><B>Prepare system.</B>  
+    
+<OL>
+<LI>Get relevant atomic coordinates;
+</LI>
+<LI>Decide on a force-field and set the topology;
+</LI>
+<LI>Add solvent, ions, other atoms as necessary;
+</LI>
+<LI>Minimize the potential energy.
+    
+</LI>
+</OL>
+</LI>
+<LI><B>Run MD.</B>
+</LI>
+<LI><B>Analyze results.</B>
+</LI>
+</OL>
+
+<P>
+As may be inferred, the first step is often the most difficult.  It usually requires a lot of care and thought to generate an initial condition for MD.  Here we'll consider just two test cases for which this is not so difficult, but which illustrate the workflow.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html884"
+  HREF="node69.html">A Box of Water</A>
+<LI><A NAME="tex2html885"
+  HREF="node70.html">The SARS-CoV-2 spike protein receptor binding domain (RBD)</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html882"
+  HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html880"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html874"
+  HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html883"
+  HREF="node69.html">A Box of Water</A>
+<B> Up:</B> <A NAME="tex2html881"
+  HREF="node67.html">Open-source Production MD: Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html875"
+  HREF="node67.html">Open-source Production MD: Gromacs</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

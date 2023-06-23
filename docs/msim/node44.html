@@ -1,0 +1,1185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Transition Path Ensembles</TITLE>
+<META NAME="description" CONTENT="The Transition Path Ensembles">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node45.html">
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="up" HREF="node42.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html606"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html604"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html598"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html607"
+  HREF="node45.html">Sampling the Transition Path</A>
+<B> Up:</B> <A NAME="tex2html605"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html599"
+  HREF="node43.html">Fundamentals</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072200000000000000">
+The Transition Path Ensembles</A>
+</H3>
+
+<P>
+In this section, we briefly recapitulate the presentation of the
+transition path sampling method given in Ref.&nbsp;[<A
+ HREF="node63.html#Dellago1999">18</A>].  Accordingly,
+we will switch notation a bit.  We will call the indicator function <IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img770.png"
+ ALT="$h_A$">,
+and call a state point at time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> <IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img771.png"
+ ALT="$x_t$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+h_{A,B}\left(x_t\right) = \left\{\begin{array}{ll}
+	1 & \mbox{if $x_t\in A,B$}\\
+	0 & \mbox{if $x_t \notin A,B$}
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="208" HEIGHT="45" BORDER="0"
+ SRC="img772.png"
+ ALT="\begin{displaymath}
+h_{A,B}\left(x_t\right) = \left\{\begin{array}{ll}
+1 &amp; \mbo...
+...n A,B$}\\
+0 &amp; \mbox{if $x_t \notin A,B$}
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(280)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We consider the correlation function which measures the likelihood of
+finding the system in state <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> at time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> provided that it was in
+state <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> at time 0.  Now, for extremely long times, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$"> approaches
+the probability to find the system in state B at equilibrium,
+regardless of the system starting point (i.e., ergodicity is
+realized).  These must correspond to times much longer that the
+reaction time <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img758.png"
+ ALT="$\tau_R$">.  For times approaching <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img758.png"
+ ALT="$\tau_R$">, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$">
+approaches <!-- MATH
+ $\left<h_B\right>$
+ -->
+<IMG
+ WIDTH="36" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img773.png"
+ ALT="$\left&lt;h_B\right&gt;$"> exponentially:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) \approx \left<h_B\right>\left(1-\exp^{-t/\tau_R}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="194" HEIGHT="34" BORDER="0"
+ SRC="img774.png"
+ ALT="\begin{displaymath}
+C\left(t\right) \approx \left&lt;h_B\right&gt;\left(1-\exp^{-t/\tau_R}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(281)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Recall that <!-- MATH
+ $\tau_R = \left(k_{AB}+k_{BA}\right)^{-1}$
+ -->
+<IMG
+ WIDTH="149" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img775.png"
+ ALT="$\tau_R = \left(k_{AB}+k_{BA}\right)^{-1}$">.  When this
+time is greater than the short-time-scale molecular relaxation time,
+<!-- MATH
+ $\tau_{\rm mol}$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img776.png"
+ ALT="$\tau_{\rm mol}$">, <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> is a linear function of time:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) \approx k_{AB}t
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="89" HEIGHT="28" BORDER="0"
+ SRC="img777.png"
+ ALT="\begin{displaymath}
+C\left(t\right) \approx k_{AB}t
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(282)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The <EM>reactive flux</EM>, <IMG
+ WIDTH="46" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img778.png"
+ ALT="$dC/dt$"> displays a time-independent plateau
+in this regime which is equal to <IMG
+ WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img696.png"
+ ALT="$k_{AB}$">.
+
+<P>
+One should realize that <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> can be computed from a single molecular
+dynamics simulation, in principle.  However, if the system dynamics is
+subject to rare event transitions, it may not be possible in practice
+to simulate long enough to achieve a statistically relevant value of
+<IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$">.  Transition path sampling is meant to overcome this limitation.
+
+<P>
+Let's consider writing <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> as an explicit ensemble average over
+the equilibrium phase space probability distribution, <!-- MATH
+ $\rho\left(x_0\right)$
+ -->
+<IMG
+ WIDTH="43" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img779.png"
+ ALT="$\rho\left(x_0\right)$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) = \frac{\int dx_0 \rho\left(x_0\right)h_A\left(x_0\right)h_B\left(x_t\right)}{\int dx_0 \rho\left(x_0\right)h_A\left(x_0\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_6"></A><IMG
+ WIDTH="240" HEIGHT="46" BORDER="0"
+ SRC="img780.png"
+ ALT="\begin{displaymath}
+C\left(t\right) = \frac{\int dx_0 \rho\left(x_0\right)h_A\le...
+...x_t\right)}{\int dx_0 \rho\left(x_0\right)h_A\left(x_0\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(283)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Now, an insight of Dellago and Chandler is that, because both the
+numerator and denominator of Eq.&nbsp;<A HREF="#eq:tps_6">284</A> are partition
+functions, the log of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$"> can be interpreted as a <EM>free energy
+difference</EM> between two systems:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta F = -\ln C\left(t\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="109" HEIGHT="28" BORDER="0"
+ SRC="img781.png"
+ ALT="\begin{displaymath}
+\Delta F = -\ln C\left(t\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(284)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+So, the log of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$"> is the free energy price one must pay to constrain
+the endpoint of a dynamical path of length <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> which starts at time 0 in
+region <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> inside state <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.  This means that we can use (in principle) any
+free energy method to compute <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$">.  Dellago and Chandler chose <EM>umbrella sampling</EM>.
+
+<P>
+To see why it is advantageous to use umbrella sampling, we must first
+imagine an <EM>order parameter</EM> <!-- MATH
+ $\lambda\left(x\right)$
+ -->
+<IMG
+ WIDTH="37" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img782.png"
+ ALT="$\lambda\left(x\right)$"> which
+indicates when we are in region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> in the following manner:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+x \in B\ \ \mbox{if}\ \ \lambda_{\rm min} \le \lambda\left(x\right) \le \lambda_{\rm max}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="212" HEIGHT="28" BORDER="0"
+ SRC="img783.png"
+ ALT="\begin{displaymath}
+x \in B  \mbox{if}  \lambda_{\rm min} \le \lambda\left(x\right) \le \lambda_{\rm max}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(285)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We now ask, how probable is it to find the system with a particular value
+of the order parameter, <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $">, at time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">?  We can express
+this probability distribution as an ensemble average by visiting each
+phase space point at time 0, <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img784.png"
+ ALT="$x_0$">, and asking does this point initiate
+a dynamical trajectory that lands at order parameter <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $"> at time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">?
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P\left(\lambda,t\right) = \frac{\int dx_0 \rho\left(x_0\right)h_A\left(x_0\right)\delta\left[\lambda-\lambda\left(x_t\right)\right]}{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="293" HEIGHT="46" BORDER="0"
+ SRC="img785.png"
+ ALT="\begin{displaymath}
+P\left(\lambda,t\right) = \frac{\int dx_0 \rho\left(x_0\righ...
+...ght)\right]}{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(286)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, <!-- MATH
+ $\delta\left(x\right)$
+ -->
+<IMG
+ WIDTH="36" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img786.png"
+ ALT="$\delta\left(x\right)$"> is the Dirac delta function.  Because
+region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> corresponds to an interval of <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $">, <!-- MATH
+ $C\left(t\right)$
+ -->
+<IMG
+ WIDTH="37" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img787.png"
+ ALT="$C\left(t\right)$">
+is an integral of <!-- MATH
+ $P\left(\lambda,t\right)$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img788.png"
+ ALT="$P\left(\lambda,t\right)$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) = \int_{\lambda_{\rm min}}^{\lambda_{\rm max}}d\lambda P\left(\lambda,t\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_cint"></A><IMG
+ WIDTH="167" HEIGHT="48" BORDER="0"
+ SRC="img789.png"
+ ALT="\begin{displaymath}
+C\left(t\right) = \int_{\lambda_{\rm min}}^{\lambda_{\rm max}}d\lambda P\left(\lambda,t\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(287)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Because transitions from <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> to <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> are rare,
+<!-- MATH
+ $P\left(\lambda,t\right)$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img788.png"
+ ALT="$P\left(\lambda,t\right)$"> in region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> is small for relevant values
+of time, and we can't compute it directly.  So, we divide phase space
+into <IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img790.png"
+ ALT="$N+1$"> neighboring overlapping regions <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mbox{(whole phase space)} = \bigcup_{i=0}^{N}B[i]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="208" HEIGHT="56" BORDER="0"
+ SRC="img792.png"
+ ALT="\begin{displaymath}
+\mbox{(whole phase space)} = \bigcup_{i=0}^{N}B[i]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(288)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Each region is defined by 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+x \in B[i] \ \ \ \mbox{if}\ \ \ \lambda_{\rm min}[i] \le \lambda\left(x\right) \le \lambda_{\rm max}[i]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="264" HEIGHT="28" BORDER="0"
+ SRC="img793.png"
+ ALT="\begin{displaymath}
+x \in B[i]    \mbox{if}   \lambda_{\rm min}[i] \le \lambda\left(x\right) \le \lambda_{\rm max}[i]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(289)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Neighboring regions must overlap ``a little''; i.e., <!-- MATH
+ $\lambda_{\rm min}[i] < \lambda_{\rm max}[i-1]$
+ -->
+<IMG
+ WIDTH="146" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img794.png"
+ ALT="$\lambda_{\rm min}[i] &lt; \lambda_{\rm max}[i-1]$">.  The size of the overlap will be considered in a bit.
+Now, the distribution of <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $"> in each window <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$"> is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P\left(\lambda,t;i\right) = \frac{\int dx_0 \rho\left(x_0\right)h_A\left(x_0\right)h_{B[i]}\left(x_t\right)\delta\left[\lambda-\lambda\left(x_t\right)\right]}{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)h_{B[i]}\left(x_t\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_8"></A><IMG
+ WIDTH="370" HEIGHT="48" BORDER="0"
+ SRC="img795.png"
+ ALT="\begin{displaymath}
+P\left(\lambda,t;i\right) = \frac{\int dx_0 \rho\left(x_0\ri...
+...ho\left(x_0\right)h_A\left(x_0\right)h_{B[i]}\left(x_t\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(290)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Notice that <!-- MATH
+ $h_{B[i]}\left(x_t\right)$
+ -->
+<IMG
+ WIDTH="65" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img796.png"
+ ALT="$h_{B[i]}\left(x_t\right)$"> acts like a Boltzmann factor for an umbrella potential, <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img797.png"
+ ALT="$w_i$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+w_i = \left\{\begin{array}{ll}
+	\infty & \mbox{if $\lambda < \lambda_{\rm min}[i]$}\\
+	0 & \mbox{if $\lambda_{\rm min}[i] < \lambda < \lambda_{\rm max}[i]$}\\
+	\infty & \mbox{if $\lambda > \lambda_{\rm max}[i]$}
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="249" HEIGHT="64" BORDER="0"
+ SRC="img798.png"
+ ALT="\begin{displaymath}
+w_i = \left\{\begin{array}{ll}
+\infty &amp; \mbox{if $\lambda &lt;...
+...\mbox{if $\lambda &gt; \lambda_{\rm max}[i]$}
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(291)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+And we are computing this probability distribution in window <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> using
+a phase space distribution whose Hamiltonian is modified by <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img797.png"
+ ALT="$w_i$">;
+e.g., <!-- MATH
+ $\rho_i\left(x\right) \propto
+e^{-\beta\left(\mathscr{H}+w_i\right)}$
+ -->
+<IMG
+ WIDTH="135" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img799.png"
+ ALT="$\rho_i\left(x\right) \propto
+e^{-\beta\left(\mathscr{H}+w_i\right)}$">.  This means when we conduct a
+particular MC run, we sample only within one window <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$">.  
+
+<P>
+The key aspect of umbrella sampling is that, inside window <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P\left(\lambda,t\right) \propto P\left(\lambda,t;i\right)\ \ \ \mbox{for $\lambda_{\rm min}[i] < \lambda < \lambda_{\rm max}[i]$}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="319" HEIGHT="28" BORDER="0"
+ SRC="img800.png"
+ ALT="\begin{displaymath}
+P\left(\lambda,t\right) \propto P\left(\lambda,t;i\right) \...
+...x{for $\lambda_{\rm min}[i] &lt; \lambda &lt; \lambda_{\rm max}[i]$}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(292)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This is because the denominator of <!-- MATH
+ $P\left(\lambda,t;i\right)$
+ -->
+<IMG
+ WIDTH="66" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img801.png"
+ ALT="$P\left(\lambda,t;i\right)$"> counts
+only those paths that end at <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> in <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$">, while the denominator of
+<!-- MATH
+ $P\left(\lambda,t\right)$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img788.png"
+ ALT="$P\left(\lambda,t\right)$"> counts all paths that end in state <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.
+
+<P>
+This proportionality is important, because it means that one can
+compute <!-- MATH
+ $P\left(\lambda,t;i\right)$
+ -->
+<IMG
+ WIDTH="66" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img801.png"
+ ALT="$P\left(\lambda,t;i\right)$"> for each window <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$"> separately
+using MC simulations, and then <EM>match</EM> the resulting distributions
+(tabulated as histograms over <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $">) in the overlapping regions,
+and then renormalize the entire distribution to produce
+<!-- MATH
+ $P\left(\lambda,t\right)$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img788.png"
+ ALT="$P\left(\lambda,t\right)$">.  Each MC simulation performs the
+appropriate random walk <EM>focused</EM> in its window, and thus
+maximizes the statistical significance of the results obtained in each
+window.  
+
+<P>
+Finally, when we have <!-- MATH
+ $P\left(\lambda,t\right)$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img788.png"
+ ALT="$P\left(\lambda,t\right)$">, one must only 
+integrate over the appropriate values of <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $"> to obtain <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$">.
+
+<P>
+The notion of a ``path ensemble'' comes from interpreting
+Eq.&nbsp;<A HREF="#eq:tps_8">291</A> as an average of the quantity
+<!-- MATH
+ $\delta\left[\lambda-\lambda\left(x_t\right)\right]$
+ -->
+<IMG
+ WIDTH="91" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img802.png"
+ ALT="$\delta\left[\lambda-\lambda\left(x_t\right)\right]$"> over a
+distribution <!-- MATH
+ $f_{AB[i]}\left(x_0,t\right) =
+\rho\left(x_0\right)h_A\left(x_0\right)h_{B[i]}\left(x_t\right)$
+ -->
+<IMG
+ WIDTH="266" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$f_{AB[i]}\left (x_0,t\right ) = \rho \left (x_0\right )h_A\left (x_0\right )h_{B[i]}\left (x_t\right )$">.
+<!-- MATH
+ $f_{AB[i]}\left(x_0,t\right)$
+ -->
+<IMG
+ WIDTH="88" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img803.png"
+ ALT="$f_{AB[i]}\left(x_0,t\right)$"> is the distribution function of all
+initial states <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img784.png"
+ ALT="$x_0$"> whose trajectories lead exactly to state <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img791.png"
+ ALT="$B[i]$">
+in time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">.  <!-- MATH
+ $P\left(\lambda,t;i\right)$
+ -->
+<IMG
+ WIDTH="66" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img801.png"
+ ALT="$P\left(\lambda,t;i\right)$"> is a weighted average over
+these ``paths.''  <!-- MATH
+ $f_{AB[i]}\left(x_0,t\right)$
+ -->
+<IMG
+ WIDTH="88" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img803.png"
+ ALT="$f_{AB[i]}\left(x_0,t\right)$"> is therefore called a
+``path ensemble.''  The average of any quantity
+<!-- MATH
+ $A\left(x_{t^\prime}\right)$
+ -->
+<IMG
+ WIDTH="50" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img804.png"
+ ALT="$A\left(x_{t^\prime}\right)$"> in this ensemble,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<A\left(x_{t^\prime}\right)\right> = \frac{\int dx_0 f_{AB[i]}\left(x_0,t\right) A\left[x_{t^\prime}\left(x_0\right)\right]}{\int dx_0 f_{AB[i]}\left(x_0,t\right)},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="283" HEIGHT="48" BORDER="0"
+ SRC="img805.png"
+ ALT="\begin{displaymath}
+\left&lt;A\left(x_{t^\prime}\right)\right&gt; = \frac{\int dx_0 f_...
+...eft(x_0\right)\right]}{\int dx_0 f_{AB[i]}\left(x_0,t\right)},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(293)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+is called a ``path average.''
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="524" HEIGHT="409" ALIGN="CENTER"
+ SRC="tpens1.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">A schematic of the first transition path ensemble, <!-- MATH
+ $f_{AB[i]}\left(x_0,t\right) =
+\rho\left(x_0\right)h_A\left(x_0\right)h_{B[i]}\left(x_t\right)$
+ -->
+<IMG
+ WIDTH="266" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$f_{AB[i]}\left (x_0,t\right ) = \rho \left (x_0\right )h_A\left (x_0\right )h_{B[i]}\left (x_t\right )$">.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Let's take stock: We know that <IMG
+ WIDTH="76" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img806.png"
+ ALT="$k = dC/dt$">.  In order for <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$"> to be a
+constant, we need to ensure that <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> is linear in time, meaning we
+must evaluate <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> for many values of <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">.  Each evaluation of
+<IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> is a ``free energy'' calculation, so getting at <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$"> this way
+may be prohibitively expensive.  Another insight of Dellago and
+Chandler&nbsp;[<A
+ HREF="node63.html#Dellago1999">18</A>] was to recognize that a simple
+factorization of <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$"> leads to an algorithm in which one need only
+do a <EM>single</EM> free energy calculation.  Consider:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) = \frac{\left<h_Ah_B\left(t\right)\right>}{\left<h_Ah_B\left(t^\prime\right)\right>} \times \frac{\left<h_Ah_B\left(t^\prime\right)\right>}{h_A} = \frac{\left<h_Ah_B\left(t\right)\right>}{\left<h_Ah_B\left(t^\prime\right)\right>} \times C\left(t^\prime\right),
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="402" HEIGHT="44" BORDER="0"
+ SRC="img807.png"
+ ALT="\begin{displaymath}
+C\left(t\right) = \frac{\left&lt;h_Ah_B\left(t\right)\right&gt;}{\...
+..._B\left(t^\prime\right)\right&gt;} \times C\left(t^\prime\right),
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(294)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where both <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> and <IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img493.png"
+ ALT="$t^\prime$"> are in an interval denoted <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img808.png"
+ ALT="$[0,T]$">.  For
+notational convenience: <!-- MATH
+ $h_A\equiv h_A\left(x_0\right)$
+ -->
+<IMG
+ WIDTH="95" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img809.png"
+ ALT="$h_A\equiv h_A\left(x_0\right)$"> and
+<!-- MATH
+ $h_B(t)\equiv h_B\left(x_t\right)$
+ -->
+<IMG
+ WIDTH="113" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img810.png"
+ ALT="$h_B(t)\equiv h_B\left(x_t\right)$">.
+
+<P>
+Next, we define a new indicator function as a property of the interval
+<IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img808.png"
+ ALT="$[0,T]$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_B\left(x_0,T\right) \equiv \max_{0\le t\le T} h_B\left(x_t\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="186" HEIGHT="38" BORDER="0"
+ SRC="img811.png"
+ ALT="\begin{displaymath}
+H_B\left(x_0,T\right) \equiv \max_{0\le t\le T} h_B\left(x_t\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(295)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which tells us if the trajectory begun at <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img784.png"
+ ALT="$x_0$"> visits state <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> <EM>at least once</EM> during the interval <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img808.png"
+ ALT="$[0,T]$">.  Since <IMG
+ WIDTH="57" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img812.png"
+ ALT="$H_B = 0$"> if
+<IMG
+ WIDTH="71" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img813.png"
+ ALT="$h_B(t) = 0$"> for all <!-- MATH
+ $t \in \left[0,T\right]$
+ -->
+<IMG
+ WIDTH="64" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img814.png"
+ ALT="$t \in \left[0,T\right]$">, and <IMG
+ WIDTH="57" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img815.png"
+ ALT="$H_B = 1$">
+otherwise, we can insert it into our factorized expression for <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) =
+\frac{\left<h_Ah_B\left(t\right)H_B\left(T\right)\right>}{\left<h_AH_B\left(T\right)\right>}\times\frac{\left<h_AH_B\left(T\right)\right>}{\left<h_Ah_B\left(t^\prime\right)H_B\left(T\right)\right>}
+\times C\left(t^\prime\right),
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_9"></A><IMG
+ WIDTH="402" HEIGHT="44" BORDER="0"
+ SRC="img816.png"
+ ALT="\begin{displaymath}
+C\left(t\right) =
+\frac{\left&lt;h_Ah_B\left(t\right)H_B\left(T...
+...right)H_B\left(T\right)\right&gt;}
+\times C\left(t^\prime\right),
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(296)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+(We've also multiplied and divided by <!-- MATH
+ $\left<h_AH_B\left(T\right)\right>$
+ -->
+<IMG
+ WIDTH="87" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img817.png"
+ ALT="$\left&lt;h_AH_B\left(T\right)\right&gt;$">.)
+
+<P>
+If we stare at Eq.&nbsp;<A HREF="#eq:tps_9">297</A> long enough, we see that the quantity
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left<h_B\left(t\right)\right>_{AB} & \equiv & 
+\frac{\left<h_Ah_B\left(t\right)H_B\left(T\right)\right>}{\left<h_AH_B\left(T\right)\right>}\\
+& = & \frac{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_0,T\right)h_B\left(x_t\right)}{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_0,T\right)}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="78" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img818.png"
+ ALT="$\displaystyle \left&lt;h_B\left(t\right)\right&gt;_{AB}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img593.png"
+ ALT="$\textstyle \equiv$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="134" HEIGHT="55" ALIGN="MIDDLE" BORDER="0"
+ SRC="img819.png"
+ ALT="$\displaystyle \frac{\left&lt;h_Ah_B\left(t\right)H_B\left(T\right)\right&gt;}{\left&lt;h_AH_B\left(T\right)\right&gt;}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(297)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="268" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img820.png"
+ ALT="$\displaystyle \frac{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_...
+...\right)}{\int dx_0\rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_0,T\right)}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(298)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+is an average of <IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img821.png"
+ ALT="$h_B(t)$"> over the distribution function
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+F_{AB}\left(x_0,T\right) \equiv \rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_0,T\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="269" HEIGHT="28" BORDER="0"
+ SRC="img822.png"
+ ALT="\begin{displaymath}
+F_{AB}\left(x_0,T\right) \equiv \rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_0,T\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(299)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This is the ensemble of all paths that begin in <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and visit <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> <EM>at least once</EM> in the interval <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img808.png"
+ ALT="$[0,T]$">.  (It therefore differs from
+<!-- MATH
+ $f_{AB}\left(x_0,T\right)$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img823.png"
+ ALT="$f_{AB}\left(x_0,T\right)$">.)  
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="531" HEIGHT="409" ALIGN="CENTER"
+ SRC="tpens2.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">A schematic of the second transition path ensemble, <!-- MATH
+ $F_{AB}\left(x_0,T\right) \equiv \rho\left(x_0\right)h_A\left(x_0\right)H_B\left(x_0,T\right)$
+ -->
+<IMG
+ WIDTH="275" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$F_{AB}\left (x_0,T\right ) \equiv \rho \left (x_0\right )h_A\left (x_0\right )H_B\left (x_0,T\right )$">.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Using this notation to denote averaging
+over this ensemble, <!-- MATH
+ $\left<\cdots\right>_{AB}$
+ -->
+<IMG
+ WIDTH="55" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img824.png"
+ ALT="$\left&lt;\cdots\right&gt;_{AB}$">,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C\left(t\right) = \frac{\left<h_B\left(t\right)\right>_{AB}}{\left<h_B\left(t^\prime\right)\right>_{AB}}C\left(t^\prime\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_10"></A><IMG
+ WIDTH="172" HEIGHT="45" BORDER="0"
+ SRC="img825.png"
+ ALT="\begin{displaymath}
+C\left(t\right) = \frac{\left&lt;h_B\left(t\right)\right&gt;_{AB}}...
+...ft&lt;h_B\left(t^\prime\right)\right&gt;_{AB}}C\left(t^\prime\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(300)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We can efficiently calculate <!-- MATH
+ $\left<h_B\left(t\right)\right>_{AB}$
+ -->
+<IMG
+ WIDTH="78" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img826.png"
+ ALT="$\left&lt;h_B\left(t\right)\right&gt;_{AB}$"> by
+sampling <!-- MATH
+ $F_{AB}\left(x_0,T\right)$
+ -->
+<IMG
+ WIDTH="84" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img827.png"
+ ALT="$F_{AB}\left(x_0,T\right)$"> in a single simulation.
+<IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img828.png"
+ ALT="$C(t^\prime)$"> can be calculated from a single free-energy
+umbrella-sampling calculation.  This provides a recipe for obtaining
+<IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$">:
+
+<OL>
+<LI>Perform path sampling on <!-- MATH
+ $F_{AB}\left(x_0,T\right)$
+ -->
+<IMG
+ WIDTH="84" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img827.png"
+ ALT="$F_{AB}\left(x_0,T\right)$"> to obtain the
+function <!-- MATH
+ $\left<h_B\left(t\right)\right>_{AB}$
+ -->
+<IMG
+ WIDTH="78" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img826.png"
+ ALT="$\left&lt;h_B\left(t\right)\right&gt;_{AB}$"> on <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img808.png"
+ ALT="$[0,T]$">.  If
+<!-- MATH
+ $\frac{d}{dt}\left<h_B\left(t\right)\right>_{AB}$
+ -->
+<IMG
+ WIDTH="96" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img829.png"
+ ALT="$\frac{d}{dt}\left&lt;h_B\left(t\right)\right&gt;_{AB}$"> does not display a
+plateau, repeat with a larger value of <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">.
+</LI>
+<LI>Choose a time <IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img493.png"
+ ALT="$t^\prime$"> (which can be much less than <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">) and compute
+<!-- MATH
+ $P\left(\lambda,t^\prime\right)$
+ -->
+<IMG
+ WIDTH="58" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img830.png"
+ ALT="$P\left(\lambda,t^\prime\right)$"> by umbrella sampling to get <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img828.png"
+ ALT="$C(t^\prime)$">
+by integration of Eq.&nbsp;<A HREF="#eq:tps_cint">288</A>.  Because of step 1,
+<!-- MATH
+ $\left<h_B\left(t^\prime\right)\right>_{AB}$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img831.png"
+ ALT="$\left&lt;h_B\left(t^\prime\right)\right&gt;_{AB}$"> is known.
+</LI>
+<LI>Calculate <IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$C(t)$">.
+</LI>
+<LI>Calculate <IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img832.png"
+ ALT="$k(t)$"> as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+k\left(t\right) = \frac{dC\left(t\right)}{dt} = \frac{\left<\dot{h}_B\left(t\right)\right>_{AB}}{\left<h_B\left(t^\prime\right)\right>_{AB}}\times C\left(t^\prime\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="257" HEIGHT="58" BORDER="0"
+ SRC="img833.png"
+ ALT="\begin{displaymath}
+k\left(t\right) = \frac{dC\left(t\right)}{dt} = \frac{\left&lt;...
+...left(t^\prime\right)\right&gt;_{AB}}\times C\left(t^\prime\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(301)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+</LI>
+</OL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html606"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html604"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html598"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html607"
+  HREF="node45.html">Sampling the Transition Path</A>
+<B> Up:</B> <A NAME="tex2html605"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html599"
+  HREF="node43.html">Fundamentals</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

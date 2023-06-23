@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Monte Carlo Simulation</TITLE>
+<META NAME="description" CONTENT="Monte Carlo Simulation">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="msim.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html192"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html190"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html184"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html193"
+  HREF="node8.html">The Metropolis Monte Carlo</A>
+<B> Up:</B> <A NAME="tex2html191"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html185"
+  HREF="node6.html">Classical Statistical Mechanics</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00030000000000000000"></A>
+<A NAME="sec:mc"></A>
+<BR>
+Monte Carlo Simulation
+</H1>
+
+<P>
+The first simulation technique we will study is the Monte Carlo
+method, covered in Ch. 3 of Frenkel &amp; Smit&nbsp;[<A
+ HREF="node63.html#Frenkel+Smit2002">1</A>].
+In these pages, I provide some elaboration of the content in the book,
+but it should be emphasized that a complete presentation of MC
+involves <EM>most</EM> of what is presented in Ch. 3.  The primary
+``flavor'' of MC most appropriate for this introductory level course is 
+the original Metropolis method, explained in Sec.&nbsp;<A HREF="node8.html#sec:metropolis">3.1</A>.
+
+<P>
+We will also use MC to explain basic technical aspects of molecular
+simulation code in Sec.&nbsp;<A HREF="node13.html#sec:elements">3.3</A>.  These aspects are not all
+restricted to MC, but following the text, we will introduce and
+discuss these technical aspects here.  These include (1) periodic
+boundary conditions, (2) energy evaluation, (3) representation of
+data, among others.
+
+<P>
+Finally, four case studies will be presented and investigated.  The
+first is the Ising system (Sec.&nbsp;<A HREF="node9.html#sec:cs1">3.2</A>) which does not appear
+in Frankel &amp; Smit.  The second considers hard-disks confined in a
+circle (Sec.&nbsp;<A HREF="node17.html#sec:cs2">3.4</A>), and the third is hard-disk-dumbbells
+(Sec.&nbsp;<A HREF="node18.html#sec:cs3">3.5</A>).  The fourth is ``Case Study 1'' from the Frankel
+&amp; Smit, namely using MC to explore the equation of state of a model
+liquid known as the Lennard-Jones fluid (Sec.&nbsp;<A HREF="node19.html#sec:cs4">3.6</A>).
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html194"
+  HREF="node8.html">The Metropolis Monte Carlo Method</A>
+<LI><A NAME="tex2html195"
+  HREF="node9.html">Case Study 1:  The 2D Ising Magnet</A>
+<UL>
+<LI><A NAME="tex2html196"
+  HREF="node10.html">Introduction</A>
+<LI><A NAME="tex2html197"
+  HREF="node11.html">A C Code for the 2D Ising Magnet</A>
+<LI><A NAME="tex2html198"
+  HREF="node12.html">Suggested Exercises</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html199"
+  HREF="node13.html">Elements of a Continuous-Space MC program</A>
+<UL>
+<LI><A NAME="tex2html200"
+  HREF="node14.html">Data Representation and Input/Output</A>
+<LI><A NAME="tex2html201"
+  HREF="node15.html">Analytical Potentials</A>
+<LI><A NAME="tex2html202"
+  HREF="node16.html">Trial Moves</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html203"
+  HREF="node17.html">Case Study 2:  MC of Hard Disks</A>
+<LI><A NAME="tex2html204"
+  HREF="node18.html">Case Study 3:  Hard-Disk Dumbbells in 2D</A>
+<LI><A NAME="tex2html205"
+  HREF="node19.html">Case Study 4 (F&amp;S Case Study 1):  
+Equation of State of the Lennard-Jones Fluid</A>
+<LI><A NAME="tex2html206"
+  HREF="node20.html">Suggest Project:  Lennard-Jones Dumbbells</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html192"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html190"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html184"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html193"
+  HREF="node8.html">The Metropolis Monte Carlo</A>
+<B> Up:</B> <A NAME="tex2html191"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html185"
+  HREF="node6.html">Classical Statistical Mechanics</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

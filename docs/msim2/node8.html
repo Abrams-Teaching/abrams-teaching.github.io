@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Making Observations: The Ergodic Hypothesis</TITLE>
+<META NAME="description" CONTENT="Making Observations: The Ergodic Hypothesis">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html223"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html221"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html215"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html224"
+  HREF="node9.html">Entropy and Temperature</A>
+<B> Up:</B> <A NAME="tex2html222"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html216"
+  HREF="node7.html">Microstates and Degeneracy</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00022000000000000000">
+Making Observations:  The Ergodic Hypothesis</A>
+</H2>
+
+<P>
+Scientists are taught early on that when conducting measurements, one must perform repeated experiments and average the results.  If one makes <!-- MATH
+ $\mathscr{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img108.png"
+ ALT="$ \mathscr{N}$"></SPAN> independent measurements of some observable <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$ G$"></SPAN>, one computes the mean value as 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+G_{\rm obs} = \frac{1}{\mathscr{N}}\sum_{i=1}^{\mathscr{N}}G_i.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="131" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img109.png"
+ ALT="$\displaystyle G_{\rm obs} = \frac{1}{\mathscr{N}}\sum_{i=1}^{\mathscr{N}}G_i.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We now imagine that the time of a measurement is so short that we <EM>know</EM> that the system is in only one of its many possible microstates. This means we can write
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:exp_obs"></A><!-- MATH
+ \begin{equation}
+G_{\rm obs} = \sum_{\nu}\left[\frac{1}{\mathscr{N}}\left(\begin{array}{c}
+	\mbox{number of times state $\nu$\  is} \\
+	\mbox{observed in the $\mathscr{N}$\  observations}
+	\end{array}\right)\right]G_\nu,
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="415" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img110.png"
+ ALT="$\displaystyle G_{\rm obs} = \sum_{\nu}\left[\frac{1}{\mathscr{N}}\left(\begin{a...
+...ox{observed in the $\mathscr{N}$ observations} \end{array}\right)\right]G_\nu,$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img74.png"
+ ALT="$ G_\nu$"></SPAN> was introduced previously (Eq.&nbsp;<A HREF="node6.html#eq:ensemble_average">1</A>) as the value of observable <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$ G$"></SPAN> when the system is in state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>.
+
+<P>
+Now we have to imagine that our system is evolving in time.  As it evolves, its degrees of freedom change values, and the system is thought of as tracing out a <EM>trajectory</EM> in state space. (&ldquo;State space&rdquo; is a Hilbert space spanned by all states <!-- MATH
+ $\left|\nu\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img78.png"
+ ALT="$ \left\vert\nu\right&gt;$"></SPAN> in the quantum mechanical case, or phase space in the classical case.) How is the system evolving?  The system wavefunction evolves according to Schr&#246;dinger's equation, while particles in a classical system follow Newtonian mechanics.  As the experimenters, we control the system by specifying a handful of variables, such as its total energy, <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$ E$"></SPAN>, the number of particles, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>, and the volume, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN>.  These <EM>constraints</EM> force the system's trajectory to remain in a designated partition of state space.
+
+<P>
+The key assumption we make at this point is that, if we wait long enough, our system will visit every possible state; that is, the trajectory will eventually pass through every available point in state space consistent with our constraints (that is, all states in the partition).  If this is true, and we make <!-- MATH
+ $\mathscr{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img108.png"
+ ALT="$ \mathscr{N}$"></SPAN> independent observations, then the number of times we observe the system in state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN> divided by the number of observations, <!-- MATH
+ $\mathscr{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img108.png"
+ ALT="$ \mathscr{N}$"></SPAN>, is the <EM>probability</EM> of observing state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img73.png"
+ ALT="$ P_\nu$"></SPAN>, if we happen to make a random observation.  So, Eq.&nbsp;<A HREF="#eq:exp_obs">10</A> above becomes the ensemble average first presented in Eq.&nbsp;<A HREF="node6.html#eq:ensemble_average">1</A>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+G_{\rm obs} = \sum_\nu P_\nu G_\nu = \left<G\right>
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="167" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img111.png"
+ ALT="$\displaystyle G_{\rm obs} = \sum_\nu P_\nu G_\nu = \left&lt;G\right&gt;$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This assumption is important: it is referred to as the <EM>ergodic hypothesis</EM>.  A system is &ldquo;ergodic&rdquo; if, after a sufficiently long time, it visits all possible state space points consistent with whatever constraints are put on it.  We cannot in general prove that any system is ergodic; it is something we are comfortable assuming for most systems based on our physical intuition.  There are, however, many systems which are non-ergodic on the time-scales they are measured.  The ergodic hypothesis is only strictly true when the number of measurements taken is sufficiently long that the <EM>computed</EM> probabilities <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img73.png"
+ ALT="$ P_\nu$"></SPAN> no longer change, which can only be guaranteed for an <EM>infinite</EM> number of observations:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left<G\right> = \lim_{\mathscr{N}\rightarrow\infty}\frac{1}{\mathscr{N}}\sum_{i=1}^\mathscr{N} G_{\nu(i)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="180" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img112.png"
+ ALT="$\displaystyle \left&lt;G\right&gt; = \lim_{\mathscr{N}\rightarrow\infty}\frac{1}{\mathscr{N}}\sum_{i=1}^\mathscr{N} G_{\nu(i)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img113.png"
+ ALT="$ \nu(i)$"></SPAN> refers to the state of the system at measurement <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>. 
+
+<P>
+Another important consideration is the following: How far apart must the <!-- MATH
+ $\mathscr{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img108.png"
+ ALT="$ \mathscr{N}$"></SPAN> independent measurements be from one another in time to be considered truly &ldquo;independent&rdquo;?  To answer this question, we must introduce the notion of a <EM>relaxation time</EM>, <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$ \tau_{\rm relax}$"></SPAN>, which arises naturally due to the presumably chaotic nature of the microscopic system.  Given some initial conditions, after a time <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$ \tau_{\rm relax}$"></SPAN> has elapsed, the system has &ldquo;lost memory&rdquo; of the initial condition.  We measure this loss of memory in terms of <EM>correlation functions</EM>, which will be discussed in more detail later.  If we wait at least <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$ \tau_{\rm relax}$"></SPAN> between successive observations, we know they are more likely to be independent.  It turns out that one can use simulation methods to estimate relaxation times (and their spectra; many systems display a broad spectrum of relaxation times, each element cooresponding to a particular type of molecular motion). We will pay particularly close attention to <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$ \tau_{\rm relax}$"></SPAN> in upcoming sections.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html223"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html221"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html215"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html224"
+  HREF="node9.html">Entropy and Temperature</A>
+<B> Up:</B> <A NAME="tex2html222"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html216"
+  HREF="node7.html">Microstates and Degeneracy</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

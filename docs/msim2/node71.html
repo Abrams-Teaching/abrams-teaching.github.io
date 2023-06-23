@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>NAMD</TITLE>
+<META NAME="description" CONTENT="NAMD">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node68.html">
+<LINK REL="up" HREF="node67.html">
+<LINK REL="next" HREF="node72.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html910"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html908"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html904"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html911"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Up:</B> <A NAME="tex2html909"
+  HREF="node67.html">Open-source Production MD: Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html905"
+  HREF="node70.html">The SARS-CoV-2 spike protein</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00082000000000000000">
+NAMD</A>
+</H2>
+
+<P>
+The NAMD source code and many precompiled binaries are available from <a href="https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD">the official download site</a> at the University of Illinois.  Like Gromacs, NAMD is also available in many supercomputing centers.  Compiling NAMD from source is not for the faint-hearted, so I won't cover that here; fortunately for us, the standard `Linux-multicore` executable will work just fine in Ubuntu on WSL.  (If you have a mac, you'll have to download a mac-specific executable.)  For now, just download the tarball, extract it, and copy the <code>namd2</code> executable to <code>/usr/local/bin/</code>:
+
+<P>
+<PRE>
+$ tar zxf NAMD_2.14_Linux-x86_64-multicore.tar.gz
+$ cd NAMD_2.14_Linux-x86_64-multicore/
+$ sudo cp namd2 /usr/local/bin/
+</PRE>
+
+<P>
+If you have not done so already, download the Linux version of VMD and install it inside WSL as well - we need to use that rather than the native Windows version here.
+
+<P>
+To build a system to simulation with NAMD with the CHARMM force field, one must use the <code>psfgen</code> utility of VMD.  This will generate an input PDB file along with a PSF file that contains all the topological information.  I cannot stress enough how important it is to use the <code>psfgen</code> <a href="https://www.ks.uiuc.edu/Research/vmd/plugins/psfgen/ug.png">manual</a>; I'm only showing a little bit of here.
+
+<P>
+Let's revisit the SARS-CoV-2 S RBD for this example.  Starting with the same coordinates extracted from the PDB entry and put into <code>my_7c8j.pdb</code>, we use a series of VMD scripts to build a solvated system.
+
+<P>
+First is <code>mkpsf.tcl</code> (it's name is not important; what's important is what is inside it). This script contains TcL commands that implement PSF generation using VMD as an interpreter.  To run it:
+
+<P>
+<PRE>
+$ vmd -dispdev text -e mkpsf.tcl
+</PRE>
+
+<P>
+This generates <code>my_7c8j.psf</code> which is an X-PLOR Protein Sturcture Format (PSF) file, along with the PDB file <code>my_78cj_processed.pdb</code>, which contains all the missing H's.  It is customary to run a short energy minimization in vacuum just in case some of those H's are a little too close to each other by accident.  As with Gromacs, this is done by invoking the main MD program with an input configuration file requesting a minimization.  Here, this is <code>vac.namd</code>.  This can be run:
+
+<P>
+<PRE>
+$ namd2 vac.namd &gt;&amp; vac.log &amp;
+$ tail -f vac.log
+</PRE>
+
+<P>
+The <code>tail</code> command allows you to watch the simulation write to <code>vac.log</code> as it runs.  Once this finishes, the next step is to solvate and neutralize.  This is accomplished with another script, <code>solv.tcl</code>, which uses both the <code>solvate</code> and <code>autoionize</code> VMD packages:
+
+<P>
+<PRE>
+$ vmd -dispdev text -e solv.tcl
+</PRE>
+
+<P>
+Similar to the <code>editconf</code> in Gromacs, <code>solv.tcl</code> computes and saves the resulting box dimensions, here in a file called <code>cell.inp</code>.  Once this is done, we see the new PSF/PDB pair <code>my_7c8j_i.psf</code> and <code>my_7c8j_i.pdb</code> that contain the protein and all the solvent.  These files, along with <code>cell.inp</code> and the CHARMM parameter files are now inputs for a 100-ps NPT MD simulation described by <code>prod.namd</code>.
+
+<P>
+<PRE>
+$ namd2 +p8 prod.namd &gt;&amp; prod.log &amp;
+$ tail -f prod.log
+</PRE>
+
+<P>
+This takes about 1.5 h on my Dell Latitude 7400 2-in-1 Intel Core-I7 laptop on WSL2 running Ubuntu.  I ran this in a directory called <code>instructional-codes/my_work/namd</code>, so the directory <code>originals</code> is two up from the run directory.  Fig.&nbsp;<A HREF="#fig:namd-energies">38</A> shows plots of energies, temperature, and pressure, vs time-step from this MD simulation, generated by the following four python commands:
+
+<P>
+<PRE>
+$ python3 ../../originals/plot_mdlj_log.py -fmt NAMD \ 
+  -logs prod.log -d 11 14 -ylabel "Temperature (K)" -o temp.png
+$ python3 ../../originals/plot_mdlj_log.py -fmt NAMD \ 
+  -logs prod.log -d 18 -ylabel "Pressure (bar)" -o pres.png \ 
+  -ylim -500 500 -every 100
+$ python3 ../../originals/plot_mdlj_log.py -fmt NAMD \ 
+  -logs prod.log -d 9 10 12 -ylabel "Energy (kcal/mol)" \ 
+  -ylim -150000 100000 -o kin-pot-tot.png
+$ python3 ../../originals/plot_mdlj_log.py -fmt NAMD \ 
+  -logs prod.log -d 1 2 3 4 -ylabel "Potential energy (kcal/mol)" \ 
+  -o bonded.png
+</PRE>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:namd-energies"></A><A NAME="8412"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 38:</STRONG>
+(Clockwise from top-left) Temperature; pressure; bonded potential energies; kinetic, potential and total energies, vs time-step from a NAMD simulation of solvated SARS-CoV-2 S RBD.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="540" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./temp.png"
+ ALT="Image temp">
+    <IMG
+  WIDTH="552" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./pres.png"
+ ALT="Image pres">
+    <IMG
+  WIDTH="578" HEIGHT="376" ALIGN="BOTTOM" BORDER="0"
+ SRC="./kin-pot-tot.png"
+ ALT="Image kin-pot-tot">
+    <IMG
+  WIDTH="549" HEIGHT="375" ALIGN="BOTTOM" BORDER="0"
+ SRC="./bonded.png"
+ ALT="Image bonded"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+It should be stressed that system generation in both Gromacs and NAMD requires surmounting a significant learning curve if one wants to venture from only the simplest systems shown here.  The Gromacs workflow is (to me) a bit more uniform than NAMD, which requires essentially a bunch of script-writing.  (VMD offers an automated PSF builder that also works for simple systems.)
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html910"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html908"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html904"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html911"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Up:</B> <A NAME="tex2html909"
+  HREF="node67.html">Open-source Production MD: Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html905"
+  HREF="node70.html">The SARS-CoV-2 spike protein</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

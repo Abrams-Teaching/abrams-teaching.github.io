@@ -1,0 +1,817 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Case Study 3: Dynamical Properties: The Self-Diffusion
+Coefficient</TITLE>
+<META NAME="description" CONTENT="Case Study 3: Dynamical Properties: The Self-Diffusion
+Coefficient">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node28.html">
+<LINK REL="up" HREF="node21.html">
+<LINK REL="next" HREF="node30.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html431"
+  HREF="node30.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html429"
+  HREF="node21.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html425"
+  HREF="node28.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html432"
+  HREF="node30.html">Ensembles</A>
+<B> Up:</B> <A NAME="tex2html430"
+  HREF="node21.html">Molecular Dynamics Simulation</A>
+<B> Previous:</B> <A NAME="tex2html426"
+  HREF="node28.html">Case Study 2: Static</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00044000000000000000">
+Case Study 3:  Dynamical Properties:  The Self-Diffusion
+Coefficient</A>
+</H2>
+
+<P>
+This Case Study combines elements of Case Studies 5 and 6 in F&amp;S,
+which are unfortunately incomplete in their description.  The purpose
+of this Case Study is to demonstrate how one computes a self-diffusion
+coefficient, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$">, from an MD simulation of a simple
+Lennard-Jones liquid.  There are two means to computing <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$">:
+(1) the mean-squared displacement <!-- MATH
+ $\left<r^2\right>(t)$
+ -->
+<IMG
+ WIDTH="54" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img470.png"
+ ALT="$\left&lt;r^2\right&gt;(t)$">, and (2) the velocity
+autocorrelation function, <IMG
+ WIDTH="66" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img471.png"
+ ALT="${\rm VACF}(t)$">.
+
+<P>
+The self-diffusion coefficient governs the evolution of concentration,
+<IMG
+ WIDTH="11" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img247.png"
+ ALT="$c$">, (or number density) according to a generalized transport equation:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\frac{\partial c}{\partial t} = \mathscr{D}\nabla^2c
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="80" HEIGHT="39" BORDER="0"
+ SRC="img472.png"
+ ALT="\begin{displaymath}
+\frac{\partial c}{\partial t} = \mathscr{D}\nabla^2c
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(155)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Einstein showed (details in text) that <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> is 
+related to the mean-squared displacement, <!-- MATH
+ $\left<r^2\right>$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img473.png"
+ ALT="$\left&lt;r^2\right&gt;$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\frac{\partial\left<r^2\right>}{\partial t} = 6\mathscr{D}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:md:ein"></A><IMG
+ WIDTH="85" HEIGHT="43" BORDER="0"
+ SRC="img474.png"
+ ALT="\begin{displaymath}
+\frac{\partial\left&lt;r^2\right&gt;}{\partial t} = 6\mathscr{D}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(156)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+At long times, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> should be independent of time; hence
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<r^2\right> = \lim_{t\rightarrow\infty}6\mathscr{D}t
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="109" HEIGHT="35" BORDER="0"
+ SRC="img475.png"
+ ALT="\begin{displaymath}
+\left&lt;r^2\right&gt; = \lim_{t\rightarrow\infty}6\mathscr{D}t
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(157)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We can compute <!-- MATH
+ $\left<r^2\right>$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img473.png"
+ ALT="$\left&lt;r^2\right&gt;$">, and therefore estimate
+<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$">, easily using MD simulation.  There is, however, a very
+important consideration concerning periodic boundary conditions.
+Recall that, during integration, immediately after the position
+update, we test to see if the update has taken the particle outside of
+the primary box.  If it has, we simply shift the particle's position
+by a box length in the appropriate dimension and direction.  The
+displacement of the particle during this step is <EM>not</EM> a box
+length, but if you consider just the coordinates as they appear in the
+output, you would think that it is.  It is therefore important that we
+work with <EM>unfolded</EM> coordinates when computing mean-squared
+displacement.  This is not adequately explained in the text, so we
+cover it in some detail here.
+
+<P>
+``Unfolding'' coordinates in a simulation with periodic boundaries
+requires that we keep track of how many times each particle has
+crossed a boundary.  The code <EM>mdlj.c</EM> was just modified to allow
+output of unfolded coordinates in the sample configurations.  Here is
+how it works.  In the integration loop, you may recall that the first
+step is the update of positions (below we consider the <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-coordinate
+only):
+<PRE>
+      rx[i]+=vx[i]*dt+0.5*dt2*fx[i];
+</PRE>
+The quantity <!-- MATH
+ $v_{x,i}\delta t + 1/2\left(\delta t\right)^2f_{x,i}$
+ -->
+<IMG
+ WIDTH="147" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img476.png"
+ ALT="$v_{x,i}\delta t + 1/2\left(\delta t\right)^2f_{x,i}$"> is
+the <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-displacement of particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> in one time step of length
+<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img477.png"
+ ALT="$\delta t$">.  Now, this displacement may have resulted in a new
+<IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-coordinate of particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> which is less than zero or greater than
+the box length <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$">, in which case, we shift the coordinate to keep it
+between 0 and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$">.  In addition to performing this shift, we now increment a 
+counter for particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">:
+<PRE>
+      if (rx[i]&lt;0.0) { rx[i]+=L; ix[i]--; }
+      if (rx[i]&gt;L)   { rx[i]-=L; ix[i]++; }
+</PRE>
+The counter <TT>ix[i]</TT> is incremented by 1 if the <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-coordinate
+update takes the particle through the <IMG
+ WIDTH="25" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img478.png"
+ ALT="$+x$"> boundary, and is
+decremented by 1 if the update takes the particle through the <IMG
+ WIDTH="25" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img479.png"
+ ALT="$-x$">
+boundary.  This counter tells us how box lengths the total
+<IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-displacement of particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> has accumulated, and its sign gives
+us the sense of this accumulation.  Now, the array <TT>rx[]</TT> always
+contains the periodically shifted coordinates, but we can easily generate
+the <EM>unfolded</EM> coordinates at any time (say, upon output) by 
+performing the following operation:
+<PRE>
+       rxu = rx[i]+ix[i]*L;
+</PRE>
+Here, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> is the box length (assumed cubic).  In the newly updated
+code <A NAME="tex2html26"
+  HREF="codes/mdlj.c"><EM>mdlj.c</EM></A>, the integrator and output
+functions have been modified to allow output of the unfolded
+coordinates if the user includes the <TT>-uf</TT> flag on the command line.
+
+<P>
+Let us now run <EM>mdlj</EM> using the final configuration from one of
+the previous runs in the previous case study as an initial state, with
+the goal of computing <!-- MATH
+ $\left<r^2\right>$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img473.png"
+ ALT="$\left&lt;r^2\right&gt;$">.  (Note that we must still
+specify <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> and <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> on the command line.)  We will go for as much
+detail as possible, and output the configuration every time step.  To
+limit the amount of data, we will terminate this simulation at 1000
+steps.  This results in 1,000 xyz data files containing unfolded
+coordinates.  Now, the program <A NAME="tex2html27"
+  HREF="codes/msd.c"><EM>msd.c</EM></A>
+will read <EM>all</EM> of these configurations in at once (that is, it
+reads in the entire <EM>trajectory</EM>), and compute the mean-squared
+displacement, <!-- MATH
+ $\left<r^2\right>$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img473.png"
+ ALT="$\left&lt;r^2\right&gt;$">, from this data using a conventional,
+straightforward algorithm.  
+
+<P>
+The C-code for this algorithm appears below. <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> is the number of
+``frames'' in the trajectory, and <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> is the number of particles.
+<!-- MATH
+ $\left<r^2\right>(t)$
+ -->
+<IMG
+ WIDTH="54" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img470.png"
+ ALT="$\left&lt;r^2\right&gt;(t)$"> is computed by considering the change in
+particle position over an interval of size <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">.  Any frame in the
+trajectory can be considered an origin for any interval size, provided
+enough frames come after it in the trajectory.  This means that we
+additionally average over all possible time origins.  <TT>dt</TT> is a
+variable that loops over allowed time <EM>intervals</EM>.  <TT>cnt[]</TT>
+counts the number of time origins for a given interval.  <TT>sdx[]</TT>
+is the array in which we accumulate squared displacement in the
+<IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-displacements, and has <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> elements, one for each allowed interval
+value, including interval length 0.
+<PRE>
+  for (t=0;t&lt;M;t++) {                // Loop over all frames
+    for (dt=1;(t+dt)&lt;M;dt++) {       // Loop over all allowed origins
+      cnt[dt]++;                     // Increment the number of origins
+      for (i=0;i&lt;N;i++) {
+	sdx[dt] += (rx[t+dt][i] - rx[t][i])*(rx[t+dt][i] - rx[t][i]);
+	sdy[dt] += (ry[t+dt][i] - ry[t][i])*(ry[t+dt][i] - ry[t][i]);
+	sdz[dt] += (rz[t+dt][i] - rz[t][i])*(rz[t+dt][i] - rz[t][i]);
+      }
+    }
+  }
+</PRE>
+
+<P>
+The code fragment below completes the averaging, and outputs the
+three components of the mean-squared displacement, as well
+as the total mean-squared displacement.
+<PRE>
+  for (t=0;t&lt;M;t++) {
+    sdx[t] /= cnt[t]?(N*cnt[t]):1;
+    sdy[t] /= cnt[t]?(N*cnt[t]):1;
+    sdz[t] /= cnt[t]?(N*cnt[t]):1;
+    fprintf(stdout,"%.5lf %.8lf %.8lf %.8lf %.8lf"
+	    t*step*md_time_step,sdx[t],sdy[t],sdz[t],
+	    sdx[t]+sdy[t]+sdz[t]);
+  }
+</PRE>
+
+<P>
+Below is a plot of mean-squared displacement from a simulation of
+1,000 steps.  Recall that the Einstein relation holds as
+<!-- MATH
+ $t\rightarrow\infty$
+ -->
+<IMG
+ WIDTH="50" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img480.png"
+ ALT="$t\rightarrow\infty$">.  We see in this plot that, for low times,
+<!-- MATH
+ $\left<r^2\right> \propto t^2$
+ -->
+<IMG
+ WIDTH="68" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img481.png"
+ ALT="$\left&lt;r^2\right&gt; \propto t^2$">, which indicates that motion in this
+regime is not diffusive; it is in fact ballistic.  This ballistic
+behavior becomes apparently diffusive at a time around 0.1&nbsp;<IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img482.png"
+ ALT="$\tau$">. 
+Considering the data beyond <IMG
+ WIDTH="51" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img483.png"
+ ALT="$t &gt; 0.1$">, we can roughly estimate
+<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> at about 0.06.
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="msd1.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Mean-squared displacement in a Lennard-Jones
+fluid from an MD simulation in which <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108, <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> = 0.8442,
+sampled every time step for 1,000 steps.  Measured temperature <!-- MATH
+ $T =
+1.20 \pm 0.011$
+ -->
+<IMG
+ WIDTH="121" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$T = 1.20 \pm 0.011$"> and pressure, <!-- MATH
+ $P = 3.81 \pm 0.11$
+ -->
+<IMG
+ WIDTH="114" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.png"
+ ALT="$P = 3.81 \pm 0.11$">..&nbsp;<A NAME="tex2html20"
+  HREF="#footmp3971"><SUP>1</SUP></A></DIV></TD></TR>
+<TR ALIGN="LEFT">
+<TD><DL>
+<DD><A NAME="footmp3971"><SUP>1</SUP></A> This
+graph was produced using gnuplot and a script found
+<A NAME="tex2html21"
+  HREF="gp/gpMSD">here</A>.
+</DD>
+</DL></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+It is advisable, however, to compute <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> using much
+longer-scale data.  The ballistic crossover indicates that we need not
+consider time intervals below 0.1 (100 steps of <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img477.png"
+ ALT="$\delta t$"> = 0.001).
+In fact, in a long simulation of 600,000 steps, we can get a good
+estimate of <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> by considering samples every 1,000 steps.
+To obtain a more unambiguous estimate of <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$">, we can plot
+<!-- MATH
+ $\left<r^2\right>/(6t)$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img484.png"
+ ALT="$\left&lt;r^2\right&gt;/(6t)$"> vs <IMG
+ WIDTH="26" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img485.png"
+ ALT="$1/t$"> and extrapolate to <!-- MATH
+ $1/t\rightarrow
+0$
+ -->
+<IMG
+ WIDTH="58" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img486.png"
+ ALT="$1/t\rightarrow
+0$">, where <!-- MATH
+ $\left<r^2\right>/(6t) = \mathscr{D}$
+ -->
+<IMG
+ WIDTH="105" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$\left&lt;r^2\right&gt;/(6t) = \mathscr{D}$">.
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="msd2.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Mean-squared displacement in a Lennard-Jones fluid from an MD
+simulation in which <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108, <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> = 0.8442, sampled every 1,000
+time steps for 600,000 steps.  The horizontal line indicates that
+<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> = 0.06.  Measured temperature <!-- MATH
+ $T = 1.215 \pm 0.0006$
+ -->
+<IMG
+ WIDTH="136" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img12.png"
+ ALT="$T = 1.215 \pm 0.0006$"> and
+pressure, <!-- MATH
+ $P = 3.71 \pm 0.005$
+ -->
+<IMG
+ WIDTH="122" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.png"
+ ALT="$P = 3.71 \pm 0.005$">.&nbsp;<A NAME="tex2html22"
+  HREF="#footmp3972"><SUP>1</SUP></A></DIV></TD></TR>
+<TR ALIGN="LEFT">
+<TD><DL>
+<DD><A NAME="footmp3972"><SUP>1</SUP></A> This graph was produced
+using gnuplot and a script found
+<A NAME="tex2html23"
+  HREF="gp/gpMSD-2">here</A>.
+</DD>
+</DL></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+The velocity autocorrelation function route to the diffusion constant
+begins with the realization that one can reconstruct the displacement
+of a particle over a time interval <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> by simply integrating its
+velocity:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta{\bf r} = \int_0^t {\bf v}(t^\prime)dt^\prime
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="116" HEIGHT="46" BORDER="0"
+ SRC="img488.png"
+ ALT="\begin{displaymath}
+\Delta{\bf r} = \int_0^t {\bf v}(t^\prime)dt^\prime
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(158)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+So, the <EM>mean squared</EM> displacement can be expressed
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left<r^2\right> & = & \left<\left(\int_0^t{\bf v}(t^\prime)dt^\prime\right)^2\right>\\
+& = & \int_0^t\int_0^t dt^\prime dt^{\prime\prime} \left<{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right>\\
+& = & 2\int_0^t\int_0^{t^\prime} dt^\prime dt^{\prime\prime} \left<{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right>.
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="34" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img489.png"
+ ALT="$\displaystyle \left&lt;r^2\right&gt;$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="135" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img490.png"
+ ALT="$\displaystyle \left&lt;\left(\int_0^t{\bf v}(t^\prime)dt^\prime\right)^2\right&gt;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(159)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="188" HEIGHT="57" ALIGN="MIDDLE" BORDER="0"
+ SRC="img491.png"
+ ALT="$\displaystyle \int_0^t\int_0^t dt^\prime dt^{\prime\prime} \left&lt;{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right&gt;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(160)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="210" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img492.png"
+ ALT="$\displaystyle 2\int_0^t\int_0^{t^\prime} dt^\prime dt^{\prime\prime} \left&lt;{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right&gt;.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(161)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The third equality arises because we can swap <IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img493.png"
+ ALT="$t^\prime$"> and
+<!-- MATH
+ $t^{\prime\prime}$
+ -->
+<IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img494.png"
+ ALT="$t^{\prime\prime}$">.  The quantity <!-- MATH
+ $\left<{\bf v}(t^\prime)\cdot{\bf
+v}(t^{\prime\prime})\right>$
+ -->
+<IMG
+ WIDTH="96" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img495.png"
+ ALT="$ \left&lt;{\bf v}(t^\prime)\cdot{\bf
+v}(t^{\prime\prime})\right&gt;$"> is the velocity autocorrelation function.
+This is an example of a Green-Kubo relation; that is, a relation
+between a transport coefficient, and an autocorrelation function of a
+dynamical variable.  Eq.&nbsp;<A HREF="#eq:md:ein">156</A> then leads to
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{D} = \frac{1}{3}\int_0^\infty \left<{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="172" HEIGHT="44" BORDER="0"
+ SRC="img496.png"
+ ALT="\begin{displaymath}
+\mathscr{D} = \frac{1}{3}\int_0^\infty \left&lt;{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(162)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+So, the second route to computing <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> requires that we
+numerically integrate <!-- MATH
+ $\left<{\bf v}(t^\prime)\cdot{\bf
+v}(t^{\prime\prime})\right>$
+ -->
+<IMG
+ WIDTH="96" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img495.png"
+ ALT="$ \left&lt;{\bf v}(t^\prime)\cdot{\bf
+v}(t^{\prime\prime})\right&gt;$"> out to <EM>very</EM> large times.  How
+large?  First, let's try to understand the behavior of <!-- MATH
+ $\left<{\bf
+v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right>$
+ -->
+<IMG
+ WIDTH="96" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img495.png"
+ ALT="$ \left&lt;{\bf v}(t^\prime)\cdot{\bf
+v}(t^{\prime\prime})\right&gt;$">.
+
+<P>
+In three dimensions, we compute this by computing the components and
+adding them together, as we did for mean-squared displacement:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right> =
+\left<v_x(t^\prime)v_x(t^{\prime\prime})\right>+
+\left<v_y(t^\prime)v_y(t^{\prime\prime})\right>+
+\left<v_z(t^\prime)v_z(t^{\prime\prime})\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="426" HEIGHT="29" BORDER="0"
+ SRC="img497.png"
+ ALT="\begin{displaymath}
+\left&lt;{\bf v}(t^\prime)\cdot{\bf v}(t^{\prime\prime})\right&gt;...
+...rime})\right&gt;+
+\left&lt;v_z(t^\prime)v_z(t^{\prime\prime})\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(163)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Because the system is (nearly) isotropic, we should expect all these
+components to be equal.  The plot of <!-- MATH
+ $\left<{\bf v}(0)\cdot{\bf
+v}(t)\right>$
+ -->
+<IMG
+ WIDTH="86" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img498.png"
+ ALT="$\left&lt;{\bf v}(0)\cdot{\bf
+v}(t)\right&gt;$"> vs. <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$"> shown below indicates the level to which we can
+expect the three components to be equal for such a small system.  This
+data was computed using the code <A NAME="tex2html28"
+  HREF="codes/vacf.c"><EM>vacf.c</EM></A>.
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="va1.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Velocity autocorrelation in a Lennard-Jones fluid from an MD
+simulation in which <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108, <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> = 0.8442, sampled every time
+step for 1,000 steps.  Measured temperature <!-- MATH
+ $T = 1.20 \pm 0.011$
+ -->
+<IMG
+ WIDTH="121" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$T = 1.20 \pm 0.011$"> and
+pressure, <!-- MATH
+ $P = 3.81 \pm 0.11$
+ -->
+<IMG
+ WIDTH="114" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.png"
+ ALT="$P = 3.81 \pm 0.11$">.&nbsp;<A NAME="tex2html24"
+  HREF="#footmp3973"><SUP>1</SUP></A></DIV></TD></TR>
+<TR ALIGN="LEFT">
+<TD><DL>
+<DD><A NAME="footmp3973"><SUP>1</SUP></A> This graph was produced using
+gnuplot and a script found
+<A NAME="tex2html25"
+  HREF="gp/gpVA">here</A>.
+</DD>
+</DL></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Integrating the composite out to <IMG
+ WIDTH="51" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img499.png"
+ ALT="$t = 1.0$"> gives <!-- MATH
+ $\mathscr{D} \approx
+0.047$
+ -->
+<IMG
+ WIDTH="75" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img500.png"
+ ALT="$\mathscr{D} \approx
+0.047$">, which is not terribly good compared to <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img469.png"
+ ALT="$\mathscr{D}$"> computed
+by mean-squared displacement.  This is because, although the VACF
+below about <IMG
+ WIDTH="51" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img501.png"
+ ALT="$t = 0.1$"> contributes a heavy fraction to the integral,
+the VACF is a very slowly decaying function, so the tail contributes a
+significant amount to the integral as well.  So, just for fun, I
+extended the 1,000-step run out to 3,000 steps, then recomputed the
+VACF.  The result: <!-- MATH
+ $\mathscr{D} = 0.043.$
+ -->
+<IMG
+ WIDTH="79" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img502.png"
+ ALT="$\mathscr{D} = 0.043.$"> This result is no better,
+and this shows that it is often difficult to get reliable estimates of
+transport coefficients from Green-Kubo-type relations without
+including much longer-time contributions.  This conventional algorithm
+for computing the VACF becomes quite costly as we increase the the run
+time; it scales like <IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img503.png"
+ ALT="$t^2$">.  For this reason, it is often desirable
+to use more sophisticated sampling techniques when estimating transport
+coefficients using Green-Kubo-type analyses.  In the interest of time,
+we won't consider these techniques in this course.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html431"
+  HREF="node30.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html429"
+  HREF="node21.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html425"
+  HREF="node28.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html432"
+  HREF="node30.html">Ensembles</A>
+<B> Up:</B> <A NAME="tex2html430"
+  HREF="node21.html">Molecular Dynamics Simulation</A>
+<B> Previous:</B> <A NAME="tex2html426"
+  HREF="node28.html">Case Study 2: Static</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

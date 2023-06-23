@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Suggested Exercises</TITLE>
+<META NAME="description" CONTENT="Suggested Exercises">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node25.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node27.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html434"
+  HREF="node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html432"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html428"
+  HREF="node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html435"
+  HREF="node27.html">Elements of a Continuous-Space</A>
+<B> Up:</B> <A NAME="tex2html433"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html429"
+  HREF="node25.html">Example: Average Energy and</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000321300000000000000">
+Suggested Exercises</A>
+</H3>
+
+<P>
+
+<OL>
+<LI>Modify the code so that when samples are
+taken in accumulating statistics for <!-- MATH
+ $\left<s_1\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img272.png"
+ ALT="$ \left&lt;s_1\right&gt;$"></SPAN> and
+<!-- MATH
+ $\left<\epsilon\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img271.png"
+ ALT="$ \left&lt;\epsilon\right&gt;$"></SPAN>, the current sample values are output to the
+terminal.  You'll want to find the right place to add the following
+line: <TT>fprintf(stdout,"%i %.5lf %.5lf<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img281.png"
+ ALT="$ \backslash$"></SPAN>n",c,s,e);</TT>
+</LI>
+<LI>The current version of the code initializes the Ising lattice with
+random spins.  What temperature does this correspond to?  Modify the
+code so that the initial lattice has two well-defined domains, all
+spin-up for <SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img282.png"
+ ALT="$ i &lt; L/2$"></SPAN> and all spin-down for <SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img283.png"
+ ALT="$ i &gt; L/2$"></SPAN>.  Re-run at 
+the various temperatures.  Do you see any differences?
+</LI>
+<LI>(Advanced) Modify the code <EM>ising.c</EM> to compute the quantity
+<!-- MATH
+ $\left<s_is_j\right> - \left<s_i\right>\left<s_j\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="117" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img284.png"
+ ALT="$ \left&lt;s_is_j\right&gt; - \left&lt;s_i\right&gt;\left&lt;s_j\right&gt;$"></SPAN> as a function
+of various distances between spins <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.
+</LI>
+</OL>
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

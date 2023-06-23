@@ -1,0 +1,16 @@
+#!/usr/bin/gnuplot
+set term post eps enh color "Times-Roman" 24 linewidth 2.0 solid
+set out "va1.eps"
+set size square
+set encoding iso_8859_1
+
+set xlabel "{/Symbol t}"
+set ylabel "{/Symbol \341}v(t)v(t+{/Symbol t}){/Symbol \361}"
+
+set ytics -1,1,4
+set yr [-1:4]
+set xtics 0,0.2,1.0
+
+p "vacf" u 1:2 t"x" w l, "" u 1:3 t"y" w l, "" u 1:4 t"z" w l, "" u 1:5 t"total" w l, 0 not w l 0
+
+

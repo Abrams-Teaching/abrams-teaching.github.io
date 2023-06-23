@@ -1,0 +1,32 @@
+#!/usr/bin/gnuplot
+#
+# a gnuplot script that produces Fig. 4.3 in Frenkel + Smit. 
+# Save this and make it an executable:
+#
+# > chmod 744 gp43
+# then execute as
+# > ./gp43
+#
+# It will produce a postscript file fig4.3.eps.  If you have
+# ImageMagick installed under cygwin or windows, you can look 
+# at it or convert it to another image format.
+# With acrobat, you can view it as well.
+#
+# Note that it plots from a data file called "1.tmp".  The
+# file 1.out has ~600000 lines, most of which are unnecessary
+# for generating this figure.  So, I "chopped off" the first 3000
+# lines and put them in "1.tmp" using
+#
+# > head -1000 1.out > 1.tmp
+#
+set term post eps enh color "Times-Roman" 24 linewidth 2 solid
+set out "fig4.3.eps"
+set size square
+set yr [-5:3]
+set xr [0:2500]
+set ylabel "U/N"
+set xlabel "N_{time}"
+set key reverse Left 1500,1.0 box 
+set style data line
+plot "1.tmp" u 1:($4/108) t"total", "" u 1:($2/108) t"potential", "" u 1:($3/108) t"kinetic"
+

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Molecular Dynamics Simulation</TITLE>
+<META NAME="description" CONTENT="Molecular Dynamics Simulation">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node30.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="msim.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html345"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html343"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html337"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html346"
+  HREF="node22.html">MD: Theoretical Background</A>
+<B> Up:</B> <A NAME="tex2html344"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html338"
+  HREF="node20.html">Suggest Project: Lennard-Jones Dumbbells</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00040000000000000000"></A>
+<A NAME="sec:md"></A>
+<BR>
+Molecular Dynamics Simulation
+</H1>
+
+<P>
+We saw that the Metropolis Monte Carlo simulation technique generates
+a sequence of states with appropriate probabilities for computing
+ensemble averages (Eq.&nbsp;<A HREF="node2.html#eq:ensemble_average">1</A>).  Generating states
+probabilitistically is not the only way to explore phase space.  The
+idea behind the Molecular Dynamics (MD) technique is that we can
+observe our dynamical system explore phase space by solving all
+particle <EM>equations of motion</EM>.  We treat the particles as
+classical objects that, at least at this stage of the course, obey
+Newtonian mechanics.  Not only does this in principle provide us with
+a properly weighted sequence of states over which we can compute
+ensemble averages, it additionally gives us <EM>time-resolved</EM>
+information, something that Metropolis Monte Carlo cannot provide.
+The ``ensemble averages'' computed in traditional MD simulations are 
+in practice <EM>time averages</EM>:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<G\right> = \bar{G} = \frac{1}{N_{\rm samp}\Delta t}\sum_{i=1}^{N_{\rm samp}} G\left[r\left(t\right)\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:md:tmavg"></A><IMG
+ WIDTH="235" HEIGHT="58" BORDER="0"
+ SRC="img334.png"
+ ALT="\begin{displaymath}
+\left&lt;G\right&gt; = \bar{G} = \frac{1}{N_{\rm samp}\Delta t}\sum_{i=1}^{N_{\rm samp}} G\left[r\left(t\right)\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(102)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The <EM>ergodic hypothesis</EM> partially requires that the measurement
+time, <!-- MATH
+ $\tau_{\rm meas} = N_{\rm samp}\Delta t$
+ -->
+<IMG
+ WIDTH="122" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img335.png"
+ ALT="$\tau_{\rm meas} = N_{\rm samp}\Delta t$">, is greater than the
+longest <EM>relaxation time</EM>, <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img336.png"
+ ALT="$\tau_r$">, in the system.  The price we
+pay for this extra information is that we must at least access if not
+store particle velocities in addition to positions, and we must
+compute interparticle <EM>forces</EM> in addition to potential energy.
+We will introduce and explore MD in this section.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html347"
+  HREF="node22.html">MD:  Theoretical Background</A>
+<UL>
+<LI><A NAME="tex2html348"
+  HREF="node23.html">Newtonian Mechanics and Numerical Integration</A>
+<LI><A NAME="tex2html349"
+  HREF="node24.html">The Liouville Operator Formalism to Generating MD 
+Integration Schemes</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html350"
+  HREF="node25.html">Case Study 1: An MD Code for the Lennard-Jones Fluid</A>
+<UL>
+<LI><A NAME="tex2html351"
+  HREF="node26.html">Introduction</A>
+<LI><A NAME="tex2html352"
+  HREF="node27.html">The Code, <EM>mdlj.c</EM></A>
+</UL>
+<BR>
+<LI><A NAME="tex2html353"
+  HREF="node28.html">Case Study 2:  Static Properties of the Lennard-Jones Fluid (Case Study 4 in F&amp;S)</A>
+<LI><A NAME="tex2html354"
+  HREF="node29.html">Case Study 3:  Dynamical Properties:  The Self-Diffusion
+Coefficient</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html345"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html343"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html337"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html346"
+  HREF="node22.html">MD: Theoretical Background</A>
+<B> Up:</B> <A NAME="tex2html344"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html338"
+  HREF="node20.html">Suggest Project: Lennard-Jones Dumbbells</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

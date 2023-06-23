@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Molecular Dynamics Simulation</TITLE>
+<META NAME="description" CONTENT="Molecular Dynamics Simulation">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node46.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" HREF="msim2.html">
+<LINK REL="next" HREF="node35.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html513"
+  HREF="node35.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html511"
+  HREF="msim2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html505"
+  HREF="node33.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html514"
+  HREF="node35.html">MD: Theoretical Background</A>
+<B> Up:</B> <A NAME="tex2html512"
+  HREF="msim2.html">CHE T580: Modern Molecular</A>
+<B> Previous:</B> <A NAME="tex2html506"
+  HREF="node33.html">Case Study 4: Equation</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00040000000000000000"></A>
+<A NAME="sec:md"></A>
+<BR>
+Molecular Dynamics Simulation
+</H1>
+
+<P>
+We saw that the Metropolis Monte Carlo simulation technique generates
+a sequence of states with appropriate probabilities for computing
+ensemble averages (Eq.&nbsp;<A HREF="node6.html#eq:ensemble_average">1</A>).  Generating states
+probabilitistically is not the only way to explore phase space.  The
+idea behind the Molecular Dynamics (MD) technique is that we can
+observe our dynamical system explore phase space by solving all
+particle <EM>equations of motion</EM>.  We treat the particles as
+classical objects that, at least at this stage of the course, obey
+Newtonian mechanics.  Not only does this in principle provide us with
+a properly weighted sequence of states over which we can compute
+ensemble averages, it additionally gives us <EM>time-resolved</EM>
+information, something that Metropolis Monte Carlo cannot provide.
+The &ldquo;ensemble averages&rdquo; computed in traditional MD simulations are 
+in practice <EM>time averages</EM>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:tmavg"></A><!-- MATH
+ \begin{equation}
+\left<G\right> = \bar{G} = \frac{1}{N_{\rm samp}\Delta t}\sum_{i=1}^{N_{\rm samp}} G\left[r\left(t\right)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="242" HEIGHT="70" ALIGN="MIDDLE" BORDER="0"
+ SRC="img369.png"
+ ALT="$\displaystyle \left&lt;G\right&gt; = \bar{G} = \frac{1}{N_{\rm samp}\Delta t}\sum_{i=1}^{N_{\rm samp}} G\left[r\left(t\right)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">108</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The <EM>ergodic hypothesis</EM> partially requires that the measurement
+time, <!-- MATH
+ $\tau_{\rm meas} = N_{\rm samp}\Delta t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="122" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img370.png"
+ ALT="$ \tau_{\rm meas} = N_{\rm samp}\Delta t$"></SPAN>, is greater than the
+longest <EM>relaxation time</EM>, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img371.png"
+ ALT="$ \tau_r$"></SPAN>, in the system.  The price we
+pay for this extra information is that we must at least access if not
+store particle velocities in addition to positions, and we must
+compute interparticle <EM>forces</EM> in addition to potential energy.
+We will introduce and explore MD in this section.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html515"
+  HREF="node35.html">MD:  Theoretical Background</A>
+<UL>
+<LI><A NAME="tex2html516"
+  HREF="node36.html">Newtonian Mechanics and Numerical Integration</A>
+<LI><A NAME="tex2html517"
+  HREF="node37.html">The Liouville Operator Formalism to Generating MD 
+Integration Schemes</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html518"
+  HREF="node38.html">Case Study 1: An MD Code for the Lennard-Jones Fluid</A>
+<UL>
+<LI><A NAME="tex2html519"
+  HREF="node39.html">Introduction</A>
+<LI><A NAME="tex2html520"
+  HREF="node40.html">The Code</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html521"
+  HREF="node41.html">Case Study 2:  Static Properties of the Lennard-Jones Fluid</A>
+<UL>
+<LI><A NAME="tex2html522"
+  HREF="node42.html">Running the code</A>
+<LI><A NAME="tex2html523"
+  HREF="node43.html">Equilibration and Decorrelation</A>
+<LI><A NAME="tex2html524"
+  HREF="node44.html">Radial Distribution Functions and Postprocessing</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html525"
+  HREF="node45.html">Case Study 3:  Transport Properties:  The Self-Diffusion
+Coefficient</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html513"
+  HREF="node35.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html511"
+  HREF="msim2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html505"
+  HREF="node33.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html514"
+  HREF="node35.html">MD: Theoretical Background</A>
+<B> Up:</B> <A NAME="tex2html512"
+  HREF="msim2.html">CHE T580: Modern Molecular</A>
+<B> Previous:</B> <A NAME="tex2html506"
+  HREF="node33.html">Case Study 4: Equation</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

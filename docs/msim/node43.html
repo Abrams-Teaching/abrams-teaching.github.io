@@ -1,0 +1,991 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Fundamentals</TITLE>
+<META NAME="description" CONTENT="Fundamentals">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node44.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node42.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html596"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html594"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html588"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html597"
+  HREF="node44.html">The Transition Path Ensembles</A>
+<B> Up:</B> <A NAME="tex2html595"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html589"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072100000000000000">
+Fundamentals</A>
+</H3>
+
+<P>
+Consider a unimolecular isomerization reaction:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+A~^{\stackrel{\textstyle k_{AB}}{\textstyle \rightharpoonup}}_{\stackrel{\textstyle\leftharpoondown}{\textstyle k_{BA}}}~B
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="64" HEIGHT="54" BORDER="0"
+ SRC="img695.png"
+ ALT="\begin{displaymath}
+A&nbsp;^{\stackrel{\textstyle k_{AB}}{\textstyle \rightharpoonup}}_{\stackrel{\textstyle\leftharpoondown}{\textstyle k_{BA}}}&nbsp;B
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(246)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<IMG
+ WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img696.png"
+ ALT="$k_{AB}$"> is the <EM>forward rate constant</EM> for the reaction,
+and <IMG
+ WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img697.png"
+ ALT="$k_{BA}$"> is the <EM>backward</EM> rate constant.   They are required
+to express the concentration balances for species <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> in
+the traditional way:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\frac{d C_A}{d t} & = & -k_{AB}C_A + k_{BA}C_B\\
+\frac{d C_B}{d t} & = & k_{AB}C_A - k_{BA}C_B\\
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="38" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img698.png"
+ ALT="$\displaystyle \frac{d C_A}{d t}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="137" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img699.png"
+ ALT="$\displaystyle -k_{AB}C_A + k_{BA}C_B$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(247)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="38" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img700.png"
+ ALT="$\displaystyle \frac{d C_B}{d t}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="125" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img701.png"
+ ALT="$\displaystyle k_{AB}C_A - k_{BA}C_B$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(248)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+At equilibrium, the time derivatives vanish, and <!-- MATH
+ $C_A \rightarrow \left<C_A\right>$
+ -->
+<IMG
+ WIDTH="84" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img702.png"
+ ALT="$C_A \rightarrow \left&lt;C_A\right&gt;$">, and
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+K = \frac{\left<C_A\right>}{\left<C_B\right>} = \frac{k_{BA}}{k_{AB}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="127" HEIGHT="44" BORDER="0"
+ SRC="img703.png"
+ ALT="\begin{displaymath}
+K = \frac{\left&lt;C_A\right&gt;}{\left&lt;C_B\right&gt;} = \frac{k_{BA}}{k_{AB}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(249)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We now ask, how does an initial perturbation in the concentration of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">,
+written <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img704.png"
+ ALT="$\Delta A$">,
+decay with time, assuming <IMG
+ WIDTH="101" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img705.png"
+ ALT="$C_A + C_B = C$"> = const.?
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\frac{d \left(C_A + \Delta C_A\right)}{d t} & = & -k_{AB}\left(C_A + \Delta C_A\right) + k_{BA}\left(C_B - \Delta C_A\right)\\
+\frac{d C_A}{d t} & = & -k_{AB}\Delta C_A - k_{BA}\Delta C_A = -\left(k_{AB}+k_{BA}\right)\Delta C_A
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="107" HEIGHT="55" ALIGN="MIDDLE" BORDER="0"
+ SRC="img706.png"
+ ALT="$\displaystyle \frac{d \left(C_A + \Delta C_A\right)}{d t}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="276" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img707.png"
+ ALT="$\displaystyle -k_{AB}\left(C_A + \Delta C_A\right) + k_{BA}\left(C_B - \Delta C_A\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(250)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="38" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img698.png"
+ ALT="$\displaystyle \frac{d C_A}{d t}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="327" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img708.png"
+ ALT="$\displaystyle -k_{AB}\Delta C_A - k_{BA}\Delta C_A = -\left(k_{AB}+k_{BA}\right)\Delta C_A$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(251)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We can easily solve this to yield:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta C_A\left(t\right) = \Delta C_A\left(0\right)\exp\left[-\left(k_{AB}+k_{BA}\right)t\right] \equiv \Delta C_A\left(0\right)e^{-t/\tau_R}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_macro1"></A><IMG
+ WIDTH="410" HEIGHT="28" BORDER="0"
+ SRC="img709.png"
+ ALT="\begin{displaymath}
+\Delta C_A\left(t\right) = \Delta C_A\left(0\right)\exp\left...
+...A}\right)t\right] \equiv \Delta C_A\left(0\right)e^{-t/\tau_R}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(252)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which defines the ``decay time'':
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:tps_1"></A>
+<!-- MATH
+ \begin{eqnarray}
+\tau_R & = & \left(k_{AB} + k_{BA}\right)^{-1}\\
+ & = & k_{AB}^{-1}\left(1+\frac{\left<C_A\right>}{\left<C_B\right>}\right)^{-1}\\
+& = & \frac{\left<C_B\right>}{k_{AB}}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img710.png"
+ ALT="$\displaystyle \tau_R$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="110" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$\displaystyle \left(k_{AB} + k_{BA}\right)^{-1}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(253)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="142" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img712.png"
+ ALT="$\displaystyle k_{AB}^{-1}\left(1+\frac{\left&lt;C_A\right&gt;}{\left&lt;C_B\right&gt;}\right)^{-1}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(254)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="42" HEIGHT="55" ALIGN="MIDDLE" BORDER="0"
+ SRC="img713.png"
+ ALT="$\displaystyle \frac{\left&lt;C_B\right&gt;}{k_{AB}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(255)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+(The last equality assumes the concentrations are normalized such that
+<IMG
+ WIDTH="97" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img714.png"
+ ALT="$C_A + C_B = 1$">; that is, we can consider <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img715.png"
+ ALT="$C_A$"> as the probability of
+observing ``state'' <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">.)
+
+<P>
+Now we make a connection to the microscopic.  Imagine that the two
+states labelled <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> are separated from each other along some
+general reaction coordinate <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img716.png"
+ ALT="$q$"> which has a large
+free energy barrier at position <IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img717.png"
+ ALT="$q^*$">:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="332" HEIGHT="265" ALIGN="CENTER"
+ SRC="tps_barr.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+</TABLE>
+This is a free energy barrier because the system presumably has many
+more degrees of freedom other than (which may or may not contribute
+to) <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img716.png"
+ ALT="$q$">.  Now, we enter the realm of <EM>linear response theory</EM> (See
+Appendix C in F&amp;S), and ask, what is the behavior or the system with
+a finitely small, <EM>static</EM> perturbation toward state <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">?  We
+express this as a <EM>perturbation Hamiltonian</EM>:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{H} = \mathscr{H}_0 -\epsilon g_A\left(q-q^*\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="156" HEIGHT="28" BORDER="0"
+ SRC="img718.png"
+ ALT="\begin{displaymath}
+\mathscr{H} = \mathscr{H}_0 -\epsilon g_A\left(q-q^*\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(256)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img719.png"
+ ALT="$\mathscr{H}_0$"> is the reference Hamiltonian of the unperturbed
+system.  Here, <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img720.png"
+ ALT="$g_A$"> is an indicator function which is 1 if we are in
+state <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and 0 otherwise:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+g_A\left(x\right) = \left\{\begin{array}{ll}
+	1 & \mbox{$x<0$}\\
+	0 & \mbox{$x>0$}
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="146" HEIGHT="45" BORDER="0"
+ SRC="img721.png"
+ ALT="\begin{displaymath}
+g_A\left(x\right) = \left\{\begin{array}{ll}
+1 &amp; \mbox{$x&lt;0$}\\
+0 &amp; \mbox{$x&gt;0$}
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(257)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Notice that the peturbation lowers the energy by a little bit
+(<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">) when the system chooses to be in state <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">.  Here, we
+think of <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> as a switch we can flip in order to perturb the
+system.  We measure the static pertubation as the difference between
+the average concentration of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> in the perturbed state to that in the
+<EM>un</EM>perturbed state:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta C_A = \left<C_A\right>_\epsilon - \left<C_A\right>_0 = \left<g_A\right>_\epsilon - \left<g_A\right>_0
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="270" HEIGHT="29" BORDER="0"
+ SRC="img722.png"
+ ALT="\begin{displaymath}
+\Delta C_A = \left&lt;C_A\right&gt;_\epsilon - \left&lt;C_A\right&gt;_0 = \left&lt;g_A\right&gt;_\epsilon - \left&lt;g_A\right&gt;_0
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(258)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Notice that because of our choice in magnitude for <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img720.png"
+ ALT="$g_A$">, we can
+consider its ensemble average, <!-- MATH
+ $\left<g_A\right>$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img723.png"
+ ALT="$\left&lt;g_A\right&gt;$">, to be the
+probability of observing the system in state A, which is, due to our
+normalization of concentration, equivalent to the concentration of A.
+
+<P>
+Our first step is to find the linear response of <IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img724.png"
+ ALT="$\Delta C_A$"> to
+<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">, defined as 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left(\frac{\partial\Delta C_A}{\partial\epsilon}\right)_{\epsilon=0}
+= \left(\frac{\partial\left<g_A\right>}{\partial\epsilon}\right)_{\epsilon=0}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="202" HEIGHT="45" BORDER="0"
+ SRC="img725.png"
+ ALT="\begin{displaymath}
+\left(\frac{\partial\Delta C_A}{\partial\epsilon}\right)_{\e...
+...partial\left&lt;g_A\right&gt;}{\partial\epsilon}\right)_{\epsilon=0}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(259)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+So let us first compute <!-- MATH
+ $\left<g_A\right>_\epsilon$
+ -->
+<IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img726.png"
+ ALT="$\left&lt;g_A\right&gt;_\epsilon$"> in the canonical
+ensemble:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<g_A\right>_\epsilon = \frac{
+\mbox{\begin{minipage}{9cm}
+\begin{displaymath}
+\int d{\bf q}^Nd{\bf p}^N \exp\left[-\beta\mathscr{H}_0\left({\bf q},{\bf p}\right)+\beta\epsilon g_A\left(q-q^*\right)\right]g_A\left(q-q^*\right)
+\end{displaymath}
+\end{minipage}}}{
+\mbox{\begin{minipage}{9cm}
+\begin{displaymath}
+\underbrace{\int d{\bf q}^Nd{\bf p}^N \exp\left[-\beta\mathscr{H}_0\left({\bf q},{\bf p}\right)+\beta\epsilon g_A\left(q-q^*\right)\right]}_{Z_\epsilon}
+\end{displaymath}
+\end{minipage}}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="466" HEIGHT="110" BORDER="0"
+ SRC="img727.png"
+ ALT="\begin{displaymath}
+\left&lt;g_A\right&gt;_\epsilon = \frac{
+\mbox{\begin{minipage}{9c...
+...\right)\right]}_{Z_\epsilon}
+\end{displaymath}\end{minipage}}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(260)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, we have defined <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img728.png"
+ ALT="$Z_\epsilon$"> as the unnormalized canonical
+partition function, merely to make the following gymnastics a little
+more transparent.  Differentiating with respect to <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">:
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:remarkable"></A>
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial\left<g_A\right>_\epsilon}{\partial\epsilon} & = & \frac{1}{Z_\epsilon}\int d{\bf q}^Nd{\bf p}^N \exp\left(-\beta\mathscr{H}_0+\beta\epsilon g_A\right)\beta g_A^2\\
+\nonumber
+& & -  \frac{1}{Z_\epsilon^2}\left[\int d{\bf q}^Nd{\bf p}^N \exp\left(-\beta\mathscr{H}_0+\beta\epsilon g_A\right)g_A\right]\\
+\nonumber
+& & \times \left[\int d{\bf q}^Nd{\bf p}^N \exp\left(-\beta\mathscr{H}_0+\beta\epsilon g_A\right)\beta g_A\right]\\
+& = & \beta\left<g_A^2\right>_\epsilon - \beta\left<g_A\right>^2_\epsilon\\
+\rightarrow \left(\frac{\partial\Delta C_A}{\partial\epsilon}\right)_{\epsilon=0} & = & \beta\left(\left<g_A^2\right>_0 - \left<g_A\right>_0^2\right)
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="56" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img729.png"
+ ALT="$\displaystyle \frac{\partial\left&lt;g_A\right&gt;_\epsilon}{\partial\epsilon}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="276" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img730.png"
+ ALT="$\displaystyle \frac{1}{Z_\epsilon}\int d{\bf q}^Nd{\bf p}^N \exp\left(-\beta\mathscr{H}_0+\beta\epsilon g_A\right)\beta g_A^2$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(261)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="297" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img731.png"
+ ALT="$\displaystyle - \frac{1}{Z_\epsilon^2}\left[\int d{\bf q}^Nd{\bf p}^N \exp\left(-\beta\mathscr{H}_0+\beta\epsilon g_A\right)g_A\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="284" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img732.png"
+ ALT="$\displaystyle \times \left[\int d{\bf q}^Nd{\bf p}^N \exp\left(-\beta\mathscr{H}_0+\beta\epsilon g_A\right)\beta g_A\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="125" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img733.png"
+ ALT="$\displaystyle \beta\left&lt;g_A^2\right&gt;_\epsilon - \beta\left&lt;g_A\right&gt;^2_\epsilon$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(262)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="118" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img734.png"
+ ALT="$\displaystyle \rightarrow \left(\frac{\partial\Delta C_A}{\partial\epsilon}\right)_{\epsilon=0}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="132" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img735.png"
+ ALT="$\displaystyle \beta\left(\left&lt;g_A^2\right&gt;_0 - \left&lt;g_A\right&gt;_0^2\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(263)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Now, we haven't said anything in detail about the structure of <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img720.png"
+ ALT="$g_A$">,
+but in fact, to perform this analysis, we require that it be
+continuous through the origin.  But, we can make it vary from 1 to 0
+across as narrow a region of <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img716.png"
+ ALT="$q$"> around the origin as we like.  Then
+it is true that, at all values of <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img716.png"
+ ALT="$q$"> except perhaps right at the
+barrier position <IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img717.png"
+ ALT="$q^*$">,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+g_A^2 = g_A  \ \ \ \mbox{so\ \ \ } \left<g_A^2\right> = \left<g_A\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="189" HEIGHT="30" BORDER="0"
+ SRC="img736.png"
+ ALT="\begin{displaymath}
+g_A^2 = g_A    \mbox{so   } \left&lt;g_A^2\right&gt; = \left&lt;g_A\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(264)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This implies
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left(\frac{\partial\Delta C_A}{\partial\epsilon}\right)_{\epsilon=0}  =  \beta\left[\left<g_A\right>_0\left(1 - \left<g_A\right>_0\right)\right] = 
+\beta\left<C_A\right>\left<C_B\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_2"></A><IMG
+ WIDTH="354" HEIGHT="45" BORDER="0"
+ SRC="img737.png"
+ ALT="\begin{displaymath}
+\left(\frac{\partial\Delta C_A}{\partial\epsilon}\right)_{\e...
+...ight&gt;_0\right)\right] =
+\beta\left&lt;C_A\right&gt;\left&lt;C_B\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(265)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+The next step is to introduce a clock that begins ticking the moment
+we set <IMG
+ WIDTH="40" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img738.png"
+ ALT="$\epsilon = 0$">.  As long as <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> was small, we can
+compute the decay of the static perturbation <!-- MATH
+ $\Delta
+C_A\left(t\right)$
+ -->
+<IMG
+ WIDTH="60" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img739.png"
+ ALT="$\Delta
+C_A\left(t\right)$"> to first order in <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">
+as<A NAME="tex2html44"
+  HREF="footnode.html#foot8345"><SUP>2</SUP></A>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta C_A\left(t\right) = \beta\epsilon
+\frac{
+\mbox{
+\begin{minipage}{8cm}
+\begin{displaymath}
+\int d{\bf q}^Nd{\bf p}^Ne^{-\beta\mathscr{H}_0}\left[g_A\left(0\right)-\left<g_A\right>\right]e^{iL_0t}\left[g_A\left(0\right)-\left<g_A\right>\right]
+\end{displaymath}
+\end{minipage}
+}}{
+\mbox{
+\begin{minipage}{8cm}
+\begin{displaymath}
+\int d{\bf q}^Nd{\bf p}^Ne^{-\beta\mathscr{H}_0}
+\end{displaymath}
+\end{minipage}
+}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps:lrt1"></A><IMG
+ WIDTH="468" HEIGHT="85" BORDER="0"
+ SRC="img750.png"
+ ALT="\begin{displaymath}
+\Delta C_A\left(t\right) = \beta\epsilon
+\frac{
+\mbox{
+\begi...
+... p}^Ne^{-\beta\mathscr{H}_0}
+\end{displaymath}\end{minipage}}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(269)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img751.png"
+ ALT="$iL_0$"> is the Liouville operator, which we first encountered in the
+Liouville operator formalism for deriving MD integrators (Sec.&nbsp;<A HREF="node24.html#sec:liouville">4.1.2</A>), and <IMG
+ WIDTH="36" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img752.png"
+ ALT="$e^{iL_0t}$"> is the classical propagator:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+e^{iL_0t}f\left(0\right) = f\left(t\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="115" HEIGHT="28" BORDER="0"
+ SRC="img753.png"
+ ALT="\begin{displaymath}
+e^{iL_0t}f\left(0\right) = f\left(t\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(270)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This yields:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta C_A\left(t\right) = \beta\epsilon\left<\Delta g_A\left(0\right)\Delta g_A\left(t\right)\right>,\ \ \ \ \Delta g_A \equiv g_A - \left<g_A\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_2.1"></A><IMG
+ WIDTH="366" HEIGHT="28" BORDER="0"
+ SRC="img754.png"
+ ALT="\begin{displaymath}
+\Delta C_A\left(t\right) = \beta\epsilon\left&lt;\Delta g_A\lef...
+...right)\right&gt;,    \Delta g_A \equiv g_A - \left&lt;g_A\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(271)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now, Eq.&nbsp;<A HREF="#eq:tps_2">266</A>, when integrated implies
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta C_A\left(0\right) = \beta\epsilon\left<C_A\right>\left<C_B\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="168" HEIGHT="28" BORDER="0"
+ SRC="img755.png"
+ ALT="\begin{displaymath}
+\Delta C_A\left(0\right) = \beta\epsilon\left&lt;C_A\right&gt;\left&lt;C_B\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(272)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which we can use to eliminate <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> in Eq.&nbsp;<A HREF="#eq:tps_2.1">272</A>, yielding
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Delta C_A\left(t\right) = \Delta C_A\left(0\right) \frac{\left<\Delta g_A\left(0\right)\Delta g_A\left(t\right)\right>}{\left<C_A\right>\left<C_B\right>}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_3"></A><IMG
+ WIDTH="261" HEIGHT="44" BORDER="0"
+ SRC="img756.png"
+ ALT="\begin{displaymath}
+\Delta C_A\left(t\right) = \Delta C_A\left(0\right) \frac{\l...
+...ta g_A\left(t\right)\right&gt;}{\left&lt;C_A\right&gt;\left&lt;C_B\right&gt;}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(273)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now, recalling Eq.&nbsp;<A HREF="#eq:tps_macro1">253</A>, we can make a connection to the macroscopic:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+e^{-t/\tau_R} = \frac{\left<\Delta g_A\left(0\right)\Delta g_A\left(t\right)\right>}{\left<C_A\right>\left<C_B\right>}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_4"></A><IMG
+ WIDTH="189" HEIGHT="44" BORDER="0"
+ SRC="img757.png"
+ ALT="\begin{displaymath}
+e^{-t/\tau_R} = \frac{\left&lt;\Delta g_A\left(0\right)\Delta g_A\left(t\right)\right&gt;}{\left&lt;C_A\right&gt;\left&lt;C_B\right&gt;}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(274)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+This result states that the decay behavior is governed by the
+autocorrelation function of <U>concentration fluctuations</U>.
+Eq.&nbsp;<A HREF="#eq:tps_4">275</A> is itself a remarkable result of modern
+nonequilibrium statistical mechanics, attributable to Onsager.
+
+<P>
+We have implicitly assumed that the system spends all of its time in
+either <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> or <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">; the system spends virtually no time at the barrier
+crossing itself.  Eq.&nbsp;<A HREF="#eq:tps_4">275</A> is therefore valid as long as the
+decay time, <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img758.png"
+ ALT="$\tau_R$">, is much greater than the ``barrier crossing
+time''; usually, this is true (we assume).
+
+<P>
+Now, we differentiate Eq.&nbsp;<A HREF="#eq:tps_4">275</A> with respect to time:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+-\frac{1}{\tau_R}e^{-t/\tau_R} =  \frac{\left<g_A\left(0\right)\dot{g}_A\left(t\right)\right>}{\left<C_A\right>\left<C_B\right>}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="196" HEIGHT="44" BORDER="0"
+ SRC="img759.png"
+ ALT="\begin{displaymath}
+-\frac{1}{\tau_R}e^{-t/\tau_R} = \frac{\left&lt;g_A\left(0\righ...
+...t{g}_A\left(t\right)\right&gt;}{\left&lt;C_A\right&gt;\left&lt;C_B\right&gt;}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(275)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <!-- MATH
+ $\dot{g_A} \equiv d g_A / dt$
+ -->
+<IMG
+ WIDTH="91" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img760.png"
+ ALT="$\dot{g_A} \equiv d g_A / dt$">.  Note that the <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img761.png"
+ ALT="$\Delta$">'s are gone thanks
+to the fact that <!-- MATH
+ $d\left<g_A\right>/dt = 0$
+ -->
+<IMG
+ WIDTH="99" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img762.png"
+ ALT="$d\left&lt;g_A\right&gt;/dt = 0$">.  
+
+<P>
+For time much less than <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img758.png"
+ ALT="$\tau_R$">, but still much greater than the
+barrier crossing time, <!-- MATH
+ $(t \ll \tau_R)$
+ -->
+<IMG
+ WIDTH="64" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img763.png"
+ ALT="$(t \ll \tau_R)$">,<A NAME="tex2html45"
+  HREF="footnode.html#foot8259"><SUP>3</SUP></A>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+-\left(\tau_R\right)^{-1} = \frac{\left<g_A\left(0\right)\dot{g}_A\left(t\right)\right>}{\left<C_A\right>\left<C_B\right>} = -\frac{\left<\dot{g}_A\left(0\right)g_A\left(t\right)\right>}{\left<C_A\right>\left<C_B\right>}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:tps_5"></A><IMG
+ WIDTH="312" HEIGHT="44" BORDER="0"
+ SRC="img768.png"
+ ALT="\begin{displaymath}
+-\left(\tau_R\right)^{-1} = \frac{\left&lt;g_A\left(0\right)\do...
+...ht)g_A\left(t\right)\right&gt;}{\left&lt;C_A\right&gt;\left&lt;C_B\right&gt;}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(278)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Recalling from way back from Eq.&nbsp;<A HREF="#eq:tps_1">256</A> how <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img758.png"
+ ALT="$\tau_R$"> and the
+rate constant <IMG
+ WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img696.png"
+ ALT="$k_{AB}$"> are related, we find finally that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+k_{AB}\left(t\right) = \frac{\left<\dot{g}_A\left(0\right)g_A\left(t\right)\right>}{\left<C_A\right>}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="167" HEIGHT="44" BORDER="0"
+ SRC="img769.png"
+ ALT="\begin{displaymath}
+k_{AB}\left(t\right) = \frac{\left&lt;\dot{g}_A\left(0\right)g_A\left(t\right)\right&gt;}{\left&lt;C_A\right&gt;}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(279)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+So:  <B>A rate constant is the time-derivative of a concentration autocorrelation
+function.</B>
+
+<P>
+The idea of path sampling Monte Carlo is that, because <IMG
+ WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img696.png"
+ ALT="$k_{AB}$"> is an
+ensemble average, we can compute it using MC, if we determine first
+what ensemble we need to sample.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html596"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html594"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html588"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html597"
+  HREF="node44.html">The Transition Path Ensembles</A>
+<B> Up:</B> <A NAME="tex2html595"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html589"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

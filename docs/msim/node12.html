@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Suggested Exercises</TITLE>
+<META NAME="description" CONTENT="Suggested Exercises">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" HREF="node9.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html256"
+  HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html254"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html250"
+  HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html257"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Up:</B> <A NAME="tex2html255"
+  HREF="node9.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html251"
+  HREF="node11.html">A C Code for</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032300000000000000">
+Suggested Exercises</A>
+</H3>
+
+<P>
+
+<OL>
+<LI>Run the code for the following values of temperature: 5.0, 4.0, 3.0,
+2.0, 1.0.  Run the code several times at each <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> with a different
+value for the random number generator seed.  Report the average spin
+and average energy per spin.  What is happening near <IMG
+ WIDTH="57" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img251.png"
+ ALT="$T = 2.0$">?
+</LI>
+<LI>Modify the code so that when samples are
+taken in accumulating statistics for <!-- MATH
+ $\left<s_1\right>$
+ -->
+<IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img242.png"
+ ALT="$\left&lt;s_1\right&gt;$"> and
+<!-- MATH
+ $\left<\epsilon\right>$
+ -->
+<IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img241.png"
+ ALT="$\left&lt;\epsilon\right&gt;$">, the current sample values are output to the
+terminal.  You'll want to find the right place to add the following
+line: <TT>fprintf(stdout,"%i %.5lf %.5lf<IMG
+ WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img252.png"
+ ALT="$\backslash$">n",c,s,e);</TT>
+</LI>
+<LI>The current version of the code initializes the Ising lattice with
+random spins.  What temperature does this correspond to?  Modify the
+code so that the initial lattice has two well-defined domains, all
+spin-up for <IMG
+ WIDTH="57" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img253.png"
+ ALT="$i &lt; L/2$"> and all spin-down for <IMG
+ WIDTH="57" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img254.png"
+ ALT="$i &gt; L/2$">.  Re-run at 
+the various temperatures.  Do you see any differences?
+</LI>
+<LI>(Advanced) Modify the code <EM>ising.c</EM> to compute the quantity
+<!-- MATH
+ $\left<s_is_j\right> - \left<s_i\right>\left<s_j\right>$
+ -->
+<IMG
+ WIDTH="117" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img255.png"
+ ALT="$\left&lt;s_is_j\right&gt; - \left&lt;s_i\right&gt;\left&lt;s_j\right&gt;$"> as a function
+of various distances between spins <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> and <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">.
+</LI>
+</OL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

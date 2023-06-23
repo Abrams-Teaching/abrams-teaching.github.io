@@ -1,0 +1,14 @@
+#!/usr/bin/gnuplot
+set term post eps enh color "Times-Roman" 24 linewidth 2.0 solid
+set out "msd2.eps"
+set size square
+set encoding iso_8859_1
+
+set xlabel "1/t ({/Symbol t}^{-1})"
+set ylabel "{/Symbol \341}r^2{/Symbol \361}/(6t) ({/Symbol s}^2/{/Symbol t})" 1.0
+
+unset key
+set yr [0:0.1]
+set log x
+p "msd1" u (1./$1):($5/(6*$1)) w lp pt 4, 0.06 w l 2
+

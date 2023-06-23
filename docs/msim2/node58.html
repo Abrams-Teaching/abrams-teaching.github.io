@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Ewald Forces</TITLE>
+<META NAME="description" CONTENT="Ewald Forces">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node59.html">
+<LINK REL="previous" HREF="node57.html">
+<LINK REL="up" HREF="node56.html">
+<LINK REL="next" HREF="node59.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html775"
+  HREF="node59.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html773"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html767"
+  HREF="node57.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html776"
+  HREF="node59.html">Implementation and Evaluation</A>
+<B> Up:</B> <A NAME="tex2html774"
+  HREF="node56.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html768"
+  HREF="node57.html">The Ewald Coulombic energy</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00062000000000000000">
+Ewald Forces</A>
+</H2>
+
+<P>
+Now, we can use Eq.&nbsp;<A HREF="node57.html#eq:ewald_u">249</A> in a Monte Carlo simulation of
+ a system of charges, provided that periodic boundary conditions are
+used and the domain is cubic.  (Extensions to non-cubic boxes and 
+slab geometries are discussed to a limited extent in F&amp;S.)  We can
+also use the Ewald technique to calculate forces for use in molecular
+dynamics simulations.
+
+<P>
+The force on particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> due to the charges in the system is
+given by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf F}_i = -\frac{\partial}{\partial{\bf r}_i}\mathscr{U}_{\rm Coul}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="120" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img683.png"
+ ALT="$\displaystyle {\bf F}_i = -\frac{\partial}{\partial{\bf r}_i}\mathscr{U}_{\rm Coul}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">253</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+For our purposes, the two contributions to <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img684.png"
+ ALT="$ {\bf F}_i$"></SPAN> are due
+to the <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-space energy and the short-ranged, real-space energy:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf F}_i = {\bf F}_i^{(k)} + {\bf F}_i^{(r)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="119" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img685.png"
+ ALT="$\displaystyle {\bf F}_i = {\bf F}_i^{(k)} + {\bf F}_i^{(r)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">254</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Notice that there is no change in <!-- MATH
+ $\mathscr{U}_{\rm self}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img686.png"
+ ALT="$ \mathscr{U}_{\rm self}$"></SPAN> when <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img668.png"
+ ALT="$ {\bf r}_i$"></SPAN> changes, so no forces arise from <!-- MATH
+ $\mathscr{U}_{\rm self}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img686.png"
+ ALT="$ \mathscr{U}_{\rm self}$"></SPAN>.
+
+<P>
+The <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-space contribution is given by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf F}_i^{(k)} = q_i\sum_j q_j \frac{1}{V} \sum_{{\bf k}\ne {\bf0}}
+\frac{4\pi{\bf k}}{k^2}e^{-k^2/4\alpha}\sin\left({\bf k}\cdot{\bf r}_{ij}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="316" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img687.png"
+ ALT="$\displaystyle {\bf F}_i^{(k)} = q_i\sum_j q_j \frac{1}{V} \sum_{{\bf k}\ne {\bf...
+...frac{4\pi{\bf k}}{k^2}e^{-k^2/4\alpha}\sin\left({\bf k}\cdot{\bf r}_{ij}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">255</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The real-space contribution is given by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf F}_i^{(r)} = q_i\sum_j q_j \left[2\sqrt{\frac{\alpha}{\pi}}e^{-\alpha r_{ij}^2}+\frac{1}{r_{ij}}{\rm erfc}(\sqrt{\alpha} r_{ij})\right]\frac{{\bf r}_{ij}}{r_{ij}^2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="354" HEIGHT="57" ALIGN="MIDDLE" BORDER="0"
+ SRC="img688.png"
+ ALT="$\displaystyle {\bf F}_i^{(r)} = q_i\sum_j q_j \left[2\sqrt{\frac{\alpha}{\pi}}e...
+...{1}{r_{ij}}{\rm erfc}(\sqrt{\alpha} r_{ij})\right]\frac{{\bf r}_{ij}}{r_{ij}^2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">256</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html775"
+  HREF="node59.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html773"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html767"
+  HREF="node57.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html776"
+  HREF="node59.html">Implementation and Evaluation</A>
+<B> Up:</B> <A NAME="tex2html774"
+  HREF="node56.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html768"
+  HREF="node57.html">The Ewald Coulombic energy</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

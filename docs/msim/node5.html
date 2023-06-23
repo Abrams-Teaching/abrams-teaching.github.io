@@ -1,0 +1,1050 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Entropy and Temperature</TITLE>
+<META NAME="description" CONTENT="Entropy and Temperature">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html174"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html172"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html166"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html175"
+  HREF="node6.html">Classical Statistical Mechanics</A>
+<B> Up:</B> <A NAME="tex2html173"
+  HREF="node2.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html167"
+  HREF="node4.html">Making Observations: The Ergodic</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00023000000000000000">
+Entropy and Temperature</A>
+</H2>
+
+<P>
+Eq.&nbsp;<A HREF="node3.html#eq:microcanonical">2.1</A> introduced the quantity <IMG
+ WIDTH="78" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img67.png"
+ ALT="$\Omega(N,V,E)$"> as
+the number of states available to a system under the constraints of
+constant number of particles, <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, volume, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">, and energy <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$E$">.  The
+<B>fundamental postulate</B> of statistical mechanics, also called the
+``rational basis'' by Chandler, is the following:
+<BLOCKQUOTE>
+In statistical equilibrium, all states consistent with the constraints
+of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">, and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$E$"> are <EM>equally probable</EM>.
+
+</BLOCKQUOTE>
+or
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P_\nu = 1/\Omega(N,V,E).
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="133" HEIGHT="28" BORDER="0"
+ SRC="img87.png"
+ ALT="\begin{displaymath}
+P_\nu = 1/\Omega(N,V,E).
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(9)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This relation is often referred to as a statement of the ``equal <I>a priori</I> probabilities in state space.''  Another way of saying the
+same thing: The probability distribution for states in the
+microcanonical ensemble is uniform.
+
+<P>
+The link between statistical mechanics and classical thermodynamics is
+given by a definition of entropy:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+S \equiv k_B\ln\Omega
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:entropy"></A><IMG
+ WIDTH="80" HEIGHT="26" BORDER="0"
+ SRC="img88.png"
+ ALT="\begin{displaymath}
+S \equiv k_B\ln\Omega
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(10)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Note two important properties of <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$S$">.  First, it is extensive: if we
+consider a compound system made of subsystems <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> with
+<IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.png"
+ ALT="$\Omega_A$"> and <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img93.png"
+ ALT="$\Omega_B$"> as the respective number of states, the
+total number of states is <!-- MATH
+ $\Omega_A\Omega_B$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img94.png"
+ ALT="$\Omega_A\Omega_B$">, and therefore <IMG
+ WIDTH="96" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img95.png"
+ ALT="$S = S_A +
+S_B$">.  Second, it is consistent with the second law of thermodynamics:
+putting any constraint on the system lowers its entropy because the
+constraint lowers the number of accessible states.
+
+<P>
+Temperature is defined using entropy: 
+<!-- MATH
+ $1/T \equiv \left(\partial S/\partial E\right)_{N,V}$
+ -->
+<IMG
+ WIDTH="139" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img96.png"
+ ALT="$1/T \equiv \left(\partial S/\partial E\right)_{N,V}$">, or
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\beta = \left(k_BT\right)^{-1} = \left(\partial\ln\Omega/\partial E\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="193" HEIGHT="28" BORDER="0"
+ SRC="img97.png"
+ ALT="\begin{displaymath}
+\beta = \left(k_BT\right)^{-1} = \left(\partial\ln\Omega/\partial E\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(11)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now we will consider constraining our system not with constant <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$E$">,
+but with constant <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">.  The set of all possible states satisfying
+constraints of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">, and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> is called the <EM>canonical</EM>
+ensemble.  Contrary to appearances based on their names, the canonical
+ensemble can be envisioned as a subsystem in a larger, microcanonical
+system.  Consider such a system divided into a small subsystem <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">,
+surrounded by a large ``bath'' <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.  We imagine that these two
+subsystems are ``weakly coupled,'' meaning they exchange only thermal
+energy, but no particles, and their volumes remain fixed.  We seek to
+compute the probability of finding the total system in a state such
+that subsystem <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> has energy <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$E_A$">.  The entire system is
+microcanonical, so the total energy, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$E$"> is constant, as is the total
+number of states available to the system, <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> (we omit the <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">
+and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> for simplicity).  
+
+<P>
+When <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> has energy <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$E_A$">, the total system energy is <IMG
+ WIDTH="102" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img99.png"
+ ALT="$E = E_A + E_B$">,
+where <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img100.png"
+ ALT="$E_B$"> is the energy of the bath.  By constraining system <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">'s
+energy, we have reduced the number of states available to the whole
+system to <IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$\Omega(E-E_A)$">.  So, the probability of observing the
+system in a state in which subsystem <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> has energy <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$E_A$"> looks like
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P_A = \frac{\left[\begin{array}{l}
+	\mbox{Number of states for which}\\
+        \mbox{subsystem $A$\  has energy $E_A$}
+	\end{array}\right]}
+	{\left[\begin{array}{l}
+	\mbox{Number of states available}\\
+	\mbox{to entire system}
+	\end{array}\right]} = \frac{\Omega\left(E - E_A\right)}{\Omega\left(E\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="378" HEIGHT="87" BORDER="0"
+ SRC="img102.png"
+ ALT="\begin{displaymath}
+P_A = \frac{\left[\begin{array}{l}
+\mbox{Number of states f...
+...ht]} = \frac{\Omega\left(E - E_A\right)}{\Omega\left(E\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(12)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We can expand <!-- MATH
+ $\Omega\left(E - E_A\right)$
+ -->
+<IMG
+ WIDTH="85" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img103.png"
+ ALT="$\Omega\left(E - E_A\right)$"> in a Taylor series around <IMG
+ WIDTH="55" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img104.png"
+ ALT="$E_A = 0$">:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+P_A \propto \Omega\left(E - E_A\right) & = &  
+	\exp\left[\ln\Omega\left(E-E_A\right)\right]\\
+	& = & \exp\left[\ln\Omega\left(E\right) - E_A\frac{\partial\ln\Omega}{\partial E} + \cdots\right],
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="126" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img105.png"
+ ALT="$\displaystyle P_A \propto \Omega\left(E - E_A\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="136" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img107.png"
+ ALT="$\displaystyle \exp\left[\ln\Omega\left(E-E_A\right)\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(13)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="233" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img108.png"
+ ALT="$\displaystyle \exp\left[\ln\Omega\left(E\right) - E_A\frac{\partial\ln\Omega}{\partial E} + \cdots\right],$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(14)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where the partial derivative implies we are holding <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> fixed.
+We can truncate the Taylor expansion at the first-order term, because
+higher order terms become less and less important as the size of
+subsystem <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> becomes larger and larger.  What results is the
+Boltzmann distribution law for energies of a system at constant
+temperature:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P_A \propto \exp\left(-\beta E_A\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="123" HEIGHT="28" BORDER="0"
+ SRC="img109.png"
+ ALT="\begin{displaymath}
+P_A \propto \exp\left(-\beta E_A\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(15)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The normalization condition requires that for all energies of subsystem <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">, <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$E_A$">,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\sum_A P_A = 1 = \sum_A  \exp\left(-\beta E_A\right) \equiv Q\left(N,V,T\right),
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="310" HEIGHT="45" BORDER="0"
+ SRC="img110.png"
+ ALT="\begin{displaymath}
+\sum_A P_A = 1 = \sum_A \exp\left(-\beta E_A\right) \equiv Q\left(N,V,T\right),
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(16)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which defines the <EM>canonical partition function</EM>, <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$">.  Therefore,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P_A = Q^{-1}\exp\left(-\beta E_A\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="156" HEIGHT="28" BORDER="0"
+ SRC="img111.png"
+ ALT="\begin{displaymath}
+P_A = Q^{-1}\exp\left(-\beta E_A\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(17)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Because some energies can correspond to more than one microstate, we
+should distinguish between ``states'' and ``energy levels.''  We can
+express the canonical partition function as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+Q = \sum_{\begin{array}{cc}\nu\\\mbox{states}\end{array}} e^{-\beta E_\nu} = \sum_{\begin{array}{cc}l\\\mbox{levels}\end{array}} \Omega\left(E_l\right) e^{-\beta E_l}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:canonical_1"></A><IMG
+ WIDTH="295" HEIGHT="75" BORDER="0"
+ SRC="img112.png"
+ ALT="\begin{displaymath}
+Q = \sum_{\begin{array}{cc}\nu\ \mbox{states}\end{array}} e...
+...mbox{levels}\end{array}} \Omega\left(E_l\right) e^{-\beta E_l}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(18)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where, as we have seen, <!-- MATH
+ $\Omega\left(E\right)$
+ -->
+<IMG
+ WIDTH="43" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img113.png"
+ ALT="$\Omega\left(E\right)$"> is the number of
+microstates with energy <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$E$">.  Moving to the continuum limit, and
+assuming a reference energy of <IMG
+ WIDTH="65" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$E_{ref} = 0$">,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+Q \rightarrow \int_0^\infty dE \overline\Omega\left(E\right)e^{-\beta E}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:dos"></A><IMG
+ WIDTH="166" HEIGHT="44" BORDER="0"
+ SRC="img115.png"
+ ALT="\begin{displaymath}
+Q \rightarrow \int_0^\infty dE \overline\Omega\left(E\right)e^{-\beta E}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(19)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <!-- MATH
+ $\overline\Omega\left(E\right)$
+ -->
+<IMG
+ WIDTH="43" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img116.png"
+ ALT="$\overline\Omega\left(E\right)$"> is the <EM>density of states</EM>.
+What is this equation telling us?  It is telling us that <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$"> is the
+<EM>Laplace transform</EM> of <!-- MATH
+ $\overline\Omega$
+ -->
+<IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img117.png"
+ ALT="$\overline\Omega$">.  We know that transform
+pairs are <EM>unique</EM>, and hence, both <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$"> and <!-- MATH
+ $\overline\Omega$
+ -->
+<IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img117.png"
+ ALT="$\overline\Omega$">
+contain the same information.
+
+<P>
+We recognize that for a system described by a canonical ensemble, the
+energy is a fluctuating quantity.  And we now have the probability of
+observing a state with a given energy, so we can use
+Eq.&nbsp;<A HREF="node2.html#eq:ensemble_average">1</A> to compute the average energy,
+<!-- MATH
+ $\left<E\right>$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img118.png"
+ ALT="$\left&lt;E\right&gt;$">.  Consider
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left<E\right> & = &\left<E_\nu\right> = \sum_\nu P_\nu E_\nu\\
+ & = & \left[\sum_\nu E_\nu \exp\left(-\beta E_\nu\right)\right] \left/ \left[\sum_\nu \exp\left(-\beta E_\nu\right)\right] \right.
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$\displaystyle \left&lt;E\right&gt;$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="121" HEIGHT="48" ALIGN="MIDDLE" BORDER="0"
+ SRC="img120.png"
+ ALT="$\displaystyle \left&lt;E_\nu\right&gt; = \sum_\nu P_\nu E_\nu$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(20)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="302" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img121.png"
+ ALT="$\displaystyle \left[\sum_\nu E_\nu \exp\left(-\beta E_\nu\right)\right] \left/ \left[\sum_\nu \exp\left(-\beta E_\nu\right)\right] \right.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(21)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Notice that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\sum_\nu E_\nu \exp\left(-\beta E_\nu\right) = -\left(\partial Q \left/ \partial\beta\right.\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="229" HEIGHT="44" BORDER="0"
+ SRC="img122.png"
+ ALT="\begin{displaymath}
+\sum_\nu E_\nu \exp\left(-\beta E_\nu\right) = -\left(\partial Q \left/ \partial\beta\right.\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(22)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Recalling that <!-- MATH
+ $d\ln f(x) / dx = 1/f df/dx$
+ -->
+<IMG
+ WIDTH="174" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img123.png"
+ ALT="$d\ln f(x) / dx = 1/f df/dx$">, we see that
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:ave_ener_canon"></A>
+<!-- MATH
+ \begin{eqnarray}
+\left<E\right> & = & -\left(\partial Q \left/ \partial\beta\right.\right)\left/Q\right.\\
+& = & -\left(\partial \ln Q \left/ \partial\beta\right.\right)_{N,V}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$\displaystyle \left&lt;E\right&gt;$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="110" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img124.png"
+ ALT="$\displaystyle -\left(\partial Q \left/ \partial\beta\right.\right)\left/Q\right.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(23)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="129" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img125.png"
+ ALT="$\displaystyle -\left(\partial \ln Q \left/ \partial\beta\right.\right)_{N,V}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(24)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Now, let us consider the average magnitude of the fluctuations in energy
+in the canonical ensemble.
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left<\left(\delta E\right)^2\right> & = & \left<\left(E - \left<E\right>\right)^2\right>\\
+& = & \left<E^2\right> - \left<E\right>^2\\
+& = & \sum_\nu P_\nu E_\nu^2 - \left(\sum_\nu P_\nu E_\nu\right)^2\\
+& = & Q^{-1}\left(\frac{\partial^2Q}{\partial\beta^2}\right)_{N,V} -
+Q^{-2}\left(\frac{\partial Q}{\partial\beta}\right)^2_{N,V}\\
+& = & \left(\frac{\partial\ln Q}{\partial\beta^2}\right)_{N,V} = -\left(\frac{\partial\left<E\right>}{\partial\beta}\right)_{N,V}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="63" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img126.png"
+ ALT="$\displaystyle \left&lt;\left(\delta E\right)^2\right&gt;$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="100" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img127.png"
+ ALT="$\displaystyle \left&lt;\left(E - \left&lt;E\right&gt;\right)^2\right&gt;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(25)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="90" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img128.png"
+ ALT="$\displaystyle \left&lt;E^2\right&gt; - \left&lt;E\right&gt;^2$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(26)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="183" HEIGHT="72" ALIGN="MIDDLE" BORDER="0"
+ SRC="img129.png"
+ ALT="$\displaystyle \sum_\nu P_\nu E_\nu^2 - \left(\sum_\nu P_\nu E_\nu\right)^2$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(27)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="244" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img130.png"
+ ALT="$\displaystyle Q^{-1}\left(\frac{\partial^2Q}{\partial\beta^2}\right)_{N,V} -
+Q^{-2}\left(\frac{\partial Q}{\partial\beta}\right)^2_{N,V}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(28)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="223" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img131.png"
+ ALT="$\displaystyle \left(\frac{\partial\ln Q}{\partial\beta^2}\right)_{N,V} = -\left(\frac{\partial\left&lt;E\right&gt;}{\partial\beta}\right)_{N,V}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(29)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Now, noting that the definition of heat capacity at constant volume, <IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img132.png"
+ ALT="$C_v$">, 
+is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C_v = \left(\frac{\partial E}{\partial T}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="86" HEIGHT="45" BORDER="0"
+ SRC="img133.png"
+ ALT="\begin{displaymath}
+C_v = \left(\frac{\partial E}{\partial T}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(30)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+we see that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<\left(\delta E\right)^2\right> = k_B T^2 C_v
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="134" HEIGHT="34" BORDER="0"
+ SRC="img134.png"
+ ALT="\begin{displaymath}
+\left&lt;\left(\delta E\right)^2\right&gt; = k_B T^2 C_v
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(31)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This is an interesting statement.  It relates the magnitude of
+spontaneous fluctuations in the total energy of a system to that
+system's capacity to store or release energy due to changing its
+temperature.
+
+<P>
+The fact (Eq.&nbsp;<A HREF="#eq:ave_ener_canon">24</A>) that the average energy in the
+canonical ensemble is related to a derivative of the log of the
+partition function implies that <IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\ln Q$"> is an important thermodynamic
+quantity.  So, let's go back to our undergraduate thermodynamics
+course(s) and recall the following statement of the 1st and 2nd Law:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+dA = -SdT - pdV + \mu dN
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="184" HEIGHT="27" BORDER="0"
+ SRC="img136.png"
+ ALT="\begin{displaymath}
+dA = -SdT - pdV + \mu dN
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(32)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> is the <EM>Helmholtz free energy</EM>, defined in terms of
+internal energy and entropy as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+A = \left<E\right> - TS
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:helmholtz"></A><IMG
+ WIDTH="100" HEIGHT="28" BORDER="0"
+ SRC="img137.png"
+ ALT="\begin{displaymath}
+A = \left&lt;E\right&gt; - TS
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(33)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Now, consider the following derivative of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\left(\frac{\partial\left(A/T\right)}{\partial\left(1/T\right)}\right)_{N,V}
+& = & A + \frac{1}{T}\left(\frac{\partial A}{\partial\left(1/T\right)}\right)_{N,V}\\
+& = & A - T\left(\frac{\partial A}{\partial T}\right)_{N,V} = A - TS = \left<E\right>.
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="112" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img138.png"
+ ALT="$\displaystyle \left(\frac{\partial\left(A/T\right)}{\partial\left(1/T\right)}\right)_{N,V}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="158" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img139.png"
+ ALT="$\displaystyle A + \frac{1}{T}\left(\frac{\partial A}{\partial\left(1/T\right)}\right)_{N,V}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(34)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="251" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img140.png"
+ ALT="$\displaystyle A - T\left(\frac{\partial A}{\partial T}\right)_{N,V} = A - TS = \left&lt;E\right&gt;.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(35)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Therefore,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left(\frac{\partial\left(\beta A\right)}{\partial\beta}\right)_{N,V} = \left<E\right>.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:dAdBeta_E"></A><IMG
+ WIDTH="148" HEIGHT="48" BORDER="0"
+ SRC="img141.png"
+ ALT="\begin{displaymath}
+\left(\frac{\partial\left(\beta A\right)}{\partial\beta}\right)_{N,V} = \left&lt;E\right&gt;.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(36)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Considering Eq.&nbsp;<A HREF="#eq:ave_ener_canon">24</A>, we see that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\ln Q + C = -\beta A
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:C"></A><IMG
+ WIDTH="116" HEIGHT="27" BORDER="0"
+ SRC="img142.png"
+ ALT="\begin{displaymath}
+\ln Q + C = -\beta A
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(37)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which does indeed suggest an important link between <IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\ln Q$"> and the
+important thermodynamic quantity, the Helmholtz free energy.  But what
+is the constant <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$">?  To evaluate it, consider the ``boundary condition''
+as <!-- MATH
+ $T \rightarrow 0$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img144.png"
+ ALT="$T \rightarrow 0$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+Q = \sum_\nu e^{-\beta E_\nu} \stackrel{T\rightarrow 0}{\longrightarrow} e^{-\beta E_{\rm ground}}.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="211" HEIGHT="44" BORDER="0"
+ SRC="img145.png"
+ ALT="\begin{displaymath}
+Q = \sum_\nu e^{-\beta E_\nu} \stackrel{T\rightarrow 0}{\longrightarrow} e^{-\beta E_{\rm ground}}.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(38)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, we have assumed that the degeneracy of the ground state, <!-- MATH
+ $\Omega\left(E_{\rm ground}\right)$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img146.png"
+ ALT="$\Omega\left(E_{\rm ground}\right)$"> is 1.  This tells us that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\lim_{T\rightarrow 0} \ln Q = -\beta E_{\rm ground}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="153" HEIGHT="36" BORDER="0"
+ SRC="img147.png"
+ ALT="\begin{displaymath}
+\lim_{T\rightarrow 0} \ln Q = -\beta E_{\rm ground}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(39)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Using this fact, and combining Eqs.&nbsp;<A HREF="#eq:helmholtz">33</A> and&nbsp;<A HREF="#eq:C">37</A>, as <!-- MATH
+ $T \rightarrow 0$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img144.png"
+ ALT="$T \rightarrow 0$">, we see that 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+-\beta E_{\rm ground} + C = -\beta \underbrace{\left<E\right>}_{E_{\rm ground}} - \underbrace{\frac{S}{k_B}}_{\rightarrow 0\ (\Omega = 1)},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="275" HEIGHT="68" BORDER="0"
+ SRC="img148.png"
+ ALT="\begin{displaymath}
+-\beta E_{\rm ground} + C = -\beta \underbrace{\left&lt;E\right...
+...}} - \underbrace{\frac{S}{k_B}}_{\rightarrow 0 (\Omega = 1)},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(40)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Hence, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$C$"> = 0.  So,
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\ln Q = -\beta A.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="87" HEIGHT="27" BORDER="0"
+ SRC="img149.png"
+ ALT="\begin{displaymath}
+\ln Q = -\beta A.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(41)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The quantity <!-- MATH
+ $-\beta^{-1}\ln Q$
+ -->
+<IMG
+ WIDTH="74" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img150.png"
+ ALT="$-\beta^{-1}\ln Q$"> is the Helmholtz free energy, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$">.
+This is denoted <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img151.png"
+ ALT="$F$"> in Frenkel &amp; Smit&nbsp;[<A
+ HREF="node63.html#Frenkel+Smit2002">1</A>].
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html174"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html172"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html166"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html175"
+  HREF="node6.html">Classical Statistical Mechanics</A>
+<B> Up:</B> <A NAME="tex2html173"
+  HREF="node2.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html167"
+  HREF="node4.html">Making Observations: The Ergodic</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

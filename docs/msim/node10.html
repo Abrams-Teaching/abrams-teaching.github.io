@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node9.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html238"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html236"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html230"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html239"
+  HREF="node11.html">A C Code for</A>
+<B> Up:</B> <A NAME="tex2html237"
+  HREF="node9.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html231"
+  HREF="node9.html">Case Study 1: The</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032100000000000000">
+Introduction</A>
+</H3>
+In the introductory lecture, I introduced state-counting using a
+simple, one-dimensional Ising system.  To be precise, this was a
+particular case known as a Ising system of <EM>noninteracting</EM> spins,
+because each spin made its own independent contribution to the
+Hamiltonian.
+
+<P>
+Now, we will consider a more interesting Ising system; namely, that of
+<EM>interacting</EM> spins on a 2d square lattice.  What do we mean by
+<EM>interacting</EM>?  We mean that the Hamiltonian depends on pairs of
+spins:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{H} = -\sum_{\left<ij\right>}s_is_j
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:2dising"></A><IMG
+ WIDTH="101" HEIGHT="48" BORDER="0"
+ SRC="img230.png"
+ ALT="\begin{displaymath}
+\mathscr{H} = -\sum_{\left&lt;ij\right&gt;}s_is_j
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(77)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where the notation <!-- MATH
+ $\left<ij\right>$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img231.png"
+ ALT="$\left&lt;ij\right&gt;$"> denotes that we are summing over
+unique pairs of <EM>nearest neighbors</EM>, and, as before a spin <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$s_i$">
+is either +1 or -1. How many unique pairs of nearest neighbors are
+there on a lattice of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> spins (assuming periodic boundary
+conditions)?  To answer this question, we must know the <EM>coordination</EM>, <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$z$">, of the lattice; that is, how many nearest
+neigbhors does one lattice position have?  For a square lattice, <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$z$"> =
+4.  Each spin therefore contributes <EM>two</EM> unique spin pairs to the
+system, so there are <IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img233.png"
+ ALT="$Nz/2$"> unique nearest neighbor pairs.
+
+<P>
+Think about this Hamiltonian.  It says that energy is minimal when all
+<IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> spins have the same alignment, either all up or all down.  Imagine
+a microscopic observable called the <EM>magnetization</EM>, or average
+spin orientation, <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+M \equiv \frac{1}{N} \sum_i^N s_i
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="96" HEIGHT="56" BORDER="0"
+ SRC="img234.png"
+ ALT="\begin{displaymath}
+M \equiv \frac{1}{N} \sum_i^N s_i
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(78)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Then, <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> = +1 and -1 are two energetically equivalent microstates.
+We can then expect that if there is any <EM>thermal</EM> energy in the
+system which randomly flips spins, the amount of this thermal
+energy (that is, the temerature) will somehow control the observable
+magnetization.  We ``observe'' magnetization using an ensemble
+average:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<M\right> = \frac{
+	         \begin{minipage}{8cm}
+		 \begin{displaymath}
+		 \sum_{s_1=-1}^{+1} \cdots \sum_{s_N=-1}^{+1} \left[\sum_i^N s_i\right]\exp\left[-\beta\mathscr{H}\left(s_1,\dots,s_N\right)\right]
+	         \end{displaymath}\end{minipage}}
+	        {\begin{minipage}{8cm}
+	  	\begin{displaymath}
+	 	 \sum_{s_1=-1}^{+1} \cdots \sum_{s_N=-1}^{+1} \exp\left[-\beta\mathscr{H}\left(s_1,\dots,s_N\right)\right]
+		\end{displaymath}\end{minipage}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:magnetization"></A><IMG
+ WIDTH="414" HEIGHT="115" BORDER="0"
+ SRC="img235.png"
+ ALT="\begin{displaymath}
+\left&lt;M\right&gt; = \frac{
+\begin{minipage}{8cm}
+\begin{displ...
+...(s_1,\dots,s_N\right)\right]
+\end{displaymath}\end{minipage}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(79)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Our physical intution tells us that as <IMG
+ WIDTH="36" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img236.png"
+ ALT="$T\rightarrow$">&nbsp;0,
+<!-- MATH
+ $\left<M\right>\rightarrow$
+ -->
+<IMG
+ WIDTH="54" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img237.png"
+ ALT="$\left&lt;M\right&gt;\rightarrow$">&nbsp;1, and as <!-- MATH
+ $T\rightarrow\infty$
+ -->
+<IMG
+ WIDTH="56" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img238.png"
+ ALT="$T\rightarrow\infty$">,
+<!-- MATH
+ $\left<M\right>\rightarrow$
+ -->
+<IMG
+ WIDTH="54" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img237.png"
+ ALT="$\left&lt;M\right&gt;\rightarrow$">&nbsp;0.  The fascinating thing about an Ising
+magnet is that there is a finite temperature called the <EM>critical
+temperature</EM>, <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$">.  If we start out with a ``hot'' system, and cool
+it to just below <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$">, the <EM>absolute value</EM> of the magnetization
+spontaneously jumps from 0 to some finite positive value.  In other
+words, the system undergoes a <EM>phase transition</EM> from a disordered
+phase to a partially ordered phase.  A Metropolis Monte Carlo
+simulation can allow us to probe the behavior of an Ising system and
+learn how the system behaves near criticality.  The rest of this case
+study will be devoted to showing you the inner workings of a C
+program which simulates the Ising lattice using Metropolis MC, as a
+first implementation of this technique.  In the suggested exercises
+appearing at the end of this case study, you will modify this code
+slightly to compute averages values of certain observables.
+
+<P>
+But first, I recommend a visit to the website of Peter Young at UC
+Santa Cruz
+(<A NAME="tex2html3"
+  HREF="http://bartok.ucsc.edu/peter/java/ising/ising.html">http://bartok.ucsc.edu/peter/java/ising/ising.html</A>).
+You will see a Java implentation of a Monte Carlo simulation of a
+2-dimensional Ising magnet (One of many on the web; google ``ising
+simulation'' and you'll get a nice sample.)  This is a fun little Java
+applet that lets you play with an Ising system.  You can change the
+temperature of the simulation: making it cold will ``freeze'' the
+system, and making it hot ``melts'' it.  Near the <EM>critical
+temperature</EM>, <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$">, relatively large regions of mostly-up spins
+compete with regions of mostly down spin.  In one of the exercises,
+we'll learn how to measure an observable called the <EM>correlation
+length</EM>, which characterizes the size of these domains and is a useful
+signature of criticality.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html238"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html236"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html230"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html239"
+  HREF="node11.html">A C Code for</A>
+<B> Up:</B> <A NAME="tex2html237"
+  HREF="node9.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html231"
+  HREF="node9.html">Case Study 1: The</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Velocity Scaling: Isokinetics and the Berendsen Thermostat</TITLE>
+<META NAME="description" CONTENT="Velocity Scaling: Isokinetics and the Berendsen Thermostat">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node34.html">
+<LINK REL="previous" HREF="node32.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node34.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html480"
+  HREF="node34.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html478"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html472"
+  HREF="node32.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html481"
+  HREF="node34.html">Stochastic NVT Thermostats: Andersen,</A>
+<B> Up:</B> <A NAME="tex2html479"
+  HREF="node32.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html473"
+  HREF="node32.html">Molecular Dynamics at Constant</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00052100000000000000">
+Velocity Scaling:  Isokinetics and the Berendsen Thermostat</A>
+</H3>
+
+<P>
+First, velocity scaling schemes do not strictly follow the canonical
+ensemble, though in practice, the amount they deviate from canonical
+is quite small. (This can be measured by comparing the velocity
+distribution function with a Gaussian.)  It is relatively easy to
+implement the second class of schemes, because they can be ``dropped''
+in to existing codes using almost any integrator.  However, they
+suffer the drawback that they are not time-reversible or
+deterministic, properties that become important in some advanced MD
+techniques.  The third class are slightly more difficult to implement,
+but do not suffer from such drawbacks as time-irreversibility.
+
+<P>
+We have in effect already encountered simple velocity scaling
+in <EM>mdlj.c</EM>, in the initialization function.  Here, particle
+velocities are chosen randomly from <IMG
+ WIDTH="73" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img535.png"
+ ALT="$[-0.5,0.5]$"> and the <EM>rescaled</EM> to 
+result in a desired temperature given by the relation:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\frac{3}{2}Nk_BT = \frac{1}{2}\sum_im_iv_i^2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:mdens1"></A><IMG
+ WIDTH="150" HEIGHT="48" BORDER="0"
+ SRC="img536.png"
+ ALT="\begin{displaymath}
+\frac{3}{2}Nk_BT = \frac{1}{2}\sum_im_iv_i^2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(176)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We could, if we wanted to, turn this into a dynamic scheme for
+continually keeping the velocities scaled such that the total kinetic
+energy is constant.  We can measure the instaneous temperature
+immediately after a velocity update, and call it <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img537.png"
+ ALT="$T_i$">.  Eq.&nbsp;<A HREF="#eq:mdens1">176</A>
+indicates that if we scale velocities by a constant <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img27.png"
+ ALT="$\lambda $">, 
+where
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\lambda = \sqrt{\left(T/T_i\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="92" HEIGHT="28" BORDER="0"
+ SRC="img538.png"
+ ALT="\begin{displaymath}
+\lambda = \sqrt{\left(T/T_i\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(177)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+we will be left with a system at temperature <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">.  Velocity scaling to
+maintain constant <IMG
+ WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img160.png"
+ ALT="$\mathscr{K}$"> is called an <EM>isokinetic</EM>
+thermostat.  Such a thermostat cannot be used to conduct a simulation
+in the canonical ensemble, but is perfectly fine to use in a warmup or
+initialization phase.  We could perform velocity rescaling at every
+step, or only every few steps.  As a suggested exercise, modify <EM>mdlj.c</EM> to perform velocity scaling to a user-specified setpoint
+temperature every <IMG
+ WIDTH="18" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="$m$"> time steps, where <IMG
+ WIDTH="18" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="$m$"> is a user-defined interval
+between velocity scaling events.  Begin with system at <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 1.0, and
+command it to jump to <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 3.0 after 1,000 steps.  How does the
+system behave, and is it sensitive to your choice of <IMG
+ WIDTH="18" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="$m$">?
+
+<P>
+Another popular velocity scaling thermostat is that of
+Berendsen&nbsp;[<A
+ HREF="node63.html#Berendsen84">10</A>].  Here, the scale factor is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\lambda = \left[1+\frac{\Delta t}{\tau_T}\left(\frac{T}{T_0} - 1\right)\right]^{\frac{1}{2}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="179" HEIGHT="50" BORDER="0"
+ SRC="img539.png"
+ ALT="\begin{displaymath}
+\lambda = \left[1+\frac{\Delta t}{\tau_T}\left(\frac{T}{T_0} - 1\right)\right]^{\frac{1}{2}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(178)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img540.png"
+ ALT="$T_0$"> is the setpoint temperature, <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$"> is the integration
+time step, and <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$\tau _T$"> is a constant called the ``rise time'' of the
+thermostat.  It describes the strength of the coupling of the system
+to a hypothetical heat bath. The larger <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$\tau _T$">, the weaker the
+coupling; in other words, the larger <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$\tau _T$">, the longer it takes
+to achieve a given <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img540.png"
+ ALT="$T_0$"> after an instantaneous change from some
+previous <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img540.png"
+ ALT="$T_0$">.  The code <A NAME="tex2html32"
+  HREF="codes/mdlj_ber.c"><EM>mdlj_ber.c</EM></A>
+implements the Berendsen thermostat.  As a brief exercise, you can
+experiment with this code to get a feeling for how various values
+of the rise time affect the response of the system when the setpoint 
+temperature is changed instantaneously from 1.0 to 2.0.  Below is a lin-log
+plot of just such an experiment with <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 256 particles at a density of 0.5.  
+Each curve corresponds to a different value of <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$\tau _T$">, and they 
+increase by factors of 10.  The corresponding time at which
+the setpoint <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> is reached is also seen to increase by the same factor.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="ber.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Instantaneous temperature, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">, vs. time in an MD simulation
+of 256 particles at a density of 0.5, with temperature controlled
+by the Berendsen thermostat&nbsp;[<A
+ HREF="node63.html#Berendsen84">10</A>], for various
+values of the thermostat ``rise time,'' <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$\tau _T$">.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+Though relatively simple, velocity scaling thermostats are not
+recommended for use in production MD runs because they do not strictly
+conform to the canonical ensemble.  
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html480"
+  HREF="node34.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html478"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html472"
+  HREF="node32.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html481"
+  HREF="node34.html">Stochastic NVT Thermostats: Andersen,</A>
+<B> Up:</B> <A NAME="tex2html479"
+  HREF="node32.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html473"
+  HREF="node32.html">Molecular Dynamics at Constant</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

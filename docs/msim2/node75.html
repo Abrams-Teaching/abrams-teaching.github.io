@@ -1,0 +1,522 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>The Method of Overlapping Distributions</TITLE>
+<META NAME="description" CONTENT="The Method of Overlapping Distributions">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node76.html">
+<LINK REL="previous" HREF="node74.html">
+<LINK REL="up" HREF="node72.html">
+<LINK REL="next" HREF="node76.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html959"
+  HREF="node76.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html957"
+  HREF="node72.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html951"
+  HREF="node74.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html960"
+  HREF="node76.html">Histogram Reweighting</A>
+<B> Up:</B> <A NAME="tex2html958"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html952"
+  HREF="node74.html">Thermodynamic Integration</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00093000000000000000">
+The Method of Overlapping Distributions</A>
+</H2>
+
+<P>
+One interesting feature of the Widom method is that the only trial move is <EM>insertion</EM>; however, the free-energy difference between an <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>-particle system and an <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img862.png"
+ ALT="$ N+1$"></SPAN>-particle system should not depend on which direction the trial moves take.  If we imagine a &ldquo;Widom real-particle removal&rdquo; method, we'd write the chemical potential as
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img825.png"
+ ALT="$\displaystyle \mu$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="380" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img863.png"
+ ALT="$\displaystyle = +k_BT\ln\left(Q_N/Q_{N+1}\right) = \mu_{\rm id} + k_BT\ln\langle\exp\left(+\beta\Delta\mathscr{U}\right)\rangle$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">327</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Sampling <!-- MATH
+ $\langle\exp\left(+\beta\Delta\mathscr{U}\right)\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="108" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img864.png"
+ ALT="$ \langle\exp\left(+\beta\Delta\mathscr{U}\right)\rangle$"></SPAN> in a straightforward NVT MC simulation won't work, however, because...
+
+<P>
+There is, however, a right way to use bidirectional energy changes to compute free-energy differences, termed the &ldquo;overlapping distribution method&rdquo; and attributed to Bennett&nbsp;[<A
+ HREF="node82.html#Bennett1976EfficientData">44</A>].
+Consider two systems 0 and 1, obeying potentials <!-- MATH
+ $\mathscr{U}_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img865.png"
+ ALT="$ \mathscr{U}_0$"></SPAN> and <!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN>, respectively.  Let <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img866.png"
+ ALT="$ q_i$"></SPAN> be the scaled configurational integral of the Boltzmann factor:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+q_i = \int d{{\boldsymbol s}^N} e^{-\beta\mathscr{U}_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="126" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img867.png"
+ ALT="$\displaystyle q_i = \int d{{\boldsymbol s}^N} e^{-\beta\mathscr{U}_i}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">328</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+We can then express the free energy difference between these systems as (assuming for simplicity they have the same volumes):
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta\Delta F = -\ln\frac{q_1}{q_0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="110" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img868.png"
+ ALT="$\displaystyle \beta\Delta F = -\ln\frac{q_1}{q_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">329</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Consider next we run an NVT MC simulation on <!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN> and sample <!-- MATH
+ $\Delta\mathscr{U}\equiv\mathscr{U}_1-\mathscr{U}_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="114" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img869.png"
+ ALT="$ \Delta\mathscr{U}\equiv\mathscr{U}_1-\mathscr{U}_0$"></SPAN>.  Formally, the probability density of <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> from this simulation is
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img870.png"
+ ALT="$\displaystyle p_1(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="243" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img871.png"
+ ALT="$\displaystyle = \frac{\displaystyle \int d{{\boldsymbol s}^N} e^{-\beta\mathscr{U}_1}\delta(\mathscr{U}_1-\mathscr{U}_0-\Delta\mathscr{U})}{q_1}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">330</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="286" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img872.png"
+ ALT="$\displaystyle = \frac{\displaystyle \int d{{\boldsymbol s}^N} e^{-\beta(\mathsc...
+...+\Delta\mathscr{U})}\delta(\mathscr{U}_1-\mathscr{U}_0-\Delta\mathscr{U})}{q_1}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:od:gym1">(<SPAN CLASS="arabic">331</SPAN>)</A></TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="328" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img873.png"
+ ALT="$\displaystyle = \frac{q_0}{q_1}e^{-\beta\Delta\mathscr{U}}\frac{1}{q_0}\int d{\...
+...}^Ne^{-\beta\mathscr{U}_0}\delta(\mathscr{U}_1-\mathscr{U}_0-\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:od:gym2">(<SPAN CLASS="arabic">332</SPAN>)</A></TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="146" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img874.png"
+ ALT="$\displaystyle = \frac{q_0}{q_1}e^{-\beta\Delta\mathscr{U}}p_0(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">333</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+In going from Eq.&nbsp;<A HREF="#eq:od:gym1">329</A> to&nbsp;<A HREF="#eq:od:gym2">330</A> we have used the fact that the Dirac delta function will only permit one value of <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> to survive integration.  Taking the log of both sides gives
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img875.png"
+ ALT="$\displaystyle \ln p_1(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="222" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img876.png"
+ ALT="$\displaystyle = -\ln\frac{q_1}{q_0} - \beta\Delta\mathscr{U} + \ln p_0(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">334</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="211" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img877.png"
+ ALT="$\displaystyle = \beta(\Delta F - \Delta\mathscr{U}) + \ln p_0(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">335</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This equation provides a way to estimate <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img878.png"
+ ALT="$ \Delta F$"></SPAN> at <EM>any one value</EM> of <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> so long as good estimates of both <!-- MATH
+ $p_1(\Delta\mathscr{U})$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img879.png"
+ ALT="$ p_1(\Delta\mathscr{U})$"></SPAN> <EM>and</EM> <!-- MATH
+ $p_0(\Delta\mathscr{U})$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img880.png"
+ ALT="$ p_0(\Delta\mathscr{U})$"></SPAN> are available.  That means we must be able to sample a sufficiently large domain of <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> from both a simulation run on <!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN> <EM>and another</EM> run on <!-- MATH
+ $\mathscr{U}_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img865.png"
+ ALT="$ \mathscr{U}_0$"></SPAN>.  That is, there must be a domain of <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> where <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$ p_1$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN> overlap.
+
+<P>
+Bennett[<A
+ HREF="node82.html#Bennett1976EfficientData">44</A>] suggests the following transformation of <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$ p_1$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN> to permit easy calculation of <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img878.png"
+ ALT="$ \Delta F$"></SPAN>.  Letting
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img881.png"
+ ALT="$\displaystyle f_0(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="167" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img882.png"
+ ALT="$\displaystyle \equiv \ln p_0(\Delta\mathscr{U}) - \frac{\beta\Delta\mathscr{U}}{2}, $">&nbsp; &nbsp;and</SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">336</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img883.png"
+ ALT="$\displaystyle f_1(\Delta\mathscr{U})$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="157" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img884.png"
+ ALT="$\displaystyle \equiv \ln p_1(\Delta\mathscr{U}) + \frac{\beta\Delta\mathscr{U}}{2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">337</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+gives
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta\Delta F = f_1(\Delta\mathscr{U})-f_0(\Delta\mathscr{U}).
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="199" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img885.png"
+ ALT="$\displaystyle \beta\Delta F = f_1(\Delta\mathscr{U})-f_0(\Delta\mathscr{U}).$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">338</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This means we can measure <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ f_1$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ f_0$"></SPAN> in <EM>separate</EM> simulations, and then observe a constant offset between them to be <!-- MATH
+ $\beta\Delta F$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img886.png"
+ ALT="$ \beta\Delta F$"></SPAN>.
+
+<P>
+Suppose we now take the example of system 1 with <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> real particles and system 0 with <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ N-1$"></SPAN> real particles and one ideal-gas particle.  The free-energy change from 0 to 1 is the excess chemical potential (yet again!).  Fig.&nbsp;<A HREF="#fig:od">41</A> illustrates using Bennett's method to compute <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN> of the Lennard-Jones fluid at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 1.2 for a few different densities.  For each density, two simulations were run: simulation-0 computes the distribution of <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN>, the energy associated with converting the ideal-gas particle to a real particle, while simulation-1 computes the same distribution for converting a randomly chosen particle from being an ideal-gas particle to being a real particle.  This latter <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> is easily computed using the single-particle energy function <code>e_i</code>.  It is important to note that the direction of the <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img887.png"
+ ALT="$ \Delta$"></SPAN> is from ideal-gas to real for <EM>both</EM> simulations.  Note too that since we sample <!-- MATH
+ $\Delta{\mathscr{U}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img888.png"
+ ALT="$ \Delta{\mathscr{U}}$"></SPAN> for particle insertion in simulation-0, we can just as easily compute the expectation <!-- MATH
+ $\langle\exp(-\beta\Delta\mathscr{U})\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="105" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img889.png"
+ ALT="$ \langle\exp(-\beta\Delta\mathscr{U})\rangle$"></SPAN> and thereby get a direct estimate of <!-- MATH
+ $\beta\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ \beta \mu _{\rm ex}$"></SPAN>.
+
+<P>
+At the moderately low density of <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.7, we see a clear constant offset <!-- MATH
+ $\beta\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ \beta \mu _{\rm ex}$"></SPAN> between <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ f_0$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ f_1$"></SPAN>.  Note clear agreement between the offset over a finite-size domain of <!-- MATH
+ $\mathscr\Delta{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img890.png"
+ ALT="$ \mathscr\Delta{U}$"></SPAN> and the single-point Widom estimate.  For the somewhat higher density of 0.9, the offset is a bit noisier, reflecting somewhat poorer sampling.  For the highest density, the sampling in simulation-0 is so poor that it is nearly impossible to detect an overlap domain.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:od"></A><A NAME="9132"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 41:</STRONG>
+<SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$ p_1$"></SPAN> vs <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> (left), and <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ f_0$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ f_1$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ f_1$"></SPAN> - <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ f_0$"></SPAN> vs <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> (right) computed using NVT MC simulations at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 1.2 of system-0 and system-1, for densities of 0.7 (top), 0.9 (middle), and 1.0 (bottom).  Estimates of <!-- MATH
+ $\beta\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ \beta \mu _{\rm ex}$"></SPAN> from Widom test-particle insertion are shown as red horizontal lines in the plots on the right.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="793" HEIGHT="299" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mclj-od-T1.2-rho0.7.png"
+ ALT="Image mclj-od-T1.2-rho0.7">
+    <IMG
+  WIDTH="793" HEIGHT="299" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mclj-od-T1.2-rho0.9.png"
+ ALT="Image mclj-od-T1.2-rho0.9">
+    <IMG
+  WIDTH="793" HEIGHT="299" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mclj-od-T1.2-rho1.0.png"
+ ALT="Image mclj-od-T1.2-rho1.0"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html959"
+  HREF="node76.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html957"
+  HREF="node72.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html951"
+  HREF="node74.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html960"
+  HREF="node76.html">Histogram Reweighting</A>
+<B> Up:</B> <A NAME="tex2html958"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html952"
+  HREF="node74.html">Thermodynamic Integration</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

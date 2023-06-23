@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Molecular Dynamics at Constant Pressure: The Berendsen Barostat</TITLE>
+<META NAME="description" CONTENT="Molecular Dynamics at Constant Pressure: The Berendsen Barostat">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node32.html">
+<LINK REL="up" HREF="node30.html">
+<LINK REL="next" HREF="node37.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html506"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html504"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html500"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html507"
+  HREF="node37.html">Free Energy Methods</A>
+<B> Up:</B> <A NAME="tex2html505"
+  HREF="node30.html">Ensembles</A>
+<B> Previous:</B> <A NAME="tex2html501"
+  HREF="node35.html">The Nos&#233;-Hoover Chain</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00053000000000000000">
+Molecular Dynamics at Constant Pressure:  The Berendsen Barostat</A>
+</H2>
+
+<P>
+As with temperature control, there are different classes of pressure
+control for MD simulation.  The only one we consider here is the length-scaling
+technique of Berendsen.  It should be noted that one can also use
+the the extended Nos&#233;-Hoover (extended Lagrangian) 
+formalism of Martyna, which is mentioned in F&amp;S; in the interest of time, we 
+will forego a discussion of this technique.
+
+<P>
+Here we consider implementation of the Berendsen
+barostat&nbsp;[<A
+ HREF="node63.html#Berendsen84">10</A>].  Recall that the working definition of
+instantaneous pressure, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">, is given by:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P = \rho T + {\rm vir}/V
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="112" HEIGHT="28" BORDER="0"
+ SRC="img317.png"
+ ALT="\begin{displaymath}
+P = \rho T + {\rm vir}/V
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(196)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="23" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img318.png"
+ ALT="${\rm vir}$"> is the virial:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+{\rm vir} = \frac{1}{3}\sum_{i>j} {\bf f}\left(r_{ij}\right)\cdot{\bf r}_{ij}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="149" HEIGHT="50" BORDER="0"
+ SRC="img319.png"
+ ALT="\begin{displaymath}
+{\rm vir} = \frac{1}{3}\sum_{i&gt;j} {\bf f}\left(r_{ij}\right)\cdot{\bf r}_{ij}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(197)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> is the system volume.  <!-- MATH
+ ${\bf f}\left(r_{ij}\right)$
+ -->
+<IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img320.png"
+ ALT="${\bf f}\left(r_{ij}\right)$"> is the
+<EM>force</EM> exerted on particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> by particle <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">.
+
+<P>
+Consider a cubic system, where <IMG
+ WIDTH="56" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img582.png"
+ ALT="$V = L^3$">.  The Berendsen barostat uses
+a scale factor, <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">, which is a function of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">, to scale lengths in
+the system:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf r}_i &\rightarrow &\mu{\bf r}_i\\
+L & \rightarrow & \mu L
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img583.png"
+ ALT="$\displaystyle {\bf r}_i$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img377.png"
+ ALT="$\textstyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img584.png"
+ ALT="$\displaystyle \mu{\bf r}_i$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(198)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="15" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img585.png"
+ ALT="$\displaystyle L$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img377.png"
+ ALT="$\textstyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img586.png"
+ ALT="$\displaystyle \mu L$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(199)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+<IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $"> is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mu = \left[1-\frac{\Delta t}{\tau_P}\left(P - P_0\right)\right]^{1/3}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="181" HEIGHT="49" BORDER="0"
+ SRC="img587.png"
+ ALT="\begin{displaymath}
+\mu = \left[1-\frac{\Delta t}{\tau_P}\left(P - P_0\right)\right]^{1/3}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(200)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$"> is the integrator time-step, <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.png"
+ ALT="$\tau _P$"> is the ``rise
+time'' of the barostat, and <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img588.png"
+ ALT="$P_0$"> is the setpoint pressure.  Berendsen
+discusses the tensor-based analog for non-cubic
+systems&nbsp;[<A
+ HREF="node63.html#Berendsen84">10</A>].
+
+<P>
+The code <A NAME="tex2html37"
+  HREF="codes/mdlj_berp.c">mdlj_berp.c</A>
+implements
+the Berendsen barostat.  Below, I show results of using the
+Berendsen barostat to induce a pressure jump from 1.0 to 6.0 
+in a sample of LJ fluid, for various values of the rise time, <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.png"
+ ALT="$\tau _P$">.
+Notice that temperature is not controlled, but rises from about 1.3 to 2.5
+due to the increase of pressure.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="md_berp.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="md_berp_T.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Instantaneous pressure, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">, vs. time (upper), and Instantaneou
+temperature, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">, vs. time (lower) in an MD simulation
+of 256 particles at a density of 0.8442, using the Berendsen
+barostat&nbsp;[<A
+ HREF="node63.html#Berendsen84">10</A>] to impose an instantaneous pressure
+jump from 1.0 to 6.0.  Each curve corresponds to a different
+value of the rise time, <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.png"
+ ALT="$\tau _P$">.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+Length scaling at each time step using a global scale factor, while
+effective in this instance, can be lead to violent oscillations of
+pressure in more ordered systems, and is therefore not recommended for
+production MD runs.  However, it is common to find length scaling
+barostats used in the literature without reporting how effective they
+are, measured at least in terms of pressure and its fluctuations.  But
+they can be useful for pre-equilibrating samples at some <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> prior to
+beginning an NVE simulation during which one hopes the instantaneous
+pressure fluctuates about the previous setpoint.  It is easy to
+implement both the Berendsen thermostat and barostat in the same
+simulation program, to allow pre-equilibration at setpoint <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> <EM>and</EM> <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html506"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html504"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html500"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html507"
+  HREF="node37.html">Free Energy Methods</A>
+<B> Up:</B> <A NAME="tex2html505"
+  HREF="node30.html">Ensembles</A>
+<B> Previous:</B> <A NAME="tex2html501"
+  HREF="node35.html">The Nos&#233;-Hoover Chain</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

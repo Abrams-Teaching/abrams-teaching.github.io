@@ -1,0 +1,378 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Case Study 2: MC of Hard Disks</TITLE>
+<META NAME="description" CONTENT="Case Study 2: MC of Hard Disks">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="up" HREF="node7.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html307"
+  HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html305"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html299"
+  HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html308"
+  HREF="node18.html">Case Study 3: Hard-Disk</A>
+<B> Up:</B> <A NAME="tex2html306"
+  HREF="node7.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html300"
+  HREF="node16.html">Trial Moves</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00034000000000000000"></A>
+<A NAME="sec:cs2"></A>
+<BR>
+Case Study 2:  MC of Hard Disks
+</H2>
+
+<P>
+Download the code <EM>hdisk.c</EM> by clicking
+<A NAME="tex2html5"
+  HREF="codes/hdisk.c">here</A>.  This code simulates disks confined
+to a circle.  The Hamiltonian for this system may be expressed as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{H} = \sum_{i=1}^N H_1({\bf r}_i) + \sum_{i=1}^{N}\sum_{j=i+1}^{N} H_2({\bf r}_i,{\bf r}_j)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="256" HEIGHT="58" BORDER="0"
+ SRC="img276.png"
+ ALT="\begin{displaymath}
+\mathscr{H} = \sum_{i=1}^N H_1({\bf r}_i) + \sum_{i=1}^{N}\sum_{j=i+1}^{N} H_2({\bf r}_i,{\bf r}_j)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(85)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_1({\bf r}_i) = \left\{\begin{array}{ll}
+	0 & r_i < R\\
+	\infty & r_i > R
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="165" HEIGHT="45" BORDER="0"
+ SRC="img277.png"
+ ALT="\begin{displaymath}
+H_1({\bf r}_i) = \left\{\begin{array}{ll}
+0 &amp; r_i &lt; R\\
+\infty &amp; r_i &gt; R
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(86)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+and
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_2({\bf r}_i,{\bf r}_j) = \left\{\begin{array}{ll}
+	0 & \sqrt{\left({\bf r}_i-{\bf r}_j\right)^2} > \sigma\\
+	\infty & \sqrt{\left({\bf r}_i-{\bf r}_j\right)^2} < \sigma
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="254" HEIGHT="65" BORDER="0"
+ SRC="img278.png"
+ ALT="\begin{displaymath}
+H_2({\bf r}_i,{\bf r}_j) = \left\{\begin{array}{ll}
+0 &amp; \sq...
+...eft({\bf r}_i-{\bf r}_j\right)^2} &lt; \sigma
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(87)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img279.png"
+ ALT="$H_1$"> acts to keep the particles confined, and <IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img280.png"
+ ALT="$H_2$"> prevents them
+from overlapping.  One nice thing about using hard-disk Hamiltonians
+is that there is never a reason to evaluate a Boltzmann factor.  Any
+trial move that results in an overlap or a particle crossing the
+boundary gives an ``infinite'' <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img249.png"
+ ALT="$\Delta\mathscr{U}$">, so
+<!-- MATH
+ $e^{-\beta\Delta\mathscr{U}}$
+ -->
+<IMG
+ WIDTH="50" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img250.png"
+ ALT="$e^{-\beta\Delta\mathscr{U}}$"> is identically 0 and the trial is
+unconditionally rejected.
+
+<P>
+<EM>hdisk.c</EM> accepts as user input any two of the following three
+parameters: <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$R$">, the radius of the circle; <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$">, the areal number
+density of particles (# per square <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $">); and <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, the number of
+particles.  The user may also specify <IMG
+ WIDTH="19" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img205.png"
+ ALT="$\delta r$">, the scalar
+displacement, and <TT>nCycle</TT>, the number of MC cycles, where
+one cycle is <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> attempted particle displacements.  The only output
+of the code currently is the acceptance ratio:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+\left[\begin{array}{c}
+\mbox{acceptance}\\
+\mbox{ratio}
+\end{array}\right] =
+\left[\frac{\mbox{number of successful trials}}{\mbox{number of trials}}\right]
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="326" HEIGHT="45" BORDER="0"
+ SRC="img281.png"
+ ALT="\begin{displaymath}
+\left[\begin{array}{c}
+\mbox{acceptance}\\
+\mbox{ratio}
+\en...
+...{number of successful trials}}{\mbox{number of trials}}\right]
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+One important aspect of any MC simulation code is how the particle
+positions are <EM>initialized</EM>.  Here, it is best to assign initial
+positions to the particles such that the initial energy is 0 (i.e.,
+there are no overlaps nor particles out of bounds.)  Try to figure out
+how the function <TT>init()</TT> in the program <EM>hdisk.c</EM>
+accomplishes this.
+
+<P>
+As a suggested further exercise, use <EM>hdisk.c</EM> to determine a
+reasonable displacement to achieve a 30% acceptance ratio at a
+density of 0.5.  Compare your results across differently sized systems
+and runs with different numbers of cycles.  For fewer than 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$"> cycles,
+you will have large acceptance ratios because the initial condition 
+is not yet fully destroyed.
+
+<P>
+Below is a plot of acceptance ratio vs. <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> for densities
+<IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> of 0.2, 0.4, 0.6, from a simulations of 200 particles.  10,000
+cycles were performed for each run.  Are your results consistent
+with this data?
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="413" HEIGHT="396" ALIGN="CENTER"
+ SRC="hdisk_accr.gif"
+ ALT="portrait"></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+Acceptance ratio vs. <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> for various densities
+in a 200-particle hard-disk system from 100,000-cycle
+MC simulations.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+As a third suggested exercise, consider generating a trial move in the
+following way:
+
+<OL>
+<LI>Randomly select a particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">.
+</LI>
+<LI>Randomly choose a <EM>direction</EM>.  In 2D, this is an angle <IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img282.png"
+ ALT="$\theta$">
+chosen uniformly from the interval <IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img283.png"
+ ALT="$[0,2\pi]$">.  In 3D, this is <EM>two</EM> angles <IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img282.png"
+ ALT="$\theta$"> and <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img284.png"
+ ALT="$\phi$">, where <IMG
+ WIDTH="36" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img285.png"
+ ALT="$\cos\theta$"> is chosen
+uniformly from the interval <IMG
+ WIDTH="48" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img286.png"
+ ALT="$[-1,1]$">, and <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img284.png"
+ ALT="$\phi$"> is chosen uniformly
+from the interval <IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img283.png"
+ ALT="$[0,2\pi]$">.
+</LI>
+<LI>Compute the displacement vector components.  In 2D:
+<!-- MATH
+ $dx = \Delta R\cos\theta$
+ -->
+<IMG
+ WIDTH="102" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img287.png"
+ ALT="$dx = \Delta R\cos\theta$"> and <!-- MATH
+ $dy = \Delta R\sin\theta$
+ -->
+<IMG
+ WIDTH="100" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img288.png"
+ ALT="$dy = \Delta R\sin\theta$">.  In 3D: <!-- MATH
+ $dx =
+\Delta R\sin\theta\cos\phi$
+ -->
+<IMG
+ WIDTH="137" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img289.png"
+ ALT="$dx =
+\Delta R\sin\theta\cos\phi$">, <!-- MATH
+ $dy = \Delta R\sin\theta\sin\phi$
+ -->
+<IMG
+ WIDTH="134" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img290.png"
+ ALT="$dy = \Delta R\sin\theta\sin\phi$">, <!-- MATH
+ $dz =
+\Delta R\cos\theta$
+ -->
+<IMG
+ WIDTH="101" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img291.png"
+ ALT="$dz =
+\Delta R\cos\theta$">.
+</LI>
+<LI>Execute the move by adding the displacement vector components
+to the position of particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">.
+</LI>
+</OL>
+The main difference of this scheme with the first one is that, in 2D,
+only one random number must be chosen per displacement attempt.
+Explore the acceptance ratio vs. <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> relationship with this new
+trial move.  Does this scheme generate a 30% acceptance ratio for a
+<EM>higher</EM> or <EM>lower</EM> maximum displacement that does the
+original scheme?
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html307"
+  HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html305"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html299"
+  HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html308"
+  HREF="node18.html">Case Study 3: Hard-Disk</A>
+<B> Up:</B> <A NAME="tex2html306"
+  HREF="node7.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html300"
+  HREF="node16.html">Trial Moves</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

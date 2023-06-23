@@ -1,0 +1,463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Classical Statistical Mechanics</TITLE>
+<META NAME="description" CONTENT="Classical Statistical Mechanics">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html241"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html239"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html235"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html242"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Up:</B> <A NAME="tex2html240"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html236"
+  HREF="node9.html">Entropy and Temperature</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00024000000000000000">
+Classical Statistical Mechanics</A>
+</H2>
+
+<P>
+Analogous to the quasi-classical microcanonical paritition function of Eq.&nbsp;<A HREF="node7.html#eq:microcanon_class">6</A>, here is the quasi-classical representation of the canonical partition function:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:q_classical"></A><!-- MATH
+ \begin{equation}
+Q_{\rm classical} = \frac{1}{h^{dN}N!}\int \int d{\bf r}^N d{\bf p}^N
+\exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="383" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img180.png"
+ ALT="$\displaystyle Q_{\rm classical} = \frac{1}{h^{dN}N!}\int \int d{\bf r}^N d{\bf p}^N \exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">46</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+<!-- MATH
+ $\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="90" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img181.png"
+ ALT="$ \mathscr{H}\left({\bf r}^N,{\bf p}^N\right)$"></SPAN> is the Hamiltonian function which computes the energy of a point in phase space. The probability of a point in phase space is represented as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P\left({\bf r}^N,{\bf p}^N\right) = \left(Q_{\rm classical}\right)^{-1} \exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right].
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="350" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img182.png"
+ ALT="$\displaystyle P\left({\bf r}^N,{\bf p}^N\right) = \left(Q_{\rm classical}\right)^{-1} \exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right].$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">47</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+So, the general &ldquo;sum-over-states&rdquo; ensemble average of quantum statistical mechanics, first presented in Eq.&nbsp;<A HREF="node6.html#eq:ensemble_average">1</A>, becomes an integral over phase space in classical statistical mechanics:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:classical_ensemble_average"></A><!-- MATH
+ \begin{equation}
+\left<G\right> = \frac{\displaystyle
+	  \int \int d{\bf r}^N d{\bf p}^N \exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right] G\left({\bf r}^N,{\bf p}^N\right)
+	}{\displaystyle
+	  \int \int d{\bf r}^N d{\bf p}^N \exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right]
+	  },
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="386" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img183.png"
+ ALT="$\displaystyle \left&lt;G\right&gt; = \frac{\displaystyle \int \int d{\bf r}^N d{\bf p...
+...{\bf p}^N \exp\left[-\beta\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)\right] },$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">48</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $G\left({\bf r}^N,{\bf p}^N\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="82" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img184.png"
+ ALT="$ G\left({\bf r}^N,{\bf p}^N\right)$"></SPAN> is the value of the observable <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$ G$"></SPAN> at phase space point <!-- MATH
+ $\left({\bf r}^N,{\bf p}^N\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img185.png"
+ ALT="$ \left({\bf r}^N,{\bf p}^N\right)$"></SPAN>.  Before moving on, it is useful to recognize that  we normally simplify this ensemble average by noting that, for a  system of classical particles, the usual choice for the Hamiltonian has the form 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:classical_hamiltonian"></A><!-- MATH
+ \begin{equation}
+\mathscr{H}\left({\bf r}^N, {\bf p}^N\right) = \mathscr{K}\left({\bf p}^N\right)
++ U\left({\bf r}^N\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="239" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img186.png"
+ ALT="$\displaystyle \mathscr{H}\left({\bf r}^N, {\bf p}^N\right) = \mathscr{K}\left({\bf p}^N\right) + U\left({\bf r}^N\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">49</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \mathscr{K}$"></SPAN> is the kinetic energy, which is only a function of momenta, and <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img188.png"
+ ALT="$ U$"></SPAN> is the potential energy, which is only a function of position.  The canonical partition function, <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img140.png"
+ ALT="$ Q$"></SPAN>, can in this case be factorized:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:q_fact"></A><!-- MATH
+ \begin{eqnarray}
+Q\left(N,V,T\right) & = & \frac{1}{h^{3N}N!} \left\{\int d{\bf p}^N \exp\left[-\beta\mathscr{K}\left({\bf p}^N\right)\right]\right\} \left\{\int d{\bf r}^N \exp\left[-\beta U\left({\bf r}^N\right)\right]\right\}\\
+& = & \left\{\frac{V^N}{h^{3N}N!} \int d{\bf p}^N \exp\left[-\beta\mathscr{K}\left({\bf p}^N\right)\right]\right\} \left\{V^{-N}\int d{\bf r}^N \exp\left[-\beta U\left({\bf r}^N\right)\right]\right\}\\
+& = & Q_{\rm ideal} Z
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="81" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img189.png"
+ ALT="$\displaystyle Q\left(N,V,T\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="441" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img190.png"
+ ALT="$\displaystyle \frac{1}{h^{3N}N!} \left\{\int d{\bf p}^N \exp\left[-\beta\mathsc...
+... \left\{\int d{\bf r}^N \exp\left[-\beta U\left({\bf r}^N\right)\right]\right\}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">50</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="479" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img191.png"
+ ALT="$\displaystyle \left\{\frac{V^N}{h^{3N}N!} \int d{\bf p}^N \exp\left[-\beta\math...
+...\{V^{-N}\int d{\bf r}^N \exp\left[-\beta U\left({\bf r}^N\right)\right]\right\}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">51</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="55" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img192.png"
+ ALT="$\displaystyle Q_{\rm ideal} Z$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">52</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The quantity in the left-hand braces is the <EM>ideal gas</EM> partition function, because it corresponds to the case when  the potential <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img188.png"
+ ALT="$ U$"></SPAN> is 0.  (Note that we have multiplied and divided by <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img193.png"
+ ALT="$ V^N$"></SPAN>; this is the equivalent of <EM>scaling</EM> the positions in the integration over positions.)  The quantity in the right-hand braces is called the <EM>configurational partition function</EM>, <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img194.png"
+ ALT="$ Z$"></SPAN>.
+
+<P>
+Because the kinetic energy <!-- MATH
+ $\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \mathscr{K}$"></SPAN> has the simple form,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{K}\left({\bf p}^N\right) = \sum_i \frac{{\bf p}_i^2}{2m_i},
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="145" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$\displaystyle \mathscr{K}\left({\bf p}^N\right) = \sum_i \frac{{\bf p}_i^2}{2m_i},$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">53</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img196.png"
+ ALT="$ m_i$"></SPAN> is the mass of particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>, the integral over particle  momenta can be evaluated analytically:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\int d{\bf p}^N \exp\left[-\beta\mathscr{K}\left({\bf p}^N\right)\right] & = & \prod_{i=1}^{3N}\int dp_i \exp\left(-\frac{p_i^2}{2mk_BT}\right)\\
+& = & \left(2\pi m k_B T\right)^{3N/2}.
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="177" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img197.png"
+ ALT="$\displaystyle \int d{\bf p}^N \exp\left[-\beta\mathscr{K}\left({\bf p}^N\right)\right]$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="189" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img198.png"
+ ALT="$\displaystyle \prod_{i=1}^{3N}\int dp_i \exp\left(-\frac{p_i^2}{2mk_BT}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">54</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="116" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img199.png"
+ ALT="$\displaystyle \left(2\pi m k_B T\right)^{3N/2}.$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">55</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+(We have assumed all particles have the same mass, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN>; in the case
+of distinct masses, this is just a product of similar factors.)
+
+<P>
+<!-- MATH
+ $Q_{\rm ideal}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img200.png"
+ ALT="$ Q_{\rm ideal}$"></SPAN> becomes
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{V^N}{N!h^{3N}} \int d{\bf p}^N \exp\left[-\beta\mathscr{K}\left({\bf p}^N\right)\right] & = & \frac{V^N}{N!}\left(\sqrt{\frac{2\pi m k_B T}{h^2}}\right)^{3N}\\
+= Q_{\rm ideal}\left(N,V,T\right) & = & \frac{V^N}{N!\Lambda^{3N}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="230" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img201.png"
+ ALT="$\displaystyle \frac{V^N}{N!h^{3N}} \int d{\bf p}^N \exp\left[-\beta\mathscr{K}\left({\bf p}^N\right)\right]$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="161" HEIGHT="74" ALIGN="MIDDLE" BORDER="0"
+ SRC="img202.png"
+ ALT="$\displaystyle \frac{V^N}{N!}\left(\sqrt{\frac{2\pi m k_B T}{h^2}}\right)^{3N}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">56</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="125" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img203.png"
+ ALT="$\displaystyle = Q_{\rm ideal}\left(N,V,T\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="56" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img204.png"
+ ALT="$\displaystyle \frac{V^N}{N!\Lambda^{3N}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">57</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img205.png"
+ ALT="$ \Lambda$"></SPAN> is the <EM>de Broglie</EM> wavelength, a quantum-mechanical property of a particle inversely proportional to its momentum (and thus inversely proportional to the <EM>square root</EM> of temperature):
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:debroglie"></A><!-- MATH
+ \begin{equation}
+\Lambda = \sqrt{\frac{h^2}{2\pi m k_BT}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="118" HEIGHT="70" ALIGN="MIDDLE" BORDER="0"
+ SRC="img206.png"
+ ALT="$\displaystyle \Lambda = \sqrt{\frac{h^2}{2\pi m k_BT}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">58</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+As an example, for a hydrogen atom with mass 1 amu and at room temperature (298 K), <!-- MATH
+ $\Lambda\approx$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img207.png"
+ ALT="$ \Lambda\approx$"></SPAN>&nbsp;1&nbsp;&#197;.  The de Broglie wavelength limits the precision by which a particle's position can be determined; for H atoms at room temperature, one is not permitted to specify their positions with a precision finer than about 1 &#229;ngstrom without violating the Heisenberg uncertainty principle of quantum mechanics.  However, as we will see, in classical molecular simulations, we must lift this restriction, while never forgetting that this makes a classical representation of a molecule somewhat less realistic.
+
+<P>
+With the momentum degrees of freedom handled at finite temperature, when the observable <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$ G$"></SPAN> is a function of positions only, the ensemble average becomes a configurational average:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:config_avg"></A><!-- MATH
+ \begin{equation}
+\left<G\right> = Z^{-1}\int d{\bf r}^N \exp\left[-\beta U\left({\bf r}^N\right)\right] G\left({\bf r}^N\right).
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="302" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img208.png"
+ ALT="$\displaystyle \left&lt;G\right&gt; = Z^{-1}\int d{\bf r}^N \exp\left[-\beta U\left({\bf r}^N\right)\right] G\left({\bf r}^N\right).$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">59</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that the integration over momentum yields a factor <!-- MATH
+ $Q_{\rm ideal}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img200.png"
+ ALT="$ Q_{\rm ideal}$"></SPAN> in both the numerator and denominator, and thus divides out.  We can write this configurational average using a probability distribution, <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN>, as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left<G\right> = \int d{\bf r}^N G\left({\bf r}^N\right)\rho_{NVT}\left({\bf r}^N\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="225" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img210.png"
+ ALT="$\displaystyle \left&lt;G\right&gt; = \int d{\bf r}^N G\left({\bf r}^N\right)\rho_{NVT}\left({\bf r}^N\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">60</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho_{NVT}\left({\bf r}^N\right) \equiv Z^{-1}e^{-\beta U\left({\bf r}^N\right)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="195" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img211.png"
+ ALT="$\displaystyle \rho_{NVT}\left({\bf r}^N\right) \equiv Z^{-1}e^{-\beta U\left({\bf r}^N\right)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">61</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+is called the &ldquo;canonical probability distribution.&rdquo;  As pointed out on p. 15 of Frenkel &amp; Smit&nbsp;[<A
+ HREF="node82.html#Frenkel+Smit2002">1</A>], Eq.&nbsp;<A HREF="#eq:config_avg">59</A> is &ldquo;the starting point for virtually all classical simulations of many-body systems&rdquo;; that is, it is the starting point for almost all simulations discussed in this course.
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html241"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html239"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html235"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html242"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Up:</B> <A NAME="tex2html240"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html236"
+  HREF="node9.html">Entropy and Temperature</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

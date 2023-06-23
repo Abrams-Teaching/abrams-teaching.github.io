@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Temperature Fluctuations in the Canonicial Ensemble</TITLE>
+<META NAME="description" CONTENT="Temperature Fluctuations in the Canonicial Ensemble">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node52.html">
+<LINK REL="previous" HREF="node50.html">
+<LINK REL="up" HREF="node50.html">
+<LINK REL="next" HREF="node52.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html706"
+  HREF="node52.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html704"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html698"
+  HREF="node50.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html707"
+  HREF="node52.html">Velocity Rescaling: Isokinetics and</A>
+<B> Up:</B> <A NAME="tex2html705"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html699"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00052100000000000000">
+Temperature Fluctuations in the Canonicial Ensemble</A>
+</H3>
+
+<P>
+Before considering how to fiddle with particle velocities or forces to enforce constant temperature, it is worth considering what statistical thermodynamics has to say about temperature.  When we have direct knowledge of instantaneous particle velocities, we know that the kinetic energy is
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{K} = \sum_{i=1}^{N} \sum_{\alpha\in\left\{x,y,z\right\}}\frac{p_{i,\alpha}^2}{2m} \equiv \sum_{j=1}^{3N}\frac{p_j^2}{2m}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="233" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img547.png"
+ ALT="$\displaystyle \mathscr{K} = \sum_{i=1}^{N} \sum_{\alpha\in\left\{x,y,z\right\}}\frac{p_{i,\alpha}^2}{2m} \equiv \sum_{j=1}^{3N}\frac{p_j^2}{2m}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">184</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we recognize that all momentum components are independent variables.  We also know that temperature (in reduced units) is directly proportional to kinetic energy:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{3}{2}NT = \mathscr{K}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="82" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img548.png"
+ ALT="$\displaystyle \frac{3}{2}NT = \mathscr{K}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">185</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+With this equivalence, we can consider the &ldquo;instantaneous&rdquo; temperature as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+T = \frac{2}{3N}\sum_{j=1}^{3N}\frac{p_j^2}{2m}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="117" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img549.png"
+ ALT="$\displaystyle T = \frac{2}{3N}\sum_{j=1}^{3N}\frac{p_j^2}{2m}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">186</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Since momenta must fluctuate it is necessarily the case that instantaneous temperature <EM>also</EM> fluctuates.  Let's see how much.
+
+<P>
+First, since all momenta are independent, it follows from the definition of the canonical partition function that a particle momentum component <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img550.png"
+ ALT="$ p_j$"></SPAN> follows the Maxwell-Boltzmann distribution:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho(p_j) = \left(\frac{\beta}{2\pi m}\right)^{\frac32}\exp\left(-\frac{\beta p_j^2}{2m}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="225" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img551.png"
+ ALT="$\displaystyle \rho(p_j) = \left(\frac{\beta}{2\pi m}\right)^{\frac32}\exp\left(-\frac{\beta p_j^2}{2m}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">187</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We can characterize fluctuations in <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img552.png"
+ ALT="$ p_j^2$"></SPAN> by dividing its variance <!-- MATH
+ $\sigma_{p_j^2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img553.png"
+ ALT="$ \sigma_{p_j^2}$"></SPAN> to the square of its average <!-- MATH
+ $\langle p_j^2\rangle^2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img554.png"
+ ALT="$ \langle p_j^2\rangle^2$"></SPAN>.  The variance is defined
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma_{p_j^2} = \langle p_j^4\rangle-\langle p_j^2\rangle
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="122" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img555.png"
+ ALT="$\displaystyle \sigma_{p_j^2} = \langle p_j^4\rangle-\langle p_j^2\rangle$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">188</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Using the Maxwell-Boltzmann distribution:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\langle p_j^2\rangle = \int_{-\infty}^{\infty}dp_j p_j^2 \exp\left(-\frac{\beta p_j^2}{2m}\right) = \frac{3m}{\beta}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="268" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img556.png"
+ ALT="$\displaystyle \langle p_j^2\rangle = \int_{-\infty}^{\infty}dp_j p_j^2 \exp\left(-\frac{\beta p_j^2}{2m}\right) = \frac{3m}{\beta}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">189</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\langle p_j^4\rangle = \int_{-\infty}^{\infty}dp_j p_j^4 \exp\left(-\frac{\beta p_j^4}{2m}\right) = 15\left(\frac{m}{\beta}\right)^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="310" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img557.png"
+ ALT="$\displaystyle \langle p_j^4\rangle = \int_{-\infty}^{\infty}dp_j p_j^4 \exp\left(-\frac{\beta p_j^4}{2m}\right) = 15\left(\frac{m}{\beta}\right)^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">190</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Thus,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\langle p_j^4\rangle-\langle p_j^2\rangle}{\langle p_j^2\rangle} = \frac{2}{3}.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="119" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img558.png"
+ ALT="$\displaystyle \frac{\langle p_j^4\rangle-\langle p_j^2\rangle}{\langle p_j^2\rangle} = \frac{2}{3}.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">191</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Now, let's compute fluctuations in the instantaneous temperature.  First, the average:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\langle T\rangle = \frac{2}{3N}\sum_{j=1}^{3N}\frac{\langle p_j^2\rangle}{2m} = \frac{2}{3N}\frac{3N}{2m}\langle p_j^2\rangle = \frac{\langle p_j^2\rangle}{m}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="289" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img559.png"
+ ALT="$\displaystyle \langle T\rangle = \frac{2}{3N}\sum_{j=1}^{3N}\frac{\langle p_j^2...
+... \frac{2}{3N}\frac{3N}{2m}\langle p_j^2\rangle = \frac{\langle p_j^2\rangle}{m}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">192</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Now the variance, <!-- MATH
+ $\langle T^2\rangle - \langle T\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="78" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img560.png"
+ ALT="$ \langle T^2\rangle - \langle T\rangle$"></SPAN>, starting with <!-- MATH
+ $\langle T^2\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img561.png"
+ ALT="$ \langle T^2\rangle$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img562.png"
+ ALT="$\displaystyle \langle T^2\rangle$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="270" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img563.png"
+ ALT="$\displaystyle = \left(\frac{2}{3N}\right)^2\Bigg&lt;\left(\sum_{j=1}^{3N}\frac{p_j^2}{2m}\right)\left(\sum_{k=1}^{3N}\frac{p_k^2}{2m}\right)\Bigg&gt;$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">193</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="153" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img564.png"
+ ALT="$\displaystyle = \left(\frac{2}{3N}\right)^2 \sum_{jk}\frac{\langle p_j^2p_k^2\rangle}{(2m)^2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">194</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="308" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img565.png"
+ ALT="$\displaystyle = \left(\frac{2}{3N}\right)^2\left[9N\frac{\langle p_j^4\rangle}{(2m)^2}+9N(N-1)\frac{\langle p_j^2\rangle^2}{(2m)^2}\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:T2a">(<SPAN CLASS="arabic">195</SPAN>)</A></TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="258" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img566.png"
+ ALT="$\displaystyle = \frac{1}{(mN)^2}\left[N\langle p_j^4\rangle+N(N-1)\langle p_j^2\rangle^2\right)]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:T2b">(<SPAN CLASS="arabic">196</SPAN>)</A></TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that in going from Eq.&nbsp;<A HREF="#eq:T2a">195</A> to&nbsp;<A HREF="#eq:T2b">196</A>, we note the fact that
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\langle p_j^2p_k^2 \rangle = \langle p_j^2\rangle \langle p_k^2\rangle = \langle p_j^2\rangle^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="180" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img567.png"
+ ALT="$\displaystyle \langle p_j^2p_k^2 \rangle = \langle p_j^2\rangle \langle p_k^2\rangle = \langle p_j^2\rangle^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">197</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+since momenta are not correlated to each other.  Putting these together:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="89" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img568.png"
+ ALT="$\displaystyle \frac{\langle T^2\rangle - \langle T\rangle^2}{\langle T\rangle^2}$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="325" HEIGHT="87" ALIGN="MIDDLE" BORDER="0"
+ SRC="img569.png"
+ ALT="$\displaystyle = \frac{\frac{1}{(mN)^2}\left[N\langle p_j^4\rangle+N(N-1)\langle...
+...angle p_j^2\rangle}{m}\right)^2}{\left(\frac{\langle p_j^2\rangle}{m}\right)^2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">198</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="265" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img570.png"
+ ALT="$\displaystyle = \frac{N\langle p_j^4\rangle+N(N-1)\langle p_j^2\rangle^2 - N^2\langle p_j^2\rangle^2}{N^2\langle p_j^2\rangle^2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">199</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="172" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img571.png"
+ ALT="$\displaystyle = \frac{1}{N}\frac{\langle p_j^4\rangle-\langle p_j^2\rangle^2}{\langle p_j^2\rangle^2} = \frac{2}{3N}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">200</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+So clearly temperature fluctuates in the canonical ensemble.  Of course, in the thermodynamic limit (<!-- MATH
+ $N\rightarrow\infty$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img572.png"
+ ALT="$ N\rightarrow\infty$"></SPAN>), these fluctuations vanish and we perceive a &ldquo;constant&rdquo; temperature, but in a simulation in which we resolve the momenta of a set of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> particles, we <EM>must</EM> observe that <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> fluctuations as shown above.  We can use this fact to decide whether or not a temperature-control scheme in MD is actually resulting in sampling the canonical ensemble.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html706"
+  HREF="node52.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html704"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html698"
+  HREF="node50.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html707"
+  HREF="node52.html">Velocity Rescaling: Isokinetics and</A>
+<B> Up:</B> <A NAME="tex2html705"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html699"
+  HREF="node50.html">Molecular Dynamics at Constant</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

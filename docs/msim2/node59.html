@@ -1,0 +1,1083 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Implementation and Evaluation</TITLE>
+<META NAME="description" CONTENT="Implementation and Evaluation">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node58.html">
+<LINK REL="up" HREF="node56.html">
+<LINK REL="next" HREF="node60.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html783"
+  HREF="node60.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html781"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html777"
+  HREF="node58.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html784"
+  HREF="node60.html">All-atom Potential Energy Functions</A>
+<B> Up:</B> <A NAME="tex2html782"
+  HREF="node56.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html778"
+  HREF="node58.html">Ewald Forces</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00063000000000000000"></A>
+<A NAME="sec:ewald:imp"></A>
+<BR>
+Implementation and Evaluation
+</H2>
+
+<P>
+We will consider an Ewald implementation which is a modified version
+of the <code>ewald</code> code written for Berend Smit's
+Molecular Simulation course.  (All of Prof. Smit's codes are available
+in the <code>FrenkelSmitCodes</code> directory of the <code>instructional-codes</code> respository.) 
+This code
+simply computes the Ewald energy for a cubic lattice, given an
+appropriate number of particles, and a value for <!-- MATH
+ $\sqrt{\alpha}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img689.png"
+ ALT="$ \sqrt{\alpha}$"></SPAN>
+(which is called <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img66.png"
+ ALT="$ \alpha$"></SPAN> in the code), and a value for <!-- MATH
+ $k_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ k_{\rm max}$"></SPAN>,
+the maximum integer index for enumerating <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-vectors.&nbsp;<A NAME="tex2html30"
+  HREF="footnode.html#foot6530"><SUP><SPAN CLASS="arabic">1</SPAN></SUP></A>
+<P>
+The units used in a system with electrostatics differ depending on
+community.  So far, we have assumed that the units of electrostatic
+potential are charge <!-- MATH
+ $\mathscr{C}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img690.png"
+ ALT="$ \mathscr{C}$"></SPAN>, divided by length <!-- MATH
+ $\mathscr{L}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img691.png"
+ ALT="$ \mathscr{L}$"></SPAN>,
+because we write potential as <!-- MATH
+ $\phi = q/|{\bf r}|$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="66" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img692.png"
+ ALT="$ \phi = q/\vert{\bf r}\vert$"></SPAN>, where <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img693.png"
+ ALT="$ q$"></SPAN> is
+measured in units of <!-- MATH
+ $\mathscr{C}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img690.png"
+ ALT="$ \mathscr{C}$"></SPAN> and distance in units of
+<!-- MATH
+ $\mathscr{L}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img691.png"
+ ALT="$ \mathscr{L}$"></SPAN>.  Energy is therefore written in units of
+<!-- MATH
+ $\mathscr{C}^2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img694.png"
+ ALT="$ \mathscr{C}^2$"></SPAN> over <!-- MATH
+ $\mathscr{L}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img691.png"
+ ALT="$ \mathscr{L}$"></SPAN>, and force in units of
+<!-- MATH
+ $\mathscr{C}^2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img694.png"
+ ALT="$ \mathscr{C}^2$"></SPAN> over <!-- MATH
+ $\mathscr{L}^2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img695.png"
+ ALT="$ \mathscr{L}^2$"></SPAN>.  If we want the final energy in
+more familiar units, we can choose <!-- MATH
+ $\mathscr{C}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img690.png"
+ ALT="$ \mathscr{C}$"></SPAN> and <!-- MATH
+ $\mathscr{L}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img691.png"
+ ALT="$ \mathscr{L}$"></SPAN>,
+and use the standard prefactor <!-- MATH
+ $1/4\pi\epsilon_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="51" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img696.png"
+ ALT="$ 1/4\pi\epsilon_0$"></SPAN> to convert from
+&ldquo;charge squared per length&rdquo; to &ldquo;energy&rdquo;.  For example, in SI
+units, <!-- MATH
+ $\epsilon_0 = 8.85419\times10^{-12}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="149" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img697.png"
+ ALT="$ \epsilon_0 = 8.85419\times10^{-12}$"></SPAN>&nbsp;(C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img501.png"
+ ALT="$ ^2$"></SPAN>/m)/J.  In this
+implementation, we use a length of <!-- MATH
+ $\mathscr{L} = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="50" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img698.png"
+ ALT="$ \mathscr{L} = 1$"></SPAN> and <!-- MATH
+ $\mathscr{C}
+= 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img699.png"
+ ALT="$ \mathscr{C}
+= 1$"></SPAN> and measure energy such that <!-- MATH
+ $1/4\pi\epsilon_0 = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="80" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img700.png"
+ ALT="$ 1/4\pi\epsilon_0 = 1$"></SPAN>.
+
+<P>
+We will examine two configurations, both with <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> = 8<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img278.png"
+ ALT="$ ^3$"></SPAN> = 512
+particles, with alternating + and - charges.  One configuration has
+the particle on a cubic lattice with lattice spacing <SPAN CLASS="MATH"><IMG
+ WIDTH="47" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img701.png"
+ ALT="$ r_0 = 1$"></SPAN>, which
+is the standard NaCl crystal structure.  We will call this the
+&ldquo;crystal&rdquo; configuration.  The other is like the crystal, only each
+particle is displaced by a random amount from its Self Part lattice position
+with a maximum displacement of 0.3.  We will call this the &ldquo;liquid&rdquo;
+configuration.  We compute the total electrostatic energy via the
+Ewald sum technique for various values of <!-- MATH
+ $1/\sqrt{\alpha}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ 1/\sqrt {\alpha }$"></SPAN> and maximum
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-vector index.  As we increase the number of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-vectors taken in
+the sum, we would like to show that the total energy converges to a
+certain value.  We will measure this in terms of the Madelung
+constant, <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{U}_{\rm Coul} = -\frac{N q^2 M}{4\pi\epsilon_0r_0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="127" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img702.png"
+ ALT="$\displaystyle \mathscr{U}_{\rm Coul} = -\frac{N q^2 M}{4\pi\epsilon_0r_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">257</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Table&nbsp;<A HREF="#tab:ewald_cryst_runs">2</A> shows results of Ewald summation for the perfect lattice, and Table&nbsp;<A HREF="#tab:ewald_liquid_runs">3</A> shows resuts for the &ldquo;liquid&rdquo;.  We see several interesting things from these example calculations:
+
+<OL>
+<LI>The self-energy is the dominant contributor from the long-range compensating charge smears.
+</LI>
+<LI>The Fourier-space contribution is relatively small, and is much smaller for the perfect lattice than for the liquid.  This means the precision of the Fourier transform of the charge distribution (which is larger for larger <!-- MATH
+ $k_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ k_{\rm max}$"></SPAN> is relatively unimportant to the calculation.
+</LI>
+<LI>The overall Coulomb energy is insensitive to the real-space cutoff for the perfect lattice, while it is weakly decreasing in magnitude (it is negative overall) for increasing real-space cutoff in the liquid.
+</LI>
+</OL>
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="6531"></A>
+<TABLE>
+<CAPTION><STRONG>Table 2:</STRONG>
+Using the Ewald summation to compute total Coulomb energy of an 8x8x8 &ldquo;NaCl&rdquo; lattice.  For various values of the real-space cutoff <!-- MATH
+ $1/\sqrt{\alpha}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ 1/\sqrt {\alpha }$"></SPAN> and maximum number of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-vectors <!-- MATH
+ $k_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ k_{\rm max}$"></SPAN>, the values of the real-space energy <!-- MATH
+ $\mathscr{U}_{\rm short}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$ \mathscr {U}_{\rm short}$"></SPAN>, the Fourier-space energy  <!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN>, and the self-energy correction <!-- MATH
+ $-\mathscr{U}_{\rm self}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img32.png"
+ ALT="$ -\mathscr {U}_{\rm self}$"></SPAN> are shown, together with the Madelung constant <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN>.</CAPTION>
+<TR><TD>    <DIV ALIGN="CENTER">
+
+</DIV><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="RIGHT"><!-- MATH
+ $1/\sqrt{\alpha}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ 1/\sqrt {\alpha }$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $k_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ k_{\rm max}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_{\rm short}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$ \mathscr {U}_{\rm short}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_{\rm self}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img686.png"
+ ALT="$ \mathscr{U}_{\rm self}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_{\rm Coul}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img645.png"
+ ALT="$ \mathscr{U}_{\rm Coul}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.3106</TD>
+<TD ALIGN="RIGHT">1.0354<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.5642</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.3106</TD>
+<TD ALIGN="RIGHT">1.0354<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.5642</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.3106</TD>
+<TD ALIGN="RIGHT">1.0354<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.5642</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.50</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.4958</TD>
+<TD ALIGN="RIGHT">1.1708<!-- MATH
+ $\times 10^{-7}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img704.png"
+ ALT="$ \times 10^{-7}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.3780</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.50</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.4958</TD>
+<TD ALIGN="RIGHT">1.1708<!-- MATH
+ $\times 10^{-7}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img704.png"
+ ALT="$ \times 10^{-7}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.3780</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.50</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.4958</TD>
+<TD ALIGN="RIGHT">1.1708<!-- MATH
+ $\times 10^{-7}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img704.png"
+ ALT="$ \times 10^{-7}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.3780</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.5917</TD>
+<TD ALIGN="RIGHT">2.3491<!-- MATH
+ $\times 10^{-13}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img705.png"
+ ALT="$ \times 10^{-13}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2821</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.5917</TD>
+<TD ALIGN="RIGHT">2.3491<!-- MATH
+ $\times 10^{-13}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img705.png"
+ ALT="$ \times 10^{-13}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2821</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.5917</TD>
+<TD ALIGN="RIGHT">2.3491<!-- MATH
+ $\times 10^{-13}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img705.png"
+ ALT="$ \times 10^{-13}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2821</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.50</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.6481</TD>
+<TD ALIGN="RIGHT">1.3732<!-- MATH
+ $\times 10^{-20}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img706.png"
+ ALT="$ \times 10^{-20}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2257</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.50</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.6481</TD>
+<TD ALIGN="RIGHT">1.3732<!-- MATH
+ $\times 10^{-20}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img706.png"
+ ALT="$ \times 10^{-20}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2257</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.50</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.6481</TD>
+<TD ALIGN="RIGHT">1.3732<!-- MATH
+ $\times 10^{-20}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img706.png"
+ ALT="$ \times 10^{-20}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2257</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.6876</TD>
+<TD ALIGN="RIGHT">5.1260<!-- MATH
+ $\times 10^{-30}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img707.png"
+ ALT="$ \times 10^{-30}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1862</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.6876</TD>
+<TD ALIGN="RIGHT">5.1260<!-- MATH
+ $\times 10^{-30}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img707.png"
+ ALT="$ \times 10^{-30}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1862</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.6876</TD>
+<TD ALIGN="RIGHT">5.1260<!-- MATH
+ $\times 10^{-30}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img707.png"
+ ALT="$ \times 10^{-30}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1862</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.50</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.7102</TD>
+<TD ALIGN="RIGHT">1.2018<!-- MATH
+ $\times 10^{-36}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img708.png"
+ ALT="$ \times 10^{-36}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1636</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.50</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.7102</TD>
+<TD ALIGN="RIGHT">1.2018<!-- MATH
+ $\times 10^{-36}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img708.png"
+ ALT="$ \times 10^{-36}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1636</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.50</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.7102</TD>
+<TD ALIGN="RIGHT">1.2018<!-- MATH
+ $\times 10^{-36}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img708.png"
+ ALT="$ \times 10^{-36}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1636</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.7328</TD>
+<TD ALIGN="RIGHT">2.5866<!-- MATH
+ $\times 10^{-37}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img709.png"
+ ALT="$ \times 10^{-37}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1410</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.7328</TD>
+<TD ALIGN="RIGHT">2.5866<!-- MATH
+ $\times 10^{-37}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img709.png"
+ ALT="$ \times 10^{-37}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1410</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.7328</TD>
+<TD ALIGN="RIGHT">2.5866<!-- MATH
+ $\times 10^{-37}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img709.png"
+ ALT="$ \times 10^{-37}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1410</TD>
+<TD ALIGN="RIGHT">-0.8738</TD>
+<TD ALIGN="RIGHT">1.7476</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:ewald_cryst_runs"></A></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="6532"></A>
+<TABLE>
+<CAPTION><STRONG>Table 3:</STRONG>
+Using the Ewald summation to compute total Coulomb energy of an 8x8x8 &ldquo;NaCl&rdquo; liquid.  For various values of the real-space cutoff <!-- MATH
+ $1/\sqrt{\alpha}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ 1/\sqrt {\alpha }$"></SPAN> and maximum number of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-vectors <!-- MATH
+ $k_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ k_{\rm max}$"></SPAN>, the values of the real-space energy <!-- MATH
+ $\mathscr{U}_{\rm short}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$ \mathscr {U}_{\rm short}$"></SPAN>, the Fourier-space energy  <!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN>, and the self-energy correction <!-- MATH
+ $-\mathscr{U}_{\rm self}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img32.png"
+ ALT="$ -\mathscr {U}_{\rm self}$"></SPAN> are shown, together with the Madelung constant <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN>.</CAPTION>
+<TR><TD>    <DIV ALIGN="CENTER">
+
+</DIV><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="RIGHT"><!-- MATH
+ $1/\sqrt{\alpha}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ 1/\sqrt {\alpha }$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $k_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ k_{\rm max}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_{\rm short}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$ \mathscr {U}_{\rm short}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$ \mathscr {U}_1$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $-\mathscr{U}_{\rm self}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img32.png"
+ ALT="$ -\mathscr {U}_{\rm self}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><!-- MATH
+ $\mathscr{U}_{\rm Coul}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img645.png"
+ ALT="$ \mathscr{U}_{\rm Coul}$"></SPAN></TD>
+<TD ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.3322</TD>
+<TD ALIGN="RIGHT">3.1339<!-- MATH
+ $\times 10^{-2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img710.png"
+ ALT="$ \times 10^{-2}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.5642</TD>
+<TD ALIGN="RIGHT">-0.8650</TD>
+<TD ALIGN="RIGHT">1.7300</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.3322</TD>
+<TD ALIGN="RIGHT">3.2193<!-- MATH
+ $\times 10^{-2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img710.png"
+ ALT="$ \times 10^{-2}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.5642</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.3322</TD>
+<TD ALIGN="RIGHT">3.2193<!-- MATH
+ $\times 10^{-2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img710.png"
+ ALT="$ \times 10^{-2}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.5642</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.50</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.4960</TD>
+<TD ALIGN="RIGHT">9.8621<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.3780</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.50</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.4960</TD>
+<TD ALIGN="RIGHT">9.8652<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.3780</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1.50</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.4960</TD>
+<TD ALIGN="RIGHT">9.8652<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.3780</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.5859</TD>
+<TD ALIGN="RIGHT">3.8735<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2821</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.5859</TD>
+<TD ALIGN="RIGHT">3.8735<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2821</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.5859</TD>
+<TD ALIGN="RIGHT">3.8735<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2821</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.50</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.6402</TD>
+<TD ALIGN="RIGHT">1.7194<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2257</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.50</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.6402</TD>
+<TD ALIGN="RIGHT">1.7194<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2257</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2.50</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.6402</TD>
+<TD ALIGN="RIGHT">1.7194<!-- MATH
+ $\times 10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img703.png"
+ ALT="$ \times 10^{-3}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.2257</TD>
+<TD ALIGN="RIGHT">-0.8642</TD>
+<TD ALIGN="RIGHT">1.7283</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.6787</TD>
+<TD ALIGN="RIGHT">7.4067<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1862</TD>
+<TD ALIGN="RIGHT">-0.8641</TD>
+<TD ALIGN="RIGHT">1.7282</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.6787</TD>
+<TD ALIGN="RIGHT">7.4067<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1862</TD>
+<TD ALIGN="RIGHT">-0.8641</TD>
+<TD ALIGN="RIGHT">1.7282</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.6787</TD>
+<TD ALIGN="RIGHT">7.4067<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1862</TD>
+<TD ALIGN="RIGHT">-0.8641</TD>
+<TD ALIGN="RIGHT">1.7282</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.50</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.7008</TD>
+<TD ALIGN="RIGHT">3.7594<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1636</TD>
+<TD ALIGN="RIGHT">-0.8640</TD>
+<TD ALIGN="RIGHT">1.7281</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.50</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.7008</TD>
+<TD ALIGN="RIGHT">3.7594<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1636</TD>
+<TD ALIGN="RIGHT">-0.8640</TD>
+<TD ALIGN="RIGHT">1.7281</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3.50</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.7008</TD>
+<TD ALIGN="RIGHT">3.7594<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1636</TD>
+<TD ALIGN="RIGHT">-0.8640</TD>
+<TD ALIGN="RIGHT">1.7281</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4.00</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="RIGHT">-0.7230</TD>
+<TD ALIGN="RIGHT">1.5044<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1410</TD>
+<TD ALIGN="RIGHT">-0.8639</TD>
+<TD ALIGN="RIGHT">1.7278</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4.00</TD>
+<TD ALIGN="RIGHT">8</TD>
+<TD ALIGN="RIGHT">-0.7230</TD>
+<TD ALIGN="RIGHT">1.5044<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1410</TD>
+<TD ALIGN="RIGHT">-0.8639</TD>
+<TD ALIGN="RIGHT">1.7278</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4.00</TD>
+<TD ALIGN="RIGHT">16</TD>
+<TD ALIGN="RIGHT">-0.7230</TD>
+<TD ALIGN="RIGHT">1.5044<!-- MATH
+ $\times 10^{-4}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img711.png"
+ ALT="$ \times 10^{-4}$"></SPAN></TD>
+<TD ALIGN="RIGHT">-0.1410</TD>
+<TD ALIGN="RIGHT">-0.8639</TD>
+<TD ALIGN="RIGHT">1.7278</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:ewald_liquid_runs"></A></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html783"
+  HREF="node60.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html781"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html777"
+  HREF="node58.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html784"
+  HREF="node60.html">All-atom Potential Energy Functions</A>
+<B> Up:</B> <A NAME="tex2html782"
+  HREF="node56.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html778"
+  HREF="node58.html">Ewald Forces</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Data Representation and Input/Output</TITLE>
+<META NAME="description" CONTENT="Data Representation and Input/Output">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node29.html">
+<LINK REL="previous" HREF="node27.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node29.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html457"
+  HREF="node29.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html455"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html449"
+  HREF="node27.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html458"
+  HREF="node29.html">Analytical Potentials</A>
+<B> Up:</B> <A NAME="tex2html456"
+  HREF="node27.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html450"
+  HREF="node27.html">Elements of a Continuous-Space</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00033100000000000000">
+Data Representation and Input/Output</A>
+</H3>
+
+<P>
+The information that must be stored and handled in an MC program are
+the particle positions.  In 3D space, each particle has three
+components of its position.  The simplest way to represent this
+information in a program is by using <EM>parallel arrays</EM>; that is,
+three arrays, dimensioned from 1 to <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>, one for each dimension.  In
+C, we might declare these arrays for 1,000 particles as
+
+<P>
+<PRE>
+  int N = 1000;
+  double rx[N], ry[N], rz[N];
+</PRE>
+
+<P>
+This data can be stored in standard ASCII text files, or in
+unformatted binary files.  In fact, a large part of most molecular
+simulation is producing and storing configurations which can be
+processed &ldquo;offline&rdquo; (away from the simulation program) to perform
+analyses.  A simple and widely used ASCII configuration file format is called &ldquo;XYZ&rdquo;.
+A code fragment to write a configuration of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> hydrogen atoms in XYZ format appears
+below:
+
+<P>
+<PRE>
+  FILE * fp;
+  ...
+  fp = fopen("my_config.xyz","w");
+  fprintf(fp,"%i\n",N);
+  fprintf(fp,"This is a comment or just a blank line\n");
+  for (i=0;i&lt;N;i++) 
+    fprintf(fp,"%s %.8le %.8le %.8le\n","H",rx[i],ry[i],rz[i]);
+</PRE>
+
+<P>
+The main feature of XYZ files is that one can specify the element type of each atom; for simple visualization purposes of our toy systems, this can be anything, so we'll just use H for now.
+
+<P>
+It's quite easy to read ASCII data in that was written in XYZ format, e.g., using the fragment above, ignoring the element types (for now):
+
+<P>
+<PRE>
+  FILE * fp;
+  int N;
+  double * rx, * ry, * rz;
+  char dummy[4];
+  ...
+  fp = fopen("my_config.xyz","r");
+  fscanf(fp,"%i\n",&amp;N);
+  /* allocate if not done already */
+  rx=(int*)malloc(N*sizeof(int));
+  ry=(int*)malloc(N*sizeof(int));
+  rz=(int*)malloc(N*sizeof(int));
+  fscanf(fp,"\n"); /* reads the comment line but throws it away */
+  for (i=0;i&lt;N;i++) 
+    fscanf(fp,"%s %.8le %.8le %.8le\n",dummy,&amp;rx[i],&amp;ry[i],&amp;rz[i]);
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html457"
+  HREF="node29.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html455"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html449"
+  HREF="node27.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html458"
+  HREF="node29.html">Analytical Potentials</A>
+<B> Up:</B> <A NAME="tex2html456"
+  HREF="node27.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html450"
+  HREF="node27.html">Elements of a Continuous-Space</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

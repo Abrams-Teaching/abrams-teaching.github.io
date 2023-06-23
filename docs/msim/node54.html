@@ -1,0 +1,545 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>A Conventional MC Study of the = 10 Potts Model</TITLE>
+<META NAME="description" CONTENT="A Conventional MC Study of the = 10 Potts Model">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node55.html">
+<LINK REL="previous" HREF="node53.html">
+<LINK REL="up" HREF="node52.html">
+<LINK REL="next" HREF="node55.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html708"
+  HREF="node55.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html706"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html700"
+  HREF="node53.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html709"
+  HREF="node55.html">The Potts Model treated</A>
+<B> Up:</B> <A NAME="tex2html707"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html701"
+  HREF="node53.html">The Algorithm</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00074200000000000000">
+A Conventional MC Study of the <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$"> = 10 Potts Model</A>
+</H3>
+
+<P>
+An impressive example of the power of the WL method appears in the
+latter of the two original WL papers&nbsp;[<A
+ HREF="node63.html#Wang2001b">23</A>].  Here, the
+object of study is the Potts model&nbsp;[<A
+ HREF="node63.html#Wu1982">27</A>].  This is an <IMG
+ WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img240.png"
+ ALT="$L\times L$"> lattice of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> sites (i.e., <IMG
+ WIDTH="58" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img986.png"
+ ALT="$N = L^2$">) where each site can have a
+spin value, <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img987.png"
+ ALT="$q_i$">, between 1 and <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$">.  WL considered the ten-state
+model; <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$"> = 10.  The Hamiltonian of the Potts model is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{H} = -\sum_{\left<ij\right>}\delta\left(q_i,q_j\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="131" HEIGHT="48" BORDER="0"
+ SRC="img988.png"
+ ALT="\begin{displaymath}
+\mathscr{H} = -\sum_{\left&lt;ij\right&gt;}\delta\left(q_i,q_j\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(353)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where the sum is over all nearest neighbor pairs.
+
+<P>
+Under periodic boundary conditions, the ground state energy of the
+Potts model is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+E_0 = -2L^2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="77" HEIGHT="26" BORDER="0"
+ SRC="img989.png"
+ ALT="\begin{displaymath}
+E_0 = -2L^2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(354)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+and the density of states at <IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img990.png"
+ ALT="$E_0$"> (i.e., the degeneracy
+of the ground state) is easily seen to be
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Omega(E_0) = Q.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="79" HEIGHT="28" BORDER="0"
+ SRC="img991.png"
+ ALT="\begin{displaymath}
+\Omega(E_0) = Q.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(355)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> energy levels are
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+-E_0,-E_0+8,-E_0+12,\dots,-4,0,4,\dots,E_0-12,E_0-8,E_0
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="422" HEIGHT="27" BORDER="0"
+ SRC="img992.png"
+ ALT="\begin{displaymath}
+-E_0,-E_0+8,-E_0+12,\dots,-4,0,4,\dots,E_0-12,E_0-8,E_0
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(356)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The ten-state Potts model displays a first-order phase transition with
+a critical temperature of <!-- MATH
+ $T_c = 0.701232$
+ -->
+<IMG
+ WIDTH="101" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img993.png"
+ ALT="$T_c = 0.701232$"> in the thermodynamic limit
+(<!-- MATH
+ $N\rightarrow\infty$
+ -->
+<IMG
+ WIDTH="59" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img994.png"
+ ALT="$N\rightarrow\infty$">).  The two coexisting phases are characterized
+by an average energy per particle of -0.965 and -1.671, respectively.
+
+<P>
+First, let's conduct normal NVT sampling of a ten-state, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12
+Potts model at temperatures well below, near, and well-above the
+critical temperature.  (The dual purpose code
+<A NAME="tex2html53"
+  HREF="codes/wl-w.c">wl-w.c</A>
+can accomplish this.) At
+precisely the critical temperature, we should see two peaks of equal
+height in the energy histogram.  Our trial move will consist of
+randomly selecting one of the 144 spins and then randomly selecting a
+spin value between 1 and 10.  Below, I show the histograms of energy
+per spin after 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$"> cycles (one cycle = 144 attempted flips) for
+various temperatures, all begun from the same initial (randomly
+assigned) configuration which is initially in the high-energy regime
+(E/N&nbsp;<IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img995.png"
+ ALT="$\approx$">&nbsp;-0.25).  (<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.70991 is the critical temperature,
+<IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$">, for the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12, <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$"> = 10 Potts model as calculated by Wang
+and Landau.)
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="440" HEIGHT="378" ALIGN="CENTER"
+ SRC="Potts_nvt_fig.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Histograms of energy per spin, <IMG
+ WIDTH="65" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img38.png"
+ ALT="$H(E/N)$">, for the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12 ten-state
+Potts model at temperatures 0.5, 0.7, 0.70991, and 1.0, 5.0, and 10.0,
+after 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$"> cycles using conventional Monte Carlo.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Notice that precisely pinpointing <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$"> using a series of NVT MC
+simulations (if we assume that 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$"> cycles is enough - I have not
+yet claimed that it is) would be extremely difficult.  For <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">&nbsp;=&nbsp;0.7,
+the peaks are not of equal height, but an increase of a mere 0.0991
+brings them to the same height (the signature of a critical
+temperature).  How would we know how to zoom in on <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">&nbsp;=&nbsp;0.70991?  It
+is conceivable that we could embed NVT MC inside some nonlinear
+optimization routine whose objective function is a measure of relative
+peak heights, which must be minimized by allowing <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> to vary.  This
+could be automated and could in principle provide a very accurate
+<IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$"> after a finite number of runs.  But we don't know ahead of time
+how many runs would be required, nor if our optimization scheme is
+efficient enough to allow us to find <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$"> to some tolerable level of
+precision in a reasonable time.
+
+<P>
+Now, imagine that we could in some way compute the density of states,
+<IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">, from a single simulation.  We could then easily arrive at
+an estimate for <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$T_c$"> by simply evaluating canonical energy
+histograms at various <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">, each constructed from <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">,
+until we find one for which the peak heights are the same.  
+Consider:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H(E/N) \propto \Omega(E)\exp\left(-E/k_BT\right).
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:canonical_histogram"></A><IMG
+ WIDTH="230" HEIGHT="28" BORDER="0"
+ SRC="img996.png"
+ ALT="\begin{displaymath}
+H(E/N) \propto \Omega(E)\exp\left(-E/k_BT\right).
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(357)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Can we compute <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> from an NVT MC simulation?  In principle,
+yes.  We could rearrange Eq.&nbsp;<A HREF="#eq:canonical_histogram">358</A>:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H(E/N)\exp\left(+\beta E\right) \propto \Omega(E)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:anti_boltz"></A><IMG
+ WIDTH="193" HEIGHT="28" BORDER="0"
+ SRC="img997.png"
+ ALT="\begin{displaymath}
+H(E/N)\exp\left(+\beta E\right) \propto \Omega(E)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(358)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This certainly suggests that if we run NVT MC, tabulate a histogram of
+energy states, and the postmultiply it by the ``anti-Boltzmann''
+factor <!-- MATH
+ $\exp\left(+\beta E\right)$
+ -->
+<IMG
+ WIDTH="78" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img998.png"
+ ALT="$\exp\left(+\beta E\right)$">, we will recover <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">.  But
+the data from the 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$">-cycle MC runs shown in the above figure kills
+any hope of being able to do this in practice.  You can see that none
+of the histograms cover the entire domain of accessible energy levels,
+so we cannot use any single histogram to produce <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">.  You can
+also see that the very highest energy levels are not accessed even at
+extremely high temperatures.  (Interestingly, a <EM>negative</EM>
+temperature resolves this part of the energy spectrum quite well; this
+indicates that the entropy of the Potts model for <IMG
+ WIDTH="78" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img999.png"
+ ALT="$E &gt; -0.25$"> <EM>decreases</EM> with increasing energy.) The histogram taken at the lowest
+temperature appears to cover a broad part of the domain, but most of
+it is covered with very poor statistical accuracy, as evidenced by the
+large fluctuations.  The histograms taken near the critical
+temperature of <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.70991 cover a relatively broad domain
+relatively well, so it is at least conceivable that we can produce
+<EM>part</EM> of <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> from these histograms.
+
+<P>
+The figure below shows the application of Eq.&nbsp;<A HREF="#eq:anti_boltz">359</A> to 
+determine <EM>partial</EM> densities of states for each histogram
+shown in the previous figure.  
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="440" HEIGHT="378" ALIGN="CENTER"
+ SRC="Potts-omega-nvt.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Partial densities of state computed from <!-- MATH
+ $\Omega(E) =
+H(E/N)exp(+E/k_BT)$
+ -->
+<IMG
+ WIDTH="223" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img40.png"
+ ALT="$\Omega (E) = H(E/N)exp(+E/k_BT)$"> and scaled such that <!-- MATH
+ $\Omega(E_0) = 10$
+ -->
+<IMG
+ WIDTH="84" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$\Omega (E_0) = 10$"> for the
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12 ten-state Potts model at temperatures 0.5, 0.7, 0.70991, 1.0,
+5.0, 10.0, and -1.0 after 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$"> cycles using conventional Monte Carlo.
+<IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">&nbsp;=&nbsp;1.0 is scaled to match <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> for
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">&nbsp;=&nbsp;0.70991, and <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">'s at higher <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">'s (and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">&nbsp;=&nbsp;1.0) are
+matched to those at neighboring lower <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+From this data, we can see the trace of the curve defining the <EM>true</EM> density of states.  It appears to have a maximum at <!-- MATH
+ $E/M\approx
+-0.25$
+ -->
+<IMG
+ WIDTH="103" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1000.png"
+ ALT="$E/M\approx
+-0.25$"> of a whopping 10<IMG
+ WIDTH="24" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1001.png"
+ ALT="$^{145}$"> states.  We also see that the density
+of states decreases with energy for <IMG
+ WIDTH="100" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1002.png"
+ ALT="$E/N &gt; -0.25$">; energy levels
+higher than this are apparently sampled well in an MC run with <EM>negative</EM> temperature.  Now, in order to piece the true <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">
+together from these many runs, we took advantage of the fact that
+<!-- MATH
+ $\Omega(E_0) = Q$
+ -->
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1003.png"
+ ALT="$\Omega(E_0) = Q$">, and scaled the densities to have them match in the
+overlapping regions.  Notice that the two partial densities of states
+for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.7 and 0.70991 agree (not surprising), but that the density
+of states for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.5 appears much too large.  All told, it appears
+that the total curve is adequately represented by the
+anti-Boltzmann-treated histograms from just three 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$">-cycle NVT MC
+runs: <!-- MATH
+ $T \in \left\{0.7,1.0,-1.0\right\}$
+ -->
+<IMG
+ WIDTH="138" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1004.png"
+ ALT="$T \in \left\{0.7,1.0,-1.0\right\}$">.  
+
+<P>
+Now, I have to admit that I have cheated somewhat.  I knew ahead of
+time that the density of states has a maximum, so I knew that negative
+temperature MC would resolve some part of it.  I also knew that the
+critical temperature is 0.70991, but it was nice to see that number
+supported by standard MC.  Let us now learn how to compute <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">
+from a single MC run using the Wang-Landau technique.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html708"
+  HREF="node55.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html706"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html700"
+  HREF="node53.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html709"
+  HREF="node55.html">The Potts Model treated</A>
+<B> Up:</B> <A NAME="tex2html707"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html701"
+  HREF="node53.html">The Algorithm</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

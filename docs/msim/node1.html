@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="msim.html">
+<LINK REL="up" HREF="msim.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html130"
+  HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html128"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html122"
+  HREF="msim.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html131"
+  HREF="node2.html">Statistical Mechanics: A Brief</A>
+<B> Up:</B> <A NAME="tex2html129"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html123"
+  HREF="msim.html">Molecular Simulations</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00010000000000000000">
+Introduction</A>
+</H1>
+
+<P>
+This introduction pertains to a course I taught at the graduate level at Drexel in the 2003-2004 academic year.
+
+<P>
+<B>Course Objectives</B>
+
+<P>
+The objective of this course is to provide graduate students with a
+basic understanding of molecular simulation.  The level of
+understanding we will target involves both the skills to critique
+current molecular simulation research in the students' respective
+fields and to develop simple simulation programs that may 
+contribute to students' original research.
+
+<P>
+<B>Course Outline</B>
+
+<P>
+
+<UL>
+<LI>Statistical Mechanics
+</LI>
+<LI>Computing under GNU/Linux
+</LI>
+<LI>Monte Carlo Simulation (MC)
+</LI>
+<LI>Molecular Dynamics Simuation (MD)
+</LI>
+<LI>Molecular Visualization
+</LI>
+<LI>Advanced Techniques (time permitting)
+</LI>
+<LI>Course Projects
+</LI>
+</UL>
+
+<P>
+<B>Prerequisites</B>
+
+<P>
+Calculus and differential equations through the undergraduate level.
+Undergraduate physical chemistry (rudimentary quantum and statistical
+mechanics).  Some knowledge of programming will be helpful.  Access to
+either a Windows or Linux PC is required.
+
+<P>
+<B>Course Policies</B>
+
+<P>
+Recommended homework exercises will be suggested.  The grade is based
+on a final project of the student's choice.  A description of the
+project assignment appears in Sec.&nbsp;<A HREF="node57.html#sec:project">8</A>.  Participants
+will be granted user accounts on the instructor's Linux cluster, <TT>syrinx.chemeng.drexel.edu</TT>.
+
+<P>
+<B>Introductory Remarks</B>
+
+<P>
+In this course, we are concerned with systems of many particles.  Such
+a system models a chunk of matter, and the particles are its
+contituents.  <EM>Statistical mechanics</EM> allows us predict the
+macroscopic properties and behavior of matter when conceptualized as
+collections of many (<IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$\sim$">&nbsp;10<IMG
+ WIDTH="17" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$^{23}$">) particles, and it is the
+central theme of this course.  As we will see, the formalism of
+statistical mechanics allows straightforward analytical treatment of
+only a few simple systems.  The primary motivation behind molecular
+simulation is to apply the framework of statistical mechanics in the
+prediction of macroscopic behavior for relatively ``complicated''
+systems.  The two major branches of molecular simulation we will
+consider are (1) Monte Carlo and (2) molecular dynamics.
+
+<P>
+Statistical mechanics is a broad subject, and we will restrict
+ourselves in this course to stat mech at the introductory level.  The
+lessons of elementary stat mech will be reinforced time and time again
+throughout the course as we explore aspects of molecular simulation
+techniques.  Stat mech is not normally taught to engineering students
+outside a general course on physical chemistry.  (Undergraduates in
+physics or chemistry might get a one or two course series on
+statistical mechanics.)
+
+<P>
+A second component of this course is programming.  Most engineering
+students take a programming course (though this is not true for our
+unfortunate tDEC students), so some exposure to computer programming
+is expected as a prerequisite.  It will be necessary to discuss
+certain simulation algorithms using ``pseudo-code'' examples, or even
+examples written in C or FORTRAN.  The level of code presented in this
+course will generally be sufficiently basic such that novices can
+understand it line by line.  For example, see if you can predict what
+the following C program does:
+<PRE>
+#include &lt;stdio.h&gt;
+int main () {
+  int i;
+  for (i=0;i&lt;100;i++) printf(``Hello, I am number %i\n'',i);
+}
+</PRE>
+If it looks somewhat mysterious to you, don't worry.  Part of this
+course will be explaining how code works.  By the end of the course,
+you would be able to <EM>write</EM> the above program (perhaps in
+FORTRAN) had I told you to write a program to output the numbers 0 -
+99.  It must be emphasized at this point that I do not intend to turn
+you all into expert coders.  This is a survey course from which I hope
+you gain an accurate picture of the field of molecular simulation from
+which you can begin your own exploration.  In order to achieve this
+goal, it is necessary to do some <EM>minor</EM> work with actual code.
+
+<P>
+A closely related aspect of this component is the practical matter of
+how one <EM>works</EM> with simulation code.  My preference, and
+therefore the manner in which I teach the course, is to use a
+Unix-like environment, as opposed to Windows.  It should be emphasized
+that the concepts and ideas that form the backbone of this course are
+not operating system-specific.  However, the <EM>implementation</EM> of
+those ideas and concepts, as I hope you will see, is straightforward
+once you know how to write, compile, and run simple programs at a Unix
+prompt.  Again, this will be at a basic level; this is not a
+programming course.
+
+<P>
+Much of this course is based on the book <I>Understanding Molecular
+Simulation</I> by Daan Frenkel and Berend Smit,&nbsp;[<A
+ HREF="node63.html#Frenkel+Smit2002">1</A>]
+two chemical engineers from Amsterdam.  The book's website,
+<A NAME="tex2html2"
+  HREF="http://molsim.chem.uva.nl/frenkel_smit/">http://molsim.chem.uva.nl/frenkel_smit/</A>, is an excellent resource for
+FORTRAN source code.  There are several other books which I have used
+on occasion,&nbsp;[<A
+ HREF="node63.html#Allen+Tildesley1987">2</A>,<A
+ HREF="node63.html#Rapaport1995">3</A>,<A
+ HREF="node63.html#Leach2001">4</A>] the
+most useful of which was <EM>Computer Simulation of Liquids</EM> by Allen
+and Tildesly.&nbsp;[<A
+ HREF="node63.html#Allen+Tildesley1987">2</A>].  
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html130"
+  HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html128"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html122"
+  HREF="msim.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html131"
+  HREF="node2.html">Statistical Mechanics: A Brief</A>
+<B> Up:</B> <A NAME="tex2html129"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html123"
+  HREF="msim.html">Molecular Simulations</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,489 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Grand Canonical</TITLE>
+<META NAME="description" CONTENT="Grand Canonical">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node48.html">
+<LINK REL="up" HREF="node47.html">
+<LINK REL="next" HREF="node50.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html682"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html680"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html676"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html683"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Up:</B> <A NAME="tex2html681"
+  HREF="node47.html">Monte Carlo Simulations in</A>
+<B> Previous:</B> <A NAME="tex2html677"
+  HREF="node48.html">Isothermal-Isobaric</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00051200000000000000">
+Grand Canonical</A>
+</H3>
+
+<P>
+So we see that <EM>volume</EM> exchanges with an ideal gas reservoir can
+be used to fix the pressure of a test system.  Similarly, <EM>particle</EM> exchanges with an ideal gas reservoir can be used to fix the
+<EM>chemical potential</EM> <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ \mu $"></SPAN> of a test system.  Chemical potential is defined as
+the change in free energy with particle number:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu = \frac{\partial F}{\partial N}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img531.png"
+ ALT="$\displaystyle \mu = \frac{\partial F}{\partial N}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">173</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Thus, as reciprocal temperature, <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img532.png"
+ ALT="$ \beta$"></SPAN>, is conjugate to entropy, <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img117.png"
+ ALT="$ S$"></SPAN>,
+and pressure, <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN>, is conjugate to volume, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN>, chemical potential,
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ \mu $"></SPAN>, is conjugate to number of particles, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>.  An ensemble in which
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ \mu $"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> are fixed is referred to as the &ldquo;grand canonical&rdquo;
+ensemble.
+
+<P>
+For an ideal gas, we know that the NVT partition function is given
+by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Q^{i.g.}\left(N,V,T\right) = \frac{V^N}{\Lambda^{3N}N!}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="174" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img533.png"
+ ALT="$\displaystyle Q^{i.g.}\left(N,V,T\right) = \frac{V^N}{\Lambda^{3N}N!}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">174</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Because <!-- MATH
+ $F = \beta^{-1} \ln Q$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="95" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img534.png"
+ ALT="$ F = \beta^{-1} \ln Q$"></SPAN>, it is straightforward to show for the ideal gas that
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta P = \rho
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img535.png"
+ ALT="$\displaystyle \beta P = \rho$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">175</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu^{\rm i.g.} = k_BT\ln \Lambda^3\rho = \mu^0 + k_BT\ln\beta P
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="258" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img536.png"
+ ALT="$\displaystyle \mu^{\rm i.g.} = k_BT\ln \Lambda^3\rho = \mu^0 + k_BT\ln\beta P$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">176</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu^0 \equiv k_BT\ln\Lambda^3.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="114" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img537.png"
+ ALT="$\displaystyle \mu^0 \equiv k_BT\ln\Lambda^3.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">177</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The conventional definition of the <EM>excess chemical
+potential</EM>, or the difference in chemical potential of the
+material of interest and an ideal gas at the same density, is
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu^{\rm ex} = \mu - \mu^{\rm i.g.} = \mu -\mu^0 - k_BT\ln\beta P
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="263" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img538.png"
+ ALT="$\displaystyle \mu^{\rm ex} = \mu - \mu^{\rm i.g.} = \mu -\mu^0 - k_BT\ln\beta P$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">178</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+To keep things clean, we will specify a <EM>relative</EM> chemical potential defined as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mu^\prime \equiv \mu - \mu^0
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="85" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img539.png"
+ ALT="$\displaystyle \mu^\prime \equiv \mu - \mu^0$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">179</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+giving the definition of the excess as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\beta\mu^{\rm ex} \equiv \beta\mu^\prime - \ln\beta P
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="139" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img540.png"
+ ALT="$\displaystyle \beta\mu^{\rm ex} \equiv \beta\mu^\prime - \ln\beta P$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">180</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+To implement a grand canonical MC simulation, the basic idea is that we allow our
+system to interact with an ideal gas system at a fixed <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> (which is
+related to a fixed <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ \mu $"></SPAN>, as discussed above) by exchanging
+particles.  The appropriate probability density is
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{N}_{\mu VT}\left({\bf s}^N; N\right) \propto
+\frac{\exp\left(\beta\mu N\right)V^N}{\Lambda^{3N}N!}
+\exp\left[-\beta\mathscr{U}\left({\bf s}^N\right)\right] = \frac{V}{N}\exp\left[-\beta\left(\mathscr{U}-\mu^\prime N\right)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="529" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img541.png"
+ ALT="$\displaystyle \mathscr{N}_{\mu VT}\left({\bf s}^N; N\right) \propto \frac{\exp\...
+...ight] = \frac{V}{N}\exp\left[-\beta\left(\mathscr{U}-\mu^\prime N\right)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">181</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+To implement a random walk with this probability distribution, in
+addition to the normal particle displacement moves, we also have
+insertion and removal of particles with appropriate acceptance ratios:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\rm acc}\left(N \rightarrow N+1\right) & = &
+{\rm min}\left[1,\frac{V}{N+1}\exp\left\{
+-\beta\left[\mathscr{U}\left(N+1\right) - \mathscr{U}\left(N\right)-\mu^\prime
+\right]\right\}\right]\\
+{\rm acc}\left(N \rightarrow N-1\right) & = & 
+{\rm min}\left[1,\frac{N}{V}\exp\left\{
+-\beta\left[\mathscr{U}\left(N-1\right) - \mathscr{U}\left(N\right)+\mu^\prime
+\right]\right\}\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="122" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img542.png"
+ ALT="$\displaystyle {\rm acc}\left(N \rightarrow N+1\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="363" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img543.png"
+ ALT="$\displaystyle {\rm min}\left[1,\frac{V}{N+1}\exp\left\{
+-\beta\left[\mathscr{U}\left(N+1\right) - \mathscr{U}\left(N\right)-\mu^\prime
+\right]\right\}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">182</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="122" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img544.png"
+ ALT="$\displaystyle {\rm acc}\left(N \rightarrow N-1\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="335" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img545.png"
+ ALT="$\displaystyle {\rm min}\left[1,\frac{N}{V}\exp\left\{
+-\beta\left[\mathscr{U}\left(N-1\right) - \mathscr{U}\left(N\right)+\mu^\prime
+\right]\right\}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">183</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+So, we can specify <!-- MATH
+ $\mu^\prime$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img546.png"
+ ALT="$ \mu^\prime$"></SPAN> of the ideal gas bath, system volume <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> and temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>,
+and conduct a grand canonical MC simulation from which we can observe measure pressure,
+density, and <EM>excess</EM> chemical potential in our system of
+interest.  The code <code>mclj_muvt.c</code> implements grand canonical MC for the Lennard-Jones fluid.
+
+<P>
+It is instructive to run this code with various values of <!-- MATH
+ $\mu^\prime$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img546.png"
+ ALT="$ \mu^\prime$"></SPAN>.  For example, at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 2.0 and <!-- MATH
+ $\mu^\prime$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img546.png"
+ ALT="$ \mu^\prime$"></SPAN> = -2.0, an initially 512-particle system at <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.6 becomes a 436-particle systems at <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.54:
+<PRE>
+$ ./mclj_muvt -N 512 -rho 0.6 -T 2 -mu -2 \ 
+  -disp-wt 0.5 -nc 50000 -dr 0.5 -s 124521  
+  -ne 1000 -rc 3.5 -prog 0
+# muVT MC Simulation of a Lennard-Jones fluid
+# L = 9.48505; rho0 = 0.60000; mu' = -2.00000; N0 = 512; rc = 3.50000
+# nCycles 50000, nEq 1000, seed 124521, dR 0.50000
+NPT Metropolis Monte Carlo Simulation of the Lennard-Jones fluid in the Grand Canonical Ensemble
+---------------------------------------------
+Number of cycles:                 51000
+Maximum particle displacement:     0.50000
+Displacement weight:               0.50000
+Temperature:                       2.00000
+Relative chemical potential:      -2.00000
+Initial number of particles:      512
+Tail corrections used?            Yes
+Shifted potentials used?          No
+Results:
+Final number of particles:        408
+Displacement attempts:            26058
+Insertion attempts:               12384
+Deletion attempts:                12558
+Acceptance ratio, ptcl displ:      0.47981
+Acceptance ratio, insertion:       0.08648
+Acceptance ratio, deletion:        0.09357
+Overall acceptance ratio:          0.28920
+Energy/particle:                  -3.31911
+Density:                           0.50063
+Computed pressure:                 0.96980
+Excess chemical potential:        -0.61622
+Program ends.
+</PRE>
+
+<P>
+Why does the number of particles go down?  The system is being asked to find an equilibrium in which the chemical potential is negative, yet we are apparently starting it at a state where it is more positive, so the system sheds particles. That is, our initial density corresponds to a system of higher chemical potential than what we are asking for.  Conversely, if initialize at a lower density, say 0.4, then we see the number of particles increases:
+<PRE>
+$ ./mclj_muvt -N 512 -rho 0.4 -T 2 -mu -2 \ 
+  -disp-wt 0.5 -nc 50000 -dr 0.5 -s 124521  
+  -ne 1000 -rc 3.5 -prog 0
+# muVT MC Simulation of a Lennard-Jones fluid
+# L = 10.85767; rho0 = 0.40000; mu' = -2.00000; N0 = 512; rc = 3.50000
+# nCycles 50000, nEq 1000, seed 124521, dR 0.50000
+NPT Metropolis Monte Carlo Simulation of the Lennard-Jones fluid in the Grand Canonical Ensemble
+---------------------------------------------
+Number of cycles:                 51000
+Maximum particle displacement:     0.50000
+Displacement weight:               0.50000
+Temperature:                       2.00000
+Relative chemical potential:      -2.00000
+Initial number of particles:      512
+Tail corrections used?            Yes
+Shifted potentials used?          No
+Results:
+Final number of particles:        598
+Displacement attempts:            26058
+Insertion attempts:               12384
+Deletion attempts:                12558
+Acceptance ratio, ptcl displ:      0.54885
+Acceptance ratio, insertion:       0.12766
+Acceptance ratio, deletion:        0.11905
+Overall acceptance ratio:          0.34075
+Energy/particle:                  -2.62249
+Density:                           0.44318
+Computed pressure:                 0.88387
+Excess chemical potential:        -0.37246
+Program ends.
+</PRE>
+
+<P>
+Note that while these two runs purportedly aim for the same equilibrium state, they don't converge there.  The second run converges to a lower pressure and more positive excess chemical potential than the first run does.  This is partially due to the fact that they are different sizes so there are random errors, but it is also due to the fact that grand canonical MC simulations take a relatively long time to reach equilibrium compared to NVT MC.  In practice, it can take many hundreds of thousands of cycles to generate reproducible measurements in <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ \mu $"></SPAN>VT MC.  Fig.&nbsp;<A HREF="#fig:muex">21</A> shows isotherms at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 2.0 of pressure and excess chemical potential for the LJ fluid computed using <code>mclg_muvt.c</code>.  These were computed using three independent trials per data point.  This matches Fig. 5.8 in F&amp;S&nbsp;[<A
+ HREF="node82.html#Frenkel+Smit2002">1</A>].
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:muex"></A><A NAME="5022"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 21:</STRONG>
+Isotherms of pressure and excess chemical potential at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 2.0 from <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ \mu $"></SPAN>VT MC simulation of the Lennard-Jones fluid.  Each point is the average of three independent, 600,000-move simulations.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="473" HEIGHT="393" ALIGN="BOTTOM" BORDER="0"
+ SRC="./pmuex_v_rho_LJ.png"
+ ALT="Image pmuex_v_rho_LJ"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html682"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html680"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html676"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html683"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Up:</B> <A NAME="tex2html681"
+  HREF="node47.html">Monte Carlo Simulations in</A>
+<B> Previous:</B> <A NAME="tex2html677"
+  HREF="node48.html">Isothermal-Isobaric</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

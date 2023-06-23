@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Well-Tempered Metadynamics</TITLE>
+<META NAME="description" CONTENT="Well-Tempered Metadynamics">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node79.html">
+<LINK REL="up" HREF="node78.html">
+<LINK REL="next" HREF="node81.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1011"
+  HREF="node81.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1009"
+  HREF="node78.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1005"
+  HREF="node79.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1012"
+  HREF="node81.html">ABF</A>
+<B> Up:</B> <A NAME="tex2html1010"
+  HREF="node78.html">Metadynamics</A>
+<B> Previous:</B> <A NAME="tex2html1006"
+  HREF="node79.html">Original Metadynamics</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00095120000000000000">
+Well-Tempered Metadynamics</A>
+</H4>
+
+<P>
+In the well-tempered variant&nbsp;[<A
+ HREF="node82.html#Barducci2008Well-temperedMethod">49</A>] of metadynamics, The weight <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> is augmented with a Boltzmann factor that diminishes exponentially as <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img948.png"
+ ALT="$ V_b$"></SPAN> builds up:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:wtmd"></A><!-- MATH
+ \begin{equation}
+V_b(\theta,t) = w\sum_{t^\prime < t}\exp\left[-\frac{V_b(\theta(t^\prime))}{\Delta T}\right] \exp\left(-\frac{\left[\theta(t^\prime)-\theta(t)\right]^2}{2\sigma^2}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="396" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img949.png"
+ ALT="$\displaystyle V_b(\theta,t) = w\sum_{t^\prime &lt; t}\exp\left[-\frac{V_b(\theta(t...
+...] \exp\left(-\frac{\left[\theta(t^\prime)-\theta(t)\right]^2}{2\sigma^2}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">365</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img950.png"
+ ALT="$ \Delta T$"></SPAN> is the so-called &ldquo;bias temperature&rdquo;, and it acts to diminish the contribution to <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img948.png"
+ ALT="$ V_b$"></SPAN> at any <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img318.png"
+ ALT="$ \theta$"></SPAN> as time progresses, leading to a converged bias potential.  The free energy is reconstructed by an inversion of the converged bias potential that requires the bias temperature:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:wtmd-f"></A><!-- MATH
+ \begin{equation}
+F = -\frac{T+\Delta T}{\Delta T}V_b
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="125" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img951.png"
+ ALT="$\displaystyle F = -\frac{T+\Delta T}{\Delta T}V_b$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">366</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Fig.&nbsp;<A HREF="#fig:wtmd-butane">48</A> shows the free energy vs. C1-C4 distance for butane at 273 K computed using well-tempered metadynamics with parameters identical to the standard metadynamics run of the previous section but with a bias temperature of 1000 K.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:wtmd-butane"></A><A NAME="9094"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 48:</STRONG>
+Free energy in kcal/mol vs. C1-C4 distance in &#197;, for butane in vacuum at 273 K computed using MD (green dash) and well-tempered metadynamics (black solid).  The MD simulation was run for 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img63.png"
+ ALT="$ ^8$"></SPAN> timesteps, and the metadynamics for 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN>.  The bias temperature for well-biased metadynamics was 1000 K. Intermediate values of the metadynamics free energy are also shown color-coded from purple (early) to yellow (late).  The final metadynamics free energy is the average over all free-energy snapshots (i.e., it is the time-average negative bias potential).</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="709" HEIGHT="539" ALIGN="BOTTOM" BORDER="0"
+ SRC="./wtmd-wav-273.png"
+ ALT="Image wtmd-wav-273"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1011"
+  HREF="node81.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1009"
+  HREF="node78.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1005"
+  HREF="node79.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1012"
+  HREF="node81.html">ABF</A>
+<B> Up:</B> <A NAME="tex2html1010"
+  HREF="node78.html">Metadynamics</A>
+<B> Previous:</B> <A NAME="tex2html1006"
+  HREF="node79.html">Original Metadynamics</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

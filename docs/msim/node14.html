@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Data Representation and Input/Output</TITLE>
+<META NAME="description" CONTENT="Data Representation and Input/Output">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html279"
+  HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html277"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html271"
+  HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html280"
+  HREF="node15.html">Analytical Potentials</A>
+<B> Up:</B> <A NAME="tex2html278"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html272"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00033100000000000000">
+Data Representation and Input/Output</A>
+</H3>
+
+<P>
+The information that must be stored and handled in an MC program are
+the particle positions.  In 3D space, each particle has three
+components of its position.  The simplest way to represent this
+information in a program is by using <EM>parallel arrays</EM>; that is,
+three arrays, dimensioned from 1 to <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, one for each dimension.  In
+FORTRAN and C, we might declare these arrays for 1,000 particles as
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">In FORTRAN</TD>
+<TD ALIGN="LEFT">In C</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+<PRE>
+      parameter (N = 1000)
+      real*8 rx(N), ry(N), rz(N)
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+<PRE>
+  const int N = 1000;
+  double rx[N], ry[N], rz[N];
+</PRE></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+
+<P>
+This data can be stored in standard ASCII text files, or in
+unformatted binary files.  In fact, a large part of most molecular
+simulation is producing and storing configurations which can be
+processed ``offline'' (away from the simulation program) to perform
+analyses.  A code fragment to write a configuration of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> atoms appears
+below:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">In FORTRAN</TD>
+<TD ALIGN="LEFT">In C</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+<PRE>
+	do 100 i=1,N
+	   write(9,101) i,rx(i),ry(i),rz(i)
+100     continue
+101	format(i,e13.8,e13.8,e13.8)
+! writes to file fort.9
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+<PRE>
+  fp = fopen("file1.dat","w");
+  for (i=0;i&lt;N;i++) 
+    fprintf(fp,"%i %.8le %.8le %.8le\n",
+     i,rx[i],ry[i],rz[i]);
+/* fp is declared as a pointer of type FILE */
+</PRE></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+
+<P>
+It's quite easy to read ASCII data in:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">In FORTRAN</TD>
+<TD ALIGN="LEFT">In C</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+<PRE>
+	do 100 i=1,N
+	   read(9,101) i,rx(i),ry(i),rz(i)
+100     continue
+101	format(i,e13.8,e13.8,e13.8)
+! read from file fort.9
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+<PRE>
+  fp = fopen("file1.dat","r");
+  for (i=0;i&lt;N;i++) 
+    fscanf(fp,"%i %.8le %.8le %.8le\n",
+     &amp;i,&amp;rx[i],&amp;ry[i],&amp;rz[i]);
+/* fp is declared as a pointer of type FILE */
+</PRE></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html279"
+  HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html277"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html271"
+  HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html280"
+  HREF="node15.html">Analytical Potentials</A>
+<B> Up:</B> <A NAME="tex2html278"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html272"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

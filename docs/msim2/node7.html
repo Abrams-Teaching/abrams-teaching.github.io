@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Microstates and Degeneracy</TITLE>
+<META NAME="description" CONTENT="Microstates and Degeneracy">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html213"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html211"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html205"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html214"
+  HREF="node8.html">Making Observations: The Ergodic</A>
+<B> Up:</B> <A NAME="tex2html212"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html206"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00021000000000000000">
+Microstates and Degeneracy</A>
+</H2>
+
+<P>
+A microstate is a full specification of all degrees of freedom of a system. In quantum mechanics, degrees of freedom are <EM>quantum numbers</EM>.  The index <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN> in Eq.&nbsp;<A HREF="node6.html#eq:ensemble_average">1</A> runs over all unique combinations of quantum number values.  Equilibrium (eigen)solutions of the Schr&#246;dinger equation define the energy <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img75.png"
+ ALT="$ E_\nu$"></SPAN> of any state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:energy_eigenstates"></A><!-- MATH
+ \begin{equation}
+\mathscr{H}\left|\nu\right> = E_\nu\left|\nu\right>,
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="116" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img76.png"
+ ALT="$\displaystyle \mathscr{H}\left\vert\nu\right&gt; = E_\nu\left\vert\nu\right&gt;,$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $\mathscr{H}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img77.png"
+ ALT="$ \mathscr{H}$"></SPAN> is the Hamiltonian operator, <!-- MATH
+ $\left|\nu\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img78.png"
+ ALT="$ \left\vert\nu\right&gt;$"></SPAN> is shorthand for the system wavefunction in state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img75.png"
+ ALT="$ E_\nu$"></SPAN> is the energy of state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN> (<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img75.png"
+ ALT="$ E_\nu$"></SPAN> is an eigenvalue of the Schr&#246;dinger equation).  In contrast to model systems usually considered in elementary quantum mechanics, the number of distinct microstates of systems with energy <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$ E$"></SPAN> and comprising <!-- MATH
+ $\sim 10^{23}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="50" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img80.png"
+ ALT="$ \sim 10^{23}$"></SPAN> particles is <EM>very large</EM>, and this set of eigenstates is in practice impossible to obtain explicitly.  This is indeed why we must instead treat this set <EM>statistically</EM>.  We refer to the number of states that satisfy a given energy as the degeneracy of the energy level <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$ E$"></SPAN>, denoted <!-- MATH
+ $\Omega(E,N,V)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="81" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img81.png"
+ ALT="$ \Omega(E,N,V)$"></SPAN>:
+<P><A NAME="eq:microcanonical"></A><!-- MATH
+ \begin{displaymath}
+\Omega(N,V,E) = \begin{array}{l}
+	\mbox{number of microstates with $N$\  and $V$\  and}\\
+        \mbox{energy between $E$\  and $E+\delta E$.}
+	\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:microcanonical"></A>
+<IMG
+ WIDTH="406" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img82.png"
+ ALT="$\displaystyle \Omega(N,V,E) = \begin{array}{l}
+\mbox{number of microstates with $N$ and $V$ and}\\
+\mbox{energy between $E$ and $E+\delta E$.}
+\end{array}$">
+</DIV><P></P>
+The many states contributing to the count <!-- MATH
+ $\Omega(N,V,E)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="78" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$ \Omega(N,V,E)$"></SPAN> is called a <EM>microcanonical ensemble</EM>.  Because one in principle can partition state space into non-overlapping sets of states where each set represents a unique value of <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$ E$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img84.png"
+ ALT="$ \Omega$"></SPAN> is also called the &ldquo;microcanonical partition function&rdquo;.
+
+<P>
+The Ising spin lattice is a simple statistical mechanical model with discrete energy levels which we can now introduce to gain some understanding of what it means to say <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img84.png"
+ ALT="$ \Omega$"></SPAN> is &ldquo;large.&rdquo; Imagine a linear array of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> spins, each pointing either &ldquo;up&rdquo; or &ldquo;down.&rdquo;
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:ising"></A><A NAME="216"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 1:</STRONG>
+A 1-D Ising system.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="224" HEIGHT="69" ALIGN="BOTTOM" BORDER="0"
+ SRC="img85.png"
+ ALT="\includegraphics[width=5cm]{eps/ising_1d.eps}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Let us suppose that the Hamiltonian of this system is given by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:ising_fieldhamil"></A><!-- MATH
+ \begin{equation}
+\mathscr{H} = h\sum_{i=1}^{N}s_i
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="95" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$\displaystyle \mathscr{H} = h\sum_{i=1}^{N}s_i$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img87.png"
+ ALT="$ s_i$"></SPAN> is -1 if spin <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> is &ldquo;down&rdquo; and +1 if spin <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> is &ldquo;up,&rdquo; and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img88.png"
+ ALT="$ h$"></SPAN> is some unit of energy.  Let <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> denote the number of spins that are up out of the <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> spins, and let <!-- MATH
+ $\Omega(N,m)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img90.png"
+ ALT="$ \Omega(N,m)$"></SPAN> be the number of realizations of the <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> spin states for which <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> spins are up.  The ground state, the state with the lowest energy, has all spins down, so <!-- MATH
+ $\Omega(N,0) = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="85" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$ \Omega(N,0) = 1$"></SPAN>.  The next state up has one spin up, but there are <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> possible microstates that have this energy: <!-- MATH
+ $\Omega(N,1) = N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="92" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.png"
+ ALT="$ \Omega(N,1) = N$"></SPAN>.  The next state up has two spins, and there are <SPAN CLASS="MATH"><IMG
+ WIDTH="88" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img93.png"
+ ALT="$ N(N-1)/2$"></SPAN> such microstates: <!-- MATH
+ $\Omega(N,2) = N(N-1)/2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="162" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img94.png"
+ ALT="$ \Omega(N,2) = N(N-1)/2$"></SPAN>.  For <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> spins flipped, there are
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:choose"></A><!-- MATH
+ \begin{equation}
+\Omega_m = \frac{N!}{(N-m)!m!}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="135" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img95.png"
+ ALT="$\displaystyle \Omega_m = \frac{N!}{(N-m)!m!}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+distinct microstates.  You can now easily see that working with <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img84.png"
+ ALT="$ \Omega$"></SPAN> for statistical mechanical systems means working with <EM>enormous</EM> numbers.  For the rather small system of 100 spins, if we ask how many states are there with 50 spins up, we see <!-- MATH
+ $\Omega(100,50) \approx 10^{29}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="125" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \Omega(100,50) \approx 10^{29}$"></SPAN>.
+
+<P>
+Although quantum mechanics tells us that atomic systems have discrete energy levels, when systems contain very large numbers of atoms, these energy levels become so closely spaced relative to their span that they may effectively be considered a continuum.  We can thus pass into a <EM>classical</EM> (as opposed to quantum mechanical) representation, where the microstate for a system of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> particles is specified by a point in a 6<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>-dimensional <EM>phase space</EM>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left(r^N,p^N\right) \equiv \left({\boldsymbol r}_1,{\boldsymbol r}_2,...,{\boldsymbol r}_N;{\boldsymbol p}_1,{\boldsymbol p}_2,...,p_N\right).
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="288" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img97.png"
+ ALT="$\displaystyle \left(r^N,p^N\right) \equiv \left({\boldsymbol r}_1,{\boldsymbol r}_2,...,{\boldsymbol r}_N;{\boldsymbol p}_1,{\boldsymbol p}_2,...,p_N\right).$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ ${\boldsymbol r}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$ {\boldsymbol r}_i$"></SPAN> is the 3-space position of particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <!-- MATH
+ ${\boldsymbol p}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img99.png"
+ ALT="$ {\boldsymbol p}_i$"></SPAN> is its momentum.
+We can denote the number of states in a classical microcanonical ensemble by integrating over all of phase space and plucking out those states for which the energy is <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$ E$"></SPAN> using the Dirac delta function:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="95" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img100.png"
+ ALT="$\displaystyle \overline\Omega(N,V,E) =$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="560" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$\displaystyle \frac{1}{h^{3N}N!}\int_V d{\boldsymbol r}_1\int_Vd{\boldsymbol r}...
+...oldsymbol p}_N \delta\left[\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)-E\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:microcanon_class">(<SPAN CLASS="arabic">6</SPAN>)</A></TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="266" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img102.png"
+ ALT="$\displaystyle \equiv \int\int d{\boldsymbol r}^Nd{\boldsymbol p}^N \delta\left[\mathscr{H}\left({\bf r}^N,{\bf p}^N\right)-E\right],$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+(The second line introduces some shorthand notation.) The delta function integrand has units that are the reciprocal of its argument, so <!-- MATH
+ $\overline\Omega$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img103.png"
+ ALT="$ \overline\Omega$"></SPAN> is more precisely termed the &ldquo;density of states&rdquo; and is directly related to <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img84.png"
+ ALT="$ \Omega$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:dos"></A><!-- MATH
+ \begin{equation}
+\overline\Omega\delta E = \Omega
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img104.png"
+ ALT="$\displaystyle \overline\Omega\delta E = \Omega$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This definition satisfies the idea that the integral of <!-- MATH
+ $\overline\Omega$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img103.png"
+ ALT="$ \overline\Omega$"></SPAN> over the entire continuous domain of energy <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$ E$"></SPAN> should equal a complete integral over all of phase space.
+
+<P>
+The microcanonical ensemble represents a hyperdimensional surface in the phase space dimensioned by <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> particles with positions limited by the extent of <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN>.  The factorial in Eq.&nbsp;<A HREF="#eq:microcanon_class">6</A>, <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img105.png"
+ ALT="$ N!$"></SPAN>, takes into account that the particles are indistinguishable; that is, all orderings of particle indices 1, 2, <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img106.png"
+ ALT="$ \dots$"></SPAN> N, are treated identically. <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img88.png"
+ ALT="$ h$"></SPAN> is Planck's constant; note that it has units of length<SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img107.png"
+ ALT="$ \bullet$"></SPAN>momentum.  Think of it as a quantum-mechanically-required &ldquo;mesh discretization&rdquo; for continuous space (it arises due to the Heisenberg uncertainty relation).  It also <EM>nondimensionalizes</EM> the partition function.  We will encounter it again in the next section, but we will also see why these &ldquo;prefactors&rdquo; are not essential ingredients of most molecular simulations.
+
+<P>
+You may wonder why there seem to be two viewpoints of statistical mechanics, quantum and classical.  First, there really aren't two viewpoints: the classical picture is an approximation of the more general quantum mechanical picture.  But statistical mechanics as a discipline was first formalized by Gibbs and Boltzmann <EM>before</EM> quantum mechanics was widely accepted, so it dealt necessarily with systems of classical particles obeying Newtonian equations of motion; that is, on classical mechanics.  There appears to be a general consensus that it is easier to introduce statistical mechanical concepts using the &ldquo;sum-over-states&rdquo; notation of quantum statistical mechanics, rather than the apparently more cumbersome (and anyway approximate) &ldquo;integral-over-phase-space&rdquo; notation of classical statistical mechanics.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html213"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html211"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html205"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html214"
+  HREF="node8.html">Making Observations: The Ergodic</A>
+<B> Up:</B> <A NAME="tex2html212"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html206"
+  HREF="node6.html">Statistical Mechanics: A Brief</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

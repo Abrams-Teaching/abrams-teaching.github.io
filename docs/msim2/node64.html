@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Bond-Order Potentials</TITLE>
+<META NAME="description" CONTENT="Bond-Order Potentials">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node65.html">
+<LINK REL="previous" HREF="node63.html">
+<LINK REL="up" HREF="node62.html">
+<LINK REL="next" HREF="node65.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html842"
+  HREF="node65.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html840"
+  HREF="node62.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html834"
+  HREF="node63.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html843"
+  HREF="node65.html">ReaxFF</A>
+<B> Up:</B> <A NAME="tex2html841"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Previous:</B> <A NAME="tex2html835"
+  HREF="node63.html">Embedded Atom Method (EAM)</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072200000000000000">
+Bond-Order Potentials</A>
+</H3>
+
+<P>
+Bond-order potentials aim to capture the effect of the nearest-neighbor environment on the behavior of any bond.  Such potentials began with the work of Abell&nbsp;[<A
+ HREF="node82.html#Abell1985EmpiricalBonding">30</A>].  Here I only very lightly gloss over this very deep field of research.  In the bond-order formalism, the total potential energy due to covalent bonds is:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eqn:U"></A><!-- MATH
+ \begin{equation}
+U = \sum_i{\sum_{j>i} {\phi_{ij}}},
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="114" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img747.png"
+ ALT="$\displaystyle U = \sum_i{\sum_{j&gt;i} {\phi_{ij}}},$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">276</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where the bond energy <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img748.png"
+ ALT="$ \phi_{ij}$"></SPAN> between atoms <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> has
+repulsive and attractive components:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eqn:phi"></A><!-- MATH
+ \begin{equation}
+\phi_{ij} = V_R(r_{ij}) - \overline{b}_{ij}V_A(r_{ij}) ,
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="188" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img749.png"
+ ALT="$\displaystyle \phi_{ij} = V_R(r_{ij}) - \overline{b}_{ij}V_A(r_{ij}) ,$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">277</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img750.png"
+ ALT="$ V_R$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img751.png"
+ ALT="$ V_A$"></SPAN> are Morse-type pair potentials:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eqn:Vr"></A><!-- MATH
+ \begin{equation}
+V_R(r_{ij}) = f_{ij}(r_{ij})A_{ij}\exp(-\lambda_{ij}r_{ij}) {\rm\hspace{5mm} and}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="287" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img752.png"
+ ALT="$\displaystyle V_R(r_{ij}) = f_{ij}(r_{ij})A_{ij}\exp(-\lambda_{ij}r_{ij}) {\rm\hspace{5mm} and}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">278</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eqn:Va"></A><!-- MATH
+ \begin{equation}
+V_A(r_{ij}) = f_{ij}(r_{ij})B_{ij}\exp(-\mu_{ij}r_{ij})
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="239" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img753.png"
+ ALT="$\displaystyle V_A(r_{ij}) = f_{ij}(r_{ij})B_{ij}\exp(-\mu_{ij}r_{ij})$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">279</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img754.png"
+ ALT="$ r_{ij}$"></SPAN> is the scalar separation between atoms <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and
+<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.  <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img755.png"
+ ALT="$ A_{ij}$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img756.png"
+ ALT="$ B_{ij}$"></SPAN>, <!-- MATH
+ $\lambda_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img757.png"
+ ALT="$ \lambda_{ij}$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img758.png"
+ ALT="$ \mu_{ij}$"></SPAN> are all
+parameters specific to the two elements participating in the bond. (I
+use the following <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img589.png"
+ ALT="$ ij$"></SPAN>-subscript convention: when <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img589.png"
+ ALT="$ ij$"></SPAN> appears on a
+variable, <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> refer to the individual atom indices; when <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img589.png"
+ ALT="$ ij$"></SPAN>
+appears on a parameter or function, <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> are specific only to
+the elements of atoms <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.) The cutoff function <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img759.png"
+ ALT="$ f_{ij}$"></SPAN> decays smoothly
+from 1 at some &ldquo;inner&rdquo; radius to 0 at some &ldquo;outer&rdquo; radius.
+
+<P>
+The bond order <!-- MATH
+ $\overline{b_{ij}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img760.png"
+ ALT="$ \overline{b_{ij}}$"></SPAN> models all of the many-body chemistry:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eqn:bijbar"></A><!-- MATH
+ \begin{equation}
+\overline{b_{ij}} = {1\over2}
+\left[b_{ij}+b_{ji}+\mbox{corrections}\right],
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="224" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img761.png"
+ ALT="$\displaystyle \overline{b_{ij}} = {1\over2} \left[b_{ij}+b_{ji}+\mbox{corrections}\right],$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">280</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img762.png"
+ ALT="$ b_{ij}$"></SPAN> is the contribution of atoms that neighbor atom <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>
+to the bond order of the <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img589.png"
+ ALT="$ ij$"></SPAN> bond.  These involve complicated 3- and 4-body interactions.  The corrections arise from the need to expand set of thermochemical data which the potentials are fit against.
+
+<P>
+Bond-order potentials first applied to metals, but expanded into  silicon and hydrocarbons with the work of  and Tersoff&nbsp;[<A
+ HREF="node82.html#Tersoff1986NewSilicon">31</A>]and Brenner&nbsp;[<A
+ HREF="node82.html#Brenner1990EmpiricalFilms">32</A>], respectively, producing what is called the &ldquo;reactive empirical bond order potential (REBO).  The more recent adaptive intermolecular reactive empirical bond-order (AIREBO) potential combines REBO with Lennard-Jones interactions and specific torsional potentials for better modeling of hydrocarbon chains.&nbsp;[<A
+ HREF="node82.html#Stuart2000AInteractions">33</A>]
+
+<P>
+Polarizable versions of reactive potentials have also been developed.  The charge-optimized many-body (COMB) potential is an extension of REBO in which the charge on each atom is allowed to change according to energies dictated by input parameters such as atom electronegativity.&nbsp;[<A
+ HREF="node82.html#Yu2007ChargeSystem">34</A>]  Adding oxygen to the AIREBO hydrocarbon potential also necessitated including polarizability, leading to the qAIREBO potential.&nbsp;[<A
+ HREF="node82.html#Knippenberg2012Bond-orderSystems">35</A>]
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html842"
+  HREF="node65.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html840"
+  HREF="node62.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html834"
+  HREF="node63.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html843"
+  HREF="node65.html">ReaxFF</A>
+<B> Up:</B> <A NAME="tex2html841"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Previous:</B> <A NAME="tex2html835"
+  HREF="node63.html">Embedded Atom Method (EAM)</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Making Observations: The Ergodic Hypothesis</TITLE>
+<META NAME="description" CONTENT="Making Observations: The Ergodic Hypothesis">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html164"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html162"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html156"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html165"
+  HREF="node5.html">Entropy and Temperature</A>
+<B> Up:</B> <A NAME="tex2html163"
+  HREF="node2.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html157"
+  HREF="node3.html">Microstates and Degeneracy</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00022000000000000000">
+Making Observations:  The Ergodic Hypothesis</A>
+</H2>
+
+<P>
+Scientists are taught early on that when conducting measurements, one
+must perform repeated experiments and average the results.  If one
+makes <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$"> independent measurements of some observable <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$G$">,
+one computes the mean value as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+G_{\rm obs} = \frac{1}{\mathscr{N}}\sum_{i=1}^{\mathscr{N}}G_i.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="118" HEIGHT="56" BORDER="0"
+ SRC="img83.png"
+ ALT="\begin{displaymath}
+G_{\rm obs} = \frac{1}{\mathscr{N}}\sum_{i=1}^{\mathscr{N}}G_i.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(6)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+We now imagine that the time of a measurement is so short that we <EM>know</EM> that the system is in only one of its many possible microstates.
+This means we can write
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+G_{\rm obs} = \sum_{\nu}\left[\frac{1}{\mathscr{N}}\left(\begin{array}{c}
+	\mbox{number of times state $\nu$\  is} \\
+	\mbox{observed in the $\mathscr{N}$\  observations}
+	\end{array}\right)\right]G_\nu,
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:exp_obs"></A><IMG
+ WIDTH="394" HEIGHT="49" BORDER="0"
+ SRC="img84.png"
+ ALT="\begin{displaymath}
+G_{\rm obs} = \sum_{\nu}\left[\frac{1}{\mathscr{N}}\left(\be...
+... $\mathscr{N}$ observations}
+\end{array}\right)\right]G_\nu,
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(7)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.png"
+ ALT="$G_\nu$"> was introduced previously
+(Eq.&nbsp;<A HREF="node2.html#eq:ensemble_average">1</A>) as the value of observable <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$G$"> when
+the system is in state <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$">.
+
+<P>
+Now we have to imagine that our system is evolving in time.  As it
+evolves, its degrees of freedom change values, and the system is
+thought of as tracing out a <EM>trajectory</EM> in state space. (``State
+space'' is a Hilbert space spanned by all states <!-- MATH
+ $\left|\nu\right>$
+ -->
+<IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$\left\vert\nu\right&gt;$"> in
+the quantum mechanical case, or phase space in the classical case.)
+How is the system evolving?  The system wavefunction evolves according
+to Schr&#246;dinger's equation, while particles in a classical system
+follow Newtonian mechanics.  (We will consider Newtonian mechanics in
+much greater detail later in Sec.&nbsp;<A HREF="node21.html#sec:md">4</A>.)  As the
+experimenters, we control the system by specifying a handful of
+variables, such as its total energy, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$E$">, the number of particles,
+<IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, and the volume, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">.  These <EM>contraints</EM> force the system's
+trajectory to remain on a hyperdimensional surface in state space.
+
+<P>
+The key assumption we make at this point is that, if we wait long
+enough, our system will visit every possible state; that is, the
+trajectory will eventually pass through every available point in state
+space consistent with our constraints.  If this is true, and we make
+<IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$"> independent observations, then the number of times we
+observe the system in state <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$"> divided by the number of
+observations, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$">, is the <EM>probability</EM> of observing
+state <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$">, <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$P_\nu$">, if we happen to make a random observation.  So,
+Eq.&nbsp;<A HREF="#eq:exp_obs">7</A> above becomes the ensemble average first
+presented in Eq.&nbsp;<A HREF="node2.html#eq:ensemble_average">1</A>:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+G_{\rm obs} = \sum_\nu P_\nu G_\nu = \left<G\right>
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="161" HEIGHT="44" BORDER="0"
+ SRC="img85.png"
+ ALT="\begin{displaymath}
+G_{\rm obs} = \sum_\nu P_\nu G_\nu = \left&lt;G\right&gt;
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(8)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We see that a time average is the same as an ensemble average.
+
+<P>
+This assumption is important: it is referred to as the <EM>ergodic
+hypothesis</EM>.  A system is ``ergodic'' if, after a sufficiently long
+time, it visits all possible state space points consistent with
+whatever constraints are put on it.  We cannot in general prove that
+any system is ergodic; it is something we are comfortable assuming for
+most systems based on our physical intuition.  There are, however,
+many systems which are non-ergodic.  For the most part, we will not
+concern ourselves with such systems in this course.
+
+<P>
+Another important consideration is the following: How far apart must
+the <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$"> independent measurements be from one another in time
+to be considered truly ``independent''?  To answer this question, we
+must introduce the notion of a <EM>relaxation time</EM>, <!-- MATH
+ $\tau_{\rm
+relax}$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$\tau_{\rm
+relax}$">, which arises naturally due to the presumably chaotic nature
+of the microscopic system.  Given some initial conditions, after a
+time <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$\tau_{\rm
+relax}$"> has elapsed, the system has ``lost memory'' of
+the initial condition.  We measure this loss of memory in terms of
+<EM>correlation functions</EM>, which will be discussed in more detail
+later.  If we wait at least <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$\tau_{\rm
+relax}$"> between successive
+observations, we know they are independent.  It turns out that one can
+use simulation methods to estimate relaxation times (and their
+spectra; many systems display a broad spectrum of relaxation times,
+each element cooresponding to a particular type of molecular motion).
+We will pay particularly close attention to <!-- MATH
+ $\tau_{\rm relax}$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$\tau_{\rm
+relax}$"> in
+upcoming sections.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html164"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html162"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html156"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html165"
+  HREF="node5.html">Entropy and Temperature</A>
+<B> Up:</B> <A NAME="tex2html163"
+  HREF="node2.html">Statistical Mechanics: A Brief</A>
+<B> Previous:</B> <A NAME="tex2html157"
+  HREF="node3.html">Microstates and Degeneracy</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

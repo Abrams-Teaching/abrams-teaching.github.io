@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Suggested Topics</TITLE>
+<META NAME="description" CONTENT="Suggested Topics">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node69.html">
+<LINK REL="previous" HREF="node67.html">
+<LINK REL="up" HREF="node67.html">
+<LINK REL="next" HREF="node69.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html899"
+  HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html897"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html891"
+  HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html900"
+  HREF="node69.html">Schedule of Presentations</A>
+<B> Up:</B> <A NAME="tex2html898"
+  HREF="node67.html">Course Projects</A>
+<B> Previous:</B> <A NAME="tex2html892"
+  HREF="node67.html">Course Projects</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000101000000000000000">
+Suggested Topics</A>
+</H2>
+
+<P>
+Below is a list of <EM>suggested</EM> topics, and they are only weakly
+suggested.  You can do almost anything else as long as you find it
+reasonably interesting.  This could be using one of the codes provided
+by me or F&amp;S, or your own code.  You will write a short ``report''
+(just a few pages, maybe a figure or two), and give a short
+presentation about your project.  The goal in both cases is to
+document and demonstrate <EM>what you learned</EM> in doing the project,
+not so much to document and demonstrate anything <EM>new</EM>.
+
+<P>
+
+<UL>
+<LI>Monte-Carlo simulations:
+
+<UL>
+<LI>Suggested exercises for the Ising magnet (Sec.&nbsp;<A HREF="node19.html#sec:cs1"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+</LI>
+<LI>Orientational correlation functions in 2D dumbbells (Sec.&nbsp;<A HREF="node28.html#sec:cs3"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+</LI>
+<LI>Various displacement methods in MC simulation of LJ fluid
+</LI>
+<LI>Orientational correlation in LJ Dumbbells in 3D (Sec.&nbsp;<A HREF="node30.html#sec:ljdumb"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+</LI>
+</UL>
+</LI>
+<LI>Molecular dynamics simulations:
+
+<UL>
+<LI>Structure in a liquid made of particle of two different sizes.
+Modify mdlj.c to handle a particle-specific value of <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img235.png"
+ ALT="$\sigma$">.  Let
+there be two types of particles, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img45.png"
+ ALT="$A$"> and <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$B$">, and let <!-- MATH
+ $\sigma_A =
+\sigma = \sigma_B/2$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1010.png"
+ ALT="$\sigma_A =
+\sigma = \sigma_B/2$">.  For any pair <IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img527.png"
+ ALT="$ij$">, the <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img235.png"
+ ALT="$\sigma$"> used 
+in evaluating the potential is <!-- MATH
+ $\sigma_{ij} = 1/2(\sigma_i+\sigma_j)$
+ -->
+<IMG
+ WIDTH="130" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1011.png"
+ ALT="$\sigma_{ij} = 1/2(\sigma_i+\sigma_j)$">.
+Modify rdf.c to compute the <IMG
+ WIDTH="27" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1012.png"
+ ALT="$AA$">, <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1013.png"
+ ALT="$BB$">, and <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1014.png"
+ ALT="$AB$"> radial distribution functions
+at a few  compositions and overall densities.
+</LI>
+<LI>Obstacles: Compute the effect on the diffusivity in a Lennard-Jones
+fluid at a given temperature and density by the presence of <EM>fixed
+obstacles</EM> in the domain which interact with the particles.  These
+obstacles could be other particles which <EM>do not move</EM>, or
+``lines'' of Lennard-Jones potential (See Sec.&nbsp;<A HREF="node72.html#sec:ljline"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+arrayed on some grid or randomly.  A relationship between
+<!-- MATH
+ $\mathscr{D}/\mathscr{D_0}$
+ -->
+<IMG
+ WIDTH="38" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1015.png"
+ ALT="$\mathscr{D}/\mathscr{D_0}$"> and <!-- MATH
+ $\rho_{\rm obs}$
+ -->
+<IMG
+ WIDTH="30" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1016.png"
+ ALT="$\rho_{\rm obs}$">, where <!-- MATH
+ $\rho_{\rm
+obs}$
+ -->
+<IMG
+ WIDTH="30" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1016.png"
+ ALT="$\rho_{\rm obs}$"> is the density of obstacles, might be interesting to see.
+</LI>
+<LI>Any of the suggested exercises involving Stillinger-Weber silicon 
+(Sec.&nbsp;<A HREF="node51.html#sec:swsi"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+</LI>
+</UL>
+</LI>
+<LI>Case Study 15 from F&amp;S:  The overlapping distribution method
+for computing <IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$\mu_{\rm ex}$">.
+</LI>
+<LI>Optimization:  Apply one or more of the techniques in Appendix F
+to one of the Lennard-Jones codes (mclj.c or mdlj.c), and compare the
+performance to the standard <IMG
+ WIDTH="25" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img237.png"
+ ALT="$N^2$"> algorithm.
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html899"
+  HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html897"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html891"
+  HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html900"
+  HREF="node69.html">Schedule of Presentations</A>
+<B> Up:</B> <A NAME="tex2html898"
+  HREF="node67.html">Course Projects</A>
+<B> Previous:</B> <A NAME="tex2html892"
+  HREF="node67.html">Course Projects</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

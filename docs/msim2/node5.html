@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Introductory Remarks</TITLE>
+<META NAME="description" CONTENT="Introductory Remarks">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node1.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html189"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html187"
+  HREF="node1.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html183"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html190"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Up:</B> <A NAME="tex2html188"
+  HREF="node1.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html184"
+  HREF="node4.html">Prerequisites</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00014000000000000000">
+Introductory Remarks</A>
+</H2>
+
+<P>
+In this course, we are concerned with systems of many particles.  Such
+a system models a chunk of matter, and the particles are its
+constituents.  <EM>Statistical mechanics</EM> allows us predict the
+macroscopic properties and behavior of matter when conceptualized as
+collections of many (<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img67.png"
+ ALT="$\sim$"></SPAN>&nbsp;10<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$^{23}$"></SPAN>) particles, and it is the
+central theme of this course.  As we will see, the formalism of
+statistical mechanics allows straightforward analytical treatment of
+only a few simple systems.  The primary motivation behind molecular
+simulation is to apply the framework of statistical mechanics in the
+prediction of macroscopic behavior for relatively &ldquo;complicated&rdquo;
+systems.  The two major branches of molecular simulation we will
+consider are (1) Monte Carlo (MC) and (2) molecular dynamics (MD).
+
+<P>
+Statistical mechanics is a broad subject, and we will restrict
+ourselves in this course to stat mech at the introductory level.  The
+lessons of elementary stat mech will be reinforced time and time again
+throughout the course as we explore aspects of molecular simulation
+techniques.  Stat mech is not normally taught to engineering students
+outside a general course on physical chemistry.  (Undergraduates in
+physics or chemistry might get a one or two course series on
+statistical mechanics.)
+
+<P>
+A second component of this course is programming.  Most engineering
+students take a programming course, so some exposure to computer programming
+is expected as a prerequisite.  It will be necessary to discuss
+certain simulation algorithms using &ldquo;pseudo-code&rdquo; examples, or even
+examples written in C or FORTRAN or Python.  The level of code presented in this
+course will generally be sufficiently basic such that novices can
+understand it line by line.  For example, see if you can predict what
+the following C program does:
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+int main () {
+  int i;
+  for (i=0;i&lt;100;i++) printf("Hello, I am number %i\n",i);
+}
+</PRE>
+
+<P>
+Maybe you'd like it better in Python:
+
+<P>
+<PRE>
+for i in range(100):
+    print('Hello, I am number',i)
+</PRE>
+
+<P>
+If it looks somewhat mysterious to you, don't worry.  Part of this
+course will be explaining how code works.  By the end of the course,
+you would be able to <EM>write</EM> the above program had I told you to write a program to output the numbers 0 - 99.  It must be emphasized at this point that I do not intend to turn
+you all into expert coders (though there are worse things to aim for).  This is a survey course from which I hope
+you gain an accurate picture of the field of molecular simulation from
+which you can begin your own exploration.  In order to achieve this
+goal, it is necessary to do some <EM>minor</EM> work with actual code.
+
+<P>
+A closely related aspect of this component is the practical matter of
+how one <EM>works</EM> with simulation code.  My preference, and
+therefore the manner in which I teach the course, is to use a
+command-line environment, as opposed to a graphical user environment.  It should be emphasized
+that the concepts and ideas that form the backbone of this course are
+not operating system-specific.  However, the <EM>implementation</EM> of
+those ideas and concepts, as I hope you will see, is straightforward
+once you know how to compile and run simple programs at the command-line.  Again, this will be at a basic level; this is not a
+programming course.  All of the production MD codes we consider later in the course are <EM>exclusively</EM> used in a command-line environment.  For writing and editing code, I recommend VSCode. 
+
+<P>
+Much of this course is based on the book <I>Understanding Molecular
+Simulation</I> by Daan Frenkel and Berend Smit,&nbsp;[<A
+ HREF="node82.html#Frenkel+Smit2002">1</A>]
+two chemical engineers from Amsterdam. There are several other books which I have used
+on occasion, the most useful of which was <EM>Computer Simulation of Liquids</EM> by Allen
+and Tildesly.&nbsp;[<A
+ HREF="node82.html#Allen+Tildesley1987">2</A>]. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html189"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html187"
+  HREF="node1.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html183"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html190"
+  HREF="node6.html">Statistical Mechanics: A Brief</A>
+<B> Up:</B> <A NAME="tex2html188"
+  HREF="node1.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html184"
+  HREF="node4.html">Prerequisites</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

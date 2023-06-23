@@ -1,0 +1,808 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Monte Carlo Simulations in the Isothermal-Isobaric (NPT) and Grand Canonical (VT) Ensembles</TITLE>
+<META NAME="description" CONTENT="Monte Carlo Simulations in the Isothermal-Isobaric (NPT) and Grand Canonical (VT) Ensembles">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node32.html">
+<LINK REL="previous" HREF="node30.html">
+<LINK REL="up" HREF="node30.html">
+<LINK REL="next" HREF="node32.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html457"
+  HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html455"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html449"
+  HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html458"
+  HREF="node32.html">Molecular Dynamics at Constant</A>
+<B> Up:</B> <A NAME="tex2html456"
+  HREF="node30.html">Ensembles</A>
+<B> Previous:</B> <A NAME="tex2html450"
+  HREF="node30.html">Ensembles</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00051000000000000000"></A>
+<A NAME="sec:ens:mc"></A>
+<BR>
+Monte Carlo Simulations in the Isothermal-Isobaric (NPT) and 
+Grand Canonical (<IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">VT) Ensembles
+</H2>
+
+<P>
+<B>Isothermal-Isobaric (NPT)</B>
+
+<P>
+In this section, we consider how to conduct Monte Carlo simulation in
+ensembles other than the canonical ensemble.  In deriving the
+partition function for the canonical ensemble
+(Eq.&nbsp;<A HREF="node6.html#eq:q_classical">42</A>), we imagined our sytem of constant <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">,
+<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">, and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> in thermal contact with a large reservoir.  This thermal
+contact allowed the system and reservoir to exchange energy such that
+the system remained at constant <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">, and what resulted was the
+Boltzmann factor.  In Section&nbsp;5.4.1, F&amp;S explain the case when we
+have the reservoir and the system both thermally and <EM>mechanically</EM> coupled.  The mechanical coupling allows the volume of
+the system to change such that the pressure in the system is the same
+as the reservoir, which is again considered as an inifinite ideal gas.
+In addition to thermostatting our system, the reservoir acts as a <EM>barostat</EM>.  
+
+<P>
+First, for convenience, we express the set of coordinates, <IMG
+ WIDTH="23" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img256.png"
+ ALT="${\bf r}^N$">, scaled by the box length, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$">, as <IMG
+ WIDTH="23" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img504.png"
+ ALT="${\bf s}^N$">.  The partition
+function in the NPT ensemble is then
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+Q\left(N,P,T\right) = \frac{\beta P}{\Lambda^{3N}N!}
+\int dV V^N \exp\left(-\beta PV\right)
+\int d{\bf s}^N \exp\left[-\beta\mathscr{U}\left({\bf s}^N;L\right)\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="484" HEIGHT="42" BORDER="0"
+ SRC="img505.png"
+ ALT="\begin{displaymath}
+Q\left(N,P,T\right) = \frac{\beta P}{\Lambda^{3N}N!}
+\int dV...
+...}^N \exp\left[-\beta\mathscr{U}\left({\bf s}^N;L\right)\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(164)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The free energy associated with this ensemble is the <EM>Gibbs</EM> free energy:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+G = -k_BT\ln Q\left(N,P,T\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="171" HEIGHT="28" BORDER="0"
+ SRC="img506.png"
+ ALT="\begin{displaymath}
+G = -k_BT\ln Q\left(N,P,T\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(165)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now, compared to the canonical ensemble, in the NPT ensemble, volume
+is an additional degree of freedom.  We need the probability
+distribution to include volume:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\mathscr{N}\left(V;{\bf s}^N\right) & \propto &V^N\exp\left(-\beta PV\right)\exp\left[-\beta\mathscr{U}\left({\bf s}^N;L\right)\right]\\
+& = & \exp\left\{-\beta\left[\mathscr{U}\left({\bf s}^N,V\right) + PV - N\beta^{-1}\ln V\right]\right\}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="73" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img507.png"
+ ALT="$\displaystyle \mathscr{N}\left(V;{\bf s}^N\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img508.png"
+ ALT="$\textstyle \propto$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="249" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img509.png"
+ ALT="$\displaystyle V^N\exp\left(-\beta PV\right)\exp\left[-\beta\mathscr{U}\left({\bf s}^N;L\right)\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(166)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="292" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img510.png"
+ ALT="$\displaystyle \exp\left\{-\beta\left[\mathscr{U}\left({\bf s}^N,V\right) + PV - N\beta^{-1}\ln V\right]\right\}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(167)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We can use this new Boltzmann factor in an acceptance rule for a Monte
+Carlo trial move involving a simple volume change from <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> to <IMG
+ WIDTH="62" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img511.png"
+ ALT="$V +
+\Delta V$">, where <IMG
+ WIDTH="30" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img512.png"
+ ALT="$\Delta V$"> is randomly chosen from <!-- MATH
+ $[-\Delta
+V_{max},\Delta V_{max}]$
+ -->
+<IMG
+ WIDTH="130" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img513.png"
+ ALT="$[-\Delta
+V_{max},\Delta V_{max}]$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mbox{acc}\left(o\rightarrow n\right) = \min\left(1,\exp\left\{
+-\beta\left[\mathscr{U}\left({\bf s}^N,V^\prime\right)-\mathscr{U}\left({\bf s}^N,V\right)+P\left(V-V^\prime\right)-N\beta^{-1}\ln\left(V^\prime/V\right)\right]\right\}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="626" HEIGHT="30" BORDER="0"
+ SRC="img514.png"
+ ALT="\begin{displaymath}
+\mbox{acc}\left(o\rightarrow n\right) = \min\left(1,\exp\lef...
+...t)-N\beta^{-1}\ln\left(V^\prime/V\right)\right]\right\}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(168)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+We can also consider trial move that changes the logarithm of the box
+size from <IMG
+ WIDTH="33" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img515.png"
+ ALT="$\ln V$"> to <!-- MATH
+ $\ln V + \Delta\left(\ln V\right)$
+ -->
+<IMG
+ WIDTH="109" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img516.png"
+ ALT="$\ln V + \Delta\left(\ln V\right)$">.  In this
+case, the integral of <IMG
+ WIDTH="29" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img166.png"
+ ALT="$V^N$"> over <IMG
+ WIDTH="25" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img517.png"
+ ALT="$dV$"> is re-expressed as an integral
+of <IMG
+ WIDTH="45" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img518.png"
+ ALT="$V^{N+1}$"> over <IMG
+ WIDTH="44" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img519.png"
+ ALT="$d\ln V$">, and the acceptance rule is the same as the
+one above except for a factor of <IMG
+ WIDTH="58" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img520.png"
+ ALT="$(N+1)$"> multiplying <IMG
+ WIDTH="31" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img521.png"
+ ALT="$\beta^{-1}$">,
+instead of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">.
+
+<P>
+The C-code <A NAME="tex2html30"
+  HREF="codes/mclj_npt.c"><EM>mclj_npt.c</EM></A>
+implements
+an NPT MC simulation of the Lennard-Jones liquid using both particle
+displacements and log-<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> displacements.  For each cycle, there is a
+<IMG
+ WIDTH="74" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img522.png"
+ ALT="$1/(N+1)$"> probability that a trial move is a volume displacement.  The
+trial move generates a random displacement, computes a new box length,
+rescales all particle positions, scales the cutoff radius, and
+recomputes the tail corrections and shift, if applicable.  If the
+Metropolis criterion is not met after a random number is selected,
+then all of these operations are undone.  Otherwise, the new box size
+with the newly scaled particle positions is kept.  The particle
+displacement algorithm is the same as in <EM>mclj.c</EM>.
+
+<P>
+As an exercise, you can use the code to regenerate Figure 5.3 in the
+text, which is again a slice through the phase diagram of the
+Lennard-Jones fluid at <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 2.0.  This temperature is above the
+critical tempeerature, so we do not anticipate a phase transition at
+the pressures investigated.  However, we saw that when we considered
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.9 using the NVT MC simulation, negative pressures were
+predicted, indicating that the system would have liked to phase
+separate but couldn't due to its fixed density and finite size.  That
+is, at the density specified, there might not be enough particles to
+``nucleate'' the denser of the two phases.  NPT simulations in
+principle offer a way around that by allowing the system density to
+fluctuate.  
+
+<P>
+I ran the code with <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108 particles for 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$">
+cycles.&nbsp;<A NAME="tex2html29"
+  HREF="footnode.html#foot5180"><SUP>1</SUP></A>  The log-volume maximum
+displacement was set at 0.25, and the maximum particle displacement
+varied from 0.3 for <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">, to 0.5 at the lowest value of <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">.  You can
+see from the figure below that the data at <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 2.0 is equally well
+reproduced here as it was using conventional NVT MC.  However, for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">
+= 0.9, we notice that the densities which arise are clearly indicate a
+high-density phase is prevalent.  As suggested in F&amp;S, this code
+also computes the pressure from the virial, and the measured pressure 
+and imposed pressures agreed, as you can see from the table.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="mc_npt1.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> vs. <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> for the Lennard-Jones fluid computed using
+an NPT Monte Carlo simulation, for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.9 and 2.0.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"></TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\left<P\right>$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img300.png"
+ ALT="$\left&lt;P\right&gt;$"></TD>
+</TR>
+<TR><TD ALIGN="CENTER">0.0100</TD>
+<TD ALIGN="CENTER">0.0115</TD>
+</TR>
+<TR><TD ALIGN="CENTER">0.100</TD>
+<TD ALIGN="CENTER">0.101</TD>
+</TR>
+<TR><TD ALIGN="CENTER">0.500</TD>
+<TD ALIGN="CENTER">0.500</TD>
+</TR>
+<TR><TD ALIGN="CENTER">0.750</TD>
+<TD ALIGN="CENTER">0.743</TD>
+</TR>
+<TR><TD ALIGN="CENTER">1.000</TD>
+<TD ALIGN="CENTER">0.992</TD>
+</TR>
+<TR><TD ALIGN="CENTER">2.000</TD>
+<TD ALIGN="CENTER">2.002</TD>
+</TR>
+<TR><TD ALIGN="CENTER">3.000</TD>
+<TD ALIGN="CENTER">2.996</TD>
+</TR>
+<TR><TD ALIGN="CENTER">4.000</TD>
+<TD ALIGN="CENTER">3.977</TD>
+</TR>
+</TABLE>
+Imposed and measured pressures from 10<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$^6$">-cycle NPT MC 
+simulations of the Lennard-Jones fluid with <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108 and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 2.0.
+
+<P>
+For temperatures near the critical temperature, we would expect the
+fluctuations in density to be maximum.  As an exercise, you can modify
+<EM>mclj_npt.c</EM> to compute the average fluctuations in <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$">.
+
+<P>
+<B>Grand Canonical (<IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">VT)</B>
+
+<P>
+So we see that <EM>volume</EM> exchanges with an ideal gas reservoir can
+be used to fix the pressure of a test system.  Similarly, <EM>particle</EM> exchanges with an ideal gas reservoir can be used to fix the
+<EM>chemical potential</EM> of a test system.  Chemical potential is defined as
+the change in free energy with particle number:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mu = \frac{\partial F}{\partial N}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="57" HEIGHT="39" BORDER="0"
+ SRC="img523.png"
+ ALT="\begin{displaymath}
+\mu = \frac{\partial F}{\partial N}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(169)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Thus, as reciprocal temperature, <IMG
+ WIDTH="14" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img524.png"
+ ALT="$\beta$">, is conjugate to entropy, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$S$">,
+and pressure, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">, is conjugate to volume, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">, chemical potential,
+<IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">, is conjugate to number of particles, <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">.  An ensemble in which
+<IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">, <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$">, and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> are fixed is referred to as the ``grand canonical''
+ensemble.
+
+<P>
+For an ideal gas, we know that the NVT partition function is given
+by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+Q^{i.g.}\left(N,V,T\right) = \frac{V^N}{\Lambda^{3N}N!}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="168" HEIGHT="42" BORDER="0"
+ SRC="img525.png"
+ ALT="\begin{displaymath}
+Q^{i.g.}\left(N,V,T\right) = \frac{V^N}{\Lambda^{3N}N!}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(170)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Because <!-- MATH
+ $F = -1/\beta \ln Q$
+ -->
+<IMG
+ WIDTH="107" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img526.png"
+ ALT="$F = -1/\beta \ln Q$">, and for an ideal gas, <!-- MATH
+ $N/V = \rho =
+\beta P$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img527.png"
+ ALT="$N/V = \rho =
+\beta P$">, it is straightforward to show that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mu^{i.g.} = k_BT\ln \Lambda^3\rho = \mu^0 - \ln\beta p
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="217" HEIGHT="27" BORDER="0"
+ SRC="img528.png"
+ ALT="\begin{displaymath}
+\mu^{i.g.} = k_BT\ln \Lambda^3\rho = \mu^0 - \ln\beta p
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(171)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This leads to the conventional definition of the <EM>excess chemical
+potential</EM>; that is, the difference in chemical potential of the
+material of interest and an ideal gas at the same density.
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mu^{ex} = \mu - \mu^{i.g.}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="101" HEIGHT="27" BORDER="0"
+ SRC="img529.png"
+ ALT="\begin{displaymath}
+\mu^{ex} = \mu - \mu^{i.g.}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(172)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Sec. 5.6 in F&amp;S is devoted to explaining the implementation of a
+grand canonical MC simulation.  The basic idea is that we allow our
+system to interact with an ideal gas system at a fixed <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $"> (which is
+related to a fixed <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$">, as discussed in Appendix G) by exchanging
+particles.  The appropriate probability density is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{N}_{\mu VT}\left({\bf s}^N; N\right) \propto
+\frac{\exp\left(\beta\mu N\right)V^N}{\Lambda^{3N}N!}
+\exp\left[-\beta\mathscr{U}\left({\bf s}^N\right)\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="334" HEIGHT="42" BORDER="0"
+ SRC="img530.png"
+ ALT="\begin{displaymath}
+\mathscr{N}_{\mu VT}\left({\bf s}^N; N\right) \propto
+\frac{...
+...N}N!}
+\exp\left[-\beta\mathscr{U}\left({\bf s}^N\right)\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(173)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+To implement a random walk with this probability distribution, in
+addition to the normal particle displacement moves, we also have
+insertion and removal of particles with appropriate acceptance ratios:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\rm acc}\left(N \rightarrow N+1\right) & = & 
+{\rm min}\left[1,\frac{V}{\Lambda^3\left(N+1\right)}\exp\left\{
+\beta\left[\mu-\mathscr{U}\left(N+1\right) + \mathscr{U}\left(N\right)
+\right]\right\}\right]\\
+{\rm acc}\left(N+1 \rightarrow N\right) & = & 
+{\rm min}\left[1,\frac{\Lambda^3N}{V}\exp\left\{
+\beta\left[\mu-\mathscr{U}\left(N-1\right) - \mathscr{U}\left(N\right)
+\right]\right\}\right]
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="122" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img531.png"
+ ALT="$\displaystyle {\rm acc}\left(N \rightarrow N+1\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="368" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img532.png"
+ ALT="$\displaystyle {\rm min}\left[1,\frac{V}{\Lambda^3\left(N+1\right)}\exp\left\{
+\...
+...-\mathscr{U}\left(N+1\right) + \mathscr{U}\left(N\right)
+\right]\right\}\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(174)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="122" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img533.png"
+ ALT="$\displaystyle {\rm acc}\left(N+1 \rightarrow N\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="326" HEIGHT="57" ALIGN="MIDDLE" BORDER="0"
+ SRC="img534.png"
+ ALT="$\displaystyle {\rm min}\left[1,\frac{\Lambda^3N}{V}\exp\left\{
+\beta\left[\mu-\mathscr{U}\left(N-1\right) - \mathscr{U}\left(N\right)
+\right]\right\}\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(175)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+So, we can specify <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $"> of the ideal gas bath, specify <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">,
+and conduct a grand canonical MC simulation, and measure pressure,
+density, and <EM>excess</EM> chemical potential in our system of
+interest.  The code for Case Study 9 in F&amp;S is available at the
+book's
+website:&nbsp;<A NAME="tex2html31"
+  HREF="http://molsim.chem.uva.nl/frenkel_smit/">http://molsim.chem.uva.nl/frenkel_smit/</A>.
+As an exercise, and to have an opportunity to see how someone else
+writes a simulation code, I recommend that you download this program
+and try to compile and run it.  You will see three directories: Run,
+Source, and Block; Source contains the FORTRAN source code, and Run
+contains input files and a run script.  Block contains the code for
+computing block averages; my version of this code is <EM>flyvbjerg.c</EM>.  The file you download is <TT>CaseStudy_9.tar.gz</TT>,
+which is a gzipped tar archive (sometimes referred to as a
+``tarball'').  You can unpack it under Cygwin using
+<PRE>
+cfa@abrams01:/home/cfa&gt; tar zvxf CaseStudy_9.tar.gz
+</PRE>
+Then, to compile, change directory into <TT>CaseStudy_9/Source</TT>,
+and use the <TT>make</TT> command:
+<PRE>
+cfa@abrams01:/home/cfa&gt; cd CaseStudy_9/Source
+cfa@abrams01:/home/cfa/CaseStudy_9/Source&gt; make clean
+cfa@abrams01:/home/cfa/CaseStudy_9/Source&gt; make
+</PRE>
+The <TT>make clean</TT> command removes the object files (those that end
+with o), which are presumably included because F&amp;S assume you are
+going to run on a Linux PC.  The second <TT>make</TT> compiles the
+program.  You should repeat this procedure in the <TT>Block</TT>
+directory to build the block average program, which is used in the
+<TT>run</TT> script.  Then, you can change directory to the <TT>Run</TT>
+directory and begin simulating.
+
+<P>
+We can run this code by specifying the pressure of the ideal gas bath,
+the temperature, and the initial density and number of particles,
+which sets the volume.  The run script, <TT>run</TT>, has a loop
+structure in it (a ``foreach'' loop) which in principle allows the
+user to run multiple bath pressures.  The output is appended to a file
+called <TT>out</TT>, which you can process (using <TT>grep</TT>, for
+example) to extract results.  Simply add more ideal gas pressures
+in the parentheses:
+<PRE>
+foreach pid  (0.016 0.032 0.064 )
+</PRE>
+
+<P>
+<B>There is, however, a little bug
+in the run script.  </B>  The copy command (the first command in the
+script) should be inside the loop, because the last command in
+the body of the loop removes all files whose name begin with ``fort.''
+Original:
+<PRE>
+cp lj.model        fort.25
+foreach pid  (0.016 )
+[remainder]
+</PRE>
+Correct:
+<PRE>
+foreach pid  (0.016 )
+  cp lj.model        fort.25
+[remainder]
+</PRE>
+
+<P>
+I ran this code for ideal gas bath pressures of 0.016, 0.032, 0.064,
+0.128, 0.25, 0.50, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0, at a
+temperature <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 2.0 for 20,000 cycles and for <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108 particles
+with an initial density of 0.6 (<IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> = 180.0).  The results are below:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="muvt.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> and <IMG
+ WIDTH="28" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$\mu ^{ex}$"> vs. <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> for the Lennard-Jones 
+fluid computed using
+an grand canonical <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">VT Monte Carlo simulation, for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 2.0, <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">
+= 108, and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img17.png"
+ ALT="$V$"> = 180.0.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html457"
+  HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html455"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html449"
+  HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html458"
+  HREF="node32.html">Molecular Dynamics at Constant</A>
+<B> Up:</B> <A NAME="tex2html456"
+  HREF="node30.html">Ensembles</A>
+<B> Previous:</B> <A NAME="tex2html450"
+  HREF="node30.html">Ensembles</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

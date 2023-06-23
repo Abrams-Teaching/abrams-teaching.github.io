@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Trial Moves</TITLE>
+<META NAME="description" CONTENT="Trial Moves">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node29.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node31.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html475"
+  HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html473"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html469"
+  HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html476"
+  HREF="node31.html">Case Study 2: MC</A>
+<B> Up:</B> <A NAME="tex2html474"
+  HREF="node27.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html470"
+  HREF="node29.html">Analytical Potentials</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00033300000000000000"></A>
+<A NAME="sec:trialmoves"></A>
+<BR>
+Trial Moves
+</H3>
+
+<P>
+<EM>Particle Displacement.</EM>  The most common trial move in
+continuous-space MC is a particle displacement.  First, a small
+number <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN>, representing a maximum displacement, is set.  A
+trial move consists of
+
+<OL>
+<LI>Randomly select a particle, <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>.
+</LI>
+<LI>Displace x-position coordinate of particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> by a 
+random amount, <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img300.png"
+ ALT="$ \delta x$"></SPAN>, which is given by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\delta x = \Delta R \xi_x
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="82" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img301.png"
+ ALT="$\displaystyle \delta x = \Delta R \xi_x$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">90</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img302.png"
+ ALT="$ \xi_x$"></SPAN> is a uniform random variate on the interval [-0.5:0.5].
+</LI>
+<LI>Repeat for the <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img303.png"
+ ALT="$ y$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ z$"></SPAN> coordinates, if applicable.
+</LI>
+</OL>
+
+<P>
+This move guarantees detailed balance, provided that the random
+particle selection is uniform; for any given move, selection of all
+possible particles is equally likely.  This means that probability of
+suggesting a move that displaces a particle, going from a state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> to
+a new state <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN>, has the same probability of selecting the same
+particle while in state <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> and giving it a displacement that will
+return the configuration to state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN>.  (Do you think such sequential
+moves ever actually happen?)
+
+<P>
+For a system of simple particles, random displacements are the only
+necessary trial moves; thus, <!-- MATH
+ $\alpha_{nm}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img304.png"
+ ALT="$ \alpha_{nm}$"></SPAN> is always unity.  For more
+complicated systems, there are zoos of trial moves all over the
+literature.  We will consider some more complicated
+systems and trial moves later in the course; one that we consider next is
+<EM>rigid rotation</EM>.
+
+<P>
+The question at this point is, how does one choose an appropriate
+value for <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN>?  If <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN> is too small, the system will not
+explore phase space given a reasonable amount of computational effort.
+If it is too large, displacements will rarely result in new
+configurations which will be accepted in a Metropolis MC scheme.  So
+it takes a bit of trial and error to find a good value for <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN>,
+and the rule of thumb is to set <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN> such that the average
+probability of accepting a new configuration <EM>during a run</EM> is
+about 30%.  This is termed &ldquo;tuning <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN> to achieve a 30%
+acceptance ratio.&rdquo;  We will go through the exercise of determining
+such an appropriate value for <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \Delta R$"></SPAN> for a simple continuous-space
+system; namely, 2D hard disks confined to a circle.
+
+<P>
+<EM>Rigid rotation.</EM> A second common type of trial move is used in
+systems of more structured molecules than just simple, single-center
+spheres.  Consider a diatomic with a rigid bond length <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img305.png"
+ ALT="$ r_0$"></SPAN>.
+Clearly, attempting to move one of the two members of the diatomic by
+a random displacement is likely to result in a new bond length with
+may be significantly different from <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img305.png"
+ ALT="$ r_0$"></SPAN>.  So, for a system of
+diatomics, a reasonable <EM>set</EM> of trial moves would include
+
+<P>
+
+<OL>
+<LI>Small displacement of molecule center of mass; and
+</LI>
+<LI>Small rotation around molecule center of mass.
+</LI>
+</OL>
+
+<P>
+With more than one kind of move, an attempt to generate a new state
+must be preceded by a random selection of the trial move.  We can
+weight each kind of move and then use a random number to decide which
+move to attempt.  For example, let's say that we choose that 80% of
+all trial moves be displacements, and the balance rotations (we will
+see later whether or not this is a good choice).  Prior to an
+attempted move, we select a uniform random variate, <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img306.png"
+ ALT="$ \xi$"></SPAN>, on the
+interval <SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img256.png"
+ ALT="$ [0,1]$"></SPAN>.  If <SPAN CLASS="MATH"><IMG
+ WIDTH="53" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img307.png"
+ ALT="$ \xi &lt; 0.8$"></SPAN>, which it will be 80% of the time,
+we execute a displacement of a randomly chosen molecule; otherwise, we
+execute a rotation of a randomly chosen molecule.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html475"
+  HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html473"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html469"
+  HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html476"
+  HREF="node31.html">Case Study 2: MC</A>
+<B> Up:</B> <A NAME="tex2html474"
+  HREF="node27.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html470"
+  HREF="node29.html">Analytical Potentials</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

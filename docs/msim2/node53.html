@@ -1,0 +1,666 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Stochastic NVT Thermostats: Andersen, Langevin, and
+Dissipative Particle Dynamics</TITLE>
+<META NAME="description" CONTENT="Stochastic NVT Thermostats: Andersen, Langevin, and
+Dissipative Particle Dynamics">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node54.html">
+<LINK REL="previous" HREF="node52.html">
+<LINK REL="up" HREF="node50.html">
+<LINK REL="next" HREF="node54.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html726"
+  HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html724"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html718"
+  HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html727"
+  HREF="node54.html">The Nos&#233;-Hoover Chain</A>
+<B> Up:</B> <A NAME="tex2html725"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html719"
+  HREF="node52.html">Velocity Rescaling: Isokinetics and</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00052300000000000000">
+Stochastic NVT Thermostats:  Andersen, Langevin, and
+Dissipative Particle Dynamics</A>
+</H3>
+
+<P>
+<B>The Andersen Scheme</B>.
+Perhaps the simplest thermostat which does correctly sample
+the NVT ensemble is due to
+Andersen&nbsp;[<A
+ HREF="node82.html#Andersen1980MolecularTemperature">10</A>].  Here, at each step, some prescribed
+number of particles is selected, and their momenta (actually, their
+velocities) are drawn from a Gaussian distribution at the prescribed
+temperature (otherwise known as the Maxwell-Boltzmann distribution):
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:ens:gaus"></A><!-- MATH
+ \begin{equation}
+\mathscr{P}(p) = \left(\frac{\beta}{2\pi m}\right)^{3/2} \exp\left[-\beta p^2/\left(2m\right)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="267" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img580.png"
+ ALT="$\displaystyle \mathscr{P}(p) = \left(\frac{\beta}{2\pi m}\right)^{3/2} \exp\left[-\beta p^2/\left(2m\right)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">204</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This is intended to mimic collisions with bath particles at a
+specified <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>.  The strength of the coupling to the heat bath is
+specified by a collision frequency, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>.  For each particle, a random
+variate is selected between 0 and 1.  If this variate is less than
+<!-- MATH
+ $\nu\Delta t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img581.png"
+ ALT="$ \nu\Delta t$"></SPAN>, then that particle's momenta are reset.
+
+<P>
+The code <code>mdlj_and.c</code> implements the
+Andersen thermostat for the
+Lennard-Jones fluid. The two relevant parameters are <code>and_T</code>, the setpoint temperature, and <code>and_nu</code>, the rise time. Fig.&nbsp;<A HREF="#fig:andersen">24</A> shows traces of temperature vs time for three MD simulations of the Lennard-Jones fluid with 512 particles at a density of 0.50, with temperature controlled using the Andersen thermostat with various values of collision frequency <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>.  Larger <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN> results in longer approach times to the setpoint temperature, but it is also clear that for these values of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>, the Andersen thermostat acts much more quickly than the Berendsen thermostat.  Note also that the relative fluctuations of the temperature reported indicate that canonical statistics are in fact being held.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:andersen"></A><A NAME="5205"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 24:</STRONG>
+Temperature vs time (output every time step) for three Berendsen-thermostatted MD simulations of the LJ fluid at density 0.5 with 512 particles.  <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img23.png"
+ ALT="$ \tau $"></SPAN> indicates the rise time; the setpoint temperature is 3.0, and all simulations were initialized with velocities consistent with a temperature of 2.0.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="536" HEIGHT="376" ALIGN="BOTTOM" BORDER="0"
+ SRC="./andersenT.png"
+ ALT="Image andersenT"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Although temperature fluctuations match the canonical ensemble, the Andersen
+thermostat destroys momentum transport because of the random reassignment of
+velocities; hence, there is no continuity of momentum in an Andersen
+LJ fluid, and therefore no proper <!-- MATH
+ $\mathscr{D}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img492.png"
+ ALT="$ \mathscr{D}$"></SPAN> or viscosity.  Fig. 6.3 in Frenkel &amp; Smit clearly shows that <!-- MATH
+ $\mathscr{D}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img492.png"
+ ALT="$ \mathscr{D}$"></SPAN>, if measured from an Andersen MD run, is incorrect.
+
+<P>
+<B>The Langevin thermostat</B>.  
+In the &ldquo;Langevin&rdquo; thermostat, at
+each time step all particles receive a random force and have their
+velocities lowered using a constant friction.&nbsp;[<A
+ HREF="node82.html#Grest1987StructureSimulation">11</A>] The
+average magnitude of the random forces and the friction are related in
+a particular way, which guarantees that the
+&ldquo;fluctuation-dissipation&rdquo; theorem is obeyed, thereby guaranteeing
+NVT statistics. 
+
+<P>
+In this formalism, the particle-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> equation of motion is modified:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="ens:md:lang"></A><!-- MATH
+ \begin{equation}
+m\ddot{\bf r}_i = -\nabla_i U - m\Gamma\dot{\bf r}_i + {\bf W}_i\left(t\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="216" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img582.png"
+ ALT="$\displaystyle m\ddot{\bf r}_i = -\nabla_i U - m\Gamma\dot{\bf r}_i + {\bf W}_i\left(t\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">205</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN> is a friction coefficient with units of <SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img583.png"
+ ALT="$ \tau^{-1}$"></SPAN>,
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img584.png"
+ ALT="$ {\bf W}_i$"></SPAN> is a random force that is uncorrelated in time and
+across particles, with a mean given by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left<{\bf W}_i\left(t\right),{\bf W}_j\left(t^\prime\right)\right>
+= \delta_{ij}\delta\left(t-t^\prime\right)6k_BmT\Gamma
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="285" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img585.png"
+ ALT="$\displaystyle \left&lt;{\bf W}_i\left(t\right),{\bf W}_j\left(t^\prime\right)\right&gt; = \delta_{ij}\delta\left(t-t^\prime\right)6k_BmT\Gamma$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">206</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The code <code>mdlj_lan.c</code> implements
+the Langevin thermostat.  The two relevant parameters are <code>lanT</code>, the setpoint temperature, and <code>lan_friction</code>, the friction <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN>.  The two major elements are a force initialization
+at each time step that adds in the random forces, <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img586.png"
+ ALT="$ {\bf W}$"></SPAN>, and
+a slight modification to the update equations in the integrator to
+include the effect of <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN>.  Note that the initialization of
+forces to zero in the force routine has been removed.
+
+<P>
+Fig.&nbsp;<A HREF="#fig:langevin">25</A> shows temperature vs time for several MD simulations of a 512-particle LJ fluid at a density of 0.5; the upper plot shows data from runs with <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN>=10<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img587.png"
+ ALT="$ ^{-3}$"></SPAN>, and the lower plot <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN>=10<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img588.png"
+ ALT="$ ^{-2}$"></SPAN>, each showing four values of <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN>.  Relative temperature fluctuations indicate weak agreement with canonical statistics that improves for the lower values of <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:langevin"></A><A NAME="5232"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 25:</STRONG>
+Temperature vs time (output every time step) for eight Langevin-thermostatted MD simulations of the LJ fluid at density 0.5 with 512 particles.  <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN> indicates the friction; the setpoint temperature is 3.0, and all simulations were initialized with velocities consistent with a temperature of 2.0.  Upper plot shows <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> of 0.001, lower 0.01.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="545" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./langevinT2.png"
+ ALT="Image langevinT2">
+    <IMG
+  WIDTH="545" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./langevinT1.png"
+ ALT="Image langevinT1"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+One advantage of the Langevin thermostat (and to a limited extent, the
+Andersen thermostat and other stochastic-based thermostats) is that we
+can get away with a larger time step than in NVE simulations.  At a
+density of <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.8442 and a mean temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 1.0, an NVE
+simulation is unstable for time-steps above about <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> = 0.004.
+We can, however, run a Langevin dynamics simulation with a friction
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN> = 1.0 stably with a time-step as large as <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> = 0.01
+or even higher.  This has proven invaluable in simulations of more
+complicated systems that simple liquids, namely linear polymers, which
+have very long relaxation times.  MD with the Langevin thermostat 
+is the method of choice for equilibrating samples of liquids of
+long bead-spring polymer chains.
+
+<P>
+Of course, the drawback of most stochastic thermostats (one exception
+is discussed next) is that momentum transfer is destroyed.  So again,
+it is unadvisable to use Langeving or Andersen thermostats for runs in
+which you wish to compute diffusion coefficients.  The recommendation stands: use NVE to compute properties, 
+and use thermostats for equilibration only.
+
+<P>
+<B>The Dissipative Particle Dynamics thermostat</B>.  The DPD
+thermostat&nbsp;[<A
+ HREF="node82.html#Nikunen2003HowSimulations">12</A>,<A
+ HREF="node82.html#Soddemann2003DissipativeSimulations">13</A>] adds pairwise random and
+dissipative forces to all particles, and has been shown to preserve
+momentum transport. Hence, it is the only stochastic thermostat so far
+that should even be considered for use if one wishes to compute
+transport properties.
+
+<P>
+The DPD thermostat is implemented by slight modification of the
+force routine to add in the pairwise random and dissipative forces.
+For the <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img589.png"
+ ALT="$ ij$"></SPAN> pair, the dissipative force is defined as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}_{ij}^D = -\gamma\omega^D\left(r_{ij}\right)\left({\bf v}_{ij}\cdot\hat{\bf r}_{ij}\right)\hat{\bf r}_{ij}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="208" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img590.png"
+ ALT="$\displaystyle {\bf f}_{ij}^D = -\gamma\omega^D\left(r_{ij}\right)\left({\bf v}_{ij}\cdot\hat{\bf r}_{ij}\right)\hat{\bf r}_{ij}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">207</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img591.png"
+ ALT="$ \gamma$"></SPAN> is a friction coefficient, <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img592.png"
+ ALT="$ \omega$"></SPAN> is a cut-off
+function for the force as a function of the scalar distance between
+<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> which simply limits the interaction range of the
+dissipative (and random) forces, <!-- MATH
+ ${\bf v}_{ij} = {\bf v}_i - {\bf
+v}_j$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="97" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img593.png"
+ ALT="$ {\bf v}_{ij} = {\bf v}_i - {\bf
+v}_j$"></SPAN> is the relative velocity of <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>, and <!-- MATH
+ $\hat{\bf r}_{ij} =
+{\bf r}_{ij}/r_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="89" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img594.png"
+ ALT="$ \hat{\bf r}_{ij} =
+{\bf r}_{ij}/r_{ij}$"></SPAN> is the unit vector pointing from <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>.  The
+random force is defined as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}_{ij}^R = \sigma\omega^R\left(r_{ij}\right)\zeta_{ij}\hat{\bf r}_{ij}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="146" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img595.png"
+ ALT="$\displaystyle {\bf f}_{ij}^R = \sigma\omega^R\left(r_{ij}\right)\zeta_{ij}\hat{\bf r}_{ij}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">208</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> is the strength of the random force, <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img596.png"
+ ALT="$ \omega^R$"></SPAN> is a
+cut-off, and <!-- MATH
+ $\zeta_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img597.png"
+ ALT="$ \zeta_{ij}$"></SPAN> is a Gaussian random number with zero mean
+and unit variance, and <!-- MATH
+ $\zeta_{ij} = \zeta_{ji}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img598.png"
+ ALT="$ \zeta_{ij} = \zeta_{ji}$"></SPAN>.
+
+<P>
+The update of velocity uses these new forces:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:dpd_update"></A><!-- MATH
+ \begin{equation}
+{\bf v}_i\left(t + \Delta t\right) = {\bf v}_i\left(t\right)
+- \frac{\Delta t}{m}\nabla_iU + \frac{\Delta t}{m}{\bf f}_i^D + \frac{\sqrt{\Delta t}}{m}{\bf f}_i^R
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="343" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img599.png"
+ ALT="$\displaystyle {\bf v}_i\left(t + \Delta t\right) = {\bf v}_i\left(t\right) - \f...
+...nabla_iU + \frac{\Delta t}{m}{\bf f}_i^D + \frac{\sqrt{\Delta t}}{m}{\bf f}_i^R$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">209</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf f}_i^D & = & \sum_{j\ne i} {\bf f}_{ij}^D \\
+{\bf f}_i^R & = & \sum_{j\ne i} {\bf f}_{ij}^R
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="23" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img600.png"
+ ALT="$\displaystyle {\bf f}_i^D$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="48" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img601.png"
+ ALT="$\displaystyle \sum_{j\ne i} {\bf f}_{ij}^D$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">210</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="21" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\displaystyle {\bf f}_i^R$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="47" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img603.png"
+ ALT="$\displaystyle \sum_{j\ne i} {\bf f}_{ij}^R$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">211</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The parameters <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img591.png"
+ ALT="$ \gamma$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> are linked by a fluctuation-dissipation theorem:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma^2 = 2\gamma k_B T
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img604.png"
+ ALT="$\displaystyle \sigma^2 = 2\gamma k_B T$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">212</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+So, in practice, one must specify either <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img591.png"
+ ALT="$ \gamma$"></SPAN> <EM>or</EM> <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>, and then
+a setpoint temperature, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>, in order to use the DPD thermostat.
+
+<P>
+The cutoff functions are also related:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\omega^D\left(r_{ij}\right) = \left[\omega^R\left(r_{ij}\right)\right]^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="155" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img605.png"
+ ALT="$\displaystyle \omega^D\left(r_{ij}\right) = \left[\omega^R\left(r_{ij}\right)\right]^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">213</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This is the only real constraint on the cutoffs; we are otherwise allowed
+to use any cutoff we like.  The simplest uses the cutoff radius of the
+pair potential, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img350.png"
+ ALT="$ r_c$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\omega\left(r\right) = \left\{\begin{tabular}{ll}
+	1 & \mbox{$r < r_c$}\\
+	0 & \mbox{$r > r_c$}
+	\end{tabular}\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="161" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img606.png"
+ ALT="$\displaystyle \omega\left(r\right) = \left\{\begin{tabular}{ll} 1 &amp; \mbox{$r &lt; r_c$} 0 &amp; \mbox{$r &gt; r_c$} \end{tabular}\right.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">214</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that, with this choice,
+<!-- MATH
+ $\left[\omega^R\left(r_{ij}\right)\right]^2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="78" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img607.png"
+ ALT="$ \left[\omega^R\left(r_{ij}\right)\right]^2$"></SPAN> =
+<!-- MATH
+ $\omega^R\left(r_{ij}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="58" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img608.png"
+ ALT="$ \omega^R\left(r_{ij}\right)$"></SPAN> = <!-- MATH
+ $\omega^D\left(r_{ij}\right) =
+\omega$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="91" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img609.png"
+ ALT="$ \omega^D\left(r_{ij}\right) =
+\omega$"></SPAN>.
+
+<P>
+The code <code>mdlj_dpd.c</code> implements the DPD thermostat
+in an MD simulation of the Lennard-Jones liquid.  The major changes (compared to
+mdlj.c) are to the force routine, which now requires several more arguments, including
+particle velocities, and parameters for the thermostat.  Inside the pair loop, the
+force on each particle is updated by the conservative, dissipative, and random pairwise
+force components.  The random force is divided by <!-- MATH
+ $\sqrt{\Delta t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img610.png"
+ ALT="$ \sqrt{\Delta t}$"></SPAN> so that
+the velocity Verlet algorithm need not be altered to implement Eq.&nbsp;<A HREF="#eq:dpd_update">209</A>.
+
+<P>
+The behavior of the DPD thermostat can be assessed in a similar
+fashion as was the Berendsen thermostat above.
+Here I've run several MD simulations of the LJ fluid at a density of 0.84 with 512 particles for 10,000 steps, with various values of <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN>.  Fig.&nbsp;<A HREF="#fig:dpd">26</A> shows the temperature vs time for these various runs.  We see that increased friction leads to faster approach to the setpoint temperature, and that temperature fluctuations seem to conform to canonical statistics pretty well.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:dpd"></A><A NAME="5314"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 26:</STRONG>
+Temperature vs time (output every time step) for eight DPD-thermostatted MD simulations of the LJ fluid at density 0.84 with 512 particles.  <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \Gamma$"></SPAN> indicates the friction; the setpoint temperature is 3.0, and all simulations were initialized with velocities consistent with a temperature of 2.0.  Upper plot shows <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> of 0.001, lower 0.01.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="536" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./dpdT1.png"
+ ALT="Image dpdT1">
+    <IMG
+  WIDTH="545" HEIGHT="374" ALIGN="BOTTOM" BORDER="0"
+ SRC="./dpdT2.png"
+ ALT="Image dpdT2"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html726"
+  HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html724"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html718"
+  HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html727"
+  HREF="node54.html">The Nos&#233;-Hoover Chain</A>
+<B> Up:</B> <A NAME="tex2html725"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html719"
+  HREF="node52.html">Velocity Rescaling: Isokinetics and</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Case Study 4: Equation of State of the Lennard-Jones Fluid</TITLE>
+<META NAME="description" CONTENT="Case Study 4: Equation of State of the Lennard-Jones Fluid">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node32.html">
+<LINK REL="up" HREF="node11.html">
+<LINK REL="next" HREF="node34.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html503"
+  HREF="node34.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html501"
+  HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html497"
+  HREF="node32.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html504"
+  HREF="node34.html">Molecular Dynamics Simulation</A>
+<B> Up:</B> <A NAME="tex2html502"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html498"
+  HREF="node32.html">Case Study 3: Hard-Disk</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00036000000000000000"></A>
+<A NAME="sec:cs4"></A>
+<BR>
+Case Study 4:  
+Equation of State of the Lennard-Jones Fluid
+</H2>
+
+<P>
+The final case study we will consider in this unit on Monte Carlo
+simulation is the prototypical system for continuous-space, 3D
+liquids: The Lennard-Jones fluid.  (This is detailed in Sec.&nbsp;3.4,
+&ldquo;Case Study 1&rdquo; in Frenkel &amp; Smit&nbsp;[<A
+ HREF="node82.html#Frenkel+Smit2002">1</A>].)  The
+primary objective of the MC code is to predict the <EM>pressure</EM> of a
+sample of Lennard-Jonesium at a given <EM>density</EM> and <EM>temperature</EM>; that is, we can use MC to map out (in principle) the
+<EM>phase diagram</EM> of a material.  We will use this case study to
+introduce and discuss another important element of a large number of
+molecular simulations: <EM>periodic boundary conditions.</EM>
+
+<P>
+We would like to simulate bulk fluid.  The apparently simplest way to
+approximate bulk behavior in a finite number of particles is to employ
+periodic boundaries.  That is, we imagine the box of length <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN> is
+embedded in an infinite space tiled with replicas of the central box.
+If we focus on the central box, and watch as one particle is displaced
+&ldquo;out&rdquo; of the box, it will reappear in the box at the opposite face.
+Moreover, particles interact with &ldquo;images&rdquo; of other particles in all
+replica boxes.  Periodic boundaries thus allow us to mimic the
+infinite extent of bulk fluid. 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:pbc"></A><A NAME="1760"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 11:</STRONG>
+A schematic representation of periodic boundary conditions in two
+dimensions.  The black particle leaves the central box by leaving a
+through right-hand boundary, and consequently re-enters through the
+left-hand boundary.  The two white particles interact through the
+boundary.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="275" HEIGHT="269" ALIGN="BOTTOM" BORDER="0"
+ SRC="img344.png"
+ ALT="\includegraphics[width=0.5\textwidth]{eps/pbc.eps}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Periodic boundaries require the use of the <EM>minimum image convention</EM> (MIC) when computing inter-particle contributions to the total energy.  Below is a modified <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img298.png"
+ ALT="$ N^2$"></SPAN> loop for a 3-D system of point particles obeying the Lennard-Jones pair potential with periodic boundaries.  The function <code>e_i()</code> computes the sum of all pair interactions between a
+stipulated particle <code>i</code> and all particles from <code>i0</code> to <code>N-1</code>.  It is called from <code>total_e()</code> such that a sum of pairwise energies for all unique pairs is computed.
+
+<P>
+<PRE>
+double e_i ( int i, double * rx, double * ry, double * rz, int N, 
+             double L, double rc2, int tailcorr, double ecor, 
+		     int shift, double ecut, double * vir, int i0 ) {
+  int j;
+  double dx, dy, dz, r2, r6i;
+  double e = 0.0, hL=L/2.0;
+  *vir=0.0;
+  for (j=i0;j&lt;N;j++) {
+    if (i!=j) {
+      dx = rx[i]-rx[j];
+      dy = ry[i]-ry[j];
+      dz = rz[i]-rz[j];
+      if (dx&gt;hL)       dx-=L;
+      else if (dx&lt;-hL) dx+=L;
+      if (dy&gt;hL)       dy-=L;
+      else if (dy&lt;-hL) dy+=L;
+      if (dz&gt;hL)       dz-=L;
+      else if (dz&lt;-hL) dz+=L;
+      r2 = dx*dx + dy*dy + dz*dz;
+      if (r2&lt;rc2) {
+        r6i   = 1.0/(r2*r2*r2);
+        e    += 4*(r6i*r6i - r6i) - (shift?ecut:0.0);
+        *vir += 48*(r6i*r6i-0.5*r6i);
+      }
+    }
+  }
+  return e+(tailcorr?ecor:0.0);
+}
+
+double total_e ( double * rx, double * ry, double * rz, 
+         int N, double L,
+		 double rc2, int tailcorr, double ecor, 
+		 int shift, double ecut, double * vir ) {
+  int i;
+  double tvir;
+  double e = 0.0;
+  *vir=0.0;
+  for (i=0;i&lt;N-1;i++) {
+    e += e_i(i,rx,ry,rz,N,L,rc2,
+             tailcorr,ecor,shift,ecut,&amp;tvir,i+1);
+    *vir += tvir;
+  }
+  return e;
+}
+</PRE>
+
+<P>
+The function <code>e_i()</code> is also useful when determining whether or not to accept a trial displacement move, since the change in energy <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN> associated with moving particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> can be found by calling <code>e_i()</code> for particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> before and after the move; the latter energy minus the former is <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN>, since no other particles are displaced.  This is much faster than just doing a full-blown <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img298.png"
+ ALT="$ N^2$"></SPAN> calculation to evaluate each trial move, but it forces you to do careful accounting to keep the total energy up-to-date.  If the move is accepted the total energy must be incremented by <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \Delta\mathscr{U}$"></SPAN>; if the virial is also being tallied, the virial must also be similarly incremented by the change in the virial upon particle displacement.
+
+<P>
+Note that each <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> displacement component is subject to the MIC; if <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img345.png"
+ ALT="$ \Delta x$"></SPAN> is greater than <SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ L/2$"></SPAN>, we subtract <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN> from it; if it is less than <SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img347.png"
+ ALT="$ -L/2$"></SPAN>, we add <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN> to it;  same for <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img348.png"
+ ALT="$ \Delta y$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img349.png"
+ ALT="$ \Delta z$"></SPAN>. Many caveats come with using periodic boundaries.  (A thorough
+discussion appears in Sec.&nbsp;3.2.2 of F&amp;S.)  The first thing to realize is that the total potential per particle (as a sum of pair
+potentials) in principle diverges in an infinite periodic system.
+This can be circumvented by introducing a <EM>finite interaction
+range</EM> to the pair potential.  We usually work with systems large
+enough such that the <EM>cutoff</EM> of the pair potential, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img350.png"
+ ALT="$ r_c$"></SPAN>, is
+less than one-half the box-length, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN>, in a cubic box.  This means
+that the &ldquo;image&rdquo; interactions involve only immediately neighboring
+replicas.
+
+<P>
+Truncation of a pair potential is an important idea to understand.  The major
+point is that the cutoff must be spherically symmetric; that is, we
+can't simply cut off interactions beyond a box length in each
+direction, because this results in a directional bias in the
+interaction range of the potential.  So, a hard cutoff radius <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img350.png"
+ ALT="$ r_c$"></SPAN>
+is required, and it should be less than half the box length.  The secondary
+point is that, once <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img350.png"
+ ALT="$ r_c$"></SPAN> is chosen, if you wish to mimic a potential
+with infinite range, you must use the correction terms for energy and
+pressure described below.
+
+<P>
+The system we consider is made of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> particles which interact via the
+Lennard-Jones pair potential (Eq.&nbsp;<A HREF="node29.html#eq:lj">89</A>).  The particles are
+confined in a cubic box with side-length <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN>.  Length is measured in
+units of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> and energy in <SPAN CLASS="MATH"><IMG
+ WIDTH="10" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$ \epsilon$"></SPAN>, and we consider particles
+with 1&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> diameters.  A code is provided for simulating this
+system using Metropolis Monte Carlo: <code>mclj.c</code>).  <code>mjlc.c</code> will compute the
+pressure given a temperature and density in the manner discussed in
+the text.  If a cutoff radius is chosen by the user, then a <EM>truncated</EM> and <EM>shifted</EM> pair potential is used, and the following
+tail corrections are applied:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+u^{\rm tail} & = & \frac{8}{3}\pi\rho\epsilon\sigma^3\left[\frac{1}{3}\left(\frac{\sigma}{r_c}\right)^{9}-\left(\frac{\sigma}{r_c}\right)^{3}\right]\\
+\Delta P^{\rm tail} & = & \frac{16}{3}\pi\rho^2\epsilon\sigma^3\left[\frac{2}{3}\left(\frac{\sigma}{r_c}\right)^{9}-\left(\frac{\sigma}{r_c}\right)^{3}\right]
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="32" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img351.png"
+ ALT="$\displaystyle u^{\rm tail}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="208" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$\displaystyle \frac{8}{3}\pi\rho\epsilon\sigma^3\left[\frac{1}{3}\left(\frac{\sigma}{r_c}\right)^{9}-\left(\frac{\sigma}{r_c}\right)^{3}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">98</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="49" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$\displaystyle \Delta P^{\rm tail}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="223" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img354.png"
+ ALT="$\displaystyle \frac{16}{3}\pi\rho^2\epsilon\sigma^3\left[\frac{2}{3}\left(\frac{\sigma}{r_c}\right)^{9}-\left(\frac{\sigma}{r_c}\right)^{3}\right]$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">99</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The pressure is computed from 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:mc:P"></A><!-- MATH
+ \begin{equation}
+P = \rho T + {\rm vir}/V
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="116" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img355.png"
+ ALT="$\displaystyle P = \rho T + {\rm vir}/V$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">100</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img356.png"
+ ALT="$ {\rm vir}$"></SPAN> is the virial:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\rm vir} = \frac{1}{3}\sum_{i>j} {\bf f}\left(r_{ij}\right)\cdot{\bf r}_{ij}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="155" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img357.png"
+ ALT="$\displaystyle {\rm vir} = \frac{1}{3}\sum_{i&gt;j} {\bf f}\left(r_{ij}\right)\cdot{\bf r}_{ij}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">101</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> is the system volume.  <!-- MATH
+ ${\bf f}\left(r_{ij}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img358.png"
+ ALT="$ {\bf f}\left(r_{ij}\right)$"></SPAN> is the
+<EM>force</EM> exerted on particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> by particle <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>, defined as the
+negative gradient of the pair potential <!-- MATH
+ $u\left(r_{ij}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img359.png"
+ ALT="$ u\left(r_{ij}\right)$"></SPAN> with
+respect to the position of particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+{\bf f}\left(r_{ij}\right) & = & -\frac{\partial u\left(r_{ij}\right)}{\partial {\bf r}_i}\\
+ & = & -\frac{{\bf r}_{ij}}{r_{ij}}\frac{\partial u\left(r_{ij}\right)}{\partial r_{ij}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="44" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img360.png"
+ ALT="$\displaystyle {\bf f}\left(r_{ij}\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="72" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img361.png"
+ ALT="$\displaystyle -\frac{\partial u\left(r_{ij}\right)}{\partial {\bf r}_i}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">102</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="94" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$\displaystyle -\frac{{\bf r}_{ij}}{r_{ij}}\frac{\partial u\left(r_{ij}\right)}{\partial r_{ij}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">103</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Here we have made use of the fact that 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial X}{\partial {\bf r}} = \frac{\bf r}{r}\frac{\partial X}{\partial r}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="92" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img363.png"
+ ALT="$\displaystyle \frac{\partial X}{\partial {\bf r}} = \frac{\bf r}{r}\frac{\partial X}{\partial r}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">104</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+when operating on a function <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img364.png"
+ ALT="$ X$"></SPAN> which depends on relative particle
+separations.  For the Lennard-Jones pair potential (Eq.&nbsp;<A HREF="node29.html#eq:lj">89</A>),
+we see that
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{\partial u\left(r_{ij}\right)}{\partial r_{ij}} = 4\epsilon\left[-12\frac{\sigma^{12}}{r_{ij}^{13}} + 6\frac{\sigma^{6}}{r_{ij}^7}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="221" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img365.png"
+ ALT="$\displaystyle \frac{\partial u\left(r_{ij}\right)}{\partial r_{ij}} = 4\epsilon\left[-12\frac{\sigma^{12}}{r_{ij}^{13}} + 6\frac{\sigma^{6}}{r_{ij}^7}\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">105</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+So,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}_{ij}\left(r_{ij}\right) = \frac{{\bf r}_{ij}}{r_{ij}^2}\left\{48\epsilon\left[\left(\frac{\sigma}{r_{ij}}\right)^{12} - \frac{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right]\right\},
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="322" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img366.png"
+ ALT="$\displaystyle {\bf f}_{ij}\left(r_{ij}\right) = \frac{{\bf r}_{ij}}{r_{ij}^2}\l...
+...}\right)^{12} - \frac{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right]\right\},$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">106</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and therefore,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\rm vir} = \frac{1}{3}\sum_{i>j} \left\{48\epsilon\left[\left(\frac{\sigma}{r_{ij}}\right)^{12} - \frac{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right]\right\}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="299" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img367.png"
+ ALT="$\displaystyle {\rm vir} = \frac{1}{3}\sum_{i&gt;j} \left\{48\epsilon\left[\left(\f...
+...}}\right)^{12} - \frac{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right]\right\}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">107</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Notice that any particular pair's contribution to the total virial is
+<EM>positive</EM> if the members of the pair are repelling one another
+(positive <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN> along <!-- MATH
+ ${\bf r}_{ij})$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img368.png"
+ ALT="$ {\bf r}_{ij})$"></SPAN>), and <EM>negative</EM> if the
+particles are attracting one another.
+
+<P>
+If you read the code <code>mclj.c</code>, you should see that the
+initialization of positions is accomplished by putting the particles
+on cubic lattice sites such that an overall density is achieved.  It
+is therefore convenient to run simulations with numbers of particles
+that are perfect cubes, such as 128, 216, 512, etc, so that the
+initial state uniformly fills the box.
+
+<P>
+Another consideration is that a certain number of cycles should be
+&ldquo;burned&rdquo; prior to gathering statistics so this initial state is
+fully erased. The flag <code>-ne</code> allows the user to specify how
+many equilibration cycles are to be performed before switching to
+&ldquo;production&rdquo; mode.
+
+<P>
+Fig.&nbsp;<A HREF="#fig:mclj_snaps">12</A> shows two snapshots made with VMD of the Lennard-Jones systems with 512 particles. 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:mclj_snaps"></A><A NAME="1882"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 12:</STRONG>
+Snapshots from a MC simulation of a Lennard-Jones fluid of 512 particles at a density of 0.5 and a temperature of 1.0 with a cutoff of 2.5 <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>, for 10,000 cycles.  Left is initial, right is final.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mclj_0.png"
+ ALT="Image mclj_0">
+    <IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mclj_100.png"
+ ALT="Image mclj_100"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+As a suggested exercise, you can use <code>mclj.c</code> to try to reproduce
+Figure 3.5 in F&amp;S, which shows <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> vs. <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> at both <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 2.0 and
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 0.9.  How many cycles do you need?  How many equilibration
+cycles?  What maximum displacement did you choose?
+
+<P>
+Below are some of my preliminary results using the code <code>mclj.c</code>.
+I used only 5,000 cycles for 512 particles for each point, and each
+point is the result of a single run.  These numbers appear to compare
+well with those in Figure&nbsp;3.5 in F&amp;S, for which we have no idea how
+many cycles or independent runs were performed.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:mclj_res"></A><A NAME="1925"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 13:</STRONG>
+Pressure <EM>vs.</EM> density in a Lennard-Jones fluid, measured by
+Metropolis MC simulation, at reduced temperatures 0.9, 2.0, and 3.1.  600,000
+particle-displacement moves were performed per simulation, and five independent simulations per point were performed.  Pressures are averages over these five, and standard deviations are smaller than the line width.  Each system  contained 512
+particles.  A cutoff of 3.5&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> was used.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="471" HEIGHT="394" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mclj_ex_2.png"
+ ALT="Image mclj_ex_2"></TD></TR>
+</TABLE>
+</DIV>
+
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html503"
+  HREF="node34.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html501"
+  HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html497"
+  HREF="node32.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html504"
+  HREF="node34.html">Molecular Dynamics Simulation</A>
+<B> Up:</B> <A NAME="tex2html502"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html498"
+  HREF="node32.html">Case Study 3: Hard-Disk</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

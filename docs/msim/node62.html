@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Lennard-Jones on a Line</TITLE>
+<META NAME="description" CONTENT="Lennard-Jones on a Line">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node61.html">
+<LINK REL="up" HREF="node61.html">
+<LINK REL="next" HREF="node63.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html785"
+  HREF="node63.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html783"
+  HREF="node61.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html779"
+  HREF="node61.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html786"
+  HREF="node63.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html784"
+  HREF="node61.html">Odds and Ends</A>
+<B> Previous:</B> <A NAME="tex2html780"
+  HREF="node61.html">Odds and Ends</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000101000000000000000"></A>
+<A NAME="sec:ljline"></A>
+<BR>
+Lennard-Jones on a Line
+</H2>
+
+<P>
+Imagine a particle (the ``probe'') fixed at a distance <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$a$"> from a line
+of populated by particles .  The
+probe and particles on the line interact via a pairwise potential:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+u(r) = 4\left[r^{-12}-r^{-6}\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:linelj:lj"></A><IMG
+ WIDTH="146" HEIGHT="30" BORDER="0"
+ SRC="img1024.png"
+ ALT="\begin{displaymath}
+u(r) = 4\left[r^{-12}-r^{-6}\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(360)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This is the Lennard-Jones potential in reduced units.  The particles
+on the line do not interact with each other, but they remain fixed on
+the line.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="173" HEIGHT="169" ALIGN="CENTER"
+ SRC="ljlinefig.gif"
+ ALT="portrait"></TD>
+<TD ALIGN="LEFT"><EM>Notation.</EM> A probe particle lies at a distance <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$a$"> from
+a line (the <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">-axis) populated by Lennard-Jones particles.  The line
+is divided into ``cells'' indexed by <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">, and the interaction of the
+probe with a particle in cell <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$"> depends on the distance <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$r_j$">.</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+Let us now write the total potential.  We do not know exactly where
+the fixed particles are on the line, so we do the following.  Divide
+the <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img271.png"
+ ALT="$y$">-axis into an infinite number of finitely-sized divisions, or
+``cells,'' indexed by a counter <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">.  Let the quantity <IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1025.png"
+ ALT="$n_j$"> be the
+<EM>occupation number</EM> of division <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">, which is 0 if the division is
+unoccupied, and 1 if it is occupied.  We must make the assumption that
+the cells are so small that there can either be one or no particles in
+any cell.  We can write the total potential by summing over all
+cells:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U} = \sum_j u\left(r_j\right) n_j
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="113" HEIGHT="47" BORDER="0"
+ SRC="img1026.png"
+ ALT="\begin{displaymath}
+\mathscr{U} = \sum_j u\left(r_j\right) n_j
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(361)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$r_j$"> is the distance from the probe to cell <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">.  Now we
+can pass into the continuum limit by considering that <!-- MATH
+ $n_j \rightarrow
+n\left(x\right)dx$
+ -->
+<IMG
+ WIDTH="99" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1027.png"
+ ALT="$n_j \rightarrow
+n\left(x\right)dx$">, where <!-- MATH
+ $n\left(x\right)$
+ -->
+<IMG
+ WIDTH="38" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1028.png"
+ ALT="$n\left(x\right)$"> is the <EM>density</EM> of
+particles on the line, and thus <IMG
+ WIDTH="52" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1029.png"
+ ALT="$n(x)dx$"> is the number of particles on
+the line between <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$"> and <IMG
+ WIDTH="50" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1030.png"
+ ALT="$x + dx$">.  So, in a continuum representation:
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:int1"></A>
+<!-- MATH
+ \begin{eqnarray}
+\mathscr{U}\left(a\right) & = & \int_{-\infty}^{\infty} u\left[r\left(x\right)\right] n\left(x\right) dx \\
+            & = & \int_{-\infty}^{\infty} u\left[\left(a^2+x^2\right)^{1/2}\right] n\left(x\right) dx
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1031.png"
+ ALT="$\displaystyle \mathscr{U}\left(a\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="148" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1032.png"
+ ALT="$\displaystyle \int_{-\infty}^{\infty} u\left[r\left(x\right)\right] n\left(x\right) dx$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(362)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="208" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1033.png"
+ ALT="$\displaystyle \int_{-\infty}^{\infty} u\left[\left(a^2+x^2\right)^{1/2}\right] n\left(x\right) dx$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(363)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we have used the Pythagorean theorem: <!-- MATH
+ $r^2 = a^2 + x^2$
+ -->
+<IMG
+ WIDTH="91" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1034.png"
+ ALT="$r^2 = a^2 + x^2$">.  We
+seek a representation <!-- MATH
+ $\mathscr{U}(a)$
+ -->
+<IMG
+ WIDTH="36" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1035.png"
+ ALT="$\mathscr{U}(a)$">, that is, the potential of the
+system as a function of the distance of the probe to the line.
+
+<P>
+Now, let us assume that the density of particles on the line is
+uniform and equal to 1 particle per unit length:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+n\left(x\right) = 1
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="62" HEIGHT="28" BORDER="0"
+ SRC="img1036.png"
+ ALT="\begin{displaymath}
+n\left(x\right) = 1
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+We can express Eq.&nbsp;<A HREF="#eq:int1">363</A> as 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}\left(a\right) = 4\underbrace{\int_{-\infty}^{\infty} \frac{dx}{\left(a^2+x^2\right)^{12}}}_{I_1} +  4\underbrace{\int_{-\infty}^{\infty} \frac{dx}{\left(a^2+x^2\right)^{6}}}_{I_2}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:int2"></A><IMG
+ WIDTH="317" HEIGHT="71" BORDER="0"
+ SRC="img1037.png"
+ ALT="\begin{displaymath}
+\mathscr{U}\left(a\right) = 4\underbrace{\int_{-\infty}^{\in...
+..._{-\infty}^{\infty} \frac{dx}{\left(a^2+x^2\right)^{6}}}_{I_2}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(364)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+At this point we turn to integral tables.  Dwight&nbsp;[<A
+ HREF="node63.html#Dwight1961">28</A>]
+reports on p.&nbsp;213 in integral # 856.21
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\int_0^\infty \frac{dx}{\left(a^2+x^2\right)^n} = \frac{1\cdot 3 \cdot 5 \cdots \left(2n-3\right)}{2\cdot 4\cdot 6\cdots \left(2n-2\right)} \frac{\pi}{2a^{2n-1}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:int3"></A><IMG
+ WIDTH="311" HEIGHT="44" BORDER="0"
+ SRC="img1038.png"
+ ALT="\begin{displaymath}
+\int_0^\infty \frac{dx}{\left(a^2+x^2\right)^n} = \frac{1\cd...
+...2\cdot 4\cdot 6\cdots \left(2n-2\right)} \frac{\pi}{2a^{2n-1}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(365)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Both integrals <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1039.png"
+ ALT="$I_1$"> and <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1040.png"
+ ALT="$I_2$"> in Eq.&nbsp;<A HREF="#eq:int2">365</A> are even.
+Applying Eq.&nbsp;<A HREF="#eq:int3">366</A>, we find
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+I_1 & = & \frac{63\pi}{256}a^{-11}\ \ \mbox{and}\\
+I_2 & = & \frac{3\pi}{8}a^{-5}.
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1041.png"
+ ALT="$\displaystyle I_1$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="101" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1042.png"
+ ALT="$\displaystyle \frac{63\pi}{256}a^{-11}  \mbox{and}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(366)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1043.png"
+ ALT="$\displaystyle I_2$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="55" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1044.png"
+ ALT="$\displaystyle \frac{3\pi}{8}a^{-5}.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(367)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+This leaves us with
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}\left(a\right) = \frac{3\pi}{2}\left(\frac{21}{32}a^{-11} - a^{-5}\right).
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="205" HEIGHT="45" BORDER="0"
+ SRC="img1045.png"
+ ALT="\begin{displaymath}
+\mathscr{U}\left(a\right) = \frac{3\pi}{2}\left(\frac{21}{32}a^{-11} - a^{-5}\right).
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(368)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Note that the potential now displays an ``11-5'' distance dependence.
+ The figure below shows <!-- MATH
+ $\mathscr{U}(a)$
+ -->
+<IMG
+ WIDTH="36" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1035.png"
+ ALT="$\mathscr{U}(a)$"> together with the raw
+Lennard-Jones 12-6 potential (Eq.&nbsp;<A HREF="#eq:linelj:lj">361</A>).
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="360" HEIGHT="252" ALIGN="CENTER"
+ SRC="lj11-5.gif"
+ ALT="portrait"></TD>
+<TD ALIGN="LEFT">The 11-5 potential <!-- MATH
+ $\mathscr{U}\left(a\right)$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1046.png"
+ ALT="$\mathscr{U}\left(a\right)$"> as a function
+of distance to the line, <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$a$">, together with the 12-6 Lennard-Jones
+potential used to derive it.</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html785"
+  HREF="node63.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html783"
+  HREF="node61.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html779"
+  HREF="node61.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html786"
+  HREF="node63.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html784"
+  HREF="node61.html">Odds and Ends</A>
+<B> Previous:</B> <A NAME="tex2html780"
+  HREF="node61.html">Odds and Ends</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

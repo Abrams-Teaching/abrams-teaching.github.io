@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Case Study 3: Hard-Disk Dumbbells in 2D</TITLE>
+<META NAME="description" CONTENT="Case Study 3: Hard-Disk Dumbbells in 2D">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node33.html">
+<LINK REL="previous" HREF="node31.html">
+<LINK REL="up" HREF="node11.html">
+<LINK REL="next" HREF="node33.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html495"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html493"
+  HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html487"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html496"
+  HREF="node33.html">Case Study 4: Equation</A>
+<B> Up:</B> <A NAME="tex2html494"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html488"
+  HREF="node31.html">Case Study 2: MC</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00035000000000000000"></A>
+<A NAME="sec:cs3"></A>
+<BR>
+Case Study 3:  Hard-Disk Dumbbells in 2D
+</H2>
+
+<P>
+In this case study, we consider a slightly different system than the
+hard-disk system in the previous case study.  Here, we imagine that
+pairs of disks are tethered together to form dumbbells.  The
+&ldquo;bond-length&rdquo; of a dumbbell is a constant parameter, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img305.png"
+ ALT="$ r_0$"></SPAN>.  We will
+again confine the dumbbells to a circle.  
+
+<P>
+What is new is how we have to consider the trial moves for this
+system.  We cannot simply select a random particle and try to displace
+it, because this is likely to violate the constant bond-length of the
+dumbbell that particle belongs to.  How then do we generate new
+configurations?  A simple idea is to use <EM>two</EM> kinds of trial
+moves, translation of entire dumbbells and rotation of dumbbells
+around their centers of mass.  This was originally presented in
+Sec.&nbsp;<A HREF="node30.html#sec:trialmoves">3.3.3</A>.  In order to implement an MC code with more
+than one trial move, we must include a &ldquo;trial move selection rule&rdquo;
+which randomly selects a trial move based on their user-defined
+&ldquo;weights&rdquo;.
+
+<P>
+The code <code>hdisk-dumbbells.c</code> implements a MC simulation
+of hard-disk dumbbells. One specifies a number of particles using <code>-N #</code> at the command line, and the number of dimers is assumed to be <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>/2.  One can specify two of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> (areal particle density), or <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.png"
+ ALT="$ R$"></SPAN> (confining domain diameter).  One can also specify <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img231.png"
+ ALT="$ \delta r$"></SPAN> (maximum dimer displacement distance) and <!-- MATH
+ $\delta \phi$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img326.png"
+ ALT="$ \delta \phi$"></SPAN> (maximum dimer rotation angle), as well as the dimer bond length <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img305.png"
+ ALT="$ r_0$"></SPAN>.  An XYZ-format trajectory can be saved every <code>-fs</code> cycles using <code>-traj my_traj.xyz</code>.
+
+<P>
+Let's run this program for <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> = 200, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.6, <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img231.png"
+ ALT="$ \delta r$"></SPAN> = 1, <!-- MATH
+ $\delta \phi = \pi$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img327.png"
+ ALT="$ \delta \phi = \pi$"></SPAN>, for 10,000 cycles, saving 1000 snapshots in <code>traj.xyz</code>:
+
+<P>
+<PRE>
+cd
+cd cheT580-202035/instructional-codes/my_work
+mkdir hddb_run
+cd hddb_run
+gcc -O3 -o hddb../../originals/hdisk-dumbbells.c -lm -lgsl
+./hddb -rho 0.6 -dr 1 -da 3.1 -dw 0.5 -N 200 -traj traj.xyz -fs 10 -nc 10000
+# R = 10.30; rho = 0.60; N = 200; r_0 = 1.00; s = 1.00; disp_wt = 0.50, seed = 23410981
+Results:
+Number of trial moves:             2000000
+Maximum displacement length:       1.000
+Number of displacement attempts:   999499
+Maximum rotation angle (radians):  3.100
+Number of rotation attempts:       1000501
+Displacement acceptance ratio:     0.344
+Rotation acceptance ratio:         0.405
+Reject Fraction Out-of-bounds:     0.10037
+Reject Fraction Overlap:           0.89963
+Trajectory saved to:               traj.xyz
+ls
+hddb traj.xyz
+</PRE>
+
+<P>
+As with the hard disks, we can use VMD to visualize frames in this trajectory.  Fig.&nbsp;<A HREF="#fig:hddb_snaps">8</A> shows three representative snapshots from this simulation, along with a special view showing the histories of four particular dimers.  This last rendering serves to indicate that dimers have mostly explored the entire domain for this number of cycles (is this the case for 1,000 cycles?).
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:hddb_snaps"></A><A NAME="1711"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 8:</STRONG>
+Snapshots from a short hard-disk-dumbbell MC simulation at 0, 5000, and 10,000 cycles.  Images were rendered in VMD in an orthographic view along [0,0,-1], and particles were rendered as &ldquo;points&rdquo; and colored according to index.  Far right: traces of positions of four particular dimers throughout the trajectory.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./hddb_frame0.png"
+ ALT="Image hddb_frame0">
+    <IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./hddb_frame500.png"
+ ALT="Image hddb_frame500">
+    <IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./hddb_frame1000.png"
+ ALT="Image hddb_frame1000">
+    <IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./four_dimers.png"
+ ALT="Image four_dimers"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Consider the following question: Does the
+acceptance ratio of rotational moves depend upon the weight given to
+displacement moves?  Why or why not?  Below is a plot of the
+acceptance ratio vs. the maximum displacement for a system of 100
+dumbbells at a density of 0.5, for various displacement move weights
+between 0.1 and 0.9.  As you can see, there appears to be no effect 
+on the acceptance of trial displacements if we change how frequently we perform them relative to trial rotations.
+
+<DIV ALIGN="CENTER"><A NAME="fig:hdb_accr"></A><A NAME="1716"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 9:</STRONG>
+Displacement acceptance ratio vs. maximum dumbbell displacement for various displacement trial move weights between 0.2, 0.5, and 0.8.  <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> = 200 (100 dumbbells), <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.5, and <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.png"
+ ALT="$ R$"></SPAN> = 11.3.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="640" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./hdiskdumbbell_ex.png"
+ ALT="Image hdiskdumbbell_ex"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Let's consider computing an observable function that describes how the molecules order themselves in the circular domain.  One such meaningful function we'll call <!-- MATH
+ $\langle P[\theta(r)]\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="65" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img328.png"
+ ALT="$ \langle P[\theta(r)]\rangle$"></SPAN>, where
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+P(\theta) = \cos^2\theta-\frac{1}{2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="128" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img329.png"
+ ALT="$\displaystyle P(\theta) = \cos^2\theta-\frac{1}{2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">94</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img318.png"
+ ALT="$ \theta$"></SPAN> is defined as the angle between a dumbbell's bond and a vector joining its midpoint to the domain origin.  <!-- MATH
+ $\langle P[\theta(r)]\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="65" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img328.png"
+ ALT="$ \langle P[\theta(r)]\rangle$"></SPAN> is therefore the expectation of <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> averaged over all dumbbells located between <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ r$"></SPAN> and <!-- MATH
+ $r+\delta r$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img331.png"
+ ALT="$ r+\delta r$"></SPAN> from the origin.  Why is this a meaningful measure of order for this system?  Consider that dumbbells near the periphery like to align so their bonds are tangent to the periphery itself and therefore perpendicular to the radius, and the further away from the periphery you look, the less likely this order is to appear.  When two vectors are perpendicular, their angle betwen them is <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \pi $"></SPAN> and since <SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img332.png"
+ ALT="$ \cos\pi=0$"></SPAN>, we expect <!-- MATH
+ $\langle P\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img333.png"
+ ALT="$ \langle P\rangle$"></SPAN> to be -0.5.  Is this what we observe for our system?
+
+<P>
+To explore this function, the code <code>hdisk_dumbbells_order.c</code> was copied from <code>hdisk_dumbbells.c</code>.
+In <code>hdisk_dumbbells_order.c</code>, I introduce the arrays <code>theta[]</code> to hold a tally of <!-- MATH
+ $\cos^2\theta$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img334.png"
+ ALT="$ \cos^2\theta$"></SPAN> values and <code>Rcount[]</code> to hold a count of hits in each radial bin, so that <!-- MATH
+ $\langle P(\theta(r)) \rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="69" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img335.png"
+ ALT="$ \langle P(\theta(r)) \rangle$"></SPAN> = <code>theta[i]/Rcount[i] - 0.5</code>, where <code>i</code> is the radial bin index set by <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.png"
+ ALT="$ R$"></SPAN> and a specified number of bins.  Fig.&nbsp;<A HREF="#fig:hddb_order">10</A> shows <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> vs <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ r$"></SPAN> for a hard-disk dumbbell system at density 0.66 with 400 particles (200 dumbbells), run for 500,000 cycles.  We can see some interesting structure here, notably that it looks like, on average, there is very little ordering at the periphery and it becomes substatially higher as we get closer to the origin, though still not very strong.  Notably, at about 1 <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> from the periphery, we see a dip in <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> that might indicate an enrichment in tangentially-oriented dumbbells.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:hddb_order"></A><A NAME="1726"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 10:</STRONG>
+Order parameter <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> vs radius for a hard-disk dumbbell system confined to a circle of radius 13.9 <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="800" HEIGHT="600" ALIGN="BOTTOM" BORDER="0"
+ SRC="./hddb_order.png"
+ ALT="Image hddb_order"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+A final note:  Since this is a 2D system, we don't use the second
+Legendre polynomial of <!-- MATH
+ $\cos\theta$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img319.png"
+ ALT="$ \cos\theta$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:slp"></A><!-- MATH
+ \begin{equation}
+P_2(x)=\frac12(3x^2-1)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="140" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img336.png"
+ ALT="$\displaystyle P_2(x)=\frac12(3x^2-1)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">95</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The reason for this is clear.  Suppose <SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img337.png"
+ ALT="$ f(\theta)$"></SPAN> is the probability
+distribution of the angle <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img318.png"
+ ALT="$ \theta$"></SPAN>.  Now, since the molecules are not
+polar (they have no head or tail), <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img318.png"
+ ALT="$ \theta$"></SPAN> is meaningful only 
+on the domain <!-- MATH
+ $[0,\frac{\pi}{2}]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img338.png"
+ ALT="$ [0,\frac{\pi}{2}]$"></SPAN>.  Suppose further that there
+is no preferred angle; i.e., <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN> is a constant.  In 2D, normalization
+requires 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+1=f\int_0^{\pi/2}d\theta\ \rightarrow\ f=\frac{2}{\pi},
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="185" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img340.png"
+ ALT="$\displaystyle 1=f\int_0^{\pi/2}d\theta \rightarrow f=\frac{2}{\pi},$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">96</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and in this case, with no preferred orientation, the average of <!-- MATH
+ $\cos^2\theta$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img334.png"
+ ALT="$ \cos^2\theta$"></SPAN> is
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left<\cos^2\theta\right> = \frac{2}{\pi}\int_0^{\pi/2} \cos^2\theta d\theta = \frac{2}{\pi}\frac{\pi}{4} = \frac12.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="276" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img341.png"
+ ALT="$\displaystyle \left&lt;\cos^2\theta\right&gt; = \frac{2}{\pi}\int_0^{\pi/2} \cos^2\theta d\theta = \frac{2}{\pi}\frac{\pi}{4} = \frac12.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">97</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+And Eq.&nbsp;<A HREF="#eq:slp">95</A> will have the described behavior.  The second Legendre polynomial evaluates
+to zero when <!-- MATH
+ $\cos^2\theta$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img334.png"
+ ALT="$ \cos^2\theta$"></SPAN> is <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img342.png"
+ ALT="$ \frac13$"></SPAN>, which is indeed what <!-- MATH
+ $\left<\cos^2\theta\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="58" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img343.png"
+ ALT="$ \left&lt;\cos^2\theta\right&gt;$"></SPAN> evaluates
+to when <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN> is a constant in <EM>three</EM> dimensions.
+
+<P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html495"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html493"
+  HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html487"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html496"
+  HREF="node33.html">Case Study 4: Equation</A>
+<B> Up:</B> <A NAME="tex2html494"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html488"
+  HREF="node31.html">Case Study 2: MC</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

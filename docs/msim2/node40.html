@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>The Code</TITLE>
+<META NAME="description" CONTENT="The Code">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node39.html">
+<LINK REL="up" HREF="node38.html">
+<LINK REL="next" HREF="node41.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html584"
+  HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html582"
+  HREF="node38.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html578"
+  HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html585"
+  HREF="node41.html">Case Study 2: Static</A>
+<B> Up:</B> <A NAME="tex2html583"
+  HREF="node38.html">Case Study 1: An</A>
+<B> Previous:</B> <A NAME="tex2html579"
+  HREF="node39.html">Introduction</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00042200000000000000">
+The Code</A>
+</H3>
+
+<P>
+The complete C program, <code>mdlj.c</code>, contains a
+complete implementation of the Lennard-Jones force routine and the
+velocity-Verlet integrator.  Compilation instructions appear in the
+header comments.  Let us now consider some sample results from <EM>mdlj.c</EM>.  First, <EM>mdlj.c</EM> includes an option that outputs a brief
+summary of the command line options available:
+<PRE>
+$ mdlj -h
+mdlj usage:
+mdlj [options]
+
+Options:
+         -N [integer]           Number of particles
+         -rho [real]            Number density
+         -dt [real]             Time step
+         -rc [real]             Cutoff radius
+         -ns [real]             Number of integration steps
+         -T0 [real]             Initial temperature
+         -fs [integer]          Sample frequency
+         -traj [string]         Trajectory file name
+         -prog [integer]        Interval with which logging output is generated
+         -icf [string]          Initial configuration file
+         -seed [integer]        Random number generator seed
+         -uf                    Print unfolded coordinates in trajectory file
+         -h                     Print this info
+</PRE>
+
+<P>
+Let us run <EM>mdlj.c</EM> for 512 particles and 1000 time-steps at a
+density of 0.85 and an initial temperature of 2.5.  We will pick a
+relatively conservative (small) time-step of 0.001.  We will not
+specify an input configuration, instead allowing the code to create
+initial positions on a cubic lattice.  Here is what we see in the
+terminal:
+<PRE>
+$ ./mdlj -N 512 -fs 10 -ns 1000 -traj traj.xyz -T0 2.5 -rho 0.85 -rc 2.5
+# NVE MD Simulation of a Lennard-Jones fluid
+# L = 8.44534; rho = 0.85000; N = 512; rc = 2.50000
+# nSteps 1000, seed 23410981, dt 0.00100
+#LABELS step time PE KE TE drift T P
+0 0.00000 -2429.99610 1919.39622 -510.59988  2.58118e-07 2.49921 4.28896
+1 0.00100 -2428.18306 1917.58237 -510.60069  1.84111e-06 2.49685 4.30232
+2 0.00200 -2425.15191 1914.54975 -510.60216  4.73104e-06 2.49290 4.32466
+3 0.00300 -2420.88660 1910.28230 -510.60430  8.92431e-06 2.48735 4.35604
+4 0.00400 -2415.36384 1904.75673 -510.60711  1.44276e-05 2.48015 4.39659
+5 0.00500 -2408.55314 1897.94254 -510.61060  2.12521e-05 2.47128 4.44649
+6 0.00600 -2400.41688 1889.80212 -510.61476  2.94064e-05 2.46068 4.50593
+7 0.00700 -2390.91048 1880.29088 -510.61960  3.88852e-05 2.44830 4.57515
+8 0.00800 -2379.98339 1869.35814 -510.62525  4.99443e-05 2.43406 4.65427
+9 0.00900 -2367.57807 1856.94670 -510.63137  6.19292e-05 2.41790 4.74385
+10 0.01000 -2353.63308 1842.99526 -510.63782  7.45638e-05 2.39973 4.84412
+11 0.01100 -2338.08390 1827.43905 -510.64484  8.83209e-05 2.37948 4.95492
+12 0.01200 -2320.86308 1810.21130 -510.65178  1.01908e-04 2.35705 5.07698
+...
+</PRE>
+Each line of output after the header information corresponds to one
+time-step.  (The header line that begins with the special word <code>#LABELS</code>
+is used by the Python program <code>plot_mdlj_log.py</code>.) The first column is the time-step, the second is the time value, the third is the
+potential energy, the fourth is the kinetic energy, the fifth is the total
+energy, the sixth is the &ldquo;drift,&rdquo; the seventh is the instantaneous
+temperature (Eq.&nbsp;<A HREF="node39.html#eq:md:T">152</A>), and the eighth is the instantaneous
+pressure (Eq.&nbsp;<A HREF="node33.html#eq:mc:P">100</A>).
+
+<P>
+The drift is output to assess the <EM>stability</EM> of the explicit
+integration.  As a rule of thumb, we would like to keep the drift to
+below 0.01% of the total energy.  The drift reported by <EM>mdlj.c</EM>
+is computed as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:edrift"></A><!-- MATH
+ \begin{equation}
+\Delta\mathscr{T}\left(t\right) = \frac{\mathscr{T}\left(t\right)-\mathscr{T}\left(0\right)}{\mathscr{T}\left(0\right)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="176" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img457.png"
+ ALT="$\displaystyle \Delta\mathscr{T}\left(t\right) = \frac{\mathscr{T}\left(t\right)-\mathscr{T}\left(0\right)}{\mathscr{T}\left(0\right)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">154</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $\mathscr{T}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img19.png"
+ ALT="$ \mathscr {T}$"></SPAN> is the total energy.  The plots below show the
+output trace for the full 1,000 time-steps. We note that with this time-step value (0.001) keeps the total energy conserved to about one part in 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img458.png"
+ ALT="$ ^4$"></SPAN>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:mdlj_results"></A><A NAME="3876"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 14:</STRONG>
+<EM>Left</EM>. Potential (PE), kinetic (KE), and total (TE) energies
+as functions of time in an NVE MD simulation of the Lennard-Jones fluid at
+reduced temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 2.0.  (Initial temperature was set at 2.5.)
+<EM>Right</EM>.  Drift in total energy (Eq.&nbsp;<A HREF="#eq:md:edrift">154</A>) vs. time.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="565" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./out.png"
+ ALT="Image out">
+    <IMG
+  WIDTH="582" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./drift.png"
+ ALT="Image drift"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Now, this invocation of <EM>mdlj.c</EM> produces an XYZ-format trajectory file (just like
+<code>mclj</code> did).  Here, I have expanded my XYZ-format convention to allow
+inclusion of velocities in the output file.  Inclusion of velocities is signified by a 1 on the same line as the number of particles (the first line in each frame).  If there is a 1 in that position, then each
+particle line includes three position coordinates and three velocity components:
+<PRE>
+$ more traj.xyz 
+512 1
+BOX 8.44534 8.44534 8.44534
+16   0.527833   0.527833   0.527833  -0.982352  -0.823300  -1.530590
+16   1.583500   0.527833   0.527833  -0.549726  -0.942381   1.363996
+16   2.639167   0.527833   0.527833   1.145014  -0.616762  -1.172725
+16   3.694834   0.527833   0.527833   1.520337   3.057595  -1.522653
+16   4.750501   0.527833   0.527833  -0.541350  -0.144665  -0.919845
+16   5.806168   0.527833   0.527833  -0.221483   1.143893  -1.015784
+16   6.861835   0.527833   0.527833   5.752205  -1.045603   1.066189
+16   7.917502   0.527833   0.527833   0.819532   0.167275  -1.230297
+16   0.527833   1.583500   0.527833  -1.062591   2.169692  -1.318921
+16   1.583500   1.583500   0.527833  -1.394993   0.055193   1.411530
+...
+</PRE>
+The number &ldquo;16&rdquo; at the beginning designates
+the &ldquo;type&rdquo; as an atomic number; for simplicity, I have decided to
+call all of my particles sulfur.  (XYZ format is often used for
+atomically-specific configurations.)  The functions <code>xyz_out()</code>
+and <code>xyz_in()</code> write and read this format, respectively, in <EM>mdlj.c</EM>.  We will use these functions in other programs as well,
+typically those which <EM>analyze</EM> configuration data.  Examples of
+such analysis codes are the subjects of the next two sections.
+
+<P>
+At this point, you can't do much with all this data, except appreciate
+just how much data an MD code <EM>can</EM> produce. In this example, we generated
+100 frames of configuration data (positions and velocities) for a 512-atoms system,
+and the resulting trajectory file is about 3.5 megabytes in size.  Of course, that
+file size scales with both the number of particles and the number of frames it contains.
+It is not unusual
+nowadays for researchers to use MD to produce <EM>hundreds of
+gigabytes</EM> of configuration data in order to write a single paper.  It
+leads one to think that perhaps a lesson on handling large amounts of
+data is appropriate for a course on Molecular Simulation; however,
+I'll forego that for now by trying to keep our sample exercises small.
+
+<P>
+One thing we <EM>can</EM> do with this data is make nice pictures using 
+VMD. Below are two renderings, one of the initial snapshot, and the
+other at time <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ t$"></SPAN> = 1 (1000 time steps).  Notice how the initially perfect crystalline
+lattice has been wiped out.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="3631"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 15:</STRONG>
+VMD-generated snapshots of configurations from an NVE MD simulation of
+the Lennard-Jones fluid at density <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.85 and average
+temperature <!-- MATH
+ $\left<T\right> \approx 2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.png"
+ ALT="$ \left &lt;T\right &gt; \approx 2$"></SPAN>.  Particles are colored according to their initial <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ z$"></SPAN> position.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mdlj_0.png"
+ ALT="Image mdlj_0">
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="496" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./mdlj_1.png"
+ ALT="Image mdlj_1"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html584"
+  HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html582"
+  HREF="node38.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html578"
+  HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html585"
+  HREF="node41.html">Case Study 2: Static</A>
+<B> Up:</B> <A NAME="tex2html583"
+  HREF="node38.html">Case Study 1: An</A>
+<B> Previous:</B> <A NAME="tex2html579"
+  HREF="node39.html">Introduction</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

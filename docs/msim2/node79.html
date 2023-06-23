@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Original Metadynamics</TITLE>
+<META NAME="description" CONTENT="Original Metadynamics">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node80.html">
+<LINK REL="previous" HREF="node78.html">
+<LINK REL="up" HREF="node78.html">
+<LINK REL="next" HREF="node80.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1003"
+  HREF="node80.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1001"
+  HREF="node78.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html995"
+  HREF="node78.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1004"
+  HREF="node80.html">Well-Tempered Metadynamics</A>
+<B> Up:</B> <A NAME="tex2html1002"
+  HREF="node78.html">Metadynamics</A>
+<B> Previous:</B> <A NAME="tex2html996"
+  HREF="node78.html">Metadynamics</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H4><A NAME="SECTION00095110000000000000">
+Original Metadynamics</A>
+</H4>
+
+<P>
+In metadynamics, a time-dependent bias potential is &ldquo;grown&rdquo; during the course of the simulation that acts to enhance sampling of the order parameter&nbsp;[<A
+ HREF="node82.html#Laio2002EscapingMinima.">48</A>].  Rather than confining to local regions of order parameter space as in umbrella sampling, the metadynamics potential pushes the system away from easily sampled regions of order parameter space.  This bias can be expressed:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:metadynamics"></A><!-- MATH
+ \begin{equation}
+V_b(\theta,t) = w\sum_{t^\prime < t} \exp\left(-\frac{\left[\theta(t^\prime)-\theta(t)\right]^2}{2\sigma^2}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="275" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img944.png"
+ ALT="$\displaystyle V_b(\theta,t) = w\sum_{t^\prime &lt; t} \exp\left(-\frac{\left[\theta(t^\prime)-\theta(t)\right]^2}{2\sigma^2}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">363</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> is a weight of each Gaussian kernel deposited, and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> is its width.  Apart from them, another key parameter in running metadynamics is how frequently a new Gaussian kernel is added, i.e., what is the list of values for <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img507.png"
+ ALT="$ t^\prime$"></SPAN>?  Apart from an irrelevant constant, the free energy along the order parameter is the time-average of the bias potential
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:metadynamics-f"></A><!-- MATH
+ \begin{equation}
+F(\theta) = -\frac{1}{t_f-t_i}\sum_{t=t_i}^{t_f}V_b\left[\theta(t)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="201" HEIGHT="68" ALIGN="MIDDLE" BORDER="0"
+ SRC="img946.png"
+ ALT="$\displaystyle F(\theta) = -\frac{1}{t_f-t_i}\sum_{t=t_i}^{t_f}V_b\left[\theta(t)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">364</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+NAMD includes native support for metadynamics using the <code>colvars</code> module.  By default, kernels are deposited every 1,000 steps.  To illustrate metadynamics, we return to the system of a single molecule of butane, this time at 273 K.  It requires a 100-million time-step MD simulation to generate a smooth histogram for the C1-C4 distance at this temperature.  Fig.&nbsp;<A HREF="#fig:metadyn1">46</A> shows the free energy vs C1-C4 distance computed using a 10-million time-step metadynamics simulation for which <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> = 0.1 kcal/mol, and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> = 0.1 &#197;.  We see excellent reconstruction of the true free energy at a much lower computational cost with metadynamics.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:metadyn1"></A><A NAME="9066"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 46:</STRONG>
+Free energy in kcal/mol vs. C1-C4 distance in &#197;, for butane in vacuum at 273 K computed using MD (green dash) and metadynamics (black solid).  The MD simulation was run for 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img63.png"
+ ALT="$ ^8$"></SPAN> timesteps, and the metadynamics for 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN>.  Intermediate values of the metadynamics free energy are also shown color-coded from purple (early) to yellow (late).  The final metadynamics free energy is the average over all free-energy snapshots (i.e., it is the time-average negative bias potential).</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="709" HEIGHT="539" ALIGN="BOTTOM" BORDER="0"
+ SRC="./metad-wav-273.png"
+ ALT="Image metad-wav-273"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+This 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN>-time-step metadynamics simulation deposited 10,000 Gaussian kernels in total.  Generally, it is most efficient for the simulation to keep track of the bias potential on a grid rather than as an explicit sum of Gaussians.  Here, the order-parameter line was divided into increments of 0.02 &#197; between 1.5 and 5.5 &#197;, or roughly 400 points.  Fig.&nbsp;<A HREF="#fig:metadyn-vb">47</A> shows the evolution of the bias potential <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img947.png"
+ ALT="$ V_b(t)$"></SPAN> from this simulation.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:metadyn-vb"></A><A NAME="9072"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 47:</STRONG>
+Evolution of the bias potential from the 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN>-step metadynamics simulation of butane along the C1-C4 distance.  The instantaneous bias potential is drawn every 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img65.png"
+ ALT="$ ^5$"></SPAN> time-steps and shifted to its current minimum value. Each curve is drawn with an <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img66.png"
+ ALT="$ \alpha$"></SPAN> of 0.2, so where the curves appear opaque signifies a temporarily static portion of the bias as kernels are being deposited elsewhere.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="710" HEIGHT="534" ALIGN="BOTTOM" BORDER="0"
+ SRC="./metadyn-vb.png"
+ ALT="Image metadyn-vb"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+The accuracy of metadynamics is fairly sensitive to <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>.  Fig.&nbsp;<A HREF="#fig:meta-comp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> shows free energies for the butane system at 273 K computing using metadynamics (and the long MD for reference) using various combinations of <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>, all for 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN> steps.  Among those considered, it appears <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> = 0.1 kcal/mol, and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN> = 0.1 &#197; are the best choices.  Generally, smaller <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$ w$"></SPAN> will yield more accurate free energies, but at larger computational cost.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1003"
+  HREF="node80.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1001"
+  HREF="node78.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html995"
+  HREF="node78.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1004"
+  HREF="node80.html">Well-Tempered Metadynamics</A>
+<B> Up:</B> <A NAME="tex2html1002"
+  HREF="node78.html">Metadynamics</A>
+<B> Previous:</B> <A NAME="tex2html996"
+  HREF="node78.html">Metadynamics</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

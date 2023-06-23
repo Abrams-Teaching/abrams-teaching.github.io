@@ -1,0 +1,781 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>The Metropolis Monte Carlo Method</TITLE>
+<META NAME="description" CONTENT="The Metropolis Monte Carlo Method">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" HREF="node11.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html283"
+  HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html281"
+  HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html275"
+  HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html284"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Up:</B> <A NAME="tex2html282"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html276"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00031000000000000000"></A>
+<A NAME="sec:metropolis"></A>
+<BR>
+The Metropolis Monte Carlo Method
+</H2>
+
+<P>
+Monte Carlo is a type of numerical integration.  Consider the following integral:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I = \int_a^b f\left(x\right) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img212.png"
+ ALT="$\displaystyle I = \int_a^b f\left(x\right) dx$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">62</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Now imagine that we have a second function, <SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img213.png"
+ ALT="$ \rho(x)$"></SPAN>, which is positive in the interval <SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img214.png"
+ ALT="$ [a,b]$"></SPAN>.  We can also express <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$ I$"></SPAN> as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I = \int_a^b \frac{f\left(x\right)}{\rho\left(x\right)}\rho\left(x\right) dx
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="148" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img215.png"
+ ALT="$\displaystyle I = \int_a^b \frac{f\left(x\right)}{\rho\left(x\right)}\rho\left(x\right) dx$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">63</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+If we think of <!-- MATH
+ $\rho\left(x\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img216.png"
+ ALT="$ \rho\left(x\right)$"></SPAN> as a <EM>probability density</EM>, then what we have just expressed is the expectation value of the quantity <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img217.png"
+ ALT="$ f/\rho$"></SPAN> on <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> in the interval <SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img214.png"
+ ALT="$ [a,b]$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I = \left<\frac{f\left(x\right)}{\rho\left(x\right)}\right>_\rho
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="102" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img218.png"
+ ALT="$\displaystyle I = \left&lt;\frac{f\left(x\right)}{\rho\left(x\right)}\right&gt;_\rho$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">64</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This implies that we can approximate <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$ I$"></SPAN> by picking <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN> values <!-- MATH
+ $\left\{x_i\right\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="34" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img219.png"
+ ALT="$ \left\{x_i\right\}$"></SPAN> randomly out of the probability distribution <SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img213.png"
+ ALT="$ \rho(x)$"></SPAN> and computing the following sum:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+I \approx \frac{1}{M} \sum_{i=1}^{M} \frac{f\left(x_i\right)}{\rho\left(x_i\right)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="125" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img220.png"
+ ALT="$\displaystyle I \approx \frac{1}{M} \sum_{i=1}^{M} \frac{f\left(x_i\right)}{\rho\left(x_i\right)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">65</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that this approximates the mean of <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img217.png"
+ ALT="$ f/\rho$"></SPAN> as long as we pick a large enough number of random numbers (<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN> is large enough) such that we &ldquo;densely&rdquo; cover the interval <SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img214.png"
+ ALT="$ [a,b]$"></SPAN>.  If <!-- MATH
+ $\rho\left(x\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img216.png"
+ ALT="$ \rho\left(x\right)$"></SPAN> is <EM>uniform</EM> on <SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img214.png"
+ ALT="$ [a,b]$"></SPAN>,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho\left(x\right) = \frac{1}{b-a},\ \ \ a < x < b
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="186" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img221.png"
+ ALT="$\displaystyle \rho\left(x\right) = \frac{1}{b-a},   a &lt; x &lt; b$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">66</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and therefore,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:unif_avg"></A><!-- MATH
+ \begin{equation}
+I \approx \frac{a-b}{M} \sum_{i=1}^{M} f\left(x_i\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="139" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img222.png"
+ ALT="$\displaystyle I \approx \frac{a-b}{M} \sum_{i=1}^{M} f\left(x_i\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">67</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The next question is, how good an approximation is this, compared with other one-dimensional numerical integration techniques, such as Simpson's rule and quadrature?  A better phrasing of this question is, how expensive is this technique for a given level of accuracy, compared to traditional techniques?  Consider this means to compute <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \pi $"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:get_pi"></A><!-- MATH
+ \begin{equation}
+I = \int_0^1 \left(1-x^2\right)^{1/2}dx = \frac{\pi}{4}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="192" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img223.png"
+ ALT="$\displaystyle I = \int_0^1 \left(1-x^2\right)^{1/2}dx = \frac{\pi}{4}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">68</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Allen and Tildesley&nbsp;[<A
+ HREF="node82.html#Allen+Tildesley1987">2</A>] mention that, in order use Eq.&nbsp;<A HREF="#eq:unif_avg">67</A> to compute <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \pi $"></SPAN> to an accuracy of one part in 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img43.png"
+ ALT="$ ^6$"></SPAN> requires <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN>&nbsp;=&nbsp;10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN> random values of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img224.png"
+ ALT="$ x_i$"></SPAN>, whereas Simpson's rule requires <EM>three orders of magnitude</EM> fewer points to discretize the interval to obtain an accuracy of one part in 10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img64.png"
+ ALT="$ ^7$"></SPAN> (Fig.&nbsp;<A HREF="#fig:numint_mc_vs_simp">2</A>).  So the answer is, integral estimation using Monte Carlo estimation with uniform random variates is expensive.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:numint_mc_vs_simp"></A><A NAME="1890"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2:</STRONG>
+Integration of Eq.&nbsp;<A HREF="#eq:get_pi">68</A> by Monte Carlo and Simpson's rule. Upper: 4<SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$ I$"></SPAN> vs number of random points for MC, for which points are uniform random variates on [0,1], and for Simpson's rule, for which points are equally spaced along [0,1].  Lower: Squared error in the estimate of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \pi $"></SPAN> for each method.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="640" HEIGHT="480" ALIGN="BOTTOM" BORDER="0"
+ SRC="./pi_by_mc.png"
+ ALT="Image pi_by_mc"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+But, the situation changes radically when the dimensionality of the integral is large, as is the case for an ensemble average.  For example, for a system of 100 particles comprising 300 coordinates, the configurational average <!-- MATH
+ $\left<G\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$ \left&lt;G\right&gt;$"></SPAN> (Eq.&nbsp;<A HREF="node10.html#eq:config_avg">59</A>) could be discretized using Simpson's rule.  If we did that, requesting only a modest 10 discrete points per axis in configurational space, we would need to evaluate the integrand <!-- MATH
+ $Ge^{-\beta{U}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img225.png"
+ ALT="$ Ge^{-\beta{U}}$"></SPAN> 10<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img226.png"
+ ALT="$ ^{300}$"></SPAN> times.  This is an almost unimaginably large number. Using a direct numerical technique to compute statistical mechanical averages is simply out of the question.
+
+<P>
+We therefore return to the idea of evaluating the integrand at a discrete set of points selected randomly from a distribution.  Here we call upon the idea of <EM>importance sampling</EM>.  Let us try to use whatever we know ahead of time about the integrand in picking our random distribution, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN>, such that we <EM>minimize</EM> the number of points (i.e., the expense) necessary to give an estimate of <!-- MATH
+ $\left<G\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$ \left&lt;G\right&gt;$"></SPAN> to a given level of accuracy.
+
+<P>
+Now, clearly the states that contribute the most to the integrals we wish to evaluate by configurational averaging are those states with large Boltzmann factors; that is, those states for which <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN> is large.  It stands to reason that if we randomly select points from <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN>, we will do a pretty good job approximating the integral. So what we end up computing is the &ldquo;average of <!-- MATH
+ $G\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="56" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img227.png"
+ ALT="$ G\rho_{NVT}$"></SPAN> over <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN>&rdquo;:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\left<G\rho_{NVT}/\rho_{NVT}\right> \approx \left<G\right>,
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="169" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img228.png"
+ ALT="$\displaystyle \left&lt;G\rho_{NVT}/\rho_{NVT}\right&gt; \approx \left&lt;G\right&gt;,$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">69</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+which should give an excellent approximation for <!-- MATH
+ $\left<G\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$ \left&lt;G\right&gt;$"></SPAN>. The idea of using <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN> as the sampling distribution is due to Metropolis et al.&nbsp;[<A
+ HREF="node82.html#Metropolis1953">3</A>].  This makes the real work in computing <!-- MATH
+ $\left<G\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$ \left&lt;G\right&gt;$"></SPAN> generating states that randomly sample <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN>.
+
+<P>
+Metropolis et al.&nbsp;[<A
+ HREF="node82.html#Metropolis1953">3</A>] showed that an efficient way to do this involves generating a <EM>Markov chain of states</EM> which is constructed such that its <EM>limiting distribution</EM> is <!-- MATH
+ $\rho_{NVT}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ \rho_{NVT}$"></SPAN>.  A Markov chain is just a sequence of trials, where (i) each trial outcome is a member of a finite set and (ii) every trial outcome depends only on the outcome that immediately precedes it.  By &ldquo;limiting distribution,&rdquo; we mean that the trial acceptance probabilities are tuned such that the probability of observing the Markov chain atop a particular state is defined by some equilibrium probability distribution, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN>.  For the following discussion, it will be convenient to denote a particular state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> using <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img230.png"
+ ALT="$ \Gamma_n$"></SPAN>, instead of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \nu$"></SPAN>.
+
+<P>
+A trial is some perturbation (usually small) of the coordinates specifying a state.  For example, in an Ising system, this might mean flipping a randomly selected spin.  In a system of particles in continuous space, it might mean displacing a randomly selected particle by a small amount <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img231.png"
+ ALT="$ \delta r$"></SPAN> in a randomly chosen direction <!-- MATH
+ $(\theta,\phi)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img232.png"
+ ALT="$ (\theta,\phi)$"></SPAN>. There can be a large variety of such &ldquo;trial moves&rdquo; for any particular system.
+
+<P>
+The probability that a trial move results in a successful transition from state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> is denoted <SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img233.png"
+ ALT="$ \pi_{nm}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img234.png"
+ ALT="$ {\bf\pi}$"></SPAN> is called the &ldquo;transition matrix.&rdquo;  It must be specified ahead of time to execute a traditional Markov chain.  Since the probability that a trial results in a successful transition to any state, the rows of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img234.png"
+ ALT="$ {\bf\pi}$"></SPAN> add to unity:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_i \pi_{ni} = 1
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="81" HEIGHT="48" ALIGN="MIDDLE" BORDER="0"
+ SRC="img235.png"
+ ALT="$\displaystyle \sum_i \pi_{ni} = 1$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">70</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+With this specification, we term <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img234.png"
+ ALT="$ {\bf\pi}$"></SPAN> a &ldquo;stochastic&rdquo; matrix.
+Furthermore, for an equilibrium ensemble of states in state space, we
+require that transitions from state to state <EM>do not alter state
+weights</EM> as determined by the limiting distribution.  So the weight of
+state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho_n \equiv \rho_{NVT}\left(\Gamma_n\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="115" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img236.png"
+ ALT="$\displaystyle \rho_n \equiv \rho_{NVT}\left(\Gamma_n\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">71</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+must be the result of transitions from all other states to state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:flow"></A><!-- MATH
+ \begin{equation}
+\rho_n = \sum_m \rho_m \pi_{mn}.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="121" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img237.png"
+ ALT="$\displaystyle \rho_n = \sum_m \rho_m \pi_{mn}.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">72</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+For all states <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN>, we can write Eq.&nbsp;<A HREF="#eq:flow">72</A> as a post-op matrix equation:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:balance"></A><!-- MATH
+ \begin{equation}
+{\bf\rho\pi} = {\bf\rho}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="51" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img238.png"
+ ALT="$\displaystyle {\bf\rho\pi} = {\bf\rho}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">73</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$ {\bf\rho}$"></SPAN> is the row vector of all state weights. Eq.&nbsp;<A HREF="#eq:balance">73</A> constrains our choice of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img234.png"
+ ALT="$ {\bf\pi}$"></SPAN>.  This means there is still more than one way to specify <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$ {\bf\rho}$"></SPAN>.  Metropolis et al.&nbsp;[<A
+ HREF="node82.html#Metropolis1953">3</A>] suggested:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:detailed_balance"></A><!-- MATH
+ \begin{equation}
+\rho_m\pi_{mn} = \rho_n\pi_{nm}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="120" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img240.png"
+ ALT="$\displaystyle \rho_m\pi_{mn} = \rho_n\pi_{nm}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">74</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+That is, the probability of transitioning from state <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> is exactly equal to the probability of transitioning from state <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN>.  This is called the &ldquo;detailed balance&rdquo; condition, and it guarantees that the state weights remain static.  Observe:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_m \rho_m\pi_{mn} = \sum_m\left(\rho_n\pi_{nm}\right) = \rho_n\left(\sum_m\pi_{nm}\right) = \rho_n
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="343" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img241.png"
+ ALT="$\displaystyle \sum_m \rho_m\pi_{mn} = \sum_m\left(\rho_n\pi_{nm}\right) = \rho_n\left(\sum_m\pi_{nm}\right) = \rho_n$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">75</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Detailed balance is, however, overly restrictive; is the only the conceptually simplest way to guarantee that a limiting distribution is obtained.  This fact is of little importance in this course, but you may encounter other balance-enforcing conditions in the literature.
+
+<P>
+Metropolis et al.&nbsp;[<A
+ HREF="node82.html#Metropolis1953">3</A>] chose to construct <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img234.png"
+ ALT="$ {\bf\pi}$"></SPAN> as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\pi_{nm} = \alpha_{nm} {\rm acc}\left(n\rightarrow m\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="170" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img242.png"
+ ALT="$\displaystyle \pi_{nm} = \alpha_{nm} {\rm acc}\left(n\rightarrow m\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">76</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img66.png"
+ ALT="$ \alpha$"></SPAN> is the probability that a trial move is attempted, and <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img243.png"
+ ALT="$ {\rm acc}$"></SPAN> is the probability that a move is accepted.  If the probability of <EM>proposing</EM> a move from <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> is equal to that of <EM>proposing</EM> a move from <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN>, then <!-- MATH
+ $\alpha_{nm} = \alpha_{mn}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="85" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img244.png"
+ ALT="$ \alpha_{nm} = \alpha_{mn}$"></SPAN>, and the detailed balance condition is written:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho_n{\rm acc}\left(n\rightarrow m\right) =
+\rho_m{\rm acc}\left(m\rightarrow n\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="233" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img245.png"
+ ALT="$\displaystyle \rho_n{\rm acc}\left(n\rightarrow m\right) = \rho_m{\rm acc}\left(m\rightarrow n\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">77</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+from which follows
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{{\rm acc}\left(n\rightarrow m\right)}{{\rm acc}\left(m\rightarrow n\right)} =
+\frac{\rho_m}{\rho_n} =
+\frac{e^{-\beta{U}\left(\Gamma_m\right)}}{e^{-\beta{U}\left(\Gamma_n\right)}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="228" HEIGHT="57" ALIGN="MIDDLE" BORDER="0"
+ SRC="img246.png"
+ ALT="$\displaystyle \frac{{\rm acc}\left(n\rightarrow m\right)}{{\rm acc}\left(m\righ...
+...= \frac{e^{-\beta{U}\left(\Gamma_m\right)}}{e^{-\beta{U}\left(\Gamma_n\right)}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">78</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+giving
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:acc"></A><!-- MATH
+ \begin{equation}
+\frac{{\rm acc}\left(n\rightarrow m\right)}{{\rm acc}\left(m\rightarrow n\right)} =
+\exp\left\{-\beta\left[{U}\left(\Gamma_m\right)-{U}\left(\Gamma_n\right)\right]\right\} \equiv \exp\left(-\beta\Delta{U}_{nm}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="433" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img247.png"
+ ALT="$\displaystyle \frac{{\rm acc}\left(n\rightarrow m\right)}{{\rm acc}\left(m\righ...
+...eft(\Gamma_n\right)\right]\right\} \equiv \exp\left(-\beta\Delta{U}_{nm}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">79</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we have defined the change in potential energy as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\Delta{U}_{nm} = {U}\left(\Gamma_m\right)-{U}\left(\Gamma_n\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="184" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img248.png"
+ ALT="$\displaystyle \Delta{U}_{nm} = {U}\left(\Gamma_m\right)-{U}\left(\Gamma_n\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">80</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+There are many choices for <!-- MATH
+ ${\rm acc}\left(n \rightarrow m\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="89" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img249.png"
+ ALT="$ {\rm acc}\left(n \rightarrow m\right)$"></SPAN> that satisfy Eq.&nbsp;<A HREF="#eq:acc">79</A>. The original choice of Metropolis is used most frequently:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\rm acc}\left(n \rightarrow m\right) = \left\{\begin{array}{ll}
+	\exp\left(-\beta\Delta{U}_{nm}\right) & \Delta{U}_{nm} > 0\\
+	1 & \Delta{U}_{nm} < 0
+	\end{array}
+	\right.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="335" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img250.png"
+ ALT="$\displaystyle {\rm acc}\left(n \rightarrow m\right) = \left\{\begin{array}{ll} ...
+...}_{nm}\right) &amp; \Delta{U}_{nm} &gt; 0 1 &amp; \Delta{U}_{nm} &lt; 0 \end{array} \right.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">81</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+So, suppose we have some initial configuration <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN> with potential energy <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img251.png"
+ ALT="$ U_n$"></SPAN>.  We make a trial move, <EM>temporarily</EM> generating a new configuration <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN>.  Now we calculate a new energy, <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img252.png"
+ ALT="$ U_m$"></SPAN>.  If this energy is lower than the original, (<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img253.png"
+ ALT="$ U_m &lt; U_n$"></SPAN>) we unconditionally accept the move, and configuration <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> becomes the <EM>current</EM> configuration.  If it is greater than the original, (<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img254.png"
+ ALT="$ U_m &gt; U_n$"></SPAN>) we accept it with a probability consistent with the fact that the states both belong to a canonical ensemble.  How does one in practice decide whether to accept the move?  One first picks a uniform random variate <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img255.png"
+ ALT="$ x$"></SPAN> on the interval <SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img256.png"
+ ALT="$ [0,1]$"></SPAN>.  If <!-- MATH
+ $x \le {\rm acc}\left(n \rightarrow m\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="119" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img257.png"
+ ALT="$ x \le {\rm acc}\left(n \rightarrow m\right)$"></SPAN>, the move is accepted.
+
+<P>
+The next section is devoted to an implementation of the Metropolis Monte Carlo method for a 2D Ising magnet.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html283"
+  HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html281"
+  HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html275"
+  HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html284"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Up:</B> <A NAME="tex2html282"
+  HREF="node11.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html276"
+  HREF="node11.html">Monte Carlo Simulation</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

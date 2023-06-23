@@ -1,0 +1,795 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Ewald Coulombic energy</TITLE>
+<META NAME="description" CONTENT="The Ewald Coulombic energy">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node49.html">
+<LINK REL="previous" HREF="node47.html">
+<LINK REL="up" HREF="node47.html">
+<LINK REL="next" HREF="node49.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html648"
+  HREF="node49.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html646"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html640"
+  HREF="node47.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html649"
+  HREF="node49.html">Ewald Forces</A>
+<B> Up:</B> <A NAME="tex2html647"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html641"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00073100000000000000">
+The Ewald Coulombic energy</A>
+</H3>
+
+<P>
+First, assume we have a collection of charged particles in a cubic box
+with side length <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$">, with periodic boundary conditions. The
+collection is assumed neutral; there is an equal number of positive
+and negative charges.  The total Coulombic energy in this system is
+given by:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}_{\rm Coul} = \frac{1}{2}\sum_{i=1}^N q_i \phi(r_i)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="145" HEIGHT="56" BORDER="0"
+ SRC="img880.png"
+ ALT="\begin{displaymath}
+\mathscr{U}_{\rm Coul} = \frac{1}{2}\sum_{i=1}^N q_i \phi(r_i)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(310)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<IMG
+ WIDTH="38" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img881.png"
+ ALT="$\phi(r_i)$"> is the electrostatic potential at position <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img882.png"
+ ALT="$r_i$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\phi\left(r_i\right) = {\sum_{j=1}^{N}}^\prime{\sum_{{\bf n}\in\mathbb{Z}^3}}
+\frac{q_j}{\left|{\bf r}_{ij} + {\bf n}L\right|}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="186" HEIGHT="60" BORDER="0"
+ SRC="img883.png"
+ ALT="\begin{displaymath}
+\phi\left(r_i\right) = {\sum_{j=1}^{N}}^\prime{\sum_{{\bf n}...
+...}^3}}
+\frac{q_j}{\left\vert{\bf r}_{ij} + {\bf n}L\right\vert}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(311)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img884.png"
+ ALT="${\bf n}$"> is a three dimensional integer vector.  The prime on the
+first summation indicates that we do not admit the term for which
+<IMG
+ WIDTH="38" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img885.png"
+ ALT="$j=i$"> <EM>if</EM> <!-- MATH
+ ${\bf n} = (0,0,0)$
+ -->
+<IMG
+ WIDTH="86" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img886.png"
+ ALT="${\bf n} = (0,0,0)$">.  That is, we allow each particle
+to interact with its periodic images, but not with itself.
+
+<P>
+To evaluate <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img161.png"
+ ALT="$\mathscr{U}$"> efficiently, we break it into two parts:
+
+<UL>
+<LI>A short-ranged potential treated with a simple cutoff;
+</LI>
+<LI>A long-ranged potential which is periodic and slowly varying,
+which can therefore be represented to an acceptable level of
+accuracy by a finite Fourier series.
+</LI>
+</UL>
+
+<P>
+How can we do this?  The idea of Ewald is to do two things: first,
+screen each point charge using a diffuse cloud of opposite charge
+around each point charge, and then compensate for these screening
+charges using a smoothly varying, periodic charge density.  The
+screening charge is constructed to make the electrostatic potential
+due to a charge at position <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$r_j$"> decays rapidly to near zero at a
+prescribed distance.  These interactions are treated in real space.
+The compensating charge density, which is the sum of all screening
+densities except with opposite charges, is treated using a Fourier
+series.
+
+<P>
+The standard choice for a screening potential is Gaussian:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\rho_{\rm s}(r) = -q_i(\alpha/\pi)^{3/2} e^{-\alpha r^2}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="177" HEIGHT="28" BORDER="0"
+ SRC="img887.png"
+ ALT="\begin{displaymath}
+\rho_{\rm s}(r) = -q_i(\alpha/\pi)^{3/2} e^{-\alpha r^2}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(312)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+So for each charge, we add such a screening potential.  Now, to
+evaluate <!-- MATH
+ $\mathscr{U}_{\rm Coul}$
+ -->
+<IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img888.png"
+ ALT="$\mathscr{U}_{\rm Coul}$">, we have to evaluate the potential
+of a charge density that compensates for the screening charge
+densities at each particle.  This is done in Fourier space.
+
+<P>
+The potential of a given charge distribution is given by Poisson's
+equation:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+-\nabla^2\phi(r) = 4\pi\rho(r)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:ft_pois"></A><IMG
+ WIDTH="126" HEIGHT="28" BORDER="0"
+ SRC="img889.png"
+ ALT="\begin{displaymath}
+-\nabla^2\phi(r) = 4\pi\rho(r)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(313)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now, the compensating charge distribution, denoted <IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img890.png"
+ ALT="$\rho_1$">, can be
+written:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\rho_1(r) = \sum_{j=1}^{N}\sum_{{\bf n}\in\mathbb{Z}^3} q_j (\alpha/\pi)^{3/2} \exp\left[-\alpha\left|{\bf r} - \left({\bf r}_j + {\bf n}L\right)\right|\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="354" HEIGHT="58" BORDER="0"
+ SRC="img891.png"
+ ALT="\begin{displaymath}
+\rho_1(r) = \sum_{j=1}^{N}\sum_{{\bf n}\in\mathbb{Z}^3} q_j ...
+...t{\bf r} - \left({\bf r}_j + {\bf n}L\right)\right\vert\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(314)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Notice that the sum over <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$"> includes the self-interaction when we
+include the potential due to this charge density in the calcuation of
+the total Coulombic energy.
+
+<P>
+Now, consider the Fourier transform of Poisson's equation:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+k^2 \tilde{\phi}(k) = 4\pi\tilde{\rho}(k)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="113" HEIGHT="28" BORDER="0"
+ SRC="img892.png"
+ ALT="\begin{displaymath}
+k^2 \tilde{\phi}(k) = 4\pi\tilde{\rho}(k)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(315)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The Fourier transform of <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img893.png"
+ ALT="$\rho_1(r)$"> is given by
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\rho_1(k) & = & \int_V d{\bf r} e^{-i{\bf k}\cdot{\bf r}}\rho({\bf r})\\
+& = & \sum_{j=1}^{N}q_j e^{-i{\bf k}\cdot{\bf r}_j}e^{-k^2/4\alpha}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img894.png"
+ ALT="$\displaystyle \rho_1(k)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="110" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img895.png"
+ ALT="$\displaystyle \int_V d{\bf r} e^{-i{\bf k}\cdot{\bf r}}\rho({\bf r})$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(316)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="142" HEIGHT="68" ALIGN="MIDDLE" BORDER="0"
+ SRC="img896.png"
+ ALT="$\displaystyle \sum_{j=1}^{N}q_j e^{-i{\bf k}\cdot{\bf r}_j}e^{-k^2/4\alpha}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(317)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+(The math required to show this involves noting that the the Fourier
+transform of a Gaussian is another Gaussian, and that the integral 
+over all space of a normalized Gaussian is unity.)
+The <IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img897.png"
+ ALT="${\bf k}$">-vectors are given by 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+{\bf k} = \frac{2\pi}{L} {\bf l} \ \ \ \ {\bf l} \in \mathbb{Z}^3
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="120" HEIGHT="38" BORDER="0"
+ SRC="img898.png"
+ ALT="\begin{displaymath}
+{\bf k} = \frac{2\pi}{L} {\bf l}     {\bf l} \in \mathbb{Z}^3
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(318)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+We can use Eq.&nbsp;<A HREF="#eq:ft_pois">314</A> to solve for <!-- MATH
+ $\tilde{\phi}(k)$
+ -->
+<IMG
+ WIDTH="35" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img899.png"
+ ALT="$\tilde{\phi}(k)$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\tilde{\phi}(k) = \frac{4\pi}{k^2} \sum_{j=1}^{N}q_j e^{-i{\bf k}\cdot{\bf r}_j}e^{-k^2/4\alpha}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:ft_phi1"></A><IMG
+ WIDTH="212" HEIGHT="58" BORDER="0"
+ SRC="img900.png"
+ ALT="\begin{displaymath}
+\tilde{\phi}(k) = \frac{4\pi}{k^2} \sum_{j=1}^{N}q_j e^{-i{\bf k}\cdot{\bf r}_j}e^{-k^2/4\alpha}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(319)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Note that this solution is not defined for <IMG
+ WIDTH="42" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img901.png"
+ ALT="$k = 0$">.  In fact, we have
+to assume that <!-- MATH
+ $\tilde\phi(0) = 0$
+ -->
+<IMG
+ WIDTH="63" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img902.png"
+ ALT="$\tilde\phi(0) = 0$">, which is consistent with the
+notion that our system and all its periodic images is embedded in a
+medium of infinite dielectric constant (a perfect conductor; the
+``tinfoil'' boundary condition).
+
+<P>
+Fourier inverting <IMG
+ WIDTH="35" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img903.png"
+ ALT="$\tilde\phi(k)$"> gives
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\phi_i(r) = \frac{1}{V}\sum_{{\bf k}\ne 0}\tilde\phi(k)e^{i{\bf k}\cdot{\bf r}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="160" HEIGHT="50" BORDER="0"
+ SRC="img904.png"
+ ALT="\begin{displaymath}
+\phi_i(r) = \frac{1}{V}\sum_{{\bf k}\ne 0}\tilde\phi(k)e^{i{\bf k}\cdot{\bf r}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(320)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which, when we substitute for <!-- MATH
+ $\tilde{\phi}(k)$
+ -->
+<IMG
+ WIDTH="35" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img899.png"
+ ALT="$\tilde{\phi}(k)$"> from Eq.&nbsp;<A HREF="#eq:ft_phi1">320</A>
+yields
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\phi_i(r) = \sum_{{\bf k}\ne 0}\sum_{j=1}^{N} \frac{4\pi q_j}{Vk^2}
+e^{i{\bf k}\cdot\left({\bf r}-{\bf r}_j\right)}e^{-k^2/4\alpha}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="256" HEIGHT="58" BORDER="0"
+ SRC="img905.png"
+ ALT="\begin{displaymath}
+\phi_i(r) = \sum_{{\bf k}\ne 0}\sum_{j=1}^{N} \frac{4\pi q_j...
+...^{i{\bf k}\cdot\left({\bf r}-{\bf r}_j\right)}e^{-k^2/4\alpha}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(321)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+So, the total Coulombic energy due to the compensating charge distribution
+is 
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:ewald_u1"></A>
+<!-- MATH
+ \begin{eqnarray}
+\mathscr{U}_1 & = & \frac{1}{2}\sum_i q_i\phi_1(r_i)\\
+& = & \frac{1}{2}\sum_{{\bf k}\ne 0}\sum_{j=1}^{N} \frac{4\pi q_i q_j}{Vk^2}
+e^{i{\bf k}\cdot\left({\bf r}-{\bf r}_j\right)}e^{-k^2/4\alpha}\\
+& = & \frac{1}{2V}\sum_{{\bf k}\ne 0}\frac{4\pi}{k^2}\left|\rho(k)\right|^2e^{-k^2/4\alpha}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="22" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img906.png"
+ ALT="$\displaystyle \mathscr{U}_1$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="98" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img907.png"
+ ALT="$\displaystyle \frac{1}{2}\sum_i q_i\phi_1(r_i)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(322)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="232" HEIGHT="68" ALIGN="MIDDLE" BORDER="0"
+ SRC="img908.png"
+ ALT="$\displaystyle \frac{1}{2}\sum_{{\bf k}\ne 0}\sum_{j=1}^{N} \frac{4\pi q_i q_j}{Vk^2}
+e^{i{\bf k}\cdot\left({\bf r}-{\bf r}_j\right)}e^{-k^2/4\alpha}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(323)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="182" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img909.png"
+ ALT="$\displaystyle \frac{1}{2V}\sum_{{\bf k}\ne 0}\frac{4\pi}{k^2}\left\vert\rho(k)\right\vert^2e^{-k^2/4\alpha}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(324)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\rho(k) = \sum_{i=1}^{N}q_ie^{i{\bf k}\cdot{\bf r}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="118" HEIGHT="56" BORDER="0"
+ SRC="img910.png"
+ ALT="\begin{displaymath}
+\rho(k) = \sum_{i=1}^{N}q_ie^{i{\bf k}\cdot{\bf r}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(325)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Notice that this does indeed include a spurious self-self interaction, because
+the point charge at <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img650.png"
+ ALT="${\bf
+r}_i$"> interacts with the compensating charge
+cloud also at <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img650.png"
+ ALT="${\bf
+r}_i$">.  This self-interaction is the potential
+at the center of a Gaussian charge distribution.  First, we solve
+Poission's equation for the potential due to a Gaussian charge
+distribution (details in F&amp;S):
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+-\frac{1}{r}\frac{\partial^2r\phi_{\rm Gauss}}{\partial r^2} = 4\pi\rho_{\rm Gauss}(r)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="194" HEIGHT="41" BORDER="0"
+ SRC="img911.png"
+ ALT="\begin{displaymath}
+-\frac{1}{r}\frac{\partial^2r\phi_{\rm Gauss}}{\partial r^2} = 4\pi\rho_{\rm Gauss}(r)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(326)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+yielding
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\phi_{\rm Gauss}(r) = \frac{q_i}{r}{\rm erf}(\sqrt{a}r)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="160" HEIGHT="35" BORDER="0"
+ SRC="img912.png"
+ ALT="\begin{displaymath}
+\phi_{\rm Gauss}(r) = \frac{q_i}{r}{\rm erf}(\sqrt{a}r)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(327)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img913.png"
+ ALT="${\rm erf}$"> is the error function:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+{\rm erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-r^2}dr
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="164" HEIGHT="44" BORDER="0"
+ SRC="img914.png"
+ ALT="\begin{displaymath}
+{\rm erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-r^2}dr
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(328)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+At <IMG
+ WIDTH="41" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img915.png"
+ ALT="$r=0$">, we have 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\phi_{\rm self} = \phi_{\rm Gauss}(0) = 2\left(\frac{\alpha}{\pi}\right)^{1/2}q_i
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="212" HEIGHT="40" BORDER="0"
+ SRC="img916.png"
+ ALT="\begin{displaymath}
+\phi_{\rm self} = \phi_{\rm Gauss}(0) = 2\left(\frac{\alpha}{\pi}\right)^{1/2}q_i
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(329)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+So the total self-interaction energy becomes
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}_{\rm self} = \left(\frac{\alpha}{\pi}\right)^{1/2}\sum_{i=1}^{N}q_i^2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="147" HEIGHT="56" BORDER="0"
+ SRC="img917.png"
+ ALT="\begin{displaymath}
+\mathscr{U}_{\rm self} = \left(\frac{\alpha}{\pi}\right)^{1/2}\sum_{i=1}^{N}q_i^2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(330)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which must be <EM>subtracted</EM> from the total Coulombic energy.
+
+<P>
+Finally, the real-space contribution of the point charge at <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img650.png"
+ ALT="${\bf
+r}_i$"> is the
+screened potential:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\phi_{\rm short}(r) = \frac{q_i}{r} - \frac{q_i}{r}{\rm erf}\left(\sqrt{a}r\right) \equiv \frac{q_i}{r}{\rm erfc}\left(\sqrt{a}r\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="303" HEIGHT="35" BORDER="0"
+ SRC="img918.png"
+ ALT="\begin{displaymath}
+\phi_{\rm short}(r) = \frac{q_i}{r} - \frac{q_i}{r}{\rm erf}...
+...}r\right) \equiv \frac{q_i}{r}{\rm erfc}\left(\sqrt{a}r\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(331)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img919.png"
+ ALT="${\rm erfc}$"> is the complementary error function.  The total 
+real-space Coulombic potential energy is therefore
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}_{\rm short} = \frac{1}{2}\sum_{i\ne j}^{N} \frac{q_i q_j}{r_{ij}} {\rm erfc}\left(\sqrt{a}r_{ij}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="212" HEIGHT="58" BORDER="0"
+ SRC="img920.png"
+ ALT="\begin{displaymath}
+\mathscr{U}_{\rm short} = \frac{1}{2}\sum_{i\ne j}^{N} \frac{q_i q_j}{r_{ij}} {\rm erfc}\left(\sqrt{a}r_{ij}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(332)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Putting it all together:
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:ewald_u"></A>
+<!-- MATH
+ \begin{eqnarray}
+\mathscr{U}_{\rm Coul} & = & \frac{1}{2V}\sum_{{\bf k}\ne 0}\frac{4\pi}{k^2}\left|\rho(k)\right|^2e^{-k^2/4\alpha}\\
+& & -\left(\frac{\alpha}{\pi}\right)^{1/2}\sum_{i=1}^{N}q_i^2\\
+& & +\frac{1}{2}\sum_{i\ne j}^{N} \frac{q_i q_j}{r_{ij}} {\rm erfc}\left(\sqrt{a}r_{ij}\right)
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img921.png"
+ ALT="$\displaystyle \mathscr{U}_{\rm Coul}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="182" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img909.png"
+ ALT="$\displaystyle \frac{1}{2V}\sum_{{\bf k}\ne 0}\frac{4\pi}{k^2}\left\vert\rho(k)\right\vert^2e^{-k^2/4\alpha}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(333)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="115" HEIGHT="68" ALIGN="MIDDLE" BORDER="0"
+ SRC="img922.png"
+ ALT="$\displaystyle -\left(\frac{\alpha}{\pi}\right)^{1/2}\sum_{i=1}^{N}q_i^2$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(334)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="169" HEIGHT="68" ALIGN="MIDDLE" BORDER="0"
+ SRC="img923.png"
+ ALT="$\displaystyle +\frac{1}{2}\sum_{i\ne j}^{N} \frac{q_i q_j}{r_{ij}} {\rm erfc}\left(\sqrt{a}r_{ij}\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(335)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\rho(k) = \sum_{i=1}^{N}q_ie^{i{\bf k}\cdot{\bf r}}.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="121" HEIGHT="56" BORDER="0"
+ SRC="img924.png"
+ ALT="\begin{displaymath}
+\rho(k) = \sum_{i=1}^{N}q_ie^{i{\bf k}\cdot{\bf r}}.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(336)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now, the arbitrariness left to us at this point is in a choice for the
+parameter <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $">.  Clearly, very small alphas make the Gaussians tighter
+and therefore the compensating charge distribution less smoothly varying.
+This means a Fourier series representation of <IMG
+ WIDTH="22" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img925.png"
+ ALT="$\mathscr{U}_1$"> with
+a given number of terms is more accurate for larger <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $">. We'll
+evaluate choice of <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $"> in Sec.&nbsp;<A HREF="node50.html#sec:ewald:imp">7.3.3</A>. 
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html648"
+  HREF="node49.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html646"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html640"
+  HREF="node47.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html649"
+  HREF="node49.html">Ewald Forces</A>
+<B> Up:</B> <A NAME="tex2html647"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html641"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

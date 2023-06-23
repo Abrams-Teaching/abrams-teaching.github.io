@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Main Program: Argument Parsing</TITLE>
+<META NAME="description" CONTENT="Main Program: Argument Parsing">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html376"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html374"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html368"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html377"
+  HREF="node21.html">Main Program: Initial Outputs</A>
+<B> Up:</B> <A NAME="tex2html375"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html369"
+  HREF="node19.html">Main Program: Variable Declarations</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032700000000000000">
+Main Program: Argument Parsing</A>
+</H3>
+Here, we parse the command line arguments.  The user running the program can specify the magnet side-length <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN>, the temperature (in units of <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img277.png"
+ ALT="$ J/k_B$"></SPAN>), the number of cycles, the sampling interval, and the seed value for the pseudorandom number generator.  The array <code>argv[]</code> and its count of elements <code>argc</code> appear as parameters in the definition of <code>main</code>, as is customary in C.  The built-in function <code>strcmp()</code> returns 0 if the two arguments match, so the logical expression <code></code>strcmp(a,b)! evaluates to TRUE if strings <code>a</code> and <code>b</code> match.  The built-in functions <code>atoi()</code> and <code>atof()</code> convert their string arguments to integers and floating-points, respectively.  The notation <code>argv[++i]</code> means that <EM>first</EM> the current value of <code>i</code> is incremented by 1 and <EM>then</EM> it is used to access the value in <code>argv[]</code>.  So, for example, if the string <code>"-L"</code> is detected at the <code>i</code>th position in the array of command-line arguments, the code immediately jumps to the <EM>next</EM> position in the array and tries to intepret that argument as an integer to assign to <code>L</code>.
+<PRE>
+  for (i=1;i&lt;argc;i++) {
+    if (!strcmp(argv[i],"-L")) L=atoi(argv[++i]);
+    else if (!strcmp(argv[i],"-T")) T=atof(argv[++i]);
+    else if (!strcmp(argv[i],"-nc")) nCycles = atoi(argv[++i]);
+    else if (!strcmp(argv[i],"-fs")) fSamp = atoi(argv[++i]);
+    else if (!strcmp(argv[i],"-s")) {
+      Seed = (unsigned long)atoi(argv[++i]);
+    }
+  }
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

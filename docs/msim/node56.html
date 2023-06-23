@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>How ``flat'' is ``flat''?</TITLE>
+<META NAME="description" CONTENT="How ``flat'' is ``flat''?">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node55.html">
+<LINK REL="up" HREF="node52.html">
+<LINK REL="next" HREF="node57.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html726"
+  HREF="node57.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html724"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html720"
+  HREF="node55.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html727"
+  HREF="node57.html">Course Projects</A>
+<B> Up:</B> <A NAME="tex2html725"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html721"
+  HREF="node55.html">The Potts Model treated</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00074400000000000000">
+How ``flat'' is ``flat''?</A>
+</H3>
+
+<P>
+In this section, we report results of a small case study which
+investigates the required flatness criterion to achieve a converged
+density of states.  We will consider the converged <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> computed
+using the 80% criterion as the ``exact'' result, and compare this to
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">'s computed using the criterion that every bin in the energy
+histogram has at least <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> hits.   We considered <!-- MATH
+ $M \in
+\left\{2,20,200,2000,20000,200000\right\}$
+ -->
+<IMG
+ WIDTH="259" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1012.png"
+ ALT="$M \in
+\left\{2,20,200,2000,20000,200000\right\}$">.  In order 
+to minimize the number of cycles, we will sample the histogram (that
+is, query its flatness) once per cycle.  We also used the same
+termination criterion for the update of <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">.  In the figure below, I
+show both the relative error between <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> computed with the
+<IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$">-criterion and <!-- MATH
+ $\Omega_{\rm exact}$
+ -->
+<IMG
+ WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1013.png"
+ ALT="$\Omega_{\rm exact}$">, as well as the number of
+cycles required for the <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$">-criterion computation.
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="540" HEIGHT="378" ALIGN="CENTER"
+ SRC="wl_hmin.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Relative error (<IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img44.png"
+ ALT="$\Box $">) and number of cycles (<IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$\bigcirc $">) vs. minimum hit level <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> for
+flatness in WL sampling of the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12 ten-state Potts model.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Interestingly, we see that even out to <IMG
+ WIDTH="44" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1014.png"
+ ALT="$&gt;10^6$"> cycles, our result has
+only marginally converged to the exact result; an error of <IMG
+ WIDTH="41" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1015.png"
+ ALT="$\approx
+0.1$"> is larger than the iteration-to-iteration convergence tolerance
+of <!-- MATH
+ $\approx 10^{-4}$
+ -->
+<IMG
+ WIDTH="54" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1016.png"
+ ALT="$\approx 10^{-4}$"> observed in the original run.  Nevertheless, this
+level of error is very small; the curves are indistinguishable on a plot.
+Another interesting fact is that the <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> = 2 run is apparently <EM>more 
+expensive</EM> than the <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> = 20 run.  This is likely due to fact that
+the initial configuration for each run segment (each value of <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">) is
+different; it is the final configuration from the previous segment.  It 
+just so happens that the 23rd iteration for <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> = 2 begins in a configuration
+that initiates a walk that more slowly covers energy space than the 
+configurations in the <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> = 20 runs.  Beyond <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> = 20, the behavior
+is as expected: increasing <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> makes the simulation more expensive.
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html726"
+  HREF="node57.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html724"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html720"
+  HREF="node55.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html727"
+  HREF="node57.html">Course Projects</A>
+<B> Up:</B> <A NAME="tex2html725"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html721"
+  HREF="node55.html">The Potts Model treated</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

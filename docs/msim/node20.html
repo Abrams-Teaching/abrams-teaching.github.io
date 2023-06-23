@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Suggest Project: Lennard-Jones Dumbbells</TITLE>
+<META NAME="description" CONTENT="Suggest Project: Lennard-Jones Dumbbells">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="up" HREF="node7.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html335"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html333"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html329"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html336"
+  HREF="node21.html">Molecular Dynamics Simulation</A>
+<B> Up:</B> <A NAME="tex2html334"
+  HREF="node7.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html330"
+  HREF="node19.html">Case Study 4 (F&amp;S</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00037000000000000000"></A>
+<A NAME="sec:ljdumb"></A>
+<BR>
+Suggest Project:  Lennard-Jones Dumbbells
+</H2>
+
+<P>
+In Sec.&nbsp;<A HREF="node18.html#sec:cs3">3.5</A>, MC simulation of 2D disk dumbbells was
+presented to introduce MC simulation using more than one kind of trial
+move; in that case, displacement of randomly selected <EM>molecules</EM>
+and rotation of randomly selected <EM>molecules</EM>.  For this suggested
+project, we can imagine performing simulations of dumbbells in 3D in a
+completely analogous manner.  Modify the code mclj.c such that every
+even numbered particle is bonded to its odd-numbered neighbor one up.
+Each such pair forms a molecule, and trial moves consist of (1) moves
+of molecule centers by a distance <IMG
+ WIDTH="25" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img331.png"
+ ALT="$\Delta{\bf r}$">, and (2) rotations
+of molecules by random angular displacements
+<!-- MATH
+ $(\Delta\theta,\Delta\phi)$
+ -->
+<IMG
+ WIDTH="67" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img332.png"
+ ALT="$(\Delta\theta,\Delta\phi)$">.  (Recall how one must sample polar angles
+to maintain uniform density of direction in 3D space: one must sample
+uniformly from <IMG
+ WIDTH="36" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img285.png"
+ ALT="$\cos\theta$">!)  An interesting quantity to measure is
+the orientational correlation function
+<!-- MATH
+ $P_2\left(\cos\theta_{ij}\right)$
+ -->
+<IMG
+ WIDTH="79" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img333.png"
+ ALT="$P_2\left(\cos\theta_{ij}\right)$"> (Eq.&nbsp;<A HREF="node18.html#eq:p2">88</A>) as a function of
+density.
+
+<P>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

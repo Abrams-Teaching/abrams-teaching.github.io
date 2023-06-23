@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Implementation and Evaluation</TITLE>
+<META NAME="description" CONTENT="Implementation and Evaluation">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node51.html">
+<LINK REL="previous" HREF="node49.html">
+<LINK REL="up" HREF="node47.html">
+<LINK REL="next" HREF="node51.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html668"
+  HREF="node51.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html666"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html660"
+  HREF="node49.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html669"
+  HREF="node51.html">Ewald Summation: Suggested Exercises</A>
+<B> Up:</B> <A NAME="tex2html667"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html661"
+  HREF="node49.html">Ewald Forces</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00073300000000000000"></A>
+<A NAME="sec:ewald:imp"></A>
+<BR>
+Implementation and Evaluation
+</H3>
+
+<P>
+We will consider an Ewald implementation which is a modified version
+of the <TT>ewald</TT> code written for <A NAME="tex2html51"
+  HREF="http://molsim.chem.uva.nl/course/material.html">Berend Smit's
+Molecular Simulation course
+webpage</A>.  This code
+simply computes the Ewald energy for a cubic lattice, given an
+appropriate number of particles, and a value for <IMG
+ WIDTH="27" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img932.png"
+ ALT="$\sqrt{\alpha}$">
+(which is called <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $"> in the code), and a value for <IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img933.png"
+ ALT="$k_{\rm max}$">,
+the maximum integer index for enumerating <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$">-vectors.&nbsp;<A NAME="tex2html50"
+  HREF="footnode.html#foot8322"><SUP>5</SUP></A>
+<P>
+The units used in a system with electrostatics differ depending on
+community.  So far, we have assumed that the units of electrostatic
+potential are charge <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img935.png"
+ ALT="$\mathscr{C}$">, divided by length <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img936.png"
+ ALT="$\mathscr{L}$">,
+because we write potential as <!-- MATH
+ $\phi = q/|{\bf r}|$
+ -->
+<IMG
+ WIDTH="67" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img937.png"
+ ALT="$\phi = q/\vert{\bf r}\vert$">, where <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img716.png"
+ ALT="$q$"> is
+measured in units of <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img935.png"
+ ALT="$\mathscr{C}$"> and distance in units of
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img936.png"
+ ALT="$\mathscr{L}$">.  Energy is therefore written in units of
+<IMG
+ WIDTH="21" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img938.png"
+ ALT="$\mathscr{C}^2$"> over <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img936.png"
+ ALT="$\mathscr{L}$">, and force in units of
+<IMG
+ WIDTH="21" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img938.png"
+ ALT="$\mathscr{C}^2$"> over <IMG
+ WIDTH="22" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img939.png"
+ ALT="$\mathscr{L}^2$">.  If we want the final energy in
+more familiar units, we can choose <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img935.png"
+ ALT="$\mathscr{C}$"> and <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img936.png"
+ ALT="$\mathscr{L}$">,
+and use the standard prefactor <!-- MATH
+ $1/4\pi\epsilon_0$
+ -->
+<IMG
+ WIDTH="51" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img940.png"
+ ALT="$1/4\pi\epsilon_0$"> to convert from
+``charge squared per length'' to ``energy''.  For example, in SI
+units, <!-- MATH
+ $\epsilon_0 = 8.85419\times10^{-12}$
+ -->
+<IMG
+ WIDTH="150" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img941.png"
+ ALT="$\epsilon_0 = 8.85419\times10^{-12}$">&nbsp;(C<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img243.png"
+ ALT="$^2$">/m)/J.  In this
+implementation, we use a length of <!-- MATH
+ $\mathscr{L} = 1$
+ -->
+<IMG
+ WIDTH="44" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img942.png"
+ ALT="$\mathscr{L} = 1$"> and <!-- MATH
+ $\mathscr{C}
+= 1$
+ -->
+<IMG
+ WIDTH="43" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img943.png"
+ ALT="$\mathscr{C}
+= 1$"> and measure energy such that <!-- MATH
+ $1/4\pi\epsilon_0 = 1$
+ -->
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img944.png"
+ ALT="$1/4\pi\epsilon_0 = 1$">.
+
+<P>
+We will examine two configurations, both with <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 8<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img945.png"
+ ALT="$^3$"> = 512
+particles, with alternating + and - charges.  One configuration has
+the particle on a cubic lattice with lattice spacing <IMG
+ WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img946.png"
+ ALT="$r_0 = 1$">, which
+is the standard NaCl crystal structure.  We will call this the
+``crystal'' configuration.  The other is like the crystal, only each
+particle is displaced by a random amount from its lattice position
+with a maximum displacement of 0.3.  We will call this the ``liquid''
+configuration.  We compute the total electrostatic energy via the
+Ewald sum technique for various values of <IMG
+ WIDTH="27" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img932.png"
+ ALT="$\sqrt{\alpha}$"> and maximum
+<IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$">-vector index.  As we increase the number of <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$">-vectors taken in
+the sum, we would like to show that the total energy converges to a
+certain value.  We will measure this in terms of the Madelung
+constant, <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}_{\rm Coul} = -\frac{N q^2 M}{4\pi\epsilon_0r_0}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="121" HEIGHT="44" BORDER="0"
+ SRC="img947.png"
+ ALT="\begin{displaymath}
+\mathscr{U}_{\rm Coul} = -\frac{N q^2 M}{4\pi\epsilon_0r_0}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(341)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+The following results were obtained for the crystal when <IMG
+ WIDTH="56" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img948.png"
+ ALT="$\alpha = 0.8$">:
+<PRE>
+ alpha kmax u_real    u_fourier     u_self    u_total     M
+ 1.20  2    -.206695  0.297020E-33  -0.67703  -0.88372    1.7674    
+ 1.20  3    -.206695  0.509667E-33  -0.67703  -0.88372    1.7674    
+ 1.20  4    -.206695  0.994016E-02  -0.67703  -0.87378    1.7476    
+ 1.20  5    -.206695  0.994016E-02  -0.67703  -0.87378    1.7476    
+ 1.20  6    -.206695  0.994016E-02  -0.67703  -0.87378    1.7476
+</PRE>
+This shows that, for the perfectly periodic crystal, very few <IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$">-vectors
+are needed to reach a converged energy.  
+
+<P>
+For the liquid, the results are somewhat different, again for <IMG
+ WIDTH="56" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img949.png"
+ ALT="$\alpha
+= 1.2 $">:
+<PRE>
+ alpha kmax u_real    u_fourier     u_self    u_total     M
+ 1.20  2   -.244210   0.210535E-01  -0.67703  -0.90018    1.8004    
+ 1.20  3   -.244210   0.349887E-01  -0.67703  -0.88625    1.7725    
+ 1.20  4   -.244210   0.482931E-01  -0.67703  -0.87294    1.7459    
+ 1.20  5   -.244210   0.510164E-01  -0.67703  -0.87022    1.7404    
+ 1.20  6   -.244210   0.519170E-01  -0.67703  -0.86932    1.7386    
+ 1.20  7   -.244210   0.521388E-01  -0.67703  -0.86910    1.7382    
+ 1.20  8   -.244210   0.521741E-01  -0.67703  -0.86906    1.7381    
+ 1.20  9   -.244210   0.521802E-01  -0.67703  -0.86906    1.7381    
+ 1.20 10   -.244210   0.521808E-01  -0.67703  -0.86906    1.7381
+</PRE>
+
+<P>
+Considering the converged results for various values of <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $">,
+we see that <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> is not too sensitive to <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $">, once <IMG
+ WIDTH="56" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img950.png"
+ ALT="$\alpha &gt; 0.6$">:
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="420" HEIGHT="378" ALIGN="CENTER"
+ SRC="ewald_M.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Madelung constant <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$M$"> vs. Ewald parameter <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $"> for
+a system of 512 ions.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Note that, in principle, <!-- MATH
+ $\mathscr{U}_{\rm Coul}$
+ -->
+<IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img888.png"
+ ALT="$\mathscr{U}_{\rm Coul}$"> doesn't depend on
+<IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $">.  However, errors due to too low a choice for <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$\alpha $">
+indicate that the Fourier sum is poorly converged, because of the
+factor <!-- MATH
+ $\exp[-k^2/4\alpha]$
+ -->
+<IMG
+ WIDTH="91" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img951.png"
+ ALT="$\exp[-k^2/4\alpha]$">.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html668"
+  HREF="node51.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html666"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html660"
+  HREF="node49.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html669"
+  HREF="node51.html">Ewald Summation: Suggested Exercises</A>
+<B> Up:</B> <A NAME="tex2html667"
+  HREF="node47.html">Long-Range Interactions: The Ewald</A>
+<B> Previous:</B> <A NAME="tex2html661"
+  HREF="node49.html">Ewald Forces</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Potts Model treated by Wang-Landau MC</TITLE>
+<META NAME="description" CONTENT="The Potts Model treated by Wang-Landau MC">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node56.html">
+<LINK REL="previous" HREF="node54.html">
+<LINK REL="up" HREF="node52.html">
+<LINK REL="next" HREF="node56.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html718"
+  HREF="node56.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html716"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html710"
+  HREF="node54.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html719"
+  HREF="node56.html">How ``flat'' is ``flat''?</A>
+<B> Up:</B> <A NAME="tex2html717"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html711"
+  HREF="node54.html">A Conventional MC Study</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00074300000000000000">
+The Potts Model treated by Wang-Landau MC</A>
+</H3>
+
+<P>
+Now we will use the WL algorithm to compute <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> for the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> =
+12 ten-state Potts model.  (I used the code
+<A NAME="tex2html54"
+  HREF="codes/wl-w.c">wl-w.c</A>
+to obtain these results.) The
+relevant run parameters we have to specify are the exponent for the
+update rule of the factor <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">, the initial and final values of <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">,
+and the flatness criterion for the histogram.  The data presented here
+are from a single run for which <!-- MATH
+ $\ln f_{\rm initial}$
+ -->
+<IMG
+ WIDTH="61" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1005.png"
+ ALT="$\ln f_{\rm initial}$"> = 1, <!-- MATH
+ $\ln f_{\rm
+final}$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1006.png"
+ ALT="$\ln f_{\rm
+final}$"> = 10<IMG
+ WIDTH="21" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img980.png"
+ ALT="$^{-8}$">, and <!-- MATH
+ $\ln f_{i+1} = \frac{1}{2}\ln f_{i}$
+ -->
+<IMG
+ WIDTH="112" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1007.png"
+ ALT="$\ln f_{i+1} = \frac{1}{2}\ln f_{i}$">; this
+prescribes a total of 26 independent values of <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> for which a random
+walk in energy space must be executed.  A histogram is considered
+sufficiently flat if the minimum value if the histogram is greater
+than or equal to 80% of the mean value.
+
+<P>
+The figure below shows the resulting final <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">, compared
+to the piecemeal <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> computed from three NVT MC simulations.
+We see that the two methods give essentially the same function.
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="431" HEIGHT="378" ALIGN="CENTER"
+ SRC="Potts_wl_fig.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Density of states, <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">, for the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12 ten-state
+Potts model, computed by the WL technique, and pieced together
+from NVT MC.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+The close-up shown in the inset reveals some significant differences
+at the lowest energy levels between the WL and NVT results.  This is
+because the visits to the lowest energy levels were quite rare in the
+MC case, making the statistical accuracy of the energy histogram in
+this subdomain poor.
+
+<P>
+The next figure shows the cumulative cost (in number of cycles) of the
+WL method for this system, and the relative error in neighboring
+estimates of <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">, as functions of the number of updates to the
+factor <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">.  The relative error is defined as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\epsilon\equiv \int dE \left(\ln\Omega_{i}-\ln\Omega_{i-1}\right)^2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="189" HEIGHT="42" BORDER="0"
+ SRC="img1008.png"
+ ALT="\begin{displaymath}
+\epsilon\equiv \int dE \left(\ln\Omega_{i}-\ln\Omega_{i-1}\right)^2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(359)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="500" HEIGHT="378" ALIGN="CENTER"
+ SRC="wl_cost.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Cumulative number of cycles and relative error vs. <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">-update number
+in WL sampling of the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12 ten-state Potts model.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+We see from this data that it requires roughly <IMG
+ WIDTH="27" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img866.png"
+ ALT="$10^6$"> cycles to
+converge <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> to a tolerance of about 10<IMG
+ WIDTH="21" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1009.png"
+ ALT="$^{-4}$">, and that
+an additional <IMG
+ WIDTH="54" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1010.png"
+ ALT="$3\times 10^6$"> cycles does not improve this 
+convergence.  So, WL for this system is somewhat less expensive
+than the <IMG
+ WIDTH="54" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1010.png"
+ ALT="$3\times 10^6$"> required for the canonical MC runs.  
+
+<P>
+Of course, the canonical MC runs would have been much more
+expensive had I not known ahead of time what the critical
+temperature was.  For the WL method, no such knowledge
+is required <EM>a priori</EM>.  
+
+<P>
+It should be pointed out that <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> = 12 is a <EM>very small</EM> system.
+Wang and Landau broke major new ground in studying the
+thermodynamics of the Potts model by considering <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$"> up to 200.
+
+<P>
+Although WL does arrive at an accurate estimate of <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">, it is not
+dramatically more efficient than conventional NVT MC.  One of the
+reasons is due to the nature of the random walk:  ``steps'' in energy
+space are necessarily local.  Changing one spin changes energy by
+at most <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1011.png"
+ ALT="$\pm$">4, and on average the change in energy per flip is much lower
+in absolute value than that.  So the system can spend a lot of time trying
+to get away from a large subdomain of energy space for which the histogram
+is already sufficiently flat, in order to explore neighboring subdomains.
+WL showed that this deficiency can be partially avoided by conducting
+several parallel runs in different energy windows, which overlap a little
+bit to allow matching of the resulting densities of states.  
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html718"
+  HREF="node56.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html716"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html710"
+  HREF="node54.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html719"
+  HREF="node56.html">How ``flat'' is ``flat''?</A>
+<B> Up:</B> <A NAME="tex2html717"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html711"
+  HREF="node54.html">A Conventional MC Study</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

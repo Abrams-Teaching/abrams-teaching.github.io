@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Main Program: Initial Outputs</TITLE>
+<META NAME="description" CONTENT="Main Program: Initial Outputs">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html386"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html384"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html378"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html387"
+  HREF="node22.html">Main Program: Initialization</A>
+<B> Up:</B> <A NAME="tex2html385"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html379"
+  HREF="node20.html">Main Program: Argument Parsing</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032800000000000000">
+Main Program: Initial Outputs</A>
+</H3>
+Next, we echo the command entered back to the terminal, and then output any parsed variables values.
+<PRE>
+  printf("# command: ");
+  for (i=0;i&lt;argc;i++) printf("%s ",argv[i]);
+  printf("\n");
+  printf("# ISING simulation, NVT Metropolis Monte Carlo\n");
+  printf("# L = %i, T = %.3lf, nCycles %i, fSamp %i, Seed %lu\n",
+	  L,T,nCycles,fSamp,Seed);
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

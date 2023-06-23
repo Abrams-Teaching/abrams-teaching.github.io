@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Statistical Mechanics: A Brief Introduction</TITLE>
+<META NAME="description" CONTENT="Statistical Mechanics: A Brief Introduction">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="up" HREF="msim.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html140"
+  HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html138"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html132"
+  HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html141"
+  HREF="node3.html">Microstates and Degeneracy</A>
+<B> Up:</B> <A NAME="tex2html139"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html133"
+  HREF="node1.html">Introduction</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00020000000000000000">
+Statistical Mechanics:  A Brief Introduction</A>
+</H1>
+
+<P>
+(Taken primarily from Ch. 2 of Frenkel and
+Smit&nbsp;[<A
+ HREF="node63.html#Frenkel+Smit2002">1</A>] and Ch. 3 of <I>Introduction to Modern
+Statistical Mechanics</I>, by David Chandler&nbsp;[<A
+ HREF="node63.html#Chandler1987">5</A>].)
+
+<P>
+This course is centered upon one mathematical statement:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<G\right> = \sum_\nu P_\nu G_\nu
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:ensemble_average"></A><IMG
+ WIDTH="108" HEIGHT="44" BORDER="0"
+ SRC="img53.png"
+ ALT="\begin{displaymath}
+\left&lt;G\right&gt; = \sum_\nu P_\nu G_\nu
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(1)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+That is, the <EM>expectation value</EM>, <!-- MATH
+ $\left<G\right>$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.png"
+ ALT="$\left&lt;G\right&gt;$">, of some
+observable property <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$G$"> is an <EM>average</EM> over all possible
+microstates available to a system, indexed by <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$">, where <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$P_\nu$"> is
+the probability of observing the system in microstate <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$">, and
+<IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.png"
+ ALT="$G_\nu$"> is the value of the measured property G when the system is in
+microstate <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$">.  Eq.&nbsp;<A HREF="#eq:ensemble_average">1</A> illustrates the
+operation of performing an <B>ensemble average</B>.
+
+<P>
+Before even considering how to use computer simulation to make such a
+measurement of a particular property for a particular system, there
+are three main issues to consider:
+
+<OL>
+<LI>What is a microstate?
+</LI>
+<LI>What is meant by observing the system?
+</LI>
+<LI>How do we calculate probabilities?
+</LI>
+</OL>
+
+<P>
+In the following subsections, we give a cursory treatment of
+elementary statistical mechanics aimed at answering these questions.
+The aim is to give the student an appreciation (not a mastery) of the
+basic physics that underlies a majority of current molecular
+simulation.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html142"
+  HREF="node3.html">Microstates and Degeneracy</A>
+<LI><A NAME="tex2html143"
+  HREF="node4.html">Making Observations:  The Ergodic Hypothesis</A>
+<LI><A NAME="tex2html144"
+  HREF="node5.html">Entropy and Temperature</A>
+<LI><A NAME="tex2html145"
+  HREF="node6.html">Classical Statistical Mechanics</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html140"
+  HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html138"
+  HREF="msim.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html132"
+  HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html141"
+  HREF="node3.html">Microstates and Degeneracy</A>
+<B> Up:</B> <A NAME="tex2html139"
+  HREF="msim.html">Molecular Simulations</A>
+<B> Previous:</B> <A NAME="tex2html133"
+  HREF="node1.html">Introduction</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Analytical Potentials</TITLE>
+<META NAME="description" CONTENT="Analytical Potentials">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html289"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html287"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html281"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html290"
+  HREF="node16.html">Trial Moves</A>
+<B> Up:</B> <A NAME="tex2html288"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html282"
+  HREF="node14.html">Data Representation and Input/Output</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00033200000000000000">
+Analytical Potentials</A>
+</H3>
+
+<P>
+The total system potential energy is most often computed by means of
+<EM>analytical potentials</EM>.  Such a potential energy can be written
+as a continuous function of the positions of particle centers-of-mass.
+(Such potentials are often termed ``empirical'' when applied to atomic
+systems because they formally neglect quantum mechanics.)  In most
+molecular simulations, the total system potential can be decomposed in
+the following way:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U}\left({\bf r}^N\right) = U_0 + \sum_i U_1( {\bf r}_i ) + \sum_{i<j} U_2( {\bf r}_i, {\bf r}_j )
+  + \sum_{i<j<k} U_3( {\bf r}_i, {\bf r}_j, {\bf r}_k ) + \cdots +
+  U_N( {\bf r}_i, {\bf r}_j, \dots , {\bf r}_N ),
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="581" HEIGHT="47" BORDER="0"
+ SRC="img257.png"
+ ALT="\begin{displaymath}
+\mathscr{U}\left({\bf r}^N\right) = U_0 + \sum_i U_1( {\bf r...
+... ) + \cdots +
+U_N( {\bf r}_i, {\bf r}_j, \dots , {\bf r}_N ),
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(80)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img258.png"
+ ALT="$U_0$"> is some reference potential.  <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img259.png"
+ ALT="$U_1$"> is a ``one-body''
+potential, <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img260.png"
+ ALT="$U_2$"> is a ``two-body'' potential, etc.  This generally
+defines a ``many-body'' potential, and is the heart of the
+``many-body'' problem of statistical physics.  Namely, the Boltzmann
+factor <!-- MATH
+ $e^{-\beta\mathscr{U}}$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img261.png"
+ ALT="$e^{-\beta\mathscr{U}}$"> correlates every position with every
+other position, and the configurational integral
+(Eq.&nbsp;<A HREF="node6.html#eq:config_avg">54</A>) is not factorizable into many separate
+easily evaluated integrals.
+
+<P>
+Analytical potentials are most easily understood by considering model
+systems which are decomposable into spherically-symmetric, pairwise
+interactions.  Consider then the following total system potential
+energy:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U} = \sum_{i=1}^{N}\sum_{j=i+1}^{N} U_{ij}\left(r_{ij}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="151" HEIGHT="58" BORDER="0"
+ SRC="img262.png"
+ ALT="\begin{displaymath}
+\mathscr{U} = \sum_{i=1}^{N}\sum_{j=i+1}^{N} U_{ij}\left(r_{ij}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(81)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The double-sum runs over all <EM>unique</EM> pairs of particles.  The
+function <!-- MATH
+ $U_{ij}\left(r_{ij}\right)$
+ -->
+<IMG
+ WIDTH="59" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img263.png"
+ ALT="$U_{ij}\left(r_{ij}\right)$"> is called a <EM>pair potential</EM>,
+and it is a function of the scalar distance between particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> and
+<IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">.
+
+<P>
+The simplest pair potential is the ``hard-sphere'':
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+U_{HS}\left(r\right) = \left\{\begin{array}{ll}
+	\infty & r < \sigma\\
+	0      & r > \sigma
+	\end{array}\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:hs"></A><IMG
+ WIDTH="165" HEIGHT="45" BORDER="0"
+ SRC="img264.png"
+ ALT="\begin{displaymath}
+U_{HS}\left(r\right) = \left\{\begin{array}{ll}
+\infty &amp; r &lt; \sigma\\
+0 &amp; r &gt; \sigma
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(82)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here, <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $"> is an arbitrary interaction range that denotes the
+``size'' of the spheres.  When the distance between two spheres
+is less than <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $">, the energy is infinite; otherwise it is 0.
+This is the simplest way to enforce <EM>excluded volume</EM> among
+spherical particles in an MC simulation.  We will see an implementation
+of a hard-sphere liquid in the next section.
+
+<P>
+The most celebrated pair potential is the Lennard-Jones potential:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+U_{LJ}\left(r\right) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^{6}\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:lj"></A><IMG
+ WIDTH="207" HEIGHT="45" BORDER="0"
+ SRC="img265.png"
+ ALT="\begin{displaymath}
+U_{LJ}\left(r\right) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^{6}\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(83)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> is the unit of energy, and is the well-depth of the pair
+potential (that is, it is the <EM>minimum</EM> value of the potential).
+<IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $"> is the unit of length, and is the separation distance when
+the potential is identically zero. Unlike the hard-sphere potential
+(Eq.&nbsp;<A HREF="#eq:hs">82</A>), the Lennard-Jones potential is ``smooth'' (it has a
+continuous first derivative).  This smoothness makes it useful in
+Molecular Dynamics simulations, as we will see later in the course.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="288" HEIGHT="252" ALIGN="CENTER"
+ SRC="lj.gif"
+ ALT="portrait"></TD>
+<TD ALIGN="LEFT">The Lennard-Jones pair potential.</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+We will encounter more complex potentials than Lennard-Jones, but
+it serves as a useful tool for introductory molecular simulation.
+
+<P>
+<B>Reduced Units</B>.  Because the Lennard-Jones potential is so
+prevalent in molecular simulation, it is essential that we understand
+the <EM>unit system</EM> most often chosen for simulations using this
+potential.  For computational simplicity, energy in a Lennard-Jones
+system is measured in units of <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> and length in <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $">.
+This means that everywhere in the code you would expect to see
+<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> or <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $">, you find a 1.
+
+<P>
+Now, to compute the total potential <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img161.png"
+ ALT="$\mathscr{U}$"> for a system of
+particles, the simplest algorithm is to loop over all <EM>unique</EM>
+pairs of particles.  Here is a simple <EM>pair search</EM> C function
+(the so-called <IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img266.png"
+ ALT="$N^2$"> algorithm because its complexity scales like
+<IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img266.png"
+ ALT="$N^2$">) to compute the total energy of a system of Lennard-Jones
+particles, in reduced units:
+<PRE>
+double total_e ( double * rx, double * ry, double * rz, int n ) {
+   int i,j;
+   double dx, dy, dz, r2, r6, r12;
+   double e = 0.0;
+
+   for (i=0;i&lt;(n-1);i++) {
+     for (j=i+1;j&lt;n;j++) {
+        dx  = (rx[i]-rx[j]);
+        dy  = (ry[i]-ry[j]);
+        dz  = (rz[i]-rz[j]);
+        r2  = dx*dx + dy*dy + dz*dz;
+        r6  = r2*r2*r2;
+        r12 = r6*r6;
+        e  += 4*(1.0/r12 - 1.0/r6); 
+     }
+   }
+   return e;
+}
+</PRE>
+
+<P>
+Although it is strictly correct, the <IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img266.png"
+ ALT="$N^2$"> pair search algorithm is
+inefficient if there is a <EM>finite interaction range</EM> in the pair
+potential.  Typically in dense liquid simulations, a Lennard-Jones
+pair potential is truncated at <!-- MATH
+ $r = 2.5\ \sigma$
+ -->
+<IMG
+ WIDTH="68" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img267.png"
+ ALT="$r = 2.5 \sigma$">.  There are some
+potentials that are cut off at even shorter distances.  The point is
+that, when the maximum interaction distance is finite, each particle
+has a finite maximum number of interaction partners.  (This assumes
+number density is bounded, which is a reasonable assumption.)  More
+advanced techniques (which we discuss later) can be invoked to make
+the pair search much more efficient in this case.  The two most common
+are (1) the Verlet list, and (2) the link-cell list.  For now, and to
+keep the presentation simple, we will stick to the inefficient,
+brute-force <IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img266.png"
+ ALT="$N^2$"> algorithm.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html289"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html287"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html281"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html290"
+  HREF="node16.html">Trial Moves</A>
+<B> Up:</B> <A NAME="tex2html288"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html282"
+  HREF="node14.html">Data Representation and Input/Output</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

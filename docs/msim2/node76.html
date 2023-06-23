@@ -1,0 +1,891 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Histogram Reweighting</TITLE>
+<META NAME="description" CONTENT="Histogram Reweighting">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node77.html">
+<LINK REL="previous" HREF="node75.html">
+<LINK REL="up" HREF="node72.html">
+<LINK REL="next" HREF="node77.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html969"
+  HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html967"
+  HREF="node72.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html961"
+  HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html970"
+  HREF="node77.html">Adaptive Free-Energy Methods</A>
+<B> Up:</B> <A NAME="tex2html968"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html962"
+  HREF="node75.html">The Method of Overlapping</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00094000000000000000">
+Histogram Reweighting</A>
+</H2>
+
+<P>
+To further generalize our discussion of free-energy methods, it is convenient to introduce the concept of the &ldquo;order parameter&rdquo; <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ z$"></SPAN> which is computed by a mapping function <!-- MATH
+ $\theta({\boldsymbol r}^N)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img891.png"
+ ALT="$ \theta({\boldsymbol r}^N)$"></SPAN>, which is generally just any function of configuration (for example, <!-- MATH
+ $\Delta\mathscr{U} = \mathscr{U}_1-\mathscr{U}_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="114" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img892.png"
+ ALT="$ \Delta\mathscr{U} = \mathscr{U}_1-\mathscr{U}_0$"></SPAN>).  For a system obeying the potential <!-- MATH
+ $\mathscr{U}_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img865.png"
+ ALT="$ \mathscr{U}_0$"></SPAN>, we can define the order parameter probability density as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_0 = \frac{\displaystyle \int {\boldsymbol r}^N e^{-\beta\mathscr{U}_0}\delta\left[z-\theta({\boldsymbol r}^N)\right]}{\displaystyle Z_0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="218" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img893.png"
+ ALT="$\displaystyle p_0 = \frac{\displaystyle \int {\boldsymbol r}^N e^{-\beta\mathscr{U}_0}\delta\left[z-\theta({\boldsymbol r}^N)\right]}{\displaystyle Z_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">339</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we are using the shorthand
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Z_0 = \int {\boldsymbol r}^N e^{-\beta\mathscr{U}_0}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="125" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img894.png"
+ ALT="$\displaystyle Z_0 = \int {\boldsymbol r}^N e^{-\beta\mathscr{U}_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">340</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+to represent (now the unscaled) configurational integral of the Boltzmann factor.  The &ldquo;Landau&rdquo; free energy is then expressed as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:Landau"></A><!-- MATH
+ \begin{equation}
+F_{\rm Landau}(z)=-k_BT\ln p_0(z)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="195" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img895.png"
+ ALT="$\displaystyle F_{\rm Landau}(z)=-k_BT\ln p_0(z)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">341</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We'd generally like to be able to compute <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN> or, alternatively, <!-- MATH
+ $F_{\rm Landau}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="56" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img896.png"
+ ALT="$ F_{\rm Landau}$"></SPAN>, but as we have already seen, it is often impossible to perform adequate sampling over an entire range of order parameter.  Suppose we restrict sampling to a region in order parameter space using a &ldquo;bias potential&rdquo; <!-- MATH
+ $W_i(\theta({\boldsymbol r}^N))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="78" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img897.png"
+ ALT="$ W_i(\theta({\boldsymbol r}^N))$"></SPAN>.  Under the action of this bias, we can compute directly a biased probability density:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:hw:biasedp"></A><!-- MATH
+ \begin{equation}
+p_i(z) = \frac{\displaystyle \int {\boldsymbol r}^N e^{-\beta[\mathscr{U}_0+W_i(z)]}\delta\left[z-\theta({\boldsymbol r}^N)\right]}{\displaystyle Z_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="288" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img898.png"
+ ALT="$\displaystyle p_i(z) = \frac{\displaystyle \int {\boldsymbol r}^N e^{-\beta[\ma...
+...U}_0+W_i(z)]}\delta\left[z-\theta({\boldsymbol r}^N)\right]}{\displaystyle Z_i}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">342</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we use the shorthand
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Z_i = \int {\boldsymbol r}^N e^{-\beta[\mathscr{U}_0+W_i(\theta({\boldsymbol r}^N))]}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="201" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img899.png"
+ ALT="$\displaystyle Z_i = \int {\boldsymbol r}^N e^{-\beta[\mathscr{U}_0+W_i(\theta({\boldsymbol r}^N))]}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">343</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that in Eq.&nbsp;<A HREF="#eq:hw:biasedp">340</A>, we have made use of the fact that the Dirac delta function only permits <!-- MATH
+ $\theta({\boldsymbol r}^N)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img891.png"
+ ALT="$ \theta({\boldsymbol r}^N)$"></SPAN> to equal <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ z$"></SPAN>, so we do not need to express the argument of <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img900.png"
+ ALT="$ W_i$"></SPAN> as <!-- MATH
+ $\theta({\boldsymbol r}^N)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img891.png"
+ ALT="$ \theta({\boldsymbol r}^N)$"></SPAN> in the numerator.  This is important, because it allows us to express the <EM>unbiased</EM> probability density:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_0(z) = \exp(+\beta W_i(z))\frac{Z_i}{Z_0}p_i(z)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="216" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img901.png"
+ ALT="$\displaystyle p_0(z) = \exp(+\beta W_i(z))\frac{Z_i}{Z_0}p_i(z)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">344</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Let's now consider that we compute <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img902.png"
+ ALT="$ p_i$"></SPAN> by histogramming into bins of constant width <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img349.png"
+ ALT="$ \Delta z$"></SPAN>.  Let's call the histogram <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img903.png"
+ ALT="$ H_i$"></SPAN> and the total number of hits in the histogram <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img904.png"
+ ALT="$ M_i$"></SPAN>.  Then one way to write the relation between the approximate probability density and the histogram is
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_i\Delta z = \frac{H_i}{M_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="84" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img905.png"
+ ALT="$\displaystyle p_i\Delta z = \frac{H_i}{M_i}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">345</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Now we imagine we can use several different <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img900.png"
+ ALT="$ W_i$"></SPAN>'s together, each of which focus sampling on a particular region of order-parameter space, and we propose that the unbiased probability density can be constructed by a superposition of the biased probabilities:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img906.png"
+ ALT="$\displaystyle p_0(z)$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="238" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img907.png"
+ ALT="$\displaystyle =\sum_{i=1}^n a_i(z)\exp(+\beta W_i(z))\frac{Z_i}{Z_0}p_i(z)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">346</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="81" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img908.png"
+ ALT="$\displaystyle \Rightarrow p_0(z)\Delta z$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="247" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img909.png"
+ ALT="$\displaystyle = \sum_{i=1}^n a_i(z)\exp(+\beta W_i(z))\frac{Z_i}{Z_0}\frac{H_i(z)}{M_i}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:hw:super">(<SPAN CLASS="arabic">347</SPAN>)</A></TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+subject to
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sum_{i=1}^n a_i(z) = 1 \ \ \mbox{for all $z$}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="98" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img910.png"
+ ALT="$\displaystyle \sum_{i=1}^n a_i(z) = 1  $">&nbsp; &nbsp;<IMG
+ WIDTH="58" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img911.png"
+ ALT="$\displaystyle \mbox{for all $z$}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">348</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+In Eq.&nbsp;<A HREF="#eq:hw:super">345</A>, we have supposed that <!-- MATH
+ $p_0\Delta z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img912.png"
+ ALT="$ p_0\Delta z$"></SPAN> is a normalized histogram with the same bin size <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img349.png"
+ ALT="$ \Delta z$"></SPAN> as all <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img903.png"
+ ALT="$ H_i$"></SPAN>.
+
+<P>
+Via minimization of the squared fluctuations of <SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img913.png"
+ ALT="$ p_0(z)$"></SPAN> (since it will fluctuate in a simulation), one can arrive at an expression for <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img914.png"
+ ALT="$ a_i$"></SPAN> (math not shown):
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+a_i(z) = \alpha(z)\exp[-\beta W_i(z)]M_i\frac{Z_0}{Z_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="231" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img915.png"
+ ALT="$\displaystyle a_i(z) = \alpha(z)\exp[-\beta W_i(z)]M_i\frac{Z_0}{Z_i}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">349</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where the normalization condition is met by
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha(z) = \frac{1}{\displaystyle \sum_{i=1}^n \exp[-\beta W_i(z)]M_i\frac{Z_0}{Z_i}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="224" HEIGHT="98" ALIGN="MIDDLE" BORDER="0"
+ SRC="img916.png"
+ ALT="$\displaystyle \alpha(z) = \frac{1}{\displaystyle \sum_{i=1}^n \exp[-\beta W_i(z)]M_i\frac{Z_0}{Z_i}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">350</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+This gives a reweighted histogram of
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+p_0(z)\Delta z = \frac{\displaystyle \sum_{i=1}^n H_i}{\displaystyle \sum_{i=1}^n \exp[-\beta W_i(z)]M_i\frac{Z_0}{Z_i}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="250" HEIGHT="114" ALIGN="MIDDLE" BORDER="0"
+ SRC="img917.png"
+ ALT="$\displaystyle p_0(z)\Delta z = \frac{\displaystyle \sum_{i=1}^n H_i}{\displaystyle \sum_{i=1}^n \exp[-\beta W_i(z)]M_i\frac{Z_0}{Z_i}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">351</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Now, let's define <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img918.png"
+ ALT="$ F_i$"></SPAN> via
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="56" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img919.png"
+ ALT="$\displaystyle \exp\beta F_i$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img920.png"
+ ALT="$\displaystyle = -\frac{Z_i}{Z_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">352</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="151" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img921.png"
+ ALT="$\displaystyle = \frac{\displaystyle \int d{\boldsymbol r}^N e^{-\beta(\mathscr{U}_0+W_i)}}{\displaystyle Z_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">353</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="270" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img922.png"
+ ALT="$\displaystyle = \frac{\displaystyle \int dz \int {\boldsymbol r}^N e^{-\beta(\mathscr{U}_0+W_i)}\delta(\theta({\boldsymbol r}^N)-z)}{\displaystyle Z_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">354</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="299" HEIGHT="91" ALIGN="MIDDLE" BORDER="0"
+ SRC="img923.png"
+ ALT="$\displaystyle = \int dz e^{-\beta W_i(z)}\frac{\displaystyle \int {\boldsymbol r}^N e^{-\beta\mathscr{U}_0}\delta\left[z-\theta({\boldsymbol r}^N)\right]}{Z_0}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">355</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="156" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img924.png"
+ ALT="$\displaystyle = \int dz p_0(z) e^{-\beta W_i(z)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">356</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img925.png"
+ ALT="$\displaystyle \Rightarrow F_i$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="200" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img926.png"
+ ALT="$\displaystyle = -\frac{1}{\beta}\ln\int dz p_0(z) e^{-\beta W_i(z)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:wham:F_cont">(<SPAN CLASS="arabic">357</SPAN>)</A></TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+This allows us to write the unbiased histogram as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:wham:p0"></A><!-- MATH
+ \begin{equation}
+p_0(z)\Delta z = \frac{\displaystyle \sum_{i=1}^n H_i}{\displaystyle \sum_{j=1}^n \exp[-\beta (W_j(z)-F_j)]M_j}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="280" HEIGHT="114" ALIGN="MIDDLE" BORDER="0"
+ SRC="img927.png"
+ ALT="$\displaystyle p_0(z)\Delta z = \frac{\displaystyle \sum_{i=1}^n H_i}{\displaystyle \sum_{j=1}^n \exp[-\beta (W_j(z)-F_j)]M_j}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">358</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Given that we have a finite bin width, the integration in Eq.&nbsp;<A HREF="#eq:wham:F_cont">355</A> can be approximated as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:wham:F"></A><!-- MATH
+ \begin{equation}
+F_j = -\frac{1}{\beta}\ln\sum_{k=0}^{n_{\rm bins}-1} p_0(z_k)\exp[-\beta W_j(z_k)]\Delta z
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="305" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img928.png"
+ ALT="$\displaystyle F_j = -\frac{1}{\beta}\ln\sum_{k=0}^{n_{\rm bins}-1} p_0(z_k)\exp[-\beta W_j(z_k)]\Delta z$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">359</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $z_k = z_{\rm min}+(k+\frac{1}{2})\Delta z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="161" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img929.png"
+ ALT="$ z_k = z_{\rm min}+(k+\frac{1}{2})\Delta z$"></SPAN>, with <!-- MATH
+ $z_{\rm min}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img930.png"
+ ALT="$ z_{\rm min}$"></SPAN> the lower bound of the histogram domain and <!-- MATH
+ $n_{\rm bins}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img931.png"
+ ALT="$ n_{\rm bins}$"></SPAN> is the number of bins.
+
+<P>
+Eq.&nbsp;<A HREF="#eq:wham:p0">356</A> and&nbsp;<A HREF="#eq:wham:F">357</A> are called (by some) the WHAM equations (for Weighted Histogram Analysis Method&nbsp;[<A
+ HREF="node82.html#Kumar1992THEMethod">45</A>]).  They can be solved iteratively to yield an unbiased probability provided with a set of biased histograms <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img903.png"
+ ALT="$ H_i$"></SPAN> obtained from running MC simulations on <!-- MATH
+ $\mathscr{U}_0+W_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="63" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img932.png"
+ ALT="$ \mathscr{U}_0+W_i$"></SPAN>.  The standard WHAM approach is
+
+<P>
+
+<UL>
+<LI>Set <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img933.png"
+ ALT="$ F_j$"></SPAN> = 0 for all <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.
+</LI>
+<LI>Compute the first estimate of <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN> using Eq.&nbsp;<A HREF="#eq:wham:p0">356</A> from the <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img903.png"
+ ALT="$ H_i$"></SPAN>'s and <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img904.png"
+ ALT="$ M_i$"></SPAN>'s.
+</LI>
+<LI>Compute a new estimate for the <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img933.png"
+ ALT="$ F_j$"></SPAN>'s using Eq.&nbsp;<A HREF="#eq:wham:F">357</A>.
+</LI>
+<LI>Repeat the last two steps until the <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img933.png"
+ ALT="$ F_j$"></SPAN>'s stop changing within some tolerance.
+</LI>
+</UL>
+
+<P>
+As an example, consider a single degree of freedom <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img255.png"
+ ALT="$ x$"></SPAN> (our &ldquo;particle&rdquo;) moving under Brownian dynamics (BD) on a quartic two-well potential:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="193" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img934.png"
+ ALT="$\displaystyle \dot{x} = -\frac{1}{\gamma}\frac{dV}{dx} + \sqrt{2k_BT/\gamma}\eta, $">&nbsp; &nbsp;where</SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">360</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="209" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img935.png"
+ ALT="$\displaystyle V(x) = a(x^2-1)^2 + bx^2 + cx$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:bd:v">(<SPAN CLASS="arabic">361</SPAN>)</A></TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img591.png"
+ ALT="$ \gamma$"></SPAN> is the BD friction, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> is the temperature, and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img936.png"
+ ALT="$ \eta$"></SPAN> is a random variate centered on zero with unit variance.  A symmetrical two-well potential with a barrier at <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img937.png"
+ ALT="$ x=0$"></SPAN> of about 13 can be had by using <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img767.png"
+ ALT="$ a$"></SPAN> = 0.02, <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img938.png"
+ ALT="$ b$"></SPAN> = -1, and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img495.png"
+ ALT="$ c$"></SPAN> = 0.  
+Since there is only one degree of freedom, it can easily be shown that <!-- MATH
+ $F(x) = V(x)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="93" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img939.png"
+ ALT="$ F(x) = V(x)$"></SPAN>.  So, if we run BD, sampling <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img255.png"
+ ALT="$ x$"></SPAN> and then histogramming it into <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN>, then we should see that <!-- MATH
+ $F=-k_BT\ln p_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="114" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img940.png"
+ ALT="$ F=-k_BT\ln p_0$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> agree.  Computing <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img816.png"
+ ALT="$ F$"></SPAN> from a directly histogrammed variable is sometimes called &ldquo;Boltzmann inversion&rdquo;.
+
+<P>
+Fig.&nbsp;<A HREF="#fig:bd:baseplot">42</A> shows the calculation of <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img816.png"
+ ALT="$ F$"></SPAN> using this approach, with BD on <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> using the code <code>bd-w.c</code>.  We show that sampling with a reduced temperature of 10 requires about 2 billion BD timesteps to reproduce <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN>.  If we reduce the temperature to 1, the large barrier between the two wells is  not surmounted and <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> is therefore not correctly reproduced.  
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:bd:baseplot"></A><A NAME="9146"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 42:</STRONG>
+Boltzmann inversion from 1-D Brownian dynamics simulations obeying the potential <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> in Eq.&nbsp;<A HREF="#eq:bd:v">359</A>.  (Left) BD run at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 1.0; (right) BD run at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 10.0.  Each simulation was run for <!-- MATH
+ $2\times10^9$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="54" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ 2\times 10^9$"></SPAN> steps of length <!-- MATH
+ $1\times10^{-3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="64" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.png"
+ ALT="$ 1\times 10^{-3}$"></SPAN>.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="535" HEIGHT="434" ALIGN="BOTTOM" BORDER="0"
+ SRC="./baseplot1.png"
+ ALT="Image baseplot1">
+    <IMG
+  WIDTH="535" HEIGHT="434" ALIGN="BOTTOM" BORDER="0"
+ SRC="./baseplot10.png"
+ ALT="Image baseplot10"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Fig.&nbsp;<A HREF="#fig:bd_wham">43</A> shows that <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> can be reproduced at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> of 1.0 using WHAM using 21 windows and harmonic bias potentials <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img900.png"
+ ALT="$ W_i$"></SPAN> spaced uniformly along <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ z$"></SPAN>, each with a <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> of 20.  That is, each bias potential is of the form
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+W_i(z) = \frac{1}{2}k(z-z_{0,i})^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="156" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img941.png"
+ ALT="$\displaystyle W_i(z) = \frac{1}{2}k(z-z_{0,i})^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">362</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img942.png"
+ ALT="$ z_{0,i}$"></SPAN>'s are uniformly spaced between -10 and 10. (Actually, -10 and 10 are the domain boundaries; this domain of size 20 is divided into <EM>21</EM> windows, and each <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$ z_0$"></SPAN> is in the <EM>center</EM> of its window.  So, <!-- MATH
+ $z_00 = -10+0.5(20/21) = -9.5238$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="245" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img943.png"
+ ALT="$ z_00 = -10+0.5(20/21) = -9.5238$"></SPAN>, etc.  An odd number of windows is a good idea so that we can better resolve the tippy top of the barrier.)
+
+<P>
+Here, only two million BD steps were run per window, for a total of 42 million steps. This means this WHAM dataset required more than twenty times less BD sampling at a temperature of 1.0 than the brute force sampling approach could at a temperature of 10.0.  
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:bd_wham"></A><A NAME="9147"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 43:</STRONG>
+WHAM results from BD simulations on <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img52.png"
+ ALT="$ V$"></SPAN> from Eq.&nbsp;<A HREF="#eq:bd:v">359</A>.  (Left) <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.png"
+ ALT="$ V(x)$"></SPAN> and all <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img56.png"
+ ALT="$ W_i(x)$"></SPAN>; each <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$ z_0$"></SPAN> is uniformly spaced along <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ z$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> is 20. (Center) All biased histograms <SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.png"
+ ALT="$ H_i(x)$"></SPAN> from BD simulations of <!-- MATH
+ $2\times10^6$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="54" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img59.png"
+ ALT="$ 2\times 10^6$"></SPAN> steps at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 1.0, with a scaled unbiased histogram <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ p_0$"></SPAN> (scaled for visibility). (Right) Reconstructed <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img60.png"
+ ALT="$ F(x)$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.png"
+ ALT="$ V(x)$"></SPAN> (again). </CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="1310" HEIGHT="463" ALIGN="BOTTOM" BORDER="0"
+ SRC="./wham-bd-good.png"
+ ALT="Image wham-bd-good"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+As a second example of WHAM, consider MD simulation of butane molecule in vacuum at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 310 K.  One order parameter we may consider here is the C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance.  When the molecule is in <I>trans</I>, the C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance is about 4.5&nbsp;&#197;, while when it is in <I>gauche</I>, the C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance is about 3.2&nbsp;&#197;.  We expect there to be a small free-enegy barrier between these two states when characterized using the C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance. Fig.&nbsp;<A HREF="#fig:butane_wham">44</A> shows results of both WHAM and long MD simulations, showing indeed that the <I>trans</I> and <I>gauche</I> states are separated by a small barrier of about 2 kcal/mol at 310 K, easily surmountable in MD.  WHAM reconstruction of <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img816.png"
+ ALT="$ F$"></SPAN> from 20 biased histograms generated from MD restrained using harmonic window potentials with spring constants of 100 kcal/mol-&#197;<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img501.png"
+ ALT="$ ^2$"></SPAN> shows perfect agreement with the Boltzmann-inverted result.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:butane_wham"></A><A NAME="9034"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 44:</STRONG>
+(Left) A butane molecule with the C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance indicated by a purple line. (Center) Biased histograms from window-restrained MD simulations of butane in vacuum at 310 K.  Windows are distributed uniformly along the C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance variable. (Right) Free energy vs C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ _1$"></SPAN>-C<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ _4$"></SPAN> distance computed using Boltzmann inversion from a long MD simulation (grey dashes) and from WHAM (blue solid). </CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="402" HEIGHT="321" ALIGN="BOTTOM" BORDER="0"
+ SRC="./butane.png"
+ ALT="Image butane">
+    <IMG
+  WIDTH="810" HEIGHT="376" ALIGN="BOTTOM" BORDER="0"
+ SRC="./butane-wham.png"
+ ALT="Image butane-wham"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Butane is an almost trivially simple case; the C1-C4 distance is relatively easily sampled in standard MD at 310 K in few million time-steps.  This is of course evident because we can generate a Boltzmann-inverted free energy directly from the histogram of this distance generated by MD.   But it is important to note that the order parameter here, the C1-C4 distance, has a small amount of degeneracy: every value of this parameter except for its minimum and maximum has two major realizations determined by positive and negative senses of the dihedral angle.  (There are of course some minor realizations due to angle stretching.)  That means that each window's simulation should sample both the positive and negative regions of the order parameter space, and we must take care that the window potential is not so strong that these dihedral angle fluctuations cannot occur; if so, we would undersample the gauche states for sure.  Fig.&nbsp;<A HREF="#fig:butane-wham-samples">45</A> shows traces of the C1-C4 distance for each window and corresponding traces of the dihedral angle; clearly for this value of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>, each window is indeed able to sample both positive and negative values of the dihedral angle.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:butane-wham-samples"></A><A NAME="9041"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 45:</STRONG>
+(Left) C1-C4 distance vs. time for each of 16 windows. (Right) Dihedral angle vs. time for each of 16 windows. </CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="463" HEIGHT="1218" ALIGN="BOTTOM" BORDER="0"
+ SRC="./window-traces.png"
+ ALT="Image window-traces">
+    <IMG
+  WIDTH="479" HEIGHT="1218" ALIGN="BOTTOM" BORDER="0"
+ SRC="./angles.png"
+ ALT="Image angles"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html969"
+  HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html967"
+  HREF="node72.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html961"
+  HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html970"
+  HREF="node77.html">Adaptive Free-Energy Methods</A>
+<B> Up:</B> <A NAME="tex2html968"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html962"
+  HREF="node75.html">The Method of Overlapping</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,11 @@
+#!/usr/bin/gnuplot
+set term post eps enh color "Times-Roman" 24 linewidth 2.0 solid
+set size square
+set out "grlj.eps"
+
+set xr [0:3.0]
+set xlabel "r"
+set ylabel "g(r)"
+set yr [0:3.0]
+
+p "rdf" not w l

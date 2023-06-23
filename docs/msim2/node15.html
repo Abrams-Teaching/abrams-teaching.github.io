@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>A C Code for the 2D Ising Magnet</TITLE>
+<META NAME="description" CONTENT="A C Code for the 2D Ising Magnet">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html326"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html324"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html318"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html327"
+  HREF="node16.html">Headers</A>
+<B> Up:</B> <A NAME="tex2html325"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html319"
+  HREF="node14.html">Introduction</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032200000000000000">
+A C Code for the 2D Ising Magnet</A>
+</H3>
+
+<P>
+In this section, we will dissect piece-by-piece a small C program that implements an NVT Metropolis Monte Carlo simulation of a 2D Ising magnet.  
+
+<P>
+If you have not already done so, clone the Abrams-Teaching/instructional-codes repository from Github.  
+This repository will be updated throughout the term with source code in the 
+<code>originals</code> 
+subdirectory.  You should create a subdirectory called 
+<code>my_work</code>
+inside this repository and do all editing, compiling, and running in there.  This directory is specifically excluded from 
+<code>git</code>
+revision control by its inclusion in the 
+<code>.gitignore</code> 
+file.  This way, when I put new codes in the repository, you only have to 
+<code>git pull</code> 
+to download them.
+
+<P>
+<PRE>
+cd
+cd cheT580
+git clone git@github.com:Abrams-Teaching/instructional-codes.git
+cd instructional-codes
+mkdir my_work
+cd my_work
+cp ../originals/ising_mc.c .
+code .
+</PRE>
+
+<P>
+From a terminal command-line inside VSCode, or outside, you can compile <code>ising_mc.c</code> via
+<PRE>
+gcc -O3 -o ising ising_mc.c -lm -lgsl
+</PRE>
+
+<P>
+and you can then run it at the command line as <code>./ising</code>.  It has a lot of options for controlling the size of the magnet (the number of spins), the temperature, and other parameters, which I'll go over now.
+
+<P>
+<code>ising_mc.c</code> conducts a canoncial Metropolis Monte Carlo simulation of an Ising magnet of size <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img270.png"
+ ALT="$ L\times L$"></SPAN> at temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> (both specified by the user at run time on the command line), and it computes both the average energy per spin <!-- MATH
+ $\left<\epsilon\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img271.png"
+ ALT="$ \left&lt;\epsilon\right&gt;$"></SPAN> and the average spin value, <!-- MATH
+ $\left<s_1\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img272.png"
+ ALT="$ \left&lt;s_1\right&gt;$"></SPAN>.  
+
+<P>
+<EM>Periodic boundaries</EM> are employed in calculating the nearest-neighbor interactions. Consider an <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img270.png"
+ ALT="$ L\times L$"></SPAN> magnet; each row <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> indexed from 0 to <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ N-1$"></SPAN> has <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN> columns also indexed from 0 to <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ N-1$"></SPAN>.  
+If the cell at (5,5) queries its neighbors, they are at (4,5), (6,5), (5,4), and (5,6).  However, the cell at (0,5) would have a southern neighbor at (<SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ N-1$"></SPAN>,5) instead of (-1,5), since there is no row indexed -1!  Fig.&nbsp;<A HREF="#fig:ising_pbc">3</A> demonstrates this.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:ising_pbc"></A><A NAME="1482"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3:</STRONG>
+Schematic Ising magnet highlighting periodic boundary conditions.  The neighbors of the red spin can be found by adding or subtracting one from the cell's row and column index.  For the green and blue cells, however, at least one of the neighbors appears on the other side of the magnet.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="800" HEIGHT="800" ALIGN="BOTTOM" BORDER="0"
+ SRC="./ising-fig.png"
+ ALT="Image ising-fig"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+An abbreviated listing of the code follows.  Some comments in the full, downloadable code have been omitted for space, and I have instead explained each code fragment in accompanying text.  
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html326"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html324"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html318"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html327"
+  HREF="node16.html">Headers</A>
+<B> Up:</B> <A NAME="tex2html325"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html319"
+  HREF="node14.html">Introduction</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

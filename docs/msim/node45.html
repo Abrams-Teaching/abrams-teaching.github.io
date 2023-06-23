@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Sampling the Transition Path Ensembles: Trial Moves</TITLE>
+<META NAME="description" CONTENT="Sampling the Transition Path Ensembles: Trial Moves">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node46.html">
+<LINK REL="previous" HREF="node44.html">
+<LINK REL="up" HREF="node42.html">
+<LINK REL="next" HREF="node46.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html616"
+  HREF="node46.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html614"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html608"
+  HREF="node44.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html617"
+  HREF="node46.html">A Computational Model: Dimer</A>
+<B> Up:</B> <A NAME="tex2html615"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html609"
+  HREF="node44.html">The Transition Path Ensembles</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072300000000000000">
+Sampling the Transition Path Ensembles:  Trial Moves</A>
+</H3>
+
+<P>
+So, we see now that, using the factorization trick, we have two
+ensembles to average over:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+f_{AB}\left(x_0,t\right) & : & \mbox{\begin{minipage}{8cm}
+	distn. fcn. of all paths starting at $A$\  and ending in $B$\  at time $t$,
+used to compute $P\left(\lambda,t\right)$
+\end{minipage}}\\
+F_{AB}\left(x_0,T\right) & : & \mbox{\begin{minipage}{8cm}
+	distn. fcn. of all paths starting at $A$\  and visiting $B$\  at least once in the interval $[0,T]$, used to compute $\left<\dot{h}_B(t)\right>_{AB}$
+and $\left<h_B(t^\prime)\right>_{AB}$.\end{minipage}}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="76" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img834.png"
+ ALT="$\displaystyle f_{AB}\left(x_0,t\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="8" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img835.png"
+ ALT="$\textstyle :$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="366" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img836.png"
+ ALT="$\displaystyle \mbox{\begin{minipage}{8cm}
+distn. fcn. of all paths starting at...
+... in $B$ at time $t$,
+used to compute $P\left(\lambda,t\right)$
+\end{minipage}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(302)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="84" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img837.png"
+ ALT="$\displaystyle F_{AB}\left(x_0,T\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="8" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img835.png"
+ ALT="$\textstyle :$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="366" HEIGHT="81" ALIGN="MIDDLE" BORDER="0"
+ SRC="img838.png"
+ ALT="$\displaystyle \mbox{\begin{minipage}{8cm}
+distn. fcn. of all paths starting at...
+...\dot{h}_B(t)\right&gt;_{AB}$
+and $\left&lt;h_B(t^\prime)\right&gt;_{AB}$.\end{minipage}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(303)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+We can compute averages in these two ensembles by MC sampling.  A new
+path is generated from an old path, and is accepted or rejected based
+on a detailed balance criterion.  Now, we sample these two path ensembles
+in two different simulations, but the acceptance rules and trial moves
+are the same.  Let's generall call <!-- MATH
+ $\mathscr{N}\left(i\right)$
+ -->
+<IMG
+ WIDTH="37" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img839.png"
+ ALT="$\mathscr{N}\left(i\right)$"> the 
+probability of path <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">.  We start with an old path ``<IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img840.png"
+ ALT="$o$">'' and attempt
+to generate a new path ``<IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img203.png"
+ ALT="$n$">''.  The acceptance rule obeying detailed
+balance is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\frac{{\rm acc}\left(o\rightarrow n\right)}{{\rm acc}\left(n\rightarrow o\right)} = \frac{\mathscr{N}\left(n\right)\alpha\left(n\rightarrow o\right)}{\mathscr{N}\left(o\right)\alpha\left(o\rightarrow n\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="212" HEIGHT="44" BORDER="0"
+ SRC="img841.png"
+ ALT="\begin{displaymath}
+\frac{{\rm acc}\left(o\rightarrow n\right)}{{\rm acc}\left(n...
+...)}{\mathscr{N}\left(o\right)\alpha\left(o\rightarrow n\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(304)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<!-- MATH
+ $\alpha\left(o\rightarrow n\right)$
+ -->
+<IMG
+ WIDTH="71" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img842.png"
+ ALT="$\alpha\left(o\rightarrow n\right)$"> is the <EM>a priori</EM> probabilit
+of attemptying to generate <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img203.png"
+ ALT="$n$">.  The moves used in transition path
+sampling MC guarantee <!-- MATH
+ $\alpha\left(o\rightarrow n\right) =
+\alpha\left(n\rightarrow o\right)$
+ -->
+<IMG
+ WIDTH="160" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img843.png"
+ ALT="$\alpha\left(o\rightarrow n\right) =
+\alpha\left(n\rightarrow o\right)$">. So,
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\frac{{\rm acc}\left(o\rightarrow n\right)}{{\rm acc}\left(n\rightarrow o\right)} = \frac{\mathscr{N}\left(n\right)}{\mathscr{N}\left(o\right)}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="142" HEIGHT="44" BORDER="0"
+ SRC="img844.png"
+ ALT="\begin{displaymath}
+\frac{{\rm acc}\left(o\rightarrow n\right)}{{\rm acc}\left(n...
+... = \frac{\mathscr{N}\left(n\right)}{\mathscr{N}\left(o\right)}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(305)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+So, what are the moves?  There are two basic moves we can consider here.
+<DL COMPACT>
+<DT><B>Shooting</B></DT>
+<DD>Given path <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img840.png"
+ ALT="$o$">, pick a configuration intermediate between
+<IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">, rotate all momenta by a little angle randomly selected from [-<IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img845.png"
+ ALT="$\Delta\phi$">,<IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img845.png"
+ ALT="$\Delta\phi$">], and then MD
+integrate forwards and backwards to generate a new path.  We accept if
+the backwards integration lands in A and the forwards in B.  We get a
+high acceptance rate because <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> ``attract'' trajectories.
+</DD>
+<DT><B>Shifting</B></DT>
+<DD>Given path <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img840.png"
+ ALT="$o$">, chop off the first few <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$">'s worth of its trajectory, and MD integrate from the end of another <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$">.  If the beginning and end are still in <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$"> respectively, we accept the move.  Note that this does not sample ergodically, but it does improve statistics over shooting alone.  <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$"> can be positive or negative.
+</DD>
+</DL>
+
+<P>
+It seems the real trick is generating an <EM>initial</EM> path of length
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> that successfully connects region <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> with region <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.  This can
+be done with traditional MD by beginning a trajectory in state <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and
+simply waiting long enough for it to cross into <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.  This might be
+possible, but could easily be prohibitively expensive.  A better
+technique is to guess a path by creating a configuration which you
+<EM>hypothesize</EM> to be a transition state, and then integrating
+forward and backward in time to generate a path.  It is accepted as an
+initial path if the beginning lands in <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="$A$"> and the end in <IMG
+ WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img91.png"
+ ALT="$B$">.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html616"
+  HREF="node46.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html614"
+  HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html608"
+  HREF="node44.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html617"
+  HREF="node46.html">A Computational Model: Dimer</A>
+<B> Up:</B> <A NAME="tex2html615"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Previous:</B> <A NAME="tex2html609"
+  HREF="node44.html">The Transition Path Ensembles</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>ReaxFF</TITLE>
+<META NAME="description" CONTENT="ReaxFF">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node64.html">
+<LINK REL="up" HREF="node62.html">
+<LINK REL="next" HREF="node66.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html850"
+  HREF="node66.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html848"
+  HREF="node62.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html844"
+  HREF="node64.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html851"
+  HREF="node66.html">Case Study: Stillinger-Weber Silicon</A>
+<B> Up:</B> <A NAME="tex2html849"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Previous:</B> <A NAME="tex2html845"
+  HREF="node64.html">Bond-Order Potentials</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072300000000000000">
+ReaxFF</A>
+</H3>
+
+<P>
+ReaxFF was introduced in 2001 as a new type of reactive force field for hydrocarbons, and its formalism has now greatly expanded to describe reactive interatomic chemistries for a wide swath of the periodic table&nbsp;[<A
+ HREF="node82.html#Senftle2016TheDirections">36</A>,<A
+ HREF="node82.html#Russo2011Atomistic-scaleEngineering">37</A>].  ReaxFF adopts the co-called &ldquo;central-force&rdquo; formalism wherein all pairs of atoms interact and there are no switching functions.  ReaxFF breaks down the potential into seven distinct additive contributions:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{U}_{\rm ReaxFF} = U_{\rm bond} + U_{\rm over} + U_{\rm angle} + U_{\rm torsion} + U_{\rm VdW} + U_{\rm Coulomb} + U_{\rm specific}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="518" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img763.png"
+ ALT="$\displaystyle \mathscr{U}_{\rm ReaxFF} = U_{\rm bond} + U_{\rm over} + U_{\rm angle} + U_{\rm torsion} + U_{\rm VdW} + U_{\rm Coulomb} + U_{\rm specific}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">281</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The role of the &ldquo;overcoordiation penalty&rdquo; <!-- MATH
+ $U_{\rm over}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img764.png"
+ ALT="$ U_{\rm over}$"></SPAN> is to monitor atom valencies and penalize deviations from an ideal.  This keeps hydrogens from binding to more than one partner, and carbons more the four.  The bond, angle, and torsion terms mimic those of class-I potentials but essentially determine parameters on the fly based on geometries.  The Coulomb and VdW terms represent electrostatics and dispersion/excluded-volume interactions, while atom charges are forced to equilibrate given atom electronegativities.  The &ldquo;specific&rdquo; term is the &ldquo;secret sauce&rdquo; where a lot of things are put to specialize ReaxFF for a particular system.
+
+<P>
+ReaxFF has been used for a large variety of reactive systems to date.  It is fairly expensive to run and requires a lot of tuning when applying it to systems it has never been applied to before.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html850"
+  HREF="node66.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html848"
+  HREF="node62.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html844"
+  HREF="node64.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html851"
+  HREF="node66.html">Case Study: Stillinger-Weber Silicon</A>
+<B> Up:</B> <A NAME="tex2html849"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Previous:</B> <A NAME="tex2html845"
+  HREF="node64.html">Bond-Order Potentials</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

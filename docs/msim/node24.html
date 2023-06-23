@@ -1,0 +1,774 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Liouville Operator Formalism to Generating MD Integration Schemes</TITLE>
+<META NAME="description" CONTENT="The Liouville Operator Formalism to Generating MD Integration Schemes">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node23.html">
+<LINK REL="up" HREF="node22.html">
+<LINK REL="next" HREF="node25.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html383"
+  HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html381"
+  HREF="node22.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html377"
+  HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html384"
+  HREF="node25.html">Case Study 1: An</A>
+<B> Up:</B> <A NAME="tex2html382"
+  HREF="node22.html">MD: Theoretical Background</A>
+<B> Previous:</B> <A NAME="tex2html378"
+  HREF="node23.html">Newtonian Mechanics and Numerical</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00041200000000000000"></A>
+<A NAME="sec:liouville"></A>
+<BR>
+The Liouville Operator Formalism to Generating MD 
+Integration Schemes
+</H3>
+
+<P>
+In this section, we present an elegant formalism for deriving MD
+integrators, as discussed by Tuckerman&nbsp;<EM>et
+al.</EM>&nbsp;[<A
+ HREF="node63.html#Tuckerman1992">9</A>].  What we present here is essentially the
+first two parts of the second section of
+Reference&nbsp;[<A
+ HREF="node63.html#Tuckerman1992">9</A>], including some of my own elaboration
+and some of that presented in section 4.3 of F&amp;S.
+
+<P>
+Imagine a quantity <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> which is a function of particle positions <IMG
+ WIDTH="23" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img256.png"
+ ALT="${\bf r}^N$">
+and momenta <IMG
+ WIDTH="26" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img380.png"
+ ALT="${\bf p}^N$">.  Its time derivative is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\dot{f} = \dot{\bf r}\frac{\partial f}{\partial{\bf r}} + \dot{\bf p}\frac{\partial f}{\partial {\bf p}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:liouville_1"></A><IMG
+ WIDTH="112" HEIGHT="42" BORDER="0"
+ SRC="img381.png"
+ ALT="\begin{displaymath}
+\dot{f} = \dot{\bf r}\frac{\partial f}{\partial{\bf r}} + \dot{\bf p}\frac{\partial f}{\partial {\bf p}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(122)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+We can write down a <EM>formal</EM> solution to this equation.  First,
+define the Liouville operator as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+iL = \dot{\bf r}\frac{\partial}{\partial{\bf r}} + \dot{\bf p}\frac{\partial}{\partial {\bf p}}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="117" HEIGHT="42" BORDER="0"
+ SRC="img382.png"
+ ALT="\begin{displaymath}
+iL = \dot{\bf r}\frac{\partial}{\partial{\bf r}} + \dot{\bf p}\frac{\partial}{\partial {\bf p}}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(123)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+As Tuckerman points out in his 
+<A NAME="tex2html8"
+  HREF="http://www.nyu.edu/classes/tuckerman/stat.mech/lectures/lecture_2/lecture_2.html">coursenotes</A>,
+the <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> is there by convention and ensures that the operator is <EM>Hermitian</EM>.  We can re-express Eq.&nbsp;<A HREF="#eq:liouville_1">122</A> as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\dot{f} = iLf
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="55" HEIGHT="27" BORDER="0"
+ SRC="img383.png"
+ ALT="\begin{displaymath}
+\dot{f} = iLf
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(124)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which we solve directly to yield
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+f\left(t\right) = \exp\left(iLt\right)f\left(0\right).
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="153" HEIGHT="28" BORDER="0"
+ SRC="img384.png"
+ ALT="\begin{displaymath}
+f\left(t\right) = \exp\left(iLt\right)f\left(0\right).
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(125)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+If <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> is itself a vector quantity identical to the set of positions
+and momenta, <IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img385.png"
+ ALT="$\Gamma$">, we have a way to express, formally, the
+evolution of the system:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\Gamma\left(t\right) = U\left(t\right)\Gamma\left(0\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:propagator"></A><IMG
+ WIDTH="119" HEIGHT="28" BORDER="0"
+ SRC="img386.png"
+ ALT="\begin{displaymath}
+\Gamma\left(t\right) = U\left(t\right)\Gamma\left(0\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(126)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <!-- MATH
+ $U(t) = \exp\left(iLt\right)$
+ -->
+<IMG
+ WIDTH="117" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img387.png"
+ ALT="$U(t) = \exp\left(iLt\right)$"> is the <EM>classical propagator</EM>.
+The idea with numerical integration is that we find a way to represent
+the propagator as a <EM>discrete algorithm</EM> for constructing the
+system at some time <IMG
+ WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$t + \Delta t$"> given the system at time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">.
+
+<P>
+Let's build our discrete integrator by decomposing the operator:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+iL = iL_1 + iL_2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="103" HEIGHT="26" BORDER="0"
+ SRC="img388.png"
+ ALT="\begin{displaymath}
+iL = iL_1 + iL_2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(127)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This does not necessarily lead to two independent propagators, because 
+the two components do not commute; that is:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\exp\left[\left( iL_1 + iL_2\right)t\right] \ne \exp\left(iL_1t\right)\exp\left(iL_2t\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="283" HEIGHT="28" BORDER="0"
+ SRC="img389.png"
+ ALT="\begin{displaymath}
+\exp\left[\left( iL_1 + iL_2\right)t\right] \ne \exp\left(iL_1t\right)\exp\left(iL_2t\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(128)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Consider the action of the partial Liouville operator
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+iL_1 \equiv \dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="102" HEIGHT="39" BORDER="0"
+ SRC="img390.png"
+ ALT="\begin{displaymath}
+iL_1 \equiv \dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(129)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which gives
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+f\left[{\bf p}^N\left(t\right),{\bf r}^N\left(t\right)\right] & = &
+\exp\left[t\dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}}\right]
+f\left[{\bf p}^N\left(0\right),{\bf r}^N\left(0\right)\right]\\
+& = & \sum_{n=0}^{\infty} \frac{\left(\dot{\bf r}\left(0\right)t\right)^n}{n!}\frac{\partial^n}{\partial{\bf r}^n}f\left[{\bf p}^N\left(0\right),{\bf r}^N\left(0\right)\right]\\
+ & = & f\left[{\bf p}^N\left(0\right),{\bf r}^N\left(0\right)+\dot{\bf r}\left(0\right)\right]
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="122" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img391.png"
+ ALT="$\displaystyle f\left[{\bf p}^N\left(t\right),{\bf r}^N\left(t\right)\right]$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="233" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img392.png"
+ ALT="$\displaystyle \exp\left[t\dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}}\right]
+f\left[{\bf p}^N\left(0\right),{\bf r}^N\left(0\right)\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(130)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="247" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img393.png"
+ ALT="$\displaystyle \sum_{n=0}^{\infty} \frac{\left(\dot{\bf r}\left(0\right)t\right)...
+...\partial{\bf r}^n}f\left[{\bf p}^N\left(0\right),{\bf r}^N\left(0\right)\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(131)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="177" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img394.png"
+ ALT="$\displaystyle f\left[{\bf p}^N\left(0\right),{\bf r}^N\left(0\right)+\dot{\bf r}\left(0\right)\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(132)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The last line is the collapse of the Taylor expansion of the line
+immediately above it.  So, the effect of this operator fragment is a
+simple shift of coordinates given some initial velocities.  This is an
+interesting fact: we can consider first-order integration as a Taylor
+expansion.
+
+<P>
+The next step of Tuckerman was to apply the Trotter identity:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\exp\left[\left( iL_1 + iL_2\right)t\right] = \lim_{P\rightarrow\infty}
+\left[\exp\left(iL_1t/2P\right)\exp\left(iL_t2/P\right)\exp\left(iL_1t/2P\right)\right]^P
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="489" HEIGHT="36" BORDER="0"
+ SRC="img395.png"
+ ALT="\begin{displaymath}
+\exp\left[\left( iL_1 + iL_2\right)t\right] = \lim_{P\righta...
+...ght)\exp\left(iL_t2/P\right)\exp\left(iL_1t/2P\right)\right]^P
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(133)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+When <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> is large but finite:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\exp\left[\left(iL_1 + iL_2\right)t\right] = 
+\left[\exp\left(iL_1t/2P\right)\exp\left(iL_2t/P\right)\exp\left(iL_1t/2P\right)\right]^P\exp\left[\mathscr{O}\left(1/P^2\right)\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="555" HEIGHT="30" BORDER="0"
+ SRC="img396.png"
+ ALT="\begin{displaymath}
+\exp\left[\left(iL_1 + iL_2\right)t\right] =
+\left[\exp\lef...
+...\right)\right]^P\exp\left[\mathscr{O}\left(1/P^2\right)\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(134)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Now, we define a finite timestep as <!-- MATH
+ $\Delta t = t/P$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img397.png"
+ ALT="$\Delta t = t/P$"> and we have then
+a discrete operator that, when applied to a configuration at time <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img363.png"
+ ALT="$t$">, will
+produce the configuration at time <IMG
+ WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$t + \Delta t$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\exp\left(iL_1\Delta t/2\right)\exp\left(iL_2\Delta t\right)\exp\left(iL_1\Delta t/2\right)\Gamma\left(t\right) = \Gamma\left(t+\Delta t\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="405" HEIGHT="28" BORDER="0"
+ SRC="img398.png"
+ ALT="\begin{displaymath}
+\exp\left(iL_1\Delta t/2\right)\exp\left(iL_2\Delta t\right)...
+...t/2\right)\Gamma\left(t\right) = \Gamma\left(t+\Delta t\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(135)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+By performing this operation sequentially <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> times, we recover a
+discretized version of the formal solution to generate
+<!-- MATH
+ $\Gamma\left(t\right)$
+ -->
+<IMG
+ WIDTH="35" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img399.png"
+ ALT="$\Gamma\left(t\right)$"> given <!-- MATH
+ $\Gamma\left(0\right)$
+ -->
+<IMG
+ WIDTH="37" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img400.png"
+ ALT="$\Gamma\left(0\right)$">.
+
+<P>
+Now we explicitly consider the decomposition:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+iL_1 & = & \dot{\bf p}\left(0\right)\frac{\partial}{\partial{\bf p}}\\
+iL_2 & = & \dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img401.png"
+ ALT="$\displaystyle iL_1$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="63" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img402.png"
+ ALT="$\displaystyle \dot{\bf p}\left(0\right)\frac{\partial}{\partial{\bf p}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(136)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img403.png"
+ ALT="$\displaystyle iL_2$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="58" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img404.png"
+ ALT="$\displaystyle \dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(137)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+We can perform one <IMG
+ WIDTH="23" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$\Delta t$">'s worth of update using the following operation
+on <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+\exp\left(\dot{\bf p}\left(0\right)\left(\frac{\partial}{\partial{\bf p}}\right)\frac{\Delta t}{2}\right)
+\exp\left(\dot{\bf r}\left(0\right)\left(\frac{\partial}{\partial{\bf r}}\right)\Delta t\right)
+\exp\left(\dot{\bf p}\left(0\right)\left(\frac{\partial}{\partial{\bf p}}\right)\frac{\Delta t}{2}\right)
+f\left[{\bf p}^N\left(t\right),{\bf r}^N\left(t\right)\right]
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="589" HEIGHT="45" BORDER="0"
+ SRC="img405.png"
+ ALT="\begin{displaymath}
+\exp\left(\dot{\bf p}\left(0\right)\left(\frac{\partial}{\pa...
+...f\left[{\bf p}^N\left(t\right),{\bf r}^N\left(t\right)\right]
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+The action of the rightmost operator, <!-- MATH
+ $\exp\left(\dot{\bf p}\left(0\right)\left(\frac{\partial}{\partial{\bf p}}\right)\frac{\Delta t}{2}\right)$
+ -->
+<IMG
+ WIDTH="146" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img406.png"
+ ALT="$\exp\left(\dot{\bf p}\left(0\right)\left(\frac{\partial}{\partial{\bf p}}\right)\frac{\Delta t}{2}\right)$">:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+f\left[{\bf p}^N\left(t\right),{\bf r}^N\left(t\right)\right] \rightarrow
+f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\bf p}\left(\Delta t\right)\right]^N,\left[{\bf r}\left(t\right)\right]^N\right\}
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="383" HEIGHT="54" BORDER="0"
+ SRC="img407.png"
+ ALT="\begin{displaymath}
+f\left[{\bf p}^N\left(t\right),{\bf r}^N\left(t\right)\right...
+...t\right)\right]^N,\left[{\bf r}\left(t\right)\right]^N\right\}
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+The action of the next rightmost, <!-- MATH
+ $\exp\left(\dot{\bf r}\left(0\right)\left(\frac{\partial}{\partial{\bf r}}\right)\Delta t\right)$
+ -->
+<IMG
+ WIDTH="132" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img408.png"
+ ALT="$\exp\left(\dot{\bf r}\left(0\right)\left(\frac{\partial}{\partial{\bf r}}\right)\Delta t\right)$">:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\bf p}\left(\Delta t\right)\right]^N,\left[{\bf r}\left(t\right)\right]^N\right\} \rightarrow
+   f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\bf p}\left(0\right)\right]^N,
+           \left[{\bf r}\left(t\right)+ \Delta t \dot{\bf r}\left(\frac{\Delta t}{2}\right)\right]^N\right\}
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="600" HEIGHT="54" BORDER="0"
+ SRC="img409.png"
+ ALT="\begin{displaymath}
+f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\...
+... t \dot{\bf r}\left(\frac{\Delta t}{2}\right)\right]^N\right\}
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Then, the action of the final operator:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\bf p}\left(0\right)\right]^N,
+           \left[{\bf r}\left(t\right)+ \Delta t \dot{\bf r}\left(\frac{\Delta t}{2}\right)\right]^N\right\}
+\rightarrow f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\bf p}\left(0\right)+
+	\frac{\Delta t}{2}\dot{\bf p}\left(\Delta t\right)\right]^N,
+           \left[{\bf r}\left(t\right)+ \Delta t \dot{\bf r}\left(\frac{\Delta t}{2}\right)\right]^N\right\}\\
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="778" HEIGHT="54" BORDER="0"
+ SRC="img410.png"
+ ALT="\begin{displaymath}
+f\left\{\left[{\bf p}\left(t\right)+\frac{\Delta t}{2}\dot{\...
+...\dot{\bf r}\left(\frac{\Delta t}{2}\right)\right]^N\right\}\\
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+Noting that <!-- MATH
+ ${\bf p} = m\dot{\bf r}$
+ -->
+<IMG
+ WIDTH="57" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img411.png"
+ ALT="${\bf p} = m\dot{\bf r}$"> and <!-- MATH
+ ${\bf F} = m{\bf a} = \dot{\bf p}$
+ -->
+<IMG
+ WIDTH="91" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img412.png"
+ ALT="${\bf F} = m{\bf a} = \dot{\bf p}$">, we can summarize the 
+effect of this three-step update of the positions and velocities as
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf r}\left(\Delta t\right) & = & {\bf r}\left(0\right) + 
+                                   \Delta t \dot{\bf r}\left(0\right) + 
+                                   \frac{\left(\Delta t\right)^2}{2}
+\frac{{\bf F}\left[{\bf r}\left(0\right)\right]}{m},\\
+\dot{\bf r}\left(\Delta t\right) & = & \dot{\bf r}\left(0\right) + \frac{\Delta t}{2m}
+\left\{{\bf F}\left[{\bf r}\left(0\right)\right] + {\bf F}\left[{\bf r}\left(\Delta t\right)\right]\right\}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img413.png"
+ ALT="$\displaystyle {\bf r}\left(\Delta t\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="227" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img414.png"
+ ALT="$\displaystyle {\bf r}\left(0\right) +
+\Delta t \dot{\bf r}\left(0\right) +
+...
+...left(\Delta t\right)^2}{2}
+\frac{{\bf F}\left[{\bf r}\left(0\right)\right]}{m},$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(138)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img415.png"
+ ALT="$\displaystyle \dot{\bf r}\left(\Delta t\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="236" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img416.png"
+ ALT="$\displaystyle \dot{\bf r}\left(0\right) + \frac{\Delta t}{2m}
+\left\{{\bf F}\le...
+...left(0\right)\right] + {\bf F}\left[{\bf r}\left(\Delta t\right)\right]\right\}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(139)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+This is the velocity-Verlet algorithm, seen previously in Eqs&nbsp;<A HREF="node23.html#eq:vv:pos">119</A>-<A HREF="node23.html#eq:vv:second_half">121</A>.
+Interestingly, we can also reverse the order of the decomposition; i.e.,
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+iL_1 & = & \dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}}\\
+iL_2 & = & \dot{\bf p}\left(0\right)\frac{\partial}{\partial{\bf p}}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img401.png"
+ ALT="$\displaystyle iL_1$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="58" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img404.png"
+ ALT="$\displaystyle \dot{\bf r}\left(0\right)\frac{\partial}{\partial{\bf r}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(140)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img403.png"
+ ALT="$\displaystyle iL_2$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="63" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img402.png"
+ ALT="$\displaystyle \dot{\bf p}\left(0\right)\frac{\partial}{\partial{\bf p}}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(141)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The update algorithm that arises is
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\dot{\bf r}\left(\Delta t\right) & = & \dot{\bf r}\left(0\right) + 
+	\Delta t {\bf F}\left[{\bf r}\left(0\right) +
+	                      \frac{\Delta t}{2m}\dot{\bf r}\left(0\right)\right]\\
+{\bf r}\left(\Delta t\right) & = & {\bf r}\left(0\right) + 
+                                   \frac{\Delta t}{2}\left[\dot{\bf x}\left(0\right)
+	 						  +\dot{\bf x}\left(\Delta t\right)\right].
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img415.png"
+ ALT="$\displaystyle \dot{\bf r}\left(\Delta t\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="210" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img417.png"
+ ALT="$\displaystyle \dot{\bf r}\left(0\right) +
+\Delta t {\bf F}\left[{\bf r}\left(0\right) +
+\frac{\Delta t}{2m}\dot{\bf r}\left(0\right)\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(142)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img413.png"
+ ALT="$\displaystyle {\bf r}\left(\Delta t\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="191" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img418.png"
+ ALT="$\displaystyle {\bf r}\left(0\right) +
+\frac{\Delta t}{2}\left[\dot{\bf x}\left(0\right)
++\dot{\bf x}\left(\Delta t\right)\right].$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(143)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This is termed the <EM>position Verlet</EM>
+algorithm&nbsp;[<A
+ HREF="node63.html#Tuckerman1992">9</A>].  Tuckerman <EM>et al.</EM> showed that
+this new algorithm results in a slightly lower drift in total energy
+in MD simulation of a simple Lennard-Jones fluid, when the time-step
+is greater than about 0.004.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html383"
+  HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html381"
+  HREF="node22.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html377"
+  HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html384"
+  HREF="node25.html">Case Study 1: An</A>
+<B> Up:</B> <A NAME="tex2html382"
+  HREF="node22.html">MD: Theoretical Background</A>
+<B> Previous:</B> <A NAME="tex2html378"
+  HREF="node23.html">Newtonian Mechanics and Numerical</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

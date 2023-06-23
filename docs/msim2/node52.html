@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Velocity Rescaling: Isokinetics and the Berendsen Thermostat</TITLE>
+<META NAME="description" CONTENT="Velocity Rescaling: Isokinetics and the Berendsen Thermostat">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node53.html">
+<LINK REL="previous" HREF="node51.html">
+<LINK REL="up" HREF="node50.html">
+<LINK REL="next" HREF="node53.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html716"
+  HREF="node53.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html714"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html708"
+  HREF="node51.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html717"
+  HREF="node53.html">Stochastic NVT Thermostats: Andersen,</A>
+<B> Up:</B> <A NAME="tex2html715"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html709"
+  HREF="node51.html">Temperature Fluctuations in the</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00052200000000000000">
+Velocity Rescaling:  Isokinetics and the Berendsen Thermostat</A>
+</H3>
+
+<P>
+&ldquo;Isokinetics&rdquo; refers to altering velocities on the fly to keep kinetic energy (and therefore temperature) constant.  The relationship between kinetic energy and temperature results from the application of the equipartition theorem to velocity (or, equivalently, momentum) degrees of freedom:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img573.png"
+ ALT="$\displaystyle \frac{3}{2}Nk_BT$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="182" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img574.png"
+ ALT="$\displaystyle = \frac{1}{2}\sum_im_iv_i^2m = \sum_i\frac{p_i^2}{2m}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:veleqpart">(<SPAN CLASS="arabic">201</SPAN>)</A></TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Scaling every particle velocity by a factor <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> will yield a new temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img575.png"
+ ALT="$ T^\prime$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\lambda = \sqrt{\left(T^\prime/T\right)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="98" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img576.png"
+ ALT="$\displaystyle \lambda = \sqrt{\left(T^\prime/T\right)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">202</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+An isokinetic thermostat computes <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> and rescales velocities at every time step.
+Such a thermostat <B>cannot</B> be used to conduct a simulation
+in the canonical ensemble, since it totally suppresses the required temperature fluctuations.  However, isokinetics is perfectly fine to use in a warmup or
+initialization phase in order to prevent numerical instabilities.
+
+<P>
+The code <code>mdlj_isok.c</code> illustrates implementation of an isokinetic thermostat for constant-<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> simulation of a Lennard-Jones fluid.  The implementation uses a two parameters, <code>isoKT</code> and <code>isoKi</code>, that specify the desired temperature and the number of time steps between applications of the rescaling.  It is worth asking whether or not <EM>occasional</EM> velocity rescaling (rather than at every step) might allow us to preserve the correct statistics.  Fig.&nbsp;<A HREF="#fig:isok">22</A> shows traces of temperature vs time for three MD simulations of the Lennard-Jones fluid with 512 particles at a density of 0.50.  Each simulation used a different interval size <code>i</code>.  The quantity <!-- MATH
+ $N\frac{\langle T^2\rangle - \langle T\rangle^2}{\langle T\rangle^2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="83" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img577.png"
+ ALT="$ N\frac{\langle T^2\rangle - \langle T\rangle^2}{\langle T\rangle^2}$"></SPAN> is computed for each set and values are shown in the legend.  For pure canonical statistics, we know this should be 2/3; clearly, isokinetics even at a very modest frequency utterly fails to preserve canonical statistics.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:isok"></A><A NAME="5173"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 22:</STRONG>
+Temperature vs time (output every time step) for three isokinetic MD simulations of the LJ fluid at density 0.5 with 512 particles.  <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> indicates the number of steps between velocity rescalings; the setpoint temperature is 3.0, and all simulations were initialized with velocities consistent with a temperature of 2.0.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="536" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./isoKT.png"
+ ALT="Image isoKT"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Berendsen realized that velocity scaling could be reformulated to model energy exchange 
+with a bath at constant <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>&nbsp;[<A
+ HREF="node82.html#Berendsen1984MolecularBath">9</A>].  His scale factor is defined as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:lam_ber"></A><!-- MATH
+ \begin{equation}
+\lambda = \left[1+\frac{\Delta t}{\tau_T}\left(\frac{T_0}{T} - 1\right)\right]^{\frac{1}{2}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="185" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img578.png"
+ ALT="$\displaystyle \lambda = \left[1+\frac{\Delta t}{\tau_T}\left(\frac{T_0}{T} - 1\right)\right]^{\frac{1}{2}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">203</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Here, <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$ T_0$"></SPAN> is the setpoint temperature, <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> is the integration
+time step, and <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img579.png"
+ ALT="$ \tau_T$"></SPAN> is a constant called the &ldquo;rise time&rdquo; of the
+thermostat.  It describes the strength of the coupling of the system
+to a hypothetical heat bath. The larger <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img579.png"
+ ALT="$ \tau_T$"></SPAN>, the weaker the
+coupling; in other words, the larger <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img579.png"
+ ALT="$ \tau_T$"></SPAN>, the longer it takes
+to achieve a given <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$ T_0$"></SPAN> after an instantaneous change from some
+previous <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$ T_0$"></SPAN>. 
+
+<P>
+The code <code>mdlj_ber.c</code>
+implements the Berendsen thermostat.  The two relevant parameters are <code>berT</code>, the setpoint temperature, and <code>ber_tau</code>, the rise time.  Fig.&nbsp;<A HREF="#fig:berendsen">23</A> shows traces of temperature vs time for three MD simulations of the Lennard-Jones fluid with 512 particles at a density of 0.50, with temperature controlled using the Berendsen thermostat with various values of <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img23.png"
+ ALT="$ \tau $"></SPAN>.  Larger <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img23.png"
+ ALT="$ \tau $"></SPAN> clearly results in longer approach times to the setpoint temperature.  Note also that the relative fluctuations of the temperature reported indicate that canonical statistics are not being held.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:berendsen"></A><A NAME="5189"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 23:</STRONG>
+Temperature vs time (output every time step) for three Berendsen-thermostatted MD simulations of the LJ fluid at density 0.5 with 512 particles.  <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img23.png"
+ ALT="$ \tau $"></SPAN> indicates the rise time; the setpoint temperature is 3.0, and all simulations were initialized with velocities consistent with a temperature of 2.0.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="536" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./berendsenT.png"
+ ALT="Image berendsenT"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Though relatively simple, velocity scaling thermostats are not
+recommended for use in production MD runs because they do not strictly
+conform to the canonical ensemble.  
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html716"
+  HREF="node53.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html714"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html708"
+  HREF="node51.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html717"
+  HREF="node53.html">Stochastic NVT Thermostats: Andersen,</A>
+<B> Up:</B> <A NAME="tex2html715"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html709"
+  HREF="node51.html">Temperature Fluctuations in the</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

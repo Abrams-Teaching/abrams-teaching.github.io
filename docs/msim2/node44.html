@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Radial Distribution Functions and Postprocessing</TITLE>
+<META NAME="description" CONTENT="Radial Distribution Functions and Postprocessing">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="up" HREF="node41.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html625"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html623"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html619"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html626"
+  HREF="node45.html">Case Study 3: Transport</A>
+<B> Up:</B> <A NAME="tex2html624"
+  HREF="node41.html">Case Study 2: Static</A>
+<B> Previous:</B> <A NAME="tex2html620"
+  HREF="node43.html">Equilibration and Decorrelation</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00043300000000000000">
+Radial Distribution Functions and Postprocessing</A>
+</H3>
+
+<P>
+A second major objective of this case study is to demonstrate how to
+compute the radial distribution function, <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN>.  The radial
+distribution function is an important statistical mechanical function
+that captures the structure of liquids and amorphous solids.  We can
+express <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN> using the following statement:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\rho g(r) = \mbox{\begin{minipage}{10cm}average density of particles at
+${\bf r}$\  given that\\a tagged particle is at the origin\end{minipage}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img488.png"
+ ALT="$\displaystyle \rho g(r) =$">&nbsp; &nbsp;<IMG
+ WIDTH="457" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img489.png"
+ ALT="$\displaystyle \mbox{\begin{minipage}{10cm}average density of particles at ${\bf r}$ given that a tagged particle is at the origin\end{minipage}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">157</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The procedure we will follow will be to write a second program (a
+&ldquo;postprocessing code&rdquo;) which will read in the trajectory output
+produced by the simulation, <EM>mdlj.c</EM>.  
+The general structure of a <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN> post-processing code could look
+like this:
+
+<OL>
+<LI>Determine trajectory time limits: start, stop, and step
+</LI>
+<LI>Initialize histogram.
+</LI>
+<LI>Read in the trajectory as a list of frames.
+</LI>
+<LI>For each frame:
+
+<OL Type="a">
+<LI>Visit all unique pairs of particles, and update histogram for each visit
+if applicable
+</LI>
+</OL>
+</LI>
+<LI>Normalize histogram and output.
+</LI>
+<LI>End.
+</LI>
+</OL>
+
+<P>
+We will consider a code, <code>rdf.c</code>, that
+implements this algorithm for computing <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN>, but first we present a
+brief argument for post-processing vs on-the-fly processing for
+computing quantities such as <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN>.  For demonstration purposes, it
+is arguably simpler to drop in a <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN>-histogram update sampling
+function into an existing MD simulation program to enable computation
+of <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN> <EM>during</EM> a simulation, compared to writing a wholly
+separate program.  After all, it nominally involves less coding.  The
+counterargument is that, once you have a working (and eventually
+optimized) MD simulation code, one should be wary of modifying it.
+The purpose of the MD simulation is to produce samples.  One can
+produce samples once, and use any number of post-processing codes to
+extract useful information.  The counterargument becomes stronger when
+one considers that, for particularly large-scale simulations, it is
+simply not convenient to re-run an entire simulation when one
+discovers a slight bug in the sampling routines.  The price one
+pays is that one needs the disk space to store configurations.
+
+<P>
+As shown earlier, one MD simulation of 108 particles out to 600,000
+time steps, storing configurations every 1,000 time steps, requires
+less than 5 MB.  This is an insignificant price.  Given that we <EM>know</EM> that the MD simulation works correctly, it is sensible to <EM>leave it alone</EM> and write a quick, simple post-processing code to read
+in these samples and compute <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN>.
+
+<P>
+The code <code>rdf.c</code> is a C-code implementation
+of just such a post-processing code.  This program illustrates a different way to abstractify the trajectory, namely as a list of frames.  A <code>frame</code> is an instance of an abstract data type called <code>frametype</code> that we define (for now) in <code>rdf.c</code>, along with a special function <code>NewFrame()</code> to allocate memory for a frame, and another <code>read_xyz_frame()</code> to read a frame in from an XYZ-format trajectory:
+<PRE>
+typedef struct FRAME {
+    double * rx, * ry, * rz;  // coordinates
+    double * vx, * vy, * vz;  // velocities
+    int * typ; // array of particle types 0, 1, ...
+    int N; // number of particles
+    double Lx, Ly, Lz; // box dimensions
+} frametype;
+
+/* Create and return an empty frame */
+frametype * NewFrame ( int N, int hv ) {
+    frametype * f = (frametype*)malloc(sizeof(frametype));
+    f-&gt;N=N;
+    f-&gt;rx=(double*)malloc(sizeof(double)*N);
+    f-&gt;ry=(double*)malloc(sizeof(double)*N);
+    f-&gt;rz=(double*)malloc(sizeof(double)*N);
+    if (hv) { 
+        // caller has requested a frame with space for velocities
+        f-&gt;vx=(double*)malloc(sizeof(double)*N);
+        f-&gt;vy=(double*)malloc(sizeof(double)*N);
+        f-&gt;vz=(double*)malloc(sizeof(double)*N);
+    } else {
+        f-&gt;vz=NULL;
+        f-&gt;vy=NULL;
+        f-&gt;vx=NULL;
+    }
+    f-&gt;typ=(int*)malloc(sizeof(int)*N);
+    return f;
+}
+/* Read an XYZ-format frame from stream fp; returns the new frame.
+   Note the non-conventional use of the first line to indicate 
+   whether or not the frame contains velocities and the comment 
+   line to hold boxsize information. */
+frametype * read_xyz_frame ( FILE * fp ) {
+    int N,i,j,hasvel=0;
+    double x, y, z, Lx, Ly, Lz, vx, vy, vz;
+    char typ[3], dummy[5];
+    char ln[255];
+    frametype * f = NULL;
+    if (fgets(ln,255,fp)){
+        sscanf(ln,"%i %i\n",&amp;N,&amp;hasvel);
+        f = NewFrame(N,hasvel);
+        fgets(ln,255,fp);
+        sscanf(ln,"%s %lf %lf %lf\n",dummy,&amp;f-&gt;Lx,&amp;f-&gt;Ly,&amp;f-&gt;Lz);
+        for (i=0;i&lt;N;i++) {
+            fgets(ln,255,fp);
+            sscanf(ln,"%s %lf %lf %lf %lf %lf %lf\n",
+                   typ,&amp;f-&gt;rx[i],&amp;f-&gt;ry[i],&amp;f-&gt;rz[i],&amp;vx,&amp;vy,&amp;vz);
+            if (hasvel) {
+                f-&gt;vx[i]=vx;
+                f-&gt;vy[i]=vy;
+                f-&gt;vz[i]=vz;
+            }
+            j=0;
+            while(strcmp(elem[j],"NULL")&amp;&amp;strcmp(elem[j],typ)) j++;
+            if (strcmp(elem[j],"NULL")) f-&gt;typ[i]=j;
+            else f-&gt;typ[i]=-1;
+        }
+    }
+    return f;
+}
+</PRE>
+
+<P>
+With this abstract data type, we no longer need to pass all parallel arrays as separate parameters; we can instead just pass a pointer <code>frametype*</code>.  For example, below is the function <code>rij</code> that computes the minimum-image convention distance between particles <code>i</code> and <code>j</code> in a particular frame:
+<PRE>
+/* Compute scalar distance between particles i and j in frame f;
+   note the use of the minimum image convention */
+double rij ( frametype * f, int i, int j ) {
+    double dx, dy, dz;
+    double hLx=0.5*f-&gt;Lx,hLy=0.5*f-&gt;Ly,hLz=0.5*f-&gt;Lz;
+    dx=f-&gt;rx[i]-f-&gt;rx[j];
+    dy=f-&gt;ry[i]-f-&gt;ry[j];
+    dz=f-&gt;rz[i]-f-&gt;rz[j];
+    if (dx&lt;-hLx) dx+=f-&gt;Lx;
+    if (dx&gt; hLx) dx-=f-&gt;Lx;
+    if (dy&lt;-hLy) dy+=f-&gt;Ly;
+    if (dy&gt; hLy) dy-=f-&gt;Ly;
+    if (dz&lt;-hLz) dz+=f-&gt;Lz;
+    if (dz&gt; hLz) dz-=f-&gt;Lz;
+    return sqrt(dx*dx+dy*dy+dz*dz);
+}
+</PRE>
+
+<P>
+Using <code>rij()</code> it is then easy to update the RDF histogram:
+<PRE>
+/* An N^2 algorithm for computing interparticle separations
+   and updating the radial distribution function histogram. */
+void update_hist ( frametype * f, double rcut, 
+                   double dr, int * H, int nbins ) {
+    int i,j;
+    double r;
+    int bin;
+    for (i=0;i&lt;f-&gt;N-1;i++) {
+        for (j=i+1;j&lt;f-&gt;N;j++) {
+            r=rij(f,i,j);
+            if (r&lt;rcut) {
+                bin=(int)(r/dr);
+                if (bin&lt;0||bin&gt;=nbins) {
+                    fprintf(stderr,
+                            "Warning: %.3lf not on [0.0,%.3lf]\n",
+                            r,rcut);
+                } else {
+                    H[bin]+=2;
+                }
+            }
+        }
+    }
+}
+</PRE>
+
+<P>
+<code>H</code> is the histogram.  One can see that the bin value is computed by first dividing the actual distance between members of
+the pair by the <EM>resolution</EM> of the histogram, <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img231.png"
+ ALT="$ \delta r$"></SPAN>, and casting the result as an integer.  This
+resolution can be specified on the command-line when <code>rdf.c</code> is
+executed.  Also notice that the histogram is updated by 2, which
+reflects the fact that either of the two particles in the pair can be
+placed at the origin.  Also notice the implementation of the
+minimum image convention.
+
+<P>
+In the <code>main()</code> function of <code>rdf.c</code>, a simple block of code can read in a whole
+trajectory from a file named by <code>trajfile</code> and store it in an array of <code>frametype*</code> pointers:
+<PRE>
+    i=0;
+    fprintf(stdout,"Reading %s\n",trajfile);
+    fp=fopen(trajfile,"r");
+    while (Traj[i++]=read_xyz_frame(fp));
+    nFrames=i-1;
+    fclose(fp);
+    if (!nFrames) {
+        fprintf(stdout,"Error: %s has no data.\n",trajfile);
+        exit(-1);
+    }
+    fprintf(stdout,"Read %i frames from %s.\n",nFrames,trajfile);
+</PRE>
+
+<P>
+Then a second block of code allocates, initializes, and computes the pair correlation histogram:
+<PRE>
+    /* Adjust cutoff and compute histogram */
+    L2min=min(Traj[0]-&gt;Lx/2,min(Traj[0]-&gt;Ly/2,Traj[0]-&gt;Lz/2));
+    if (rcut&gt;L2min) rcut=L2min;
+    nbins=(int)(rcut/dr)+1;
+    H=(int*)malloc(sizeof(int)*nbins);
+    for (i=0;i&lt;nbins;i++) H[i]=0;
+    for (i=begin_frame;i&lt;nFrames;i++) 
+        update_hist(Traj[i],rcut,dr,H,nbins);
+    nFramesAnalyzed=nFrames-begin_frame;
+</PRE>
+Note that the cutoff <code>rcut</code> may not exceed half a box length in any dimension.  The number of histogram bins is simply one plus the cutoff divided by the resolution <code>dr</code>.  The variable <code>begin_frame</code> allows the caller to gather statistics only after a certain number of frames in the trajectory in order to &ldquo;ignore&rdquo; initial frames where the initial configuration is still &ldquo;remembered&rdquo;.
+
+<P>
+Finally, once the trajectory has been traversed and the histrogram computed, it is then normalized by compute <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN> and save the result to a designated output file:
+<PRE>
+    /* Normalize and output g(r) to the terminal */
+    /* Compute density, assuming NVT ensemble */
+    fp=fopen(outfile,"w");
+    fprintf(fp,"# RDF from %s\n",trajfile);
+    fprintf(fp,"#LABEL r g(r)\n");
+    fprintf(fp,"#UNITS %s *\n",length_units);
+    /* Ideal-gas global density; assumes V is constant */
+    rho=Traj[0]-&gt;N/(Traj[0]-&gt;Lx*Traj[0]-&gt;Ly*Traj[0]-&gt;Lz);
+    for (i=0;i&lt;nbins-1;i++) {
+        /* bin volume */
+        vb=4./3.*M_PI*((i+1)*(i+1)*(i+1)-i*i*i)*dr*dr*dr;
+        /* number of particles in this shell if this were
+           an ideal gas */
+        nid=vb*rho;
+        fprintf(fp,"%.5lf %.5lf\n",i*dr,
+                (double)(H[i])/(nFramesAnalyzed*Traj[0]-&gt;N*nid));
+    }
+    fclose(fp);
+    fprintf(stdout,"%s created.\n",outfile);
+</PRE>
+(The variable <code>length_units</code> is a string that just labels the length units; by default, this
+is <code>"sigma"</code>, indicating LJ <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>.)
+
+<P>
+Now, let's execute <code>rdf</code> from one of our 600,000-time-step simulations' 6,001-frame trajectory, ignoring the first 1,000 frames (100,000 time steps):
+<PRE>
+$ cd ~/dxu/chet580/instructional-codes/my_work/mdlj/set1
+$ gcc -O5 -o rdf ../../../originals/rdf.c -lm
+$ ./rdf -t traj-rho0.90-rep0.xyz -dr 0.02 -rcut 3.5 \
+   -o rdf-rho0.90-rep0.dat -begin-frame 1000
+Reading traj-rho0.90-rep0.xyz
+Read 6001 frames from traj-rho0.90-rep0.xyz.
+rdf-rho0.90-rep0.dat created.
+$
+</PRE>
+
+<P>
+Using the python program <code>plot_rdf.py</code>, we can generate a plot of this RDF (Fig.&nbsp;<A HREF="#fig:rdf1">17</A>:
+<PRE>
+$ python ../../../originals/plot_rdf.py -i rdf-rho0.90-rep0.dat \ 
+  -o rdf-rho0.90-rep0.png
+</PRE>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:rdf1"></A><A NAME="3722"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 17:</STRONG>
+Radial distribution function of a Lennard-Jones fluid at reduced density 0.90, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> = 216, cutoff of 3.5, NVE MD.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="536" HEIGHT="450" ALIGN="BOTTOM" BORDER="0"
+ SRC="./rdf-rho0.90-rep0.png"
+ ALT="Image rdf-rho0.90-rep0"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+This <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN> shows a peak at about 2<!-- MATH
+ $^{1/6}\sigma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img490.png"
+ ALT="$ ^{1/6}\sigma$"></SPAN> that corresponds to the LJ well, indicating that there is a dense nearest-neighbor shell out to about 1.5 <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>.  How dense?  We can use <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img487.png"
+ ALT="$ g(r)$"></SPAN> to count particles within a distance <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ r$"></SPAN> from a 
+central atom:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:ungr"></A><!-- MATH
+ \begin{equation}
+n\left(r\right) = \rho\int_0^r\int_0^{\pi}\int_0^{2\pi} g\left(r^\prime\right) \left(r^\prime\right)^2\sin\theta dr^\prime d\theta d\phi =  4\pi\rho\int_0^r \left(r^\prime\right)^2g\left(r^\prime\right)dr^\prime
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="479" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img491.png"
+ ALT="$\displaystyle n\left(r\right) = \rho\int_0^r\int_0^{\pi}\int_0^{2\pi} g\left(r^...
+...d\phi = 4\pi\rho\int_0^r \left(r^\prime\right)^2g\left(r^\prime\right)dr^\prime$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">158</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This integration is enabled in <code>plot_rdf.py</code> via the <code>-rho</code> and <code>-R</code> flags:
+<PRE>
+$ python ../../../originals/plot_rdf.py -i rdf-rho0.90-rep0.dat \ 
+  -o rdf-rho0.90-rep0.png -rho 0.9 -R 1.5
+n=12.335
+</PRE>
+This indicates the nearest neighbor shell is pretty well packed; spherical close-packing would be exactly 12.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html625"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html623"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html619"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html626"
+  HREF="node45.html">Case Study 3: Transport</A>
+<B> Up:</B> <A NAME="tex2html624"
+  HREF="node41.html">Case Study 2: Static</A>
+<B> Previous:</B> <A NAME="tex2html620"
+  HREF="node43.html">Equilibration and Decorrelation</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

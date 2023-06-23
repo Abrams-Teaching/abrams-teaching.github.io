@@ -1,0 +1,10 @@
+#!/usr/bin/gnuplot
+set term post eps enh color "Times-Roman" 24 linewidth 2.0 solid
+set out "fig4.4.eps"
+set size square
+set xlabel "M"
+set ylabel "{/Symbol s}"
+set yr [0:0.005]
+
+set key left box
+p "150k" u 1:2:3 t"150000" w err pt 4, "600k" u 1:2:3 t"600000" w err pt 6

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>A Box of Water</TITLE>
+<META NAME="description" CONTENT="A Box of Water">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node70.html">
+<LINK REL="previous" HREF="node68.html">
+<LINK REL="up" HREF="node68.html">
+<LINK REL="next" HREF="node70.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html894"
+  HREF="node70.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html892"
+  HREF="node68.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html886"
+  HREF="node68.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html895"
+  HREF="node70.html">The SARS-CoV-2 spike protein</A>
+<B> Up:</B> <A NAME="tex2html893"
+  HREF="node68.html">Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html887"
+  HREF="node68.html">Gromacs</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00081100000000000000">
+A Box of Water</A>
+</H3>
+
+<P>
+Here I illustrate a workflow for generating and simulating a small box of water molecules.
+
+<P>
+First, we can use `gmx insert-molecules` to generate a system with waters randomly positioned inside a box:
+
+<P>
+<PRE>
+$ gmx insert-molecules -ci /usr/share/gromacs/top/spc216.gro \ 
+  -nmol 100 -box 3 3 3 -o water_box.gro
+</PRE>
+
+<P>
+The <code>-box</code> switch allows us to specify a box that is 3x3x3 nm<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img278.png"
+ ALT="$ ^3$"></SPAN>, and <code>-ci</code> refers to a special file containing template atomic coordinates for a single water molecule.  The <code>-nmol</code> switch asks Gromacs to try to insert more molecules than a simple volume/density calculation would suggest (not many more can be put in).  This creates the file <code>water_box.gro</code>, which for me contains 432 water molecules, as depicted using VMD in Fig.&nbsp;<A HREF="#fig:waterbox-vmd">32</A>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:waterbox-vmd"></A><A NAME="8415"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 32:</STRONG>
+A cubic box containing 432 water molecules created using <TT>gmx insert-molecules</TT>.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="526" HEIGHT="522" ALIGN="BOTTOM" BORDER="0"
+ SRC="./water.00006.png"
+ ALT="Image water.00006"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Next, we need to use <code>pdb2gmx</code> to generate the Gromacs topology file.
+
+<P>
+<PRE>
+$ gmx pdb2gmx -f water_box.gro -o new_water_box.gro -p topol.top
+</PRE>
+In running this command, I selected the CHARMM27 force field (which won't matter since we have nothing but water here) and the TIP3P water model.
+We now have the topology file and a new gromacs coordinate file (which just renames the water molecules to HOH to conform to the TIP3P naming scheme). 
+
+<P>
+Now, using the <code>minim.mdp</code> parameter file given, we can build and run the energy minimization:
+<PRE>
+$ gmx grompp -f minim.mdp -c new_water_box.gro -p topol.top -o min.tpr
+$ gmx mdrun -v -deffnm min
+</PRE>
+
+<P>
+This will create a lot of output files that all begin with <code>min</code>.  One of them contains all the energy-like data: <code>min.edr</code>.  This file is binary, so the tool <code>gmx energy</code> is used to extract data from it:
+
+<P>
+<PRE>
+$ gmx energy -f min.edr
+</PRE>
+
+<P>
+This will create <code>energy.xvg</code> with column-oriented time-series of whatever data is selected interactively.  Fig.&nbsp;<A HREF="#fig:water-gmx-min">33</A> shows what the potential energy looks like for this minimization.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:water-gmx-min"></A><A NAME="8351"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 33:</STRONG>
+Potential energy vs cycle in a Gromacs minimization of a box of 432 waters.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="461" HEIGHT="346" ALIGN="BOTTOM" BORDER="0"
+ SRC="./water-gmx-min.png"
+ ALT="Image water-gmx-min"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+(This is a very, very minimized system; the initial water box had no overlaps really at all.)  Now we can run the NVT simulation using the <code>nvt.mdp</code> parameter file:
+
+<P>
+<PRE>
+$ gmx grompp -f nvt.mdp -c min.gro -p topol.top -o nvt.tpr
+$ gmx mdrun -v -deffnm nvt
+</PRE>
+
+<P>
+Fig.&nbsp;<A HREF="#fig:water-gmx-nvt">34</A> shows a plot of the energies vs time for this short, short simulation.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:water-gmx-nvt"></A><A NAME="8359"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 34:</STRONG>
+Energies vs time in an NVT MD simulation (300 K) of a box of 432 water molecules.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="461" HEIGHT="346" ALIGN="BOTTOM" BORDER="0"
+ SRC="./waterNVTenergies-gmx.png"
+ ALT="Image waterNVTenergies-gmx"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Now let's try using the output configuration from this NVT simulation as an input for an NPT simulation.
+
+<P>
+<PRE>
+$ gmx grompp -f npt.mdp -c nvt.gro -t nvt.cpt -p topol.top -o npt.tpr
+$ gmx mdrun -v -deffnm npt
+</PRE>
+
+<P>
+Fig.&nbsp;<A HREF="#fig:water-gmx-npt">35</A> shows a plot of the density vs time for this short, short simulation.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:water-gmx-npt"></A><A NAME="8367"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 35:</STRONG>
+Density vs. time in an NPT MD simulation (1 bar, 300 K) of a box of 432 water molecules.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="461" HEIGHT="346" ALIGN="BOTTOM" BORDER="0"
+ SRC="./water-density-npt-gromacs.png"
+ ALT="Image water-density-npt-gromacs"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html894"
+  HREF="node70.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html892"
+  HREF="node68.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html886"
+  HREF="node68.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html895"
+  HREF="node70.html">The SARS-CoV-2 spike protein</A>
+<B> Up:</B> <A NAME="tex2html893"
+  HREF="node68.html">Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html887"
+  HREF="node68.html">Gromacs</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

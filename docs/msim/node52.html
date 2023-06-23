@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Densities of States: The Wang-Landau Monte Carlo Method</TITLE>
+<META NAME="description" CONTENT="Densities of States: The Wang-Landau Monte Carlo Method">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node47.html">
+<LINK REL="up" HREF="node40.html">
+<LINK REL="next" HREF="node53.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html684"
+  HREF="node53.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html682"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html678"
+  HREF="node51.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html685"
+  HREF="node53.html">The Algorithm</A>
+<B> Up:</B> <A NAME="tex2html683"
+  HREF="node40.html">Advanced Topics</A>
+<B> Previous:</B> <A NAME="tex2html679"
+  HREF="node51.html">Ewald Summation: Suggested Exercises</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00074000000000000000"></A>
+<A NAME="sec:wang-landau"></A>
+<BR>
+Densities of States: The Wang-Landau Monte Carlo Method
+</H2>
+
+<P>
+One of the most interesting recent developments in molecular
+simulation are the so-called ``density of states'' methods, first
+implemented by Wang and Landau&nbsp;[<A
+ HREF="node63.html#Wang2001a">22</A>,<A
+ HREF="node63.html#Wang2001b">23</A>].  In
+principle, these techniques provide a route to calculating the <EM>density of states</EM> of a system of interest, <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$">
+(Eq.&nbsp;<A HREF="node5.html#eq:dos">19</A>).&nbsp;<A NAME="tex2html52"
+  HREF="footnode.html#foot8323"><SUP>6</SUP></A>  Determining <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> gives a
+full understanding of the thermodynamics of a system, because the entropy
+is calculable directly as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+S = k_BT\ln\Omega
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="92" HEIGHT="26" BORDER="0"
+ SRC="img955.png"
+ ALT="\begin{displaymath}
+S = k_BT\ln\Omega
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(342)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+So, it is not undesirable at all to be able to compute <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">.
+
+<P>
+Now, we know that <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> is buried in the probability distribution
+of energy that arises from standard NVT Monte Carlo simulation:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P(E) = \Omega(E)\exp\left(-\beta
+E\right)\left/\sum_{i}\Omega(E_i)\exp\left(-\beta E_i\right)\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="341" HEIGHT="55" BORDER="0"
+ SRC="img956.png"
+ ALT="\begin{displaymath}
+P(E) = \Omega(E)\exp\left(-\beta
+E\right)\left/\sum_{i}\Omega(E_i)\exp\left(-\beta E_i\right)\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(343)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+If we run a simple NVT MC simulation and populate a histogram of total
+energy, <IMG
+ WIDTH="43" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img957.png"
+ ALT="$H(E)$">, we can in principle compute <IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> by first
+normalizing <IMG
+ WIDTH="43" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img957.png"
+ ALT="$H(E)$"> <!-- MATH
+ $\rightarrow P(E)$
+ -->
+<IMG
+ WIDTH="62" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img958.png"
+ ALT="$\rightarrow P(E)$"> and multiplying each entry <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">
+by the factor <!-- MATH
+ $\exp\left(+\beta E_i\right)$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img959.png"
+ ALT="$\exp\left(+\beta E_i\right)$">.  The problem in practice
+is that states for which the Boltzmann factor (<!-- MATH
+ $\exp\left(-\beta
+E_i\right)$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img960.png"
+ ALT="$\exp\left(-\beta
+E_i\right)$">) is low are rarely if ever visited in reasonable time, and
+the statistical strength of <IMG
+ WIDTH="43" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img957.png"
+ ALT="$H(E)$"> in such regions of energy is
+therefore poor.  Indeed, conventional MC is <EM>designed</EM> to not
+cover all of energy space, but to perform importance sampling of
+configurational space.  Furthermore, if the Markov process is trapped
+in a local minimum on the potential energy hypersurface, barrier
+states with vanishingly small Boltzmann factors effectively prevent
+the escape of the process, preventing an adequate sampling of the
+potential energy hypersurface.  For these reasons, it is desirable to
+perform a random walk in <EM>energy</EM> rather than <EM>configurational</EM> space.
+
+<P>
+In this section, we'll review the two papers by Wang and Landau which
+introduced their technique by demonstrating how to compute <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">
+for Ising and Potts systems by conducting random walks in energy
+space.  These are lattice systems; more recent work has been focused
+on developing efficient continuous-space versions of the technique
+(E.g.,&nbsp;[<A
+ HREF="node63.html#Shell2003">24</A>,<A
+ HREF="node63.html#Rathore2003">25</A>]).
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html686"
+  HREF="node53.html">The Algorithm</A>
+<LI><A NAME="tex2html687"
+  HREF="node54.html">A Conventional MC Study of the <IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$Q$"> = 10 Potts Model</A>
+<LI><A NAME="tex2html688"
+  HREF="node55.html">The Potts Model treated by Wang-Landau MC</A>
+<LI><A NAME="tex2html689"
+  HREF="node56.html">How ``flat'' is ``flat''?</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html684"
+  HREF="node53.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html682"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html678"
+  HREF="node51.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html685"
+  HREF="node53.html">The Algorithm</A>
+<B> Up:</B> <A NAME="tex2html683"
+  HREF="node40.html">Advanced Topics</A>
+<B> Previous:</B> <A NAME="tex2html679"
+  HREF="node51.html">Ewald Summation: Suggested Exercises</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

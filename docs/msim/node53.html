@@ -1,0 +1,503 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Algorithm</TITLE>
+<META NAME="description" CONTENT="The Algorithm">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node54.html">
+<LINK REL="previous" HREF="node52.html">
+<LINK REL="up" HREF="node52.html">
+<LINK REL="next" HREF="node54.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html698"
+  HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html696"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html690"
+  HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html699"
+  HREF="node54.html">A Conventional MC Study</A>
+<B> Up:</B> <A NAME="tex2html697"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html691"
+  HREF="node52.html">Densities of States: The</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00074100000000000000">
+The Algorithm</A>
+</H3>
+
+<P>
+The Wang-Landau algorithm is a method which <EM>converges</EM> upon
+<IMG
+ WIDTH="40" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\Omega (E)$"> to within a given tolerance.  First, we must understand
+what energy levels are accessible to our system; let us call this set
+<!-- MATH
+ $\left\{E_i: i=1,\dots,N_e\right\}$
+ -->
+<IMG
+ WIDTH="140" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img961.png"
+ ALT="$\left\{E_i: i=1,\dots,N_e\right\}$">, where <IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img962.png"
+ ALT="$N_e$"> is the number of
+levels.  Let us imagine conducting a random walk in energy space such
+that the observed histogram of visited levels, <IMG
+ WIDTH="43" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img957.png"
+ ALT="$H(E)$">, is uniform, or
+``flat.''  This random walk must be guided by some underlying
+probability distribution, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$">, which tells us whether to
+accept or reject a proposed step, <!-- MATH
+ $o\rightarrow n$
+ -->
+<IMG
+ WIDTH="46" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img963.png"
+ ALT="$o\rightarrow n$">, in the walk.
+Generally, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$"> is incorporated in a Metropolis acceptance
+rule:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+{\rm acc}(o\rightarrow n) = \min\left(1,\frac{\mathscr{N}(n)}{\mathscr{N}(o)}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:acc1"></A><IMG
+ WIDTH="200" HEIGHT="45" BORDER="0"
+ SRC="img964.png"
+ ALT="\begin{displaymath}
+{\rm acc}(o\rightarrow n) = \min\left(1,\frac{\mathscr{N}(n)}{\mathscr{N}(o)}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(344)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+By conditionally accepting trials based on Eq.&nbsp;<A HREF="#eq:acc1">345</A>, we
+guarantee that <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$"> is a static equilibrium distribution
+(assuming our trial moves obey detailed balance, or the balance
+condition is met in some other way).  Now, if <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img82.png"
+ ALT="$\mathscr{N}$"> is the
+canonical distribution, the probability of observing a particular
+energy level, <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img965.png"
+ ALT="$E_i$">, is proportional to <!-- MATH
+ $\exp\left(-E_i/k_BT\right)$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img966.png"
+ ALT="$\exp\left(-E_i/k_BT\right)$">.
+
+<P>
+Now consider that each energy level has <IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img967.png"
+ ALT="$\Omega(E_i)$"> allowable
+microstates, each with the same probability, <IMG
+ WIDTH="61" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img968.png"
+ ALT="$1/\Omega(E_i)$">, by
+the fundamental hypothesis.  The probability of observing the system
+in energy level <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img965.png"
+ ALT="$E_i$"> is the composite probability of observing it
+in one of the microstates with energy <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img965.png"
+ ALT="$E_i$">. If we want the probability
+of observing the system in energy level <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img965.png"
+ ALT="$E_i$"> to be uniform, then the
+probability of observing <EM>any</EM> particular microstate should be 
+proportional to <IMG
+ WIDTH="61" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img968.png"
+ ALT="$1/\Omega(E_i)$">.  So, the probability distribution
+we should use is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{N} \propto 1/\Omega(E_i),
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="94" HEIGHT="28" BORDER="0"
+ SRC="img969.png"
+ ALT="\begin{displaymath}
+\mathscr{N} \propto 1/\Omega(E_i),
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(345)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+and the acceptance rule becomes:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+{\rm acc}(o\rightarrow n) = \min\left(1,\frac{\Omega(o)}{\Omega(n)}\right)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:acc2"></A><IMG
+ WIDTH="198" HEIGHT="45" BORDER="0"
+ SRC="img970.png"
+ ALT="\begin{displaymath}
+{\rm acc}(o\rightarrow n) = \min\left(1,\frac{\Omega(o)}{\Omega(n)}\right)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(346)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Now, here is why we <EM>want</EM> to construct a flat histogram.  If we
+can, then we know that have the ``correct'' <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$">.  But we don't
+know <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> to begin with.  So now we need a way to begin with a
+guess for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> and then systematically refine it until we achieve
+a flat histogram in energy space.  An efficient technique for
+successively refining a guess for <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> from a sequence of
+Monte-Carlo simulations was the major contribution of Wang and
+Landau.&nbsp;[<A
+ HREF="node63.html#Wang2001a">22</A>,<A
+ HREF="node63.html#Wang2001b">23</A>]
+
+<P>
+In this algorithm, we start with the initial guess <IMG
+ WIDTH="70" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img971.png"
+ ALT="$\Omega(E) = 1$">,
+and the histogram is initialized as <IMG
+ WIDTH="73" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img972.png"
+ ALT="$H(E) = 0$">.  Then, we begin making
+trial moves and accepting or rejecting based on the acceptance rule in
+Eq.&nbsp;<A HREF="#eq:acc2">347</A>.  After a move, we find ourselves in energy state
+<IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img965.png"
+ ALT="$E_i$">, and we update <EM>both</EM> the histogram and the density of
+states:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+H(E_i) & \rightarrow & H(E_i) + 1\\
+\Omega(E_i) & \rightarrow & f\Omega(E_i)
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="48" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img973.png"
+ ALT="$\displaystyle H(E_i)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img377.png"
+ ALT="$\textstyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="75" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img974.png"
+ ALT="$\displaystyle H(E_i) + 1$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(347)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="45" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img975.png"
+ ALT="$\displaystyle \Omega(E_i)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img377.png"
+ ALT="$\textstyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="54" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img976.png"
+ ALT="$\displaystyle f\Omega(E_i)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(348)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that this is done regardless of whether we wind up in state <IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img965.png"
+ ALT="$E_i$">
+due to an <EM>accepted</EM> move or a <EM>rejected</EM> move.  The density
+of states update factor, <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">, begins at a relatively large value (<!-- MATH
+ $f =
+e^1 = 2.718281828$
+ -->
+<IMG
+ WIDTH="154" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img977.png"
+ ALT="$f =
+e^1 = 2.718281828$">).  The updates continue until the histogram is
+``sufficiently flat.''  At this point, the histogram is reset to 0,
+and <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> is reduced according to
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+f \rightarrow \sqrt{f}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:wl:f_update"></A><IMG
+ WIDTH="60" HEIGHT="28" BORDER="0"
+ SRC="img978.png"
+ ALT="\begin{displaymath}
+f \rightarrow \sqrt{f}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(349)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Then, the simulation continues again until the histogram is
+sufficiently flat.  After several iterations, <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> gets closer and
+closer to 1, and changes to <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> become smaller and smaller.  The
+series of runs is terminated after <IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img979.png"
+ ALT="$\ln f$"> is about 10<IMG
+ WIDTH="21" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img980.png"
+ ALT="$^{-8}$">.
+
+<P>
+By ``sufficiently flat,'' Wang and Landau suggest that the histogram
+is such that the bin with the minimum number of hits is within 95% of
+the mean number of hits per bin.  This is a particularly strong criterion,
+and more recent work suggests that it is adequate to require merely that 
+each bin has a minimum number of hits, regardless of the mean
+value&nbsp;[<A
+ HREF="node63.html#Shell2002">26</A>].
+
+<P>
+The factor update relation (Eq.&nbsp;<A HREF="#eq:wl:f_update">350</A>) is also somewhat
+arbitrary.  What is required is that <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> approach unity in a scheduled
+manner.  A more general rule might be
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+f \rightarrow \sqrt[n]{f}\ \ \ \ n \ge 2
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="121" HEIGHT="28" BORDER="0"
+ SRC="img981.png"
+ ALT="\begin{displaymath}
+f \rightarrow \sqrt[n]{f}    n \ge 2
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(350)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+It is important to note that, because the acceptance rule is changing
+<EM>during</EM> the simulation, detailed balance is not strictly obeyed.
+However, it is <EM>very close</EM> to being obeyed when <IMG
+ WIDTH="43" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img982.png"
+ ALT="$f\approx 1$">.  How
+does one choose a proper initial value and update scheme for <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$">?  There
+is unfortunately no general guidance on this in the current literature,
+other than the original realization of Wang and Landau that too large
+a value of <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> introduces large statistical fluctuations in <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> which
+might become ``frozen in,'' while too small a value for <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> will require
+much too many visits to produce a flat histogram.
+
+<P>
+Also, the magnitude of <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> is normally such that we can't tabulate
+it directly; it is advantageous instead to tabulate its log.  So the
+array used to store <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> actually stores <IMG
+ WIDTH="31" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img983.png"
+ ALT="$\ln\Omega$">, and the
+update of a bin becomes:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\ln\Omega \rightarrow \ln\Omega + \ln f
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="124" HEIGHT="27" BORDER="0"
+ SRC="img984.png"
+ ALT="\begin{displaymath}
+\ln\Omega \rightarrow \ln\Omega + \ln f
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(351)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The acceptance rule does not change, of course; it is simply reformulated
+as 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+{\rm acc}(o\rightarrow n) = \min\left[1,\exp\left(\ln\Omega(o)-\ln\Omega(n)\right)\right]
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="304" HEIGHT="28" BORDER="0"
+ SRC="img985.png"
+ ALT="\begin{displaymath}
+{\rm acc}(o\rightarrow n) = \min\left[1,\exp\left(\ln\Omega(o)-\ln\Omega(n)\right)\right]
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(352)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Finally, because the acceptance rule involves a ratio of
+probabilities, <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> is not determined absolutely, but rather to
+within a constant factor.  Unless we know the exact <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> for some
+reference state (as we do for certain lattice models, such at the
+Ising magnet and the Potts glass), we cannot obtain absolute thermal
+quantities (entropy and free energies) from the <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> obtained
+using this method.  This is usually not a problem, either because we
+can ``pin down'' <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img68.png"
+ ALT="$\Omega$"> at a known reference, or because we don't
+care about absolutes, but only differences.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html698"
+  HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html696"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html690"
+  HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html699"
+  HREF="node54.html">A Conventional MC Study</A>
+<B> Up:</B> <A NAME="tex2html697"
+  HREF="node52.html">Densities of States: The</A>
+<B> Previous:</B> <A NAME="tex2html691"
+  HREF="node52.html">Densities of States: The</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

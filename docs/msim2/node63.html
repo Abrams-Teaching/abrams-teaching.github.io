@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Embedded Atom Method (EAM)</TITLE>
+<META NAME="description" CONTENT="Embedded Atom Method (EAM)">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node64.html">
+<LINK REL="previous" HREF="node62.html">
+<LINK REL="up" HREF="node62.html">
+<LINK REL="next" HREF="node64.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html832"
+  HREF="node64.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html830"
+  HREF="node62.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html824"
+  HREF="node62.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html833"
+  HREF="node64.html">Bond-Order Potentials</A>
+<B> Up:</B> <A NAME="tex2html831"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Previous:</B> <A NAME="tex2html825"
+  HREF="node62.html">Reactive Potentials</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00072100000000000000">
+Embedded Atom Method (EAM)</A>
+</H3>
+
+<P>
+The embedded-atom method (EAM) was originally developed to model metals.&nbsp;[<A
+ HREF="node82.html#Daw1984Embedded-atomMetals">28</A>]  The basic idea of EAM is that atoms interact in a pairwise manner with the nearest neighbors but they also interact with a global field of electron density that is explicitly many-body in nature.
+For a system of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> atoms, the EAM potential is
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{U}({\boldsymbol r}^N) = \sum_{i=1}^{N}\left[F_i(\rho_{h,i}) + \frac{1}{2}\sum_{j\ne i} \phi_{ij}(r_{ij})\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="286" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img733.png"
+ ALT="$\displaystyle \mathscr{U}({\boldsymbol r}^N) = \sum_{i=1}^{N}\left[F_i(\rho_{h,i}) + \frac{1}{2}\sum_{j\ne i} \phi_{ij}(r_{ij})\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">269</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:EAM:phi"></A><A NAME="eq:ZBL"></A><!-- MATH
+ \begin{eqnarray}
+F\left(\rho\right) & = & -\sqrt{\rho}, \\
+\rho_i & = & \sum_{j\ne i}g\left(r_{ij}\right), \\
+g\left(r\right) & = & \exp{\left(-\beta r\right)}, \\
+\phi\left(r\right) & = & V_2\left(r\right) - 2F\left[g\left(r\right)\right], \\
+V_2\left(r\right) & = & \left\{ \begin{array}{ll}
+		V_{\rm ZBL}\left(r\right), & \mbox{$r<r_1$}, \\
+		\alpha_0+\alpha_1r+\alpha_2r^2+\alpha_3r^3, &
+		\mbox{$r_1\le r<r_2$}, \\
+		-2c\exp{\left(-{{\beta}\over{2}}r\right)}+\Phi_0\exp{\left(-\alpha r\right)}, &
+		\mbox{$r\ge r_2$},\\
+		\end{array}
+		\right.\\
+V_{\rm ZBL}\left(r\right) & = &
+{{Z_1Z_2e^2}\over{4\pi\epsilon_0r}}\sum_{i=1}^{4}c_i\exp\left(-d_i{{r}\over{a}}\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="39" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img734.png"
+ ALT="$\displaystyle F\left(\rho\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img735.png"
+ ALT="$\displaystyle -\sqrt{\rho},$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">270</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img736.png"
+ ALT="$\displaystyle \rho_i$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="78" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img737.png"
+ ALT="$\displaystyle \sum_{j\ne i}g\left(r_{ij}\right),$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">271</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="35" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img738.png"
+ ALT="$\displaystyle g\left(r\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="77" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img739.png"
+ ALT="$\displaystyle \exp{\left(-\beta r\right)},$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">272</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img740.png"
+ ALT="$\displaystyle \phi\left(r\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="132" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img741.png"
+ ALT="$\displaystyle V_2\left(r\right) - 2F\left[g\left(r\right)\right],$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">273</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="43" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img742.png"
+ ALT="$\displaystyle V_2\left(r\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="357" HEIGHT="83" ALIGN="MIDDLE" BORDER="0"
+ SRC="img743.png"
+ ALT="$\displaystyle \left\{ \begin{array}{ll}
+V_{\rm ZBL}\left(r\right), &amp; \mbox{$r&lt;r...
+...+\Phi_0\exp{\left(-\alpha r\right)}, &amp;
+\mbox{$r\ge r_2$},\\
+\end{array}\right.$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">274</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img744.png"
+ ALT="$\displaystyle V_{\rm ZBL}\left(r\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="185" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img745.png"
+ ALT="$\displaystyle {{Z_1Z_2e^2}\over{4\pi\epsilon_0r}}\sum_{i=1}^{4}c_i\exp\left(-d_i{{r}\over{a}}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">275</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The second term in Eq.&nbsp;<A HREF="#eq:EAM:phi">273</A> accounts for the fact that the electron density into which an atom is embedded does not include electrons from that atom itself. Eq.&nbsp;<A HREF="#eq:ZBL">275</A> is the Ziegler-Biersack-Littmark (ZBL) screened nuclear repulsion potential used for modeling high-energy collisions between atoms.  The three branches that make up <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img746.png"
+ ALT="$ V_2$"></SPAN> produce a spline-connection between the ZBL and a Morse-like attractive tail.
+
+<P>
+Among the many systems simulated using EAM is the sputtering of copper.&nbsp;[<A
+ HREF="node82.html#Abrams1999Three-dimensionalSimulations">29</A>] 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html832"
+  HREF="node64.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html830"
+  HREF="node62.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html824"
+  HREF="node62.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html833"
+  HREF="node64.html">Bond-Order Potentials</A>
+<B> Up:</B> <A NAME="tex2html831"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Previous:</B> <A NAME="tex2html825"
+  HREF="node62.html">Reactive Potentials</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

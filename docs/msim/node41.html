@@ -1,0 +1,912 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Case Study: Stillinger-Weber Silicon</TITLE>
+<META NAME="description" CONTENT="Case Study: Stillinger-Weber Silicon">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node42.html">
+<LINK REL="previous" HREF="node40.html">
+<LINK REL="up" HREF="node40.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html572"
+  HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html570"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html564"
+  HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html573"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Up:</B> <A NAME="tex2html571"
+  HREF="node40.html">Advanced Topics</A>
+<B> Previous:</B> <A NAME="tex2html565"
+  HREF="node40.html">Advanced Topics</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00071000000000000000"></A>
+<A NAME="sec:swsi"></A>
+<BR>
+Case Study: Stillinger-Weber Silicon
+</H2>
+
+<P>
+No one should have the impression that people who do molecular
+simulation only care about the Lennard-Jones fluid. It has been and
+continues to be an important test-bed for theories of the liquid state
+and phase-equilibria. Nevertheless, molecular simulation has been
+performed on a wide variety of materials.
+
+<P>
+As a single example, consider silicon. Perhaps the earliest attempt to
+use molecular simulation to study a realistic atomic-scale model of
+silicon was due to Stillinger and Weber&nbsp;[<A
+ HREF="node63.html#Stillinger85">16</A>]. I ``cut
+my teeth'' on the Stillinger-Weber potential coding up my first real
+research code in graduate school. I now make a version of that code
+available to the students in this course, available at 
+<A NAME="tex2html41"
+  HREF="codes/mdswsi.c">mdswsi.c</A>. This
+code computes in reduced units as well; <IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$\sigma $"> = 0.20951 nm,
+<IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $"> = 2.1678 eV, and <IMG
+ WIDTH="18" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="$m$"> = 28.085 amu, which are appropriate
+for a system of pure silicon.  One reduced unit of temperature, <!-- MATH
+ $T [=]
+\epsilon/k_B$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img641.png"
+ ALT="$T [=]
+\epsilon/k_B$">, corresponds to 25156.73798&nbsp;K.
+
+<P>
+The main reason to introduce Stillinger-Weber silicon here is to give
+you an example of a three-body potential. Silicon forms 4-coordinated
+tetrahedral bonded structures. The object of the three-body component
+of the potential is to enforce the tetrahedral bond angle
+(109.47<IMG
+ WIDTH="11" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img642.png"
+ ALT="$^\circ$">) among triplets of bonded atoms.
+
+<P>
+The total potential is expressed as two sums, one for unique pair
+interactions, and another for unique triplet interactions:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mathscr{U} = \sum_{i<j}v_2(r_{ij}) + \sum_{i<j<k}v_3({\bf r}_i, 
+{\bf r}_j, {\bf r}_k)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="245" HEIGHT="47" BORDER="0"
+ SRC="img643.png"
+ ALT="\begin{displaymath}
+\mathscr{U} = \sum_{i&lt;j}v_2(r_{ij}) + \sum_{i&lt;j&lt;k}v_3({\bf r}_i,
+{\bf r}_j, {\bf r}_k)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(220)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+The two-body models the bonds: 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+v_2 \left(r\right) = \left\{\begin{array}{ll}
+	\epsilon A \left(Br^{-p}-r^{-q}\right)\exp\left[\left(r-a\right)^{-1}\right], & \mbox{$r < a$}\\
+0 & \mbox{$r\ge a$}
+\end{array}
+\right.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="364" HEIGHT="54" BORDER="0"
+ SRC="img644.png"
+ ALT="\begin{displaymath}
+v_2 \left(r\right) = \left\{\begin{array}{ll}
+\epsilon A \l...
+...t], &amp; \mbox{$r &lt; a$}\\
+0 &amp; \mbox{$r\ge a$}
+\end{array}\right.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(221)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+It is very much like a Lennard-Jones potential, only with different
+exponents and a ``smooth cutoff'' as the interatom separation
+distance, <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$r$">, approaches some cutoff, <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$a$">, given by the factor
+<!-- MATH
+ $\exp\left[\left(r-a\right)^{-1}\right]$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img645.png"
+ ALT="$\exp\left[\left(r-a\right)^{-1}\right]$">.
+
+<P>
+The three body models the angles, and is the sum of functions of each
+of the three angles of a triplet, <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img646.png"
+ ALT="$ijk$">:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+v_3\left({\bf r}_i, {\bf r}_j, {\bf r}_k\right) = h_{jik} +  h_{ijk} + h_{ikj}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="227" HEIGHT="29" BORDER="0"
+ SRC="img647.png"
+ ALT="\begin{displaymath}
+v_3\left({\bf r}_i, {\bf r}_j, {\bf r}_k\right) = h_{jik} + h_{ijk} + h_{ikj}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(222)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Here I have employed the shorthand notation <!-- MATH
+ $\displaystyle h_{jik}
+\equiv h\left(r_{ij}, r_{ik}, \theta_{jik}\right)$
+ -->
+<IMG
+ WIDTH="154" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img648.png"
+ ALT="$\displaystyle h_{jik}
+\equiv h\left(r_{ij}, r_{ik}, \theta_{jik}\right)$">. Note that, in the
+notation of this potential, <IMG
+ WIDTH="30" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img649.png"
+ ALT="$\theta_{jik}$"> is subtended at <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img650.png"
+ ALT="${\bf
+r}_i$">, and <!-- MATH
+ $\cos\theta_{jik}^c = -\frac{1}{3}$
+ -->
+<IMG
+ WIDTH="97" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img651.png"
+ ALT="$\cos\theta_{jik}^c = -\frac{1}{3}$">:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+h\left(r_{ij},r_{ik},\theta_{jik}\right) 
+\equiv \cases{
+\epsilon\lambda\exp\left[\frac{\gamma}{r_{ij}-a} + 
+\frac{\gamma}{r_{ik}-a}\right]
+\left(\cos\theta_{jik}-\cos\theta_{jik}^c\right)^2 & 
+   \mbox{if $r_{ij} < a$, and} \cr
+0 & \mbox{otherwise} 
+}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="554" HEIGHT="54" BORDER="0"
+ SRC="img652.png"
+ ALT="\begin{displaymath}
+h\left(r_{ij},r_{ik},\theta_{jik}\right)
+\equiv \cases{
+\ep...
+...^2 &amp;
+\mbox{if $r_{ij} &lt; a$, and} \cr
+0 &amp; \mbox{otherwise}
+}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(223)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+One computes the angle-<IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$"> term, <IMG
+ WIDTH="31" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img653.png"
+ ALT="$h_{ijk}$">, and the angle-<IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img342.png"
+ ALT="$k$"> term, <IMG
+ WIDTH="31" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img654.png"
+ ALT="$h_{ikj}$">, by permuting the indices appropriately.
+
+<P>
+The parameters used in the original study by Stillinger and Weber are:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+A & = & 7.049556277\\
+B & = & 0.6022245584\\
+p & = & 4\\
+q & = & 0\\
+a & = & 1.80\\
+\lambda & = & 21.0\\
+\gamma & = & 1.20
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img655.png"
+ ALT="$\displaystyle A$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="88" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img656.png"
+ ALT="$\displaystyle 7.049556277$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(224)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img657.png"
+ ALT="$\displaystyle B$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="96" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img658.png"
+ ALT="$\displaystyle 0.6022245584$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(225)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img659.png"
+ ALT="$\displaystyle p$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img660.png"
+ ALT="$\displaystyle 4$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(226)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img661.png"
+ ALT="$\displaystyle q$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img662.png"
+ ALT="$\displaystyle 0$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(227)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img663.png"
+ ALT="$\displaystyle a$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img664.png"
+ ALT="$\displaystyle 1.80$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(228)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img665.png"
+ ALT="$\displaystyle \lambda$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img666.png"
+ ALT="$\displaystyle 21.0$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(229)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img667.png"
+ ALT="$\displaystyle \gamma$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img668.png"
+ ALT="$\displaystyle 1.20$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(230)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+As in any MD simulation, one computes the force on any particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">
+from the negative gradient of the total potential:
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+{\bf f}_i & = & -\nabla_{{\bf r}_i}\mathscr{U}\\
+& = & -\sum_{j\ne i} \nabla_{{\bf r}_i}v_2\left(r_{ij}\right) - 
+\sum_{j\ne i}\sum_{k\ne i,j} \nabla_{{\bf r}_i}v_3\left({\bf r}_i,{\bf r}_j,{\bf r}_k\right)
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="15" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img669.png"
+ ALT="$\displaystyle {\bf f}_i$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img670.png"
+ ALT="$\displaystyle -\nabla_{{\bf r}_i}\mathscr{U}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(231)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="308" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img671.png"
+ ALT="$\displaystyle -\sum_{j\ne i} \nabla_{{\bf r}_i}v_2\left(r_{ij}\right) -
+\sum_{...
+...\sum_{k\ne i,j} \nabla_{{\bf r}_i}v_3\left({\bf r}_i,{\bf r}_j,{\bf r}_k\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(232)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The two-body term for the <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">-<IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$"> interaction is only slightly more
+complicated than Lennard-Jones, due to the smooth cutoff. Here,
+assuming <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> and <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$"> are within interaction range (<IMG
+ WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img672.png"
+ ALT="$r_{ij} &lt; a$">), we
+have for the force on <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> due to <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">:
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:swfij"></A>
+<!-- MATH
+ \begin{eqnarray}
+-\nabla_{{\bf r}_i} v_2\left(r_{ij}\right) & = &
+ -\frac{\partial }{\partial{\bf r}_i} \left\{\epsilon A \left(Br_{ij}^{-p}-r_{ij}^{-q}\right)\exp\left[\left(r_{ij}-a\right)^{-1}\right]\right\}\\
+& = & -\epsilon A \frac{{\bf r}_{ij}}{r_{ij}}\left(\left.\left[\frac{\partial}{\partial r} \left(Br^{-p}-r^{-q}\right)\right]\right|_{r_{ij}}\exp\left[\left(r_{ij}-a\right)^{-1}\right]\right.\\
+& + & \left.\left(Br_{ij}^{-p}-r_{ij}^{-q}\right)\left.\left\{\frac{\partial}{\partial r}\exp\left[\left(r-a\right)^{-1}\right]\right\}\right|_{r_{ij}}\right)\\
+& = & -\epsilon A \frac{{\bf r}_{ij}}{r_{ij}}\left\{\left(-pBr_{ij}^{-p-1}+qr_{ij}^{-q-1}\right)\exp\left[\left(r_{ij}-a\right)^{-1}\right]\right.\\
+& - & \left.\left(Br_{ij}^{-p}-r_{ij}^{-q}\right)\exp\left[\left(r_{ij}-a\right)^{-1}\right]\left(r_{ij}-a\right)^{-2}\right\}\\
+& = & v_2\frac{{\bf r}_{ij}}{r_{ij}}\left[\frac{pBr_{ij}^{-p-1}-qr_{ij}^{-q-1}}{Br_{ij}^{-p}-r_{ij}^{-q}} + \left(r_{ij}-a\right)^{-2}\right]\\
+& \equiv & {\bf f}_{ij}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img673.png"
+ ALT="$\displaystyle -\nabla_{{\bf r}_i} v_2\left(r_{ij}\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="304" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img674.png"
+ ALT="$\displaystyle -\frac{\partial }{\partial{\bf r}_i} \left\{\epsilon A \left(Br_{ij}^{-p}-r_{ij}^{-q}\right)\exp\left[\left(r_{ij}-a\right)^{-1}\right]\right\}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(233)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="355" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img675.png"
+ ALT="$\displaystyle -\epsilon A \frac{{\bf r}_{ij}}{r_{ij}}\left(\left.\left[\frac{\p...
+...)\right]\right\vert _{r_{ij}}\exp\left[\left(r_{ij}-a\right)^{-1}\right]\right.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(234)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img676.png"
+ ALT="$\textstyle +$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="296" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img677.png"
+ ALT="$\displaystyle \left.\left(Br_{ij}^{-p}-r_{ij}^{-q}\right)\left.\left\{\frac{\pa...
+...al r}\exp\left[\left(r-a\right)^{-1}\right]\right\}\right\vert _{r_{ij}}\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(235)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="354" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img678.png"
+ ALT="$\displaystyle -\epsilon A \frac{{\bf r}_{ij}}{r_{ij}}\left\{\left(-pBr_{ij}^{-p-1}+qr_{ij}^{-q-1}\right)\exp\left[\left(r_{ij}-a\right)^{-1}\right]\right.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(236)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img679.png"
+ ALT="$\textstyle -$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="312" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img680.png"
+ ALT="$\displaystyle \left.\left(Br_{ij}^{-p}-r_{ij}^{-q}\right)\exp\left[\left(r_{ij}-a\right)^{-1}\right]\left(r_{ij}-a\right)^{-2}\right\}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(237)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="292" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img681.png"
+ ALT="$\displaystyle v_2\frac{{\bf r}_{ij}}{r_{ij}}\left[\frac{pBr_{ij}^{-p-1}-qr_{ij}^{-q-1}}{Br_{ij}^{-p}-r_{ij}^{-q}} + \left(r_{ij}-a\right)^{-2}\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(238)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img593.png"
+ ALT="$\textstyle \equiv$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img682.png"
+ ALT="$\displaystyle {\bf f}_{ij}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(239)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Note that it is still true that <!-- MATH
+ ${\bf f}_{ij} = -{\bf
+f}_{ji}$
+ -->
+<IMG
+ WIDTH="71" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img425.png"
+ ALT="${\bf f}_{ij} = -{\bf f}_{ji}$">. Exercise: Show that the right-hand-side of Eq.&nbsp;<A HREF="#eq:swfij">238</A> is
+well-behaved (that is, it does not diverge, and in fact vanishes) as <!-- MATH
+ $r_{ij}\rightarrow a^-$
+ -->
+<IMG
+ WIDTH="66" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img683.png"
+ ALT="$r_{ij}\rightarrow a^-$">.
+
+<P>
+It is comparatively much more tedious to evaluate the three-body gradients. 
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eq:sw3_partials"></A>
+<!-- MATH
+ \begin{eqnarray}
+-\nabla_{{\bf r}_i}v_3\left({\bf r}_i,{\bf r}_j,{\bf r}_k\right) & = & 
+-\nabla_{{\bf r}_i}\left(h_{jik} + h_{ijk} + h_{ikj}\right)\\
+& = & -\left(\frac{\partial h_{jik}}{\partial {\bf r}_i} +\frac{\partial h_{ijk}}{\partial {\bf r}_i} +\frac{\partial h_{ikj}}{\partial {\bf r}_i}\right)\\
+& \equiv & {\bf f}_{i\leftarrow jk}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="128" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img684.png"
+ ALT="$\displaystyle -\nabla_{{\bf r}_i}v_3\left({\bf r}_i,{\bf r}_j,{\bf r}_k\right)$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="177" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img685.png"
+ ALT="$\displaystyle -\nabla_{{\bf r}_i}\left(h_{jik} + h_{ijk} + h_{ikj}\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(240)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="203" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img686.png"
+ ALT="$\displaystyle -\left(\frac{\partial h_{jik}}{\partial {\bf r}_i} +\frac{\partial h_{ijk}}{\partial {\bf r}_i} +\frac{\partial h_{ikj}}{\partial {\bf r}_i}\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(241)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img593.png"
+ ALT="$\textstyle \equiv$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img687.png"
+ ALT="$\displaystyle {\bf f}_{i\leftarrow jk}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(242)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The triplet forces on the other members of the triplet, <!-- MATH
+ ${\bf f}_{j\leftarrow ik}$
+ -->
+<IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img688.png"
+ ALT="${\bf f}_{j\leftarrow ik}$"> 
+and <!-- MATH
+ ${\bf f}_{k\leftarrow ij}$
+ -->
+<IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img689.png"
+ ALT="${\bf f}_{k\leftarrow ij}$">, are defined analogously.
+
+<P>
+Each of the partials in Eq.&nbsp;<A HREF="#eq:sw3_partials">241</A> is unique: 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\begin{array}{lll}
+\mbox{\raisebox{-0.5cm}{\includegraphics[width=1cm]{eps/hjik.eps}}\ \ } 
+\displaystyle{\frac{\partial h_{jik}}{\partial{\bf r}_i}} & \displaystyle = &\displaystyle - \gamma h_{jik}\left[
+{{{\bf r}_{ij}}\over{r_{ij}}}{{1}\over{\left(r_{ij}-a\right)^2}} +
+\frac{{\bf r}_{ik}}{r_{ik}}\frac{1}{\left(r_{ik}-a\right)^2}
+\right] \\
+ & \displaystyle + & \displaystyle 2\lambda\exp\left(
+		\frac{\gamma}{r_{ij}-a} + \frac{\gamma}{r_{ik}-a}
+		\right) \left(\cos\theta_{jik}-\cos\theta_{jik}^c\right) \\
+	& \displaystyle \times & \displaystyle \left[ \frac{{\bf r}_{ij}}{r_{ij}}\frac{1}{r_{ik}}
+		      +\frac{{\bf r}_{ik}}{r_{ik}}\frac{1}{r_{ij}}
+		      -\left(\frac{{\bf r}_{ij}}{r_{ij}}\frac{1}{r_{ik}}
+		            +\frac{{\bf r}_{ik}}{r_{ik}}\frac{1}{r_{ij}}\right)
+		      \cos\theta_{jik}\right]
+\end{array}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:sw3jik"></A><IMG
+ WIDTH="471" HEIGHT="135" BORDER="0"
+ SRC="img690.png"
+ ALT="\begin{displaymath}
+\begin{array}{lll}
+\mbox{\raisebox{-0.5cm}{\includegraphics[...
+...k}}\frac{1}{r_{ij}}\right)
+\cos\theta_{jik}\right]
+\end{array}\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(243)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\begin{array}{lll}
+\mbox{\raisebox{-0.5cm}{\includegraphics[width=1cm]{eps/hijk.eps}}\ \ } 
+\displaystyle \frac{\partial h_{ijk}}{\partial{\bf r}_i} & \displaystyle = & \displaystyle - \gamma_j h_{ijk}\left[
+\frac{{\bf r}_{ij}}{r_{ij}}\frac{1}{\left(r_{ij}-a\right)^2}
+\right] \\
+ & \displaystyle + & \displaystyle 2\lambda_j\exp\left(
+		\frac{\gamma_j}{r_{ij}-a} + \frac{\gamma_j}{r_{jk}-a}
+		\right) \left(\cos\theta_{ijk}-\cos\theta_{ijk}^c\right) \\
+	& \displaystyle \times & \displaystyle \left[ \frac{{\bf r}_{jk}}{r_{jk}}\frac{1}{r_{ij}}
+		            +\frac{{\bf r}_{ij}}{r_{ij}}\frac{1}{r_{ij}}
+		      \cos\theta_{ijk}\right]
+\end{array}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:sw3ijk"></A><IMG
+ WIDTH="474" HEIGHT="136" BORDER="0"
+ SRC="img691.png"
+ ALT="\begin{displaymath}
+\begin{array}{lll}
+\mbox{\raisebox{-0.5cm}{\includegraphics[...
+...}}{r_{ij}}\frac{1}{r_{ij}}
+\cos\theta_{ijk}\right]
+\end{array}\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(244)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\begin{array}{lll}
+\mbox{\raisebox{-0.5cm}{\includegraphics[width=1cm]{eps/hikj.eps}}\ \ } 
+\displaystyle \frac{\partial h_{ikj}}{\partial{\bf r}_i} & \displaystyle = & - \displaystyle \gamma_k h_{ikj}\left[
+\frac{{\bf r}_{ik}}{r_{ik}}\frac{1}{\left(r_{ik}-a\right)^2}
+\right] \\
+ & \displaystyle + & \displaystyle 2\lambda_k\exp\left(
+		\frac{\gamma_k}{r_{ik}-a} + \frac{\gamma_k}{r_{jk}-a}
+		\right) \left(\cos\theta_{ikj}-\cos\theta_{ikj}^c\right) \\
+	& \displaystyle \times & \displaystyle \left[ -\frac{{\bf r}_{jk}}{r_{jk}}\frac{1}{r_{ik}}
+		            +\frac{{\bf r}_{ik}}{r_{ik}}\frac{1}{r_{ik}}
+		      \cos\theta_{ikj}\right]
+\end{array}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:sw3ikj"></A><IMG
+ WIDTH="475" HEIGHT="134" BORDER="0"
+ SRC="img692.png"
+ ALT="\begin{displaymath}
+\begin{array}{lll}
+\mbox{\raisebox{-0.5cm}{\includegraphics[...
+...}}{r_{ik}}\frac{1}{r_{ik}}
+\cos\theta_{ikj}\right]
+\end{array}\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(245)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Note that the right hand sides of each of
+Eqns.&nbsp;<A HREF="#eq:sw3jik">243</A>,&nbsp;<A HREF="#eq:sw3ijk">244</A>, and <A HREF="#eq:sw3ikj">245</A> vanish when the
+appropriate <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$r$">'s are greater than <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$a$">'s, as in Eq. 212. Exercise:
+Show that <!-- MATH
+ ${\bf f}_{i\leftarrow jk} + {\bf f}_{j\leftarrow ik} + {\bf
+f}_{k\leftarrow ij} = 0$
+ -->
+<IMG
+ WIDTH="182" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img693.png"
+ ALT="${\bf f}_{i\leftarrow jk} + {\bf f}_{j\leftarrow ik} + {\bf
+f}_{k\leftarrow ij} = 0$">.
+
+<P>
+We can investigate what happens when we willfully ignore the
+three-body terms. Let us initialize atoms on a diamond-cubic lattice
+(the minimal energy lattice of silicon); a snapshot appears below.
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="504" HEIGHT="478" ALIGN="CENTER"
+ SRC="snap-si.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Snapshot of a 64-atom chuck of Si on a diamond-cubic lattice.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Let us now run two MD simulations for 10,000 time steps; one with and
+and the other without three body forces, at reduced initial
+temperature <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 0.12 and reduced density <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> = 0.46 for a small
+system of 64 atoms. You can download small 64-atom system
+configuration <A NAME="tex2html42"
+  HREF="codes/si_dc.xyz">here</A>, already
+equilibrated at <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$">=0.12 (pictured above). Note that you must compile
+the code mdswsi.c with the flag -DTHREEBODY to include three-body
+forces. You can create an executable version of mdswsi that ignores
+three-body forces by compiling without the flag -DTHREEBODY. For
+example:
+<PRE>
+% gcc -o mdswsi_no3 mdswsi.c -lm -lgsl
+% gcc -o mdswsi mdswsi.c -DTHREEBODY -lm -lgsl
+</PRE>
+Note also that this code uses the Andersen thermostat by default, with
+a default value of <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$"> = 0.1. This can be overridden (or turned off)
+by specifying a value of <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.png"
+ ALT="$\nu$"> on the command line. For example,
+<PRE>
+% mdswsi -nu 0 -ns 10001 -icf init.xyz
+</PRE>
+turns off the thermostat, which is what I have done for this little
+demonstration.
+
+<P>
+Below we plot the instantaneous temperature vs. time-step (0.001
+<IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img482.png"
+ ALT="$\tau$">) for the two runs. Notice that the system with the 3-body
+forces intact remains steady at <IMG
+ WIDTH="32" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img694.png"
+ ALT="$T \approx$"> 0.12, while the system
+without 3-body forces simply ``melts,'' with <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> approaching 20,000&nbsp;K
+A quick look at a configuration (not shown) reveals that there is no
+longer any crystalline order; the system is now an amorphous blob of
+silicon atoms. The lesson of this little demonstration is that one
+must have three-body forces to stabilize a diamond-cubic lattice.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="425" HEIGHT="378" ALIGN="CENTER"
+ SRC="swsi_melt.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER">Instantaneous temperature <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> vs time-step in MD simulations of silicon
+using the Stillinger-Weber potential with and without three-body
+forces. The system is 64 atoms at an initial temperature of 0.12.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+As a suggested project, you can try one or more of several things with this code.
+
+<OL>
+<LI>The force routine involves a <EM>triplet</EM> loop, which is extremely costly.  
+Were one to double the size of the system, the computational effort would increase
+by a factor of <EM>eight</EM>.  Appendix F in F&amp;S discusses algorithms to speed up
+force evaluation by taking advantage of finite interaction ranges. Can you 
+make the triplet loop more efficient using these techniques?  (My thesis code 
+used a unique version of the Verlet List technique.)
+</LI>
+<LI>Use the code <EM>rdf.c</EM> to compute the radial distribution function of both
+crystalline and liquid silicon.  Can you explain the differences between these two, and
+from the <IMG
+ WIDTH="32" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img459.png"
+ ALT="$g(r)$"> for a simple LJ liquid?
+</LI>
+<LI>Can you compute the diffusivity of a Si atom in a liquid?
+</LI>
+</OL> 
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html572"
+  HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html570"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html564"
+  HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html573"
+  HREF="node42.html">Rare Events: Path-Sampling Monte</A>
+<B> Up:</B> <A NAME="tex2html571"
+  HREF="node40.html">Advanced Topics</A>
+<B> Previous:</B> <A NAME="tex2html565"
+  HREF="node40.html">Advanced Topics</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,27 @@
+#!/usr/bin/gnuplot
+set term post eps enh color "Times-Roman" 24 linewidth 2.0 solid
+set out "msd1.eps"
+set size square
+set encoding iso_8859_1
+
+set log xy
+
+set xlabel "Time ({/Symbol t})"
+set ylabel "{/Symbol \341}r^2{/Symbol \361} ({/Symbol s}^2)" 2.0
+
+set format x "10^{%T}"
+set format y "10^{%T}"
+
+f1(x) = a*x**2
+f2(x) = b*x
+
+a=10.0
+b=1.0
+
+unset key
+
+set label 1 "t^2" at 0.005,0.0007
+set label 2 "t" at 0.005,0.01
+
+p "msd1" u 1:5 w lp pt 4, f1(x) w l, f2(x) w l
+

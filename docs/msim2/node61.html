@@ -1,0 +1,549 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Class-I Potentials</TITLE>
+<META NAME="description" CONTENT="Class-I Potentials">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node62.html">
+<LINK REL="previous" HREF="node60.html">
+<LINK REL="up" HREF="node60.html">
+<LINK REL="next" HREF="node62.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html809"
+  HREF="node62.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html807"
+  HREF="node60.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html801"
+  HREF="node60.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html810"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Up:</B> <A NAME="tex2html808"
+  HREF="node60.html">All-atom Potential Energy Functions</A>
+<B> Previous:</B> <A NAME="tex2html802"
+  HREF="node60.html">All-atom Potential Energy Functions</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00071000000000000000">
+Class-I Potentials</A>
+</H2>
+
+<P>
+Class-I potentials break down interatomic interactions between bonded and non-bonded interactions.  Bonded interactions include bonds, valence angles, and both proper and improper dihedrals (Fig.&nbsp;<A HREF="#fig:bondeds">29</A>).  Non-bonded interactions include electrostatic and Lennard-Jones interactions.  Class-I potentials apply for systems of fixed bonded topology; i.e., bonds between atoms are permanent, never breaking or forming.  A simulation using a Class-I potential is therefore unable to model &ldquo;chemistry&rdquo;.  Examples of Class-I potentials include CHARMM&nbsp;[<A
+ HREF="node82.html#Brooks1983CHARMM:Calculations">18</A>,<A
+ HREF="node82.html#Brooks2009CHARMM:Program">19</A>,<A
+ HREF="node82.html#MacKerell1998All-Atom">20</A>], AMBER&nbsp;[<A
+ HREF="node82.html#Weiner1981AMBER:Interactions">21</A>],  Gromos&nbsp;[<A
+ HREF="node82.html#Daura1998ParametrizationField">22</A>], OPLS&nbsp;[<A
+ HREF="node82.html#Jorgensen1984OptimizedHydrocarbons">23</A>,<A
+ HREF="node82.html#Jorgensen1996DevelopmentLiquids">24</A>], and TraPPE&nbsp;[<A
+ HREF="node82.html#Martin1998TransferableN-alkanes">25</A>].
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:bondeds"></A><A NAME="7611"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 29:</STRONG>
+Schematic representation of (A) the <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> bond vector <!-- MATH
+ ${\boldsymbol r}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img34.png"
+ ALT="$ {\boldsymbol r}_{ij}$"></SPAN>, (B) the <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> angle <!-- MATH
+ $\theta_{jik}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img35.png"
+ ALT="$ \theta _{jik}$"></SPAN>, (C) the <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$ l$"></SPAN> torsion <!-- MATH
+ $\phi_{ijkl}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$ \phi _{ijkl}$"></SPAN> around the <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> bond, and (D) the <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$ l$"></SPAN> improper <!-- MATH
+ $\phi_{ijkl}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$ \phi _{ijkl}$"></SPAN>, comprising bonds <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$ l$"></SPAN> (solid), with vectors <!-- MATH
+ ${\boldsymbol r}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img34.png"
+ ALT="$ {\boldsymbol r}_{ij}$"></SPAN>, <!-- MATH
+ ${\boldsymbol r}_{jk}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img38.png"
+ ALT="$ {\boldsymbol r}_{jk}$"></SPAN>, <!-- MATH
+ ${\boldsymbol r}_{kl}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img39.png"
+ ALT="$ {\boldsymbol r}_{kl}$"></SPAN> (dashed) defining the dihedral angle. In (C), the angle <!-- MATH
+ $\phi_{ijkl}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$ \phi _{ijkl}$"></SPAN> is acute and positive by IUPAC/IUB convention; if we sight down the <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> bond with <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> nearer to the eye, the <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> bond must rotate in a clockwise direction by an angle less than <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \pi $"></SPAN> to eclipse the <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$ l$"></SPAN> bond.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="1133" HEIGHT="598" ALIGN="BOTTOM" BORDER="0"
+ SRC="./figs-bati.png"
+ ALT="Image figs-bati"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+The general form of a Class-I potential is
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img713.png"
+ ALT="$\displaystyle \mathscr{U} =$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="253" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img714.png"
+ ALT="$\displaystyle \sum_{\rm bonds} K_b(l-l_0)^2 + \sum_{\rm angles} K_\theta(\theta-\theta_0)^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+<A NAME="eq:class-i-potential">(<SPAN CLASS="arabic">258</SPAN>)</A></TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="232" HEIGHT="49" ALIGN="MIDDLE" BORDER="0"
+ SRC="img715.png"
+ ALT="$\displaystyle + \sum_{\rm dihedrals} K_{\phi,n}\left[1+\cos(n\phi - \delta_n)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">259</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="164" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img716.png"
+ ALT="$\displaystyle + \sum_{\rm impropers} K_\phi(\phi-\phi_0)^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">260</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="298" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img717.png"
+ ALT="$\displaystyle + \sum_{i&lt;j} \left\{ \frac{q_iq_j}{r_{ij}} + 4\epsilon_{ij}\left[...
+...igma}{r_{ij}}\right)^{12}-\left(\frac{\sigma}{r_{ij}}\right)^{6}\right]\right\}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">261</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The first four terms are the &ldquo;bonded&rdquo; potential.  Each bond is treated like a harmonic spring, with a specific spring constant <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img718.png"
+ ALT="$ 2K_b$"></SPAN> and equilibrium length <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img719.png"
+ ALT="$ l_0$"></SPAN>.  Similarly, every angle is also harmonic.  Dihedrals (also called torsions) are periodic and therefore modeled with a trigonometric expansion; each dihedral may have a specific <!-- MATH
+ $K_{\phi,n}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img720.png"
+ ALT="$ K_{\phi,n}$"></SPAN> for one or more values of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img229.png"
+ ALT="$ n$"></SPAN>.  Finally, impropers (improper dihedrals) refer to groupings of four atoms meant to be coplanar, such as three atoms bound to a nitrogen atom in a trigonal-planar configuration.  
+
+<P>
+Fig.&nbsp;<A HREF="#fig:bondeds">29</A> depicts representative bonded features with atoms labeled to permit presentation of formulas for computing bond lengths, valence angles, dihedrals, and impropers.  The measures are all defined conventionally using vector arithmetic and the right-hand rule for vector cross-products.  The bond vector <!-- MATH
+ ${\boldsymbol r}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img34.png"
+ ALT="$ {\boldsymbol r}_{ij}$"></SPAN> is defined
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\boldsymbol r}_{ij} = {\boldsymbol r}_i - {\boldsymbol r}_j
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="94" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img721.png"
+ ALT="$\displaystyle {\boldsymbol r}_{ij} = {\boldsymbol r}_i - {\boldsymbol r}_j$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">262</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+with magnitude
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img722.png"
+ ALT="$\displaystyle r_{ij}$"></SPAN></TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="129" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img723.png"
+ ALT="$\displaystyle = \left\vert{\boldsymbol r}_{ij}\right\vert = \left\vert{\boldsymbol r}_i-{\boldsymbol r}_j\right\vert$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">263</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE">
+<TD>&nbsp;</TD>
+<TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+ WIDTH="348" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img724.png"
+ ALT="$\displaystyle = \left[(r_{i,x}-r_{j,x})^2+(r_{i,y}-r_{j,y})^2+(r_{i,z}-r_{j,z})^2\right]^\frac12.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">264</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+For atoms <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> both bonded to <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>, the valence angle <!-- MATH
+ $\theta_{jik}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img35.png"
+ ALT="$ \theta _{jik}$"></SPAN> is found via
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\cos\theta_{jik} = \frac{{\boldsymbol r}_{ij}\cdot{\boldsymbol r}_{ik}}{r_{ij}r_{jk}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="131" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img725.png"
+ ALT="$\displaystyle \cos\theta_{jik} = \frac{{\boldsymbol r}_{ij}\cdot{\boldsymbol r}_{ik}}{r_{ij}r_{jk}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">265</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+For atoms <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> bonded to each other, the dihedral angle defined by atom <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> bonded to <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> and atom <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$ l$"></SPAN> bonded to <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> is found by computing the angle of intersection between the two planes defined by the <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>/<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN> bonds and the <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>/<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img36.png"
+ ALT="$ l$"></SPAN> bonds.  
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\cos\phi_{ijkl} = \frac{({\boldsymbol r}_{ji}\times{\boldsymbol r}_{kj})\cdot({\boldsymbol r}_{kj}\times{\boldsymbol r}_{lk})}{\left|{\boldsymbol r}_{ji}\times{\boldsymbol r}_{kj}\right|\left|{\boldsymbol r}_{kj}\times{\boldsymbol r}_{lk}\right|}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="246" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img726.png"
+ ALT="$\displaystyle \cos\phi_{ijkl} = \frac{({\boldsymbol r}_{ji}\times{\boldsymbol r...
+...\right\vert\left\vert{\boldsymbol r}_{kj}\times{\boldsymbol r}_{lk}\right\vert}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">266</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Now, for improper dihedrals, this formula is usually sufficient because (a) <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img727.png"
+ ALT="$ \phi_0$"></SPAN> is zero for coplanarity and thus <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img316.png"
+ ALT="$ \phi$"></SPAN> should be close to zero, and (b) <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img728.png"
+ ALT="$ \arccos()$"></SPAN> always returns an angle on <SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img729.png"
+ ALT="$ [0,\pi]$"></SPAN>.  However, for proper dihedrals (torsions), since these are fully periodic and not guaranteed to have symmetry of reflection about 0 or <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \pi $"></SPAN>, we must define <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img316.png"
+ ALT="$ \phi$"></SPAN> on <!-- MATH
+ $[-\pi,\pi]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="51" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img730.png"
+ ALT="$ [-\pi,\pi]$"></SPAN>, and the <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img728.png"
+ ALT="$ \arccos()$"></SPAN> is not enough.  So, the convention used to determine the sign of the torsion angle is to compute its sine:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sin\phi_{ijkl} = \frac{[({\boldsymbol r}_{ji}\times{\boldsymbol r}_{kj})\cdot({\boldsymbol r}_{kj}\times{\boldsymbol r}_{lk})]\cdot {\boldsymbol r}_{kj}}{\left|{\boldsymbol r}_{ji}\times{\boldsymbol r}_{kj}\right|\left|{\boldsymbol r}_{kj}\times{\boldsymbol r}_{lk}\right|r_{kj}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="287" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img731.png"
+ ALT="$\displaystyle \sin\phi_{ijkl} = \frac{[({\boldsymbol r}_{ji}\times{\boldsymbol ...
+...vert\left\vert{\boldsymbol r}_{kj}\times{\boldsymbol r}_{lk}\right\vert r_{kj}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">267</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+The sign of <!-- MATH
+ $\phi_{ijkl}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$ \phi _{ijkl}$"></SPAN> is determined by its sine thusly:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\phi_{ijkl} = \begin{cases}
+			-\cos^{-1}\cos\phi_{ijkl}, & \text{if $\sin_{ijkl}<0$}\\
+            \cos^{-1}\cos\phi_{ijkl}, & \text{otherwise}
+		 \end{cases}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="289" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img732.png"
+ ALT="$\displaystyle \phi_{ijkl} = \begin{cases}-\cos^{-1}\cos\phi_{ijkl}, &amp; \text{if $\sin_{ijkl}&lt;0$} \cos^{-1}\cos\phi_{ijkl}, &amp; \text{otherwise} \end{cases}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">268</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Most Class-I potentials are based on the concept of context-specific &ldquo;atom types&rdquo;.  For example, a carbon atom in an aliphatic chain is of a different type than a carbon atom in an aromatic ring, even though both are &ldquo;carbon&rdquo;.  Then, bonds, angles, dihedrals, and impropers are classified by the types of their member atoms.  This results in huge databases of potential parameters and the necessity to fully specify all bonded parameters for any system that is to be simulated.  Luckily, most MD packages have helper routines to do just that.
+
+<P>
+Determining these parameters for a given force field is context-specific and therefore a bit of an art.  Bonded potential parameters are mostly found by fitting the given analytical forms to series of single-point energy calculations peformed using high-level quantum-mechanical simulations.  For example, parameters for the C1-C2-C3-C4 torsion in olefins was parameterized by sweeping the torsion angle of a quantum mechanical model of butane.  Because most molecules involve a superpositition of such bonded potentials, their use confers a vibrational mode spectrum to molecules that can also be matched with experimental spectra for parameter adjustment.
+
+<P>
+Non-bonded parameters like charges and LJ parameters are adjusted so that errors in thermodynamics property calculations are minimized.  This includes things like vacancy energies in solids, heats of vaporization in liquids, and volumetric equations of state.  Most force-field developers strive to make their parameters sets as transferrable as possible, but one must always be aware of the context a force-field is most appropriate for.  CHARMM and AMBER are used mainly to model biological molecules, while TRAPPE is pretty much strictly used for fluids.  OPLS and GROMOS are used in a variety of settings.
+
+<P>
+It is important to note that all potentials considered so far assume each atom has a fixed partial charge (which may be zero).  In fact, for class-I potentials, &ldquo;charge&rdquo; is an atom attribute wholly separate from its type, and they are usually derived from QM calculations on small fragments.  Potentials for which the charge on each atom is a degree of freedom rather than a fixed quantity are described as &ldquo;polarizable&rdquo;.   Polarizable potentials are not widely used, but there are good arguments for their requirement in situations where atoms with high polarizabilities might lead to local dipole moments that influence interatomic interactions.  
+
+<P>
+One important polarizable model is the classical Drude oscillator, in which each atom is assigned a &ldquo;ghost&rdquo; particle tethered to its center that carries some of the charge.  This allows each atom to behave like a literal &ldquo;fluctuating dipole&rdquo;, but it requires an extended Hamiltonian approach where the Drude particles' equations of motion are solved along with those of the atom nuclei, making Drude-enabled simulations substantially more expensive than fixed-charge simulations.  For example, the polarizable version of CHARMM is called CHARMM-Drude&nbsp;[<A
+ HREF="node82.html#Lopes2009MolecularApplications">26</A>,<A
+ HREF="node82.html#Vanommeslaeghe2015CHARMMDesign">27</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html809"
+  HREF="node62.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html807"
+  HREF="node60.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html801"
+  HREF="node60.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html810"
+  HREF="node62.html">Reactive Potentials</A>
+<B> Up:</B> <A NAME="tex2html808"
+  HREF="node60.html">All-atom Potential Energy Functions</A>
+<B> Previous:</B> <A NAME="tex2html802"
+  HREF="node60.html">All-atom Potential Energy Functions</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

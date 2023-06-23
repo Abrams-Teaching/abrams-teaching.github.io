@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>The Nos&#233;-Hoover Chain</TITLE>
+<META NAME="description" CONTENT="The Nos&#233;-Hoover Chain">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node53.html">
+<LINK REL="up" HREF="node50.html">
+<LINK REL="next" HREF="node55.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html734"
+  HREF="node55.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html732"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html728"
+  HREF="node53.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html735"
+  HREF="node55.html">Molecular Dynamics at Constant</A>
+<B> Up:</B> <A NAME="tex2html733"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html729"
+  HREF="node53.html">Stochastic NVT Thermostats: Andersen,</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00052400000000000000">
+The Nos&#233;-Hoover Chain</A>
+</H3>
+
+<P>
+The final thermostat we consider is one based on the extended
+Lagrangian formalism, which leads to a deterministic trajectory; i.e.,
+there are no random forces or velocities to deal with.  The most common 
+and so far most reliable thermostat of this kind is the Nos&#233;-Hoover
+thermostat.  This thermostat can be implemented as a &ldquo;single&rdquo; 
+or a &ldquo;chain&rdquo;;  here, we consider a chain.
+
+<P>
+The basic idea of the Nos&#233;-Hoover thermostat is to use a friction
+factor to control particle velocities.  This friction factor is
+actually the scaled velocity, <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img611.png"
+ ALT="$ v_{\xi_1}$"></SPAN>, of an additional and
+dimensionless degree of freedom, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img612.png"
+ ALT="$ \xi_1$"></SPAN>.  This degree of freedom has
+an associated &ldquo;mass&rdquo;, <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img613.png"
+ ALT="$ Q_1$"></SPAN>, which effectively determines the
+strength of the thermostat.  The equations of motion obeyed by this
+additional degree of freedom guarantee that the <EM>original</EM> degrees
+of freedom (<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img286.png"
+ ALT="$ {\bf r}^N$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img412.png"
+ ALT="$ {\bf p}^N$"></SPAN>) sample a canonical ensemble.
+This degree of freedom is the terminus of a chain of similar degrees
+of freedom, each with their own mass.  The chain has a total of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN> &ldquo;links.&rdquo;  The overall set of equations of
+motion are:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\dot{\bf r}_i & = & \frac{\dot{\bf p}_i}{m_i} \\
+\dot{\bf p}_i & = & {\bf F}_i - \frac{p_{\xi_1}}{Q_1}{\bf p}_i \\
+\dot{\xi}_k & = & \frac{p_{\xi_k}}{Q_k} \ \ \ \ k = 1,\dots,M\\
+\dot{p_{\xi_1}} & = & \left(\sum_i\frac{p_i^2}{m_i} - Lk_BT\right)-\frac{p_{\xi,2}}{Q_2}p_{\xi_1}\\
+\dot{p_{\xi_k}} & = &  \left(\frac{p^2_{\xi_{k-1}}}{Q_{k-1}} - k_BT\right) -
+\frac{p_{\xi_{k+1}}}{Q_{k+1}}p_{\xi_k}\\
+\dot{p_{\xi_k}} & = &  \left(\frac{p^2_{\xi_{M-1}}}{Q_{M-1}} - k_BT\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img614.png"
+ ALT="$\displaystyle \dot{\bf r}_i$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="27" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img615.png"
+ ALT="$\displaystyle \frac{\dot{\bf p}_i}{m_i}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">215</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img616.png"
+ ALT="$\displaystyle \dot{\bf p}_i$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="80" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img617.png"
+ ALT="$\displaystyle {\bf F}_i - \frac{p_{\xi_1}}{Q_1}{\bf p}_i$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">216</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="19" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img618.png"
+ ALT="$\displaystyle \dot{\xi}_k$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="141" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img619.png"
+ ALT="$\displaystyle \frac{p_{\xi_k}}{Q_k}     k = 1,\dots,M$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">217</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img620.png"
+ ALT="$\displaystyle \dot{p_{\xi_1}}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="208" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img621.png"
+ ALT="$\displaystyle \left(\sum_i\frac{p_i^2}{m_i} - Lk_BT\right)-\frac{p_{\xi,2}}{Q_2}p_{\xi_1}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">218</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img622.png"
+ ALT="$\displaystyle \dot{p_{\xi_k}}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="201" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img623.png"
+ ALT="$\displaystyle \left(\frac{p^2_{\xi_{k-1}}}{Q_{k-1}} - k_BT\right) -
+\frac{p_{\xi_{k+1}}}{Q_{k+1}}p_{\xi_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">219</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img622.png"
+ ALT="$\displaystyle \dot{p_{\xi_k}}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="126" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img624.png"
+ ALT="$\displaystyle \left(\frac{p^2_{\xi_{M-1}}}{Q_{M-1}} - k_BT\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">220</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The main advantage of the Nos&#233;-Hoover chain thermostat is that the
+dynamics of all degrees of freedom are deterministic and
+time-reversible.  No random numbers are used.  The code
+<code>mdlj_nhc.c</code> implements an <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN> = 2
+Nos&#233;-Hoover chain thermostat in an MD simulation of an Lennard-Jones
+fluid, by implementing Algorithms 30, 31, and 32 from Frenkel &amp; Smit. The relevant parameters are <code>nhcT</code>, the setpoint temperature, and <code>nhcQ</code>, the two masses.  Fig.&nbsp;<A HREF="#fig:nhc">27</A> illustrates the use of the NHC thermostat on an N=512, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.84 LJ system.  
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:nhc"></A><A NAME="5353"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 27:</STRONG>
+Temperature vs time (output every 10 time steps) for four MD simulations of the LJ fluid at density 0.84 with 512 particles with initial velocities assigned to give an initial temperature of 2.0.  A 2-mass Nos&#233;-Hoover chain with masses indicated in the legend is used to maintain the temperature at 2 until <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ t$"></SPAN> = 2, at which time the setpoint temperature is instantaneously raised to 3.  The third number in the legend label is the product of the number of particles and the relative fluctuation in instantaneous temperature measured for the second half of each respective simulation, which in the canonical ensemble should be 2/3.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="536" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./nhc.png"
+ ALT="Image nhc"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html734"
+  HREF="node55.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html732"
+  HREF="node50.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html728"
+  HREF="node53.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html735"
+  HREF="node55.html">Molecular Dynamics at Constant</A>
+<B> Up:</B> <A NAME="tex2html733"
+  HREF="node50.html">Molecular Dynamics at Constant</A>
+<B> Previous:</B> <A NAME="tex2html729"
+  HREF="node53.html">Stochastic NVT Thermostats: Andersen,</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

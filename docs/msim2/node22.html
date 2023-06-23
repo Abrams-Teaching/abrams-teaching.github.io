@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Main Program: Initialization</TITLE>
+<META NAME="description" CONTENT="Main Program: Initialization">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html396"
+  HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html394"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html388"
+  HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html397"
+  HREF="node23.html">Main Program: Monte Carlo</A>
+<B> Up:</B> <A NAME="tex2html395"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html389"
+  HREF="node21.html">Main Program: Initial Outputs</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032900000000000000">
+Main Program: Initialization</A>
+</H3>
+Next, we initialize the pseudorandom number generator <code>r</code> by setting the seed value using <code>Seed</code>.  Then the number of spins <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> is computed assuming a square magnet.  We then allocate memory needed to hold the magnet; this is a standard method of allocating a 2D array of integers.  Next we call our <code>init()</code> function, and finally we convert <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img279.png"
+ ALT="$ 1/T$"></SPAN> since multiplication is more efficient than division.
+<PRE>
+  /* Seed the random number generator */
+  gsl_rng_set(r,Seed);
+
+  /* Compute the number of spins */
+  N=L*L;
+
+  /* Allocate memory for the system */
+  M=(int**)malloc(L*sizeof(int*));
+  for (i=0;i&lt;L;i++) M[i]=(int*)malloc(L*sizeof(int));
+
+  /* Generate an initial state */
+  init(M,L,r);
+
+  /* For computational efficiency, convert T to reciprocal T */
+  T=1.0/T;
+</PRE>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

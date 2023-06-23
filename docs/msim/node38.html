@@ -1,0 +1,518 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Excess Chemical Potential via the Widom Method</TITLE>
+<META NAME="description" CONTENT="Excess Chemical Potential via the Widom Method">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node39.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="node37.html">
+<LINK REL="next" HREF="node39.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html528"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html526"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html520"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html529"
+  HREF="node39.html">Thermodynamic Integration</A>
+<B> Up:</B> <A NAME="tex2html527"
+  HREF="node37.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html521"
+  HREF="node37.html">Free Energy Methods</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00061000000000000000"></A>
+<A NAME="sec:widom"></A>
+<BR>
+Excess Chemical Potential via the Widom Method
+</H2>
+
+<P>
+We recall that the free energy of the canonical ensemble, termed the
+Helmholtz free energy and denoted <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img151.png"
+ ALT="$F$"> in F&amp;S, is defined by
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+F & = & -k_BT \ln Q\left(N,V,T\right)\\
+ & = & -k_BT \ln\left(\left\{\frac{V^N}{\Lambda^{3N}N!}\right\} \left\{V^{-N}\int d{\bf r}^N \exp\left[-\beta\mathscr{U}\left({\bf r}^N\right)\right]\right\}\right)\\
+ & = & -k_BT\ln\left(\frac{V^N}{\Lambda^{3N}N!}\right) - k_BT\ln\left(\int d{\bf s}^N \exp\left[-\beta\mathscr{U}\left({\bf s}^N;L\right)\right]\right)\\
+& \equiv & F_{\rm id}\left(N,V,T\right) + F_{\rm ex}\left(N,V,T\right)
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img589.png"
+ ALT="$\displaystyle F$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="143" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img590.png"
+ ALT="$\displaystyle -k_BT \ln Q\left(N,V,T\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(201)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="389" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img591.png"
+ ALT="$\displaystyle -k_BT \ln\left(\left\{\frac{V^N}{\Lambda^{3N}N!}\right\} \left\{V...
+...bf r}^N \exp\left[-\beta\mathscr{U}\left({\bf r}^N\right)\right]\right\}\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(202)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="410" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img592.png"
+ ALT="$\displaystyle -k_BT\ln\left(\frac{V^N}{\Lambda^{3N}N!}\right) - k_BT\ln\left(\int d{\bf s}^N \exp\left[-\beta\mathscr{U}\left({\bf s}^N;L\right)\right]\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(203)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img593.png"
+ ALT="$\textstyle \equiv$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="197" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img594.png"
+ ALT="$\displaystyle F_{\rm id}\left(N,V,T\right) + F_{\rm ex}\left(N,V,T\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(204)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Here, <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img595.png"
+ ALT="$F_{\rm id}$"> is the ``ideal gas'' free energy, and <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img596.png"
+ ALT="$F_{\rm ex}$">
+is the ``excess'' free energy.
+
+<P>
+The chemical potential is defined as the change in free energy upon
+addition of a particle:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mu = \frac{\partial F}{\partial N}_{VT}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="78" HEIGHT="40" BORDER="0"
+ SRC="img597.png"
+ ALT="\begin{displaymath}
+\mu = \frac{\partial F}{\partial N}_{VT}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(205)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+For large <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, 
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+\mu & = & -k_BT \ln\left(Q_{N+1}/Q_N\right) \\
+& = & -k_BT\ln\left(\frac{V/\Lambda^d}{N+1}\right) - k_BT\ln\left(
+\frac{
+\mbox{\begin{minipage}{5cm}
+\begin{displaymath}
+\int d{\bf s}^{N+1} \exp\left[-\beta\mathscr{U}\left({\bf s}^{N+1};L\right)\right]
+\end{displaymath}
+\end{minipage}}}{
+\mbox{\begin{minipage}{5cm}
+\begin{displaymath}
+\int d{\bf s}^{N} \exp\left[-\beta\mathscr{U}\left({\bf s}^{N};L\right)\right]
+\end{displaymath}
+\end{minipage}}}\right)\\
+& = & \mu_{\rm id}\left(\rho\right) + \mu_{\rm ex}
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img598.png"
+ ALT="$\displaystyle \mu$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="151" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img599.png"
+ ALT="$\displaystyle -k_BT \ln\left(Q_{N+1}/Q_N\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(206)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="462" HEIGHT="96" ALIGN="MIDDLE" BORDER="0"
+ SRC="img600.png"
+ ALT="$\displaystyle -k_BT\ln\left(\frac{V/\Lambda^d}{N+1}\right) - k_BT\ln\left(
+\fra...
+...cr{U}\left({\bf s}^{N};L\right)\right]
+\end{displaymath}\end{minipage}}}\right)$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(207)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img601.png"
+ ALT="$\displaystyle \mu_{\rm id}\left(\rho\right) + \mu_{\rm ex}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(208)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+which defines the excess chemical potential, <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$">. We see
+that we can express the quotient of configurational integrals in
+<IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$"> as an integration of the ensemble average of
+<!-- MATH
+ $\Delta\mathscr{U} \equiv \mathscr{U}\left({\bf s}^{N+1}\right) -
+\mathscr{U}\left({\bf s}^N\right)$
+ -->
+<IMG
+ WIDTH="181" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img603.png"
+ ALT="$\Delta\mathscr{U} \equiv \mathscr{U}\left({\bf s}^{N+1}\right) -
+\mathscr{U}\left({\bf s}^N\right)$"> over <IMG
+ WIDTH="39" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img604.png"
+ ALT="${\bf s}_{N+1}$">, the scaled
+coordinates of the <IMG
+ WIDTH="58" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img520.png"
+ ALT="$(N+1)$">'th particle, or ``test'' particle:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\mu_{\rm ex} = -k_BT \ln \int d{\bf s}_{N+1}\left<\exp\left(-\beta\Delta\mathscr{U}\right)\right>_N
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="280" HEIGHT="42" BORDER="0"
+ SRC="img605.png"
+ ALT="\begin{displaymath}
+\mu_{\rm ex} = -k_BT \ln \int d{\bf s}_{N+1}\left&lt;\exp\left(-\beta\Delta\mathscr{U}\right)\right&gt;_N
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(209)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+This equation implies that we can measure <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$"> by performing
+a brute force sampling of <!-- MATH
+ $\exp\left(-\beta\Delta\mathscr{U}\right)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img606.png"
+ ALT="$\exp\left(-\beta\Delta\mathscr{U}\right)$">
+in an otherwise normal NVT MC simulation. That is, we can at frequent
+intervals in a normal MC program ``create'' a test particle with a
+position sampled uniformly in the box, compute <!-- MATH
+ $\mathscr{U}\left({\bf
+s}^{N+1}\right) - \mathscr{U}\left({\bf s}^N\right)$
+ -->
+<IMG
+ WIDTH="135" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img607.png"
+ ALT="$\mathscr{U}\left({\bf
+s}^{N+1}\right) - \mathscr{U}\left({\bf s}^N\right)$">, and accumulate
+<!-- MATH
+ $\exp\left(-\beta\Delta\mathscr{U}\right)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img606.png"
+ ALT="$\exp\left(-\beta\Delta\mathscr{U}\right)$">. This is the Widom method.
+
+<P>
+The code <A NAME="tex2html38"
+  HREF="codes/mclj_widom.c">mclj_widom.c</A>
+implements the Widom method for the Lennard-Jones fluid in an NVT
+simulation. Below is a code fragment for sampling <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img249.png"
+ ALT="$\Delta\mathscr{U}$">
+using the Lennard-Jones pair potential (Eq. 83):
+<PRE>
+  rx[N]=(gsl_rng_uniform(r)-0.5)*L;
+  ry[N]=(gsl_rng_uniform(r)-0.5)*L;
+  rz[N]=(gsl_rng_uniform(r)-0.5)*L;
+
+  for (j=0;j&lt;N;j++) {
+    dx  = rx[N]-rx[j];
+    dy  = ry[N]-ry[j];
+    dz  = rz[N]-rz[j];
+    r2  = dx*dx + dy*dy + dz*dz;
+    r6i = 1.0/(r2*r2*r2);
+    du += 4*(r6i*r6i - r6i);
+  }
+</PRE>
+
+<P>
+The particle with index <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> is assumed to be the ``test particle'';
+the other particles are labeled <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img608.png"
+ ALT="$0$"> to <IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img609.png"
+ ALT="$N-1$">. In the first bit, the
+position of the test particle is generated as a uniformly random
+location inside a cubic box of side length <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img39.png"
+ ALT="$L$">. Then we loop over the
+particles <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img608.png"
+ ALT="$0$"> to <IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img609.png"
+ ALT="$N-1$"> and accumulate <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img249.png"
+ ALT="$\Delta\mathscr{U}$">.
+
+<P>
+Using the code mclj_widom.c, we can measure <!-- MATH
+ $\mu_{\rm
+ex}\left(\rho,T\right)$
+ -->
+<IMG
+ WIDTH="68" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img610.png"
+ ALT="$\mu_{\rm
+ex}\left(\rho,T\right)$">. Figure 7.1 in F&amp;S reports results of
+<!-- MATH
+ $\mu_{\rm ex}\left(\rho,2.0\right)$
+ -->
+<IMG
+ WIDTH="77" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img611.png"
+ ALT="$\mu_{\rm ex}\left(\rho,2.0\right)$"> using the Widom method for <!-- MATH
+ $\rho
+\in \left\{0.4,0.5,0.6,0.7\right\}$
+ -->
+<IMG
+ WIDTH="150" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img612.png"
+ ALT="$\rho
+\in \left\{0.4,0.5,0.6,0.7\right\}$">, and compares to results from
+Grand canonical simulations. Just for fun, I repeat this exercise for
+<IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 3.0. The <IMG
+ WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img613.png"
+ ALT="$\mu VT$"> simulations were carried out using the code of
+Case Study 9 of F&amp;S, first discussed in Sec. 6.1. Here, simulations of
+40,000 MC cycles were performed at each state point for which the
+ideal gas pressure, <IMG
+ WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img614.png"
+ ALT="$P_{\rm id}$"> of the bath is chosen from 0.016,
+0.032, 0.064, 0.128, 0.15, 0.20, 0.25, 0.50, 0.75, 1.0, 1.5, 2.0, 3.0,
+4.0, 6.0, and the maximum displacement was 0.33 for all runs. Each run
+has a 100-cycle equilibration, after which it is sampled every 2
+steps. The system contains <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108 particles. For the Widom method,
+I considered densities <!-- MATH
+ $\rho \in \left\{0.4, 0.5, 0.6, 0.7,
+0.8\right\}$
+ -->
+<IMG
+ WIDTH="177" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img615.png"
+ ALT="$\rho \in \left\{0.4, 0.5, 0.6, 0.7,
+0.8\right\}$">. The system is equilibrated for 100 MC cycles, and is
+then sampled every two cycles for another 40,000 cycles, using a
+constant maximum displacement of 0.4. Below is a plot of <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$"> vs. <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> at <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 3.0:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="540" HEIGHT="378" ALIGN="CENTER"
+ SRC="widom.gif"
+ ALT="portrait"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TABLE  WIDTH="454">
+<TR><TD>
+<DIV ALIGN="CENTER"><IMG
+ WIDTH="28" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$\mu ^{ex}$"> vs. <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> for the Lennard-Jones fluid at <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> = 3.0
+computed using a grand canonical <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$\mu $">VT Monte Carlo simulation and a
+NVT simulation with the Widom sampling method. <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 108.
+</DIV></TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+Clearly, I have not taken pains to make sure the two methods agree
+exactly. It is indeed unclear from the text what these pains might
+be. But the results agree relatively well, and we might think that,
+given more cycles in both cases, or by using the same maximum
+displacement, we would converge to the same answer using both
+techniques. (Is this so, or have I left a bug in one of my codes...? 
+Perhaps one of you will find out...)
+
+<P>
+It would be useful to know how to determine which of these apparently
+competing methods is best for computing <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$">. They are both
+similar in computational requirements (this is not further qualified
+here; if someone wants to make this comparison, he or she is welcome
+to do this as a project). On the one hand, we have an inherent
+limitation of the grand canonical simulation: one cannot specify the
+system density exactly; rather it is an observable with some mean and
+fluctuations. The Widom method does allow one to specify the density
+precisely, and in this regard, it is probably more trustworthy in
+computing <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$">. On the other hand, the Widom method suffers
+the limitation that it is not generally applicable to systems with any
+potential energy function. For example, for hard-sphere systems, the
+Widom method would always predict that <IMG
+ WIDTH="27" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img602.png"
+ ALT="$\mu_{\rm ex}$"> is 0, a clearly
+nonsensical answer. The ``overlapping distribution method'' of
+Bennett, discussed in Section 7.2.3 of F&amp;S, offers a means to overcome
+this particular limitation. We do not cover this method in lecture,
+but you are encouraged to explore the overlapping distribution method
+on your own (maybe as a project) using the code for Case Study 15 from
+book's <A NAME="tex2html39"
+  HREF="http://molsim.chem.uva.nl/frenkel_smit/">website</A>.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html528"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html526"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html520"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html529"
+  HREF="node39.html">Thermodynamic Integration</A>
+<B> Up:</B> <A NAME="tex2html527"
+  HREF="node37.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html521"
+  HREF="node37.html">Free Energy Methods</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

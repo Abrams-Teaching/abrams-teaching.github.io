@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>A C Code for the 2D Ising Magnet</TITLE>
+<META NAME="description" CONTENT="A C Code for the 2D Ising Magnet">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="node9.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html248"
+  HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html246"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html240"
+  HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html249"
+  HREF="node12.html">Suggested Exercises</A>
+<B> Up:</B> <A NAME="tex2html247"
+  HREF="node9.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html241"
+  HREF="node10.html">Introduction</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032200000000000000">
+A C Code for the 2D Ising Magnet</A>
+</H3>
+
+<P>
+In this section, we will dissect piece-by-piece a small program
+(written in C) which implements an NVT Metropolis Monte Carlo
+simulation of a 2D Ising lattice.  Click
+<A NAME="tex2html4"
+  HREF="codes/ising.c">here</A>
+to download the code.
+You can compile the code using the command
+<PRE>
+cfa@abrams01:/home/cfa&gt; gcc -O3 -o ising ising.c -lm -lgsl
+</PRE>
+and you can then run it at the command line as <TT>./ising</TT>.  The
+code will conduct a canoncial Metropolis Monte Carlo simulation of an
+Ising lattice of size <IMG
+ WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img240.png"
+ ALT="$L\times L$"> at temperature <IMG
+ WIDTH="15" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$T$"> (both specified
+by the user at run time on the command line), and it computes both the
+average energy per spin <!-- MATH
+ $\left<\epsilon\right>$
+ -->
+<IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img241.png"
+ ALT="$\left&lt;\epsilon\right&gt;$"> and the average spin
+value, <!-- MATH
+ $\left<s_1\right>$
+ -->
+<IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img242.png"
+ ALT="$\left&lt;s_1\right&gt;$">.  <EM>Periodic boundaries</EM> are employed in
+calculating the nearest-neighbor interactions.
+
+<P>
+An abbreviated listing of the code follows.  Some comments in the
+full, downloadable code have been omitted for space, and I have instead 
+explained each code fragment in accompanying text.  
+
+<P>
+<BR CLEAR="ALL">
+<HR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+#include &lt;gsl/gsl_rng.h&gt;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Standard headers for a C program, and
+the header for the GSL random number
+generator.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+int E ( int ** F, int L, int i, int j ) {
+  return -2*(F[i][j])*
+	    (F[i?(i-1):(L-1)][j]+F[(i+1)%L][j]+
+             F[i][j?(j-1):(L-1)]+F[i][(j+1)%L]);
+}
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+A function that accepts as arguments the 2D array of spins, F; the
+side-length, L, and a position (i,j), and returns the <EM>change</EM> in
+energy upon flipping spin (i,j), without <EM>actually</EM> flipping it.
+All variables are of integer type, <TT>int</TT>.  The syntax <TT>** F</TT>
+means that <TT>F</TT> is a pointer to a pointer to an <TT>int</TT>.  It is a
+way of signifying that <TT>F</TT> is a 2D array.  To access the <TT>i,j</TT>
+element of <TT>F</TT>, the syntax is <TT>F[i][j]</TT>.  The syntax <TT>i?(i-1):(L-1)</TT> expands as, ``If <TT>i</TT> is non-zero, return <TT>i-1</TT>;
+otherwise (if <TT>i</TT> <EM>is</EM> zero), return <TT>L-1</TT>.''  This
+implements periodic boundaries when looking to the <EM>west</EM> of spin
+<TT>i,j</TT>.  The syntax <TT>(i+1)%L</TT> returns <TT>(i+1) mod L</TT>, which
+also implements periodic boundaries when looking to the <EM>east</EM> of
+spin <TT>i,j</TT>.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+void samp ( int ** F, int L, double * s, double * e ) {
+  int i,j;
+
+  *s=0.0;
+  *e=0.0;
+  for (i=0;i&lt;L;i++) {
+    for (j=0;j&lt;L;j++) {
+      *s+=(double)F[i][j];
+      *e-=(double)(F[i][j])*
+	  (F[i][(j+1)%L]+F[(i+1)%L][j]);
+    }
+  }
+  *s/=(L*L);
+  *e/=(L*L);
+}
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+A function that samples the current 2D array of
+spins and computes the average spin, <!-- MATH
+ $\left<s_1\right>$
+ -->
+<IMG
+ WIDTH="31" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img242.png"
+ ALT="$\left&lt;s_1\right&gt;$">,
+and the average energy per spin, <!-- MATH
+ $\left<\epsilon\right>$
+ -->
+<IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img241.png"
+ ALT="$\left&lt;\epsilon\right&gt;$">.
+The syntax <TT>x += y</TT> expands as <TT>x = x + y</TT>; the
+same is true for other ``incremental'' operators, <TT>-=, *=,
+and /=</TT>.  Because <TT>s</TT> and <TT>e</TT> are ``passed by 
+reference'' (so that their values can be changed by
+the function), we have to <EM>dereference</EM> them
+with the <TT>*</TT> operator to access their contents; that
+is <TT>*s</TT> means ``the contents of <TT>s</TT>''.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+void init ( int ** F, int L, gsl_rng * r ) {
+  int i,j;
+  for (i=0;i&lt;L;i++) {
+    for (j=0;j&lt;L;j++) {
+      F[i][j]=2*(int)gsl_rng_uniform_int(r,2)-1;
+    }
+  }
+}
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+A function that randomly initializes the 2D array of spins.  The
+function <TT>gsl_rng_uniform_int(r,2)</TT> returns either 0 or 1
+randomly, and we want each spin to be either 1 or -1.  Note
+that we have to pass in the random number generator we 
+created (as you will see) in the main program (below).
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+int main (int argc, char * argv[]) {
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Main program begins here.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  int ** F;
+  int L = 20;
+  int N;
+  double T = 1.0;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+  F is the the 2D array of spins; L is the sidelength of the array
+  (default value is 20); N is the total number of spins = L<IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img243.png"
+ ALT="$^2$">; T is
+  the dimensionless temperature = <IMG
+ WIDTH="52" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img244.png"
+ ALT="$k_BT/J$"> (default is 1.0), where <IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img245.png"
+ ALT="$J$">
+  is the unit energy of the Hamiltonian.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  int nCycles = 1000000;
+  int fSamp = 1000;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+The number of cycles to run and the sample interval.
+A cycle is a set of <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> attempted spin flips.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  int nSamp;
+  int de;
+  double b;
+  double x;
+  int i,j,a,c;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Computed variables:  number of samples taken, change in energy
+upon spin flip, Boltzmann factor, random number, and loop 
+counters.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  double s=0.0, ssum=0.0;
+  double e=0.0, esum=0.0;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Observables, average spin, <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img246.png"
+ ALT="$s_1$">, and average energy per
+spin, <IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="$\epsilon $">, and their respective accumulators for
+their ensemble averages, all initialized to 0.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  gsl_rng * r = gsl_rng_alloc(gsl_rng_mt19937);
+  unsigned long int Seed = 23410981;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+This line creates a random number generator of the "Mersenne Twister"
+type, which is much better than the default random number
+generator.  This is why we need the GNU Scientific Library.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  for (i=1;i&lt;argc;i++) {
+    if (!strcmp(argv[i],"-L")) 
+      L=atoi(argv[++i]);
+    else if (!strcmp(argv[i],"-T")) 
+      T=atof(argv[++i]);
+    else if (!strcmp(argv[i],"-nc")) 
+      nCycles = atoi(argv[++i]);
+    else if (!strcmp(argv[i],"-fs")) 
+      fSamp = atoi(argv[++i]);
+    else if (!strcmp(argv[i],"-s"))
+      Seed = (unsigned long)atoi(argv[++i]);
+  }
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Here we parse the command line arguments.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  gsl_rng_set(r,Seed);
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Seed the random number generator.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  N=L*L;
+  F=(int**)malloc(L*sizeof(int*));
+  for (i=0;i&lt;L;i++) F[i]=(int*)malloc(L*sizeof(int));
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Compute the number of spins, <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$">, and 
+allocate memory for the 2D array of spins.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  init(F,L,r);
+  T=1.0/T;
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Initialize the 2D array of spins, and convert the temperature to
+reciprocal temperature for computational convenience.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  for (c=0;c&lt;nCycles;c++) {
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Let <IMG
+ WIDTH="11" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img247.png"
+ ALT="$c$"> loop from 0 to <TT>nCycles-1</TT>.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+    for (a=0;a&lt;N;a++) {
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Let <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img46.png"
+ ALT="$a$"> loop from 0 to <TT>N-1</TT>.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+      i=(int)gsl_rng_uniform_int(r,L);
+      j=(int)gsl_rng_uniform_int(r,L);
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Randomly select spin <IMG
+ WIDTH="36" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img248.png"
+ ALT="$(i,j)$">.  The function
+<TT>gsl_rng_uniform_int()</TT> is a from the
+GSL.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+      de = E(F,L,i,j);
+      b = exp(de*T);
+      x = gsl_rng_uniform(r);
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Compute <!-- MATH
+ $\Delta\mathscr{U}$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img249.png"
+ ALT="$\Delta\mathscr{U}$">, <!-- MATH
+ $e^{-\beta\Delta\mathscr{U}}$
+ -->
+<IMG
+ WIDTH="50" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img250.png"
+ ALT="$e^{-\beta\Delta\mathscr{U}}$">,
+and select a uniform random variate, <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$">.  The
+function <TT>gsl_rng_uniform()</TT> is from the GSL.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+      if (x&lt;b) {
+	F[i][j]*=-1;
+      }
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Evaluate the acceptance test, and if passed,
+actually flip the spin.  The last 6 lines of code
+can be equivalently stated with just one line:
+<PRE>
+      if (gsl_rng_uniform(r)&lt;exp(E(F,L,i,j)*T)) F[i][j]*=-1;
+</PRE></TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+    }
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Close the loop over <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> spin flip trials.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+    if (!(c%fSamp)) {
+      samp(F,L,&amp;s,&amp;e);
+      ssum+=s;
+      esum+=e;
+      nSamp++;
+    }
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+If the cycle number is divisible by the requested sample frequency,
+(as determined by asking whether <TT>c mod fSamp</TT> is zero), take a
+sample, and update the accumulators.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  }
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Close the outer loop over <TT>nCycle</TT> cycles.
+</TD></TR>
+</TABLE></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD><PRE>
+  fprintf(stdout,
+    "# The average magnetization is %.5lf\n",
+    ssum/nSamp);
+  fprintf(stdout,
+    "# The average energy per spin is %.5lf\n",
+    esum/nSamp);
+  fprintf(stdout,"# Program ends.\n");
+}
+</PRE></TD></TR>
+</TABLE></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="317">
+<TR><TD>
+Output final information.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html248"
+  HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html246"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html240"
+  HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html249"
+  HREF="node12.html">Suggested Exercises</A>
+<B> Up:</B> <A NAME="tex2html247"
+  HREF="node9.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html241"
+  HREF="node10.html">Introduction</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

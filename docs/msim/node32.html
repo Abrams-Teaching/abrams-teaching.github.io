@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Molecular Dynamics at Constant Temperature</TITLE>
+<META NAME="description" CONTENT="Molecular Dynamics at Constant Temperature">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node36.html">
+<LINK REL="previous" HREF="node31.html">
+<LINK REL="up" HREF="node30.html">
+<LINK REL="next" HREF="node33.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html467"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html465"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html459"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html468"
+  HREF="node33.html">Velocity Scaling: Isokinetics and</A>
+<B> Up:</B> <A NAME="tex2html466"
+  HREF="node30.html">Ensembles</A>
+<B> Previous:</B> <A NAME="tex2html460"
+  HREF="node31.html">Monte Carlo Simulations in</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00052000000000000000"></A>
+<A NAME="sec:ens:md"></A>
+<BR>
+Molecular Dynamics at Constant Temperature
+</H2>
+
+<P>
+Conventional MD simulation conserves total energy; hence, the time
+averages computed from MD simulation, if it is long enough, are
+equivalent to ensemble averages computed from the microcanonical
+ensemble.  The flexibility of MD is greatly enhanced by noting that 
+it is not restricted to NVE.  There exist techniques by which MD can
+simulate in the NVT or NPT ensembles as well.  We will consider some
+popular temperature control schemes, and one popular pressure control
+scheme, in this section.
+
+<P>
+There are essentially three ways to control the temperature in 
+an MD simulation:
+
+<OL>
+<LI>Scaling velocities (e.g. simple velocity scaling and the Berendsen thermostat)
+</LI>
+<LI>Adding stochastic forces and/or velocities (e.g., the Andersen, Langevin, and Dissipative Particle Dynamics thermostats)
+</LI>
+<LI>Using ``extended Lagrangian'' formalisms (e.g., the Nos&#233;-Hoover thermostat)
+</LI>
+</OL>
+
+<P>
+Each of these classes of schemes has advantages and disadvantages,
+depending on the application.  In the following subsections, we
+consider several examples of thermostats, and attempt to discuss their
+advantages and drawbacks.  A simple barostat is also described in the last section.  
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html469"
+  HREF="node33.html">Velocity Scaling:  Isokinetics and the Berendsen Thermostat</A>
+<LI><A NAME="tex2html470"
+  HREF="node34.html">Stochastic NVT Thermostats:  Andersen, Langevin, and
+Dissipative Particle Dynamics</A>
+<LI><A NAME="tex2html471"
+  HREF="node35.html">The Nos&#233;-Hoover Chain</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html467"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html465"
+  HREF="node30.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html459"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html468"
+  HREF="node33.html">Velocity Scaling: Isokinetics and</A>
+<B> Up:</B> <A NAME="tex2html466"
+  HREF="node30.html">Ensembles</A>
+<B> Previous:</B> <A NAME="tex2html460"
+  HREF="node31.html">Monte Carlo Simulations in</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

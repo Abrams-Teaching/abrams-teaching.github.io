@@ -1,0 +1,428 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Case Study 3: Hard-Disk Dumbbells in 2D</TITLE>
+<META NAME="description" CONTENT="Case Study 3: Hard-Disk Dumbbells in 2D">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node19.html">
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="up" HREF="node7.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html317"
+  HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html315"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html309"
+  HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html318"
+  HREF="node19.html">Case Study 4 (F&amp;S</A>
+<B> Up:</B> <A NAME="tex2html316"
+  HREF="node7.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html310"
+  HREF="node17.html">Case Study 2: MC</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00035000000000000000"></A>
+<A NAME="sec:cs3"></A>
+<BR>
+Case Study 3:  Hard-Disk Dumbbells in 2D
+</H2>
+
+<P>
+In this case study, we consider a slightly different system than the
+hard-disk system in the previous case study.  Here, we imagine that
+pairs of disks are tethered together to form dumbbells.  The
+``bond-length'' of a dumbbell is a constant parameter, <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$r_0$">.  We will
+again confine the dumbbells to a circle.  
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="459" HEIGHT="459" ALIGN="CENTER"
+ SRC="hdb_snap.gif"
+ ALT="portrait"></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+Configuration snapshot of a system of hard-disk-dumbbells.  <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 200
+particles, <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> = 0.5, and <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$R$"> = 11.3.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+What is new is how we have to consider the trial moves for this
+system.  We cannot simply select a random particle and try to displace
+it, because this is likely to violate the constant bond-length of the
+dumbbell that particle belongs to.  How then do we generate new
+configurations?  A simple idea is to use <EM>two</EM> kinds of trial
+moves, translation of entire dumbbells and rotation of dumbbells
+around their centers of mass.  This was originally presented in
+Sec.&nbsp;<A HREF="node16.html#sec:trialmoves">3.3.3</A>.  In order to implement an MC code with more
+than one trial move, we must include a ``trial move selection rule''
+which randomly selects a trial move based on their user-defined
+``weights''.
+
+<P>
+The code <A NAME="tex2html6"
+  HREF="codes/hdb.c">hdb.c</A>
+implements a MC simulation
+of hard-disk dumbbells.  Consider the following question: Does the
+acceptance ratio of rotational moves depend upon the weight given to
+displacement moves?  Why or why not?  Below is a plot of the
+acceptance ratio vs. the maximum displacement for a system of 100
+dumbbells at a density of 0.5, for various displacement move weights
+between 0.1 and 0.9.  As you can see, there appears to be no effect 
+on the acceptance of trial displacements if we change how frequently we perform them relative to trial rotations.
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="540" HEIGHT="378" ALIGN="CENTER"
+ SRC="hdb_accr_wts.gif"
+ ALT="portrait"></TD>
+<TD ALIGN="LEFT"><TABLE  WIDTH="227">
+<TR><TD>
+Acceptance ratio vs. maximum dumbbell displacement for various displacement trial move weights between 0.1 and 0.9.  <IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="$N$"> = 200 (100 dumbbells), <IMG
+ WIDTH="28" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$rho$"> = 0.5, and <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$R$"> = 11.3.
+</TD></TR>
+</TABLE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+As a second suggested exercise (one of an advanced nature, suitable
+for a course project), we can use this code to explore the liquid
+crystalline nature of the dumbbell fluid.  Because the dumbbells are
+slightly elongated along one direction, they may tend to line up in a
+dense liquid.  For dumbbell <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">, let the quantity <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img292.png"
+ ALT="$\theta_i$"> represent
+the angle made by the interparticle segment and some global coordinate
+frame axis (say the <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img47.png"
+ ALT="$x$"> axis).  We <EM>could</EM> use this code to
+compute the average orientation, <!-- MATH
+ $\left<\theta\right>$
+ -->
+<IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img293.png"
+ ALT="$\left&lt;\theta\right&gt;$"> as a function
+of density and temperature.  The problem is that if the system is
+truly a liquid, even if large numbers of dumbbells are lined up at any
+one time, the system will slowly evolve so that all dumbbell
+orientations are eventually realized.  So <!-- MATH
+ $\left<\theta\right>$
+ -->
+<IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img293.png"
+ ALT="$\left&lt;\theta\right&gt;$"> is
+probably not so interesting to calculate.  What would be interesting
+would be to assess the effect of the confining circle on the spatially
+resolved orientation <EM>field</EM>, <!-- MATH
+ $\left<\theta\right>(x,y)$
+ -->
+<IMG
+ WIDTH="64" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img294.png"
+ ALT="$\left&lt;\theta\right&gt;(x,y)$">.  You
+could construct a 2D histogram of orientation and perform MC to
+populate it.  But because the system is nominally cylindrically
+symmetric, it would suffice to consider a one-dimensional field,
+<!-- MATH
+ $\left<\theta\right>(r)$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img295.png"
+ ALT="$\left&lt;\theta\right&gt;(r)$">.  Plot <!-- MATH
+ $\left<\theta\right>(r)$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img295.png"
+ ALT="$\left&lt;\theta\right&gt;(r)$"> <EM>vs.</EM> <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$r$">
+for various densities and temperatures.
+
+<P>
+A third suggested (advanced) exercise would be to measure an <EM>orientational correlation function</EM>.  Here, we let the quantity
+<IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img297.png"
+ ALT="$\theta_{ij}$"> be the <EM>relative</EM> angle between the segments of
+dumbbells <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> and <IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$j$">.  You can use the code to accumulate statistics
+on <IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img297.png"
+ ALT="$\theta_{ij}$"> as a function of <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img298.png"
+ ALT="$r_{ij}$">, where <IMG
+ WIDTH="22" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img298.png"
+ ALT="$r_{ij}$"> is the
+center-of-mass-to-center-of-mass distance of the two dumbbells.  It is
+actually better to accumulate statistics of the following polynomial
+of the cosine
+of <IMG
+ WIDTH="23" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img297.png"
+ ALT="$\theta_{ij}$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P\left(\cos\theta_{ij}\right) = \cos^2\theta_{ij}-\frac12.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:p2"></A><IMG
+ WIDTH="175" HEIGHT="38" BORDER="0"
+ SRC="img299.png"
+ ALT="\begin{displaymath}
+P\left(\cos\theta_{ij}\right) = \cos^2\theta_{ij}-\frac12.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(88)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+<!-- MATH
+ $\left<P\right>$
+ -->
+<IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img300.png"
+ ALT="$\left&lt;P\right&gt;$"> as a function of <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$r$"> will reveal the character of
+the liquid-crystalline-like ordering of the dumbbells; this is the
+orientational correlation function.  When two dumbbells are aligned,
+<!-- MATH
+ $\cos\theta_{ij}$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img301.png"
+ ALT="$\cos\theta_{ij}$"> is unity, and therefore <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> approaches unity.
+When two dumbbells are perpendicular, <IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$P$"> is -0.5.  The average,
+<!-- MATH
+ $\left<P\right>(r)$
+ -->
+<IMG
+ WIDTH="51" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img302.png"
+ ALT="$\left&lt;P\right&gt;(r)$"> at a particular distance <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$r$">, will range between
+-0.5 and 1.0, for perfectly perpendicular to perfectly aligned, and 0
+implies no preferred orientation.  Try to hypothesize how <!-- MATH
+ $\left<P(r)\right>$
+ -->
+<IMG
+ WIDTH="49" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img303.png"
+ ALT="$\left&lt;P(r)\right&gt;$">
+behaves as one changes temperature and density.
+
+<P>
+A final note:  Since this is a 2D system, we don't use the second
+Legendre polynomial of <IMG
+ WIDTH="36" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img285.png"
+ ALT="$\cos\theta$">:
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+P_2(x)=\frac12(3x^2-1)
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:slp"></A><IMG
+ WIDTH="133" HEIGHT="38" BORDER="0"
+ SRC="img304.png"
+ ALT="\begin{displaymath}
+P_2(x)=\frac12(3x^2-1)
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(89)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The reason for this is clear.  Suppose <IMG
+ WIDTH="34" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img305.png"
+ ALT="$f(\theta)$"> is the probability
+distribution of the angle <IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img282.png"
+ ALT="$\theta$">.  Now, since the molecules are not
+polar (they have no head or tail), <IMG
+ WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img282.png"
+ ALT="$\theta$"> is meaningful only 
+on the domain <!-- MATH
+ $[0,\frac{\pi}{2}]$
+ -->
+<IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img306.png"
+ ALT="$[0,\frac{\pi}{2}]$">.  Suppose further that there
+is no preferred angle; i.e., <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> is a constant.  In 2D, normalization
+requires 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+1=f\int_0^{\pi/2}d\theta\ \rightarrow\ f=\frac{2}{\pi},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="179" HEIGHT="47" BORDER="0"
+ SRC="img307.png"
+ ALT="\begin{displaymath}
+1=f\int_0^{\pi/2}d\theta \rightarrow f=\frac{2}{\pi},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(90)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+and in this case, with no preferred orientation, the average of <IMG
+ WIDTH="43" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img308.png"
+ ALT="$\cos^2\theta$"> is
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\left<\cos^2\theta\right> = \frac{2}{\pi}\int_0^{\pi/2} \cos^2\theta d\theta = \frac{2}{\pi}\frac{\pi}{4} = \frac12.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="270" HEIGHT="47" BORDER="0"
+ SRC="img309.png"
+ ALT="\begin{displaymath}
+\left&lt;\cos^2\theta\right&gt; = \frac{2}{\pi}\int_0^{\pi/2} \cos^2\theta d\theta = \frac{2}{\pi}\frac{\pi}{4} = \frac12.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(91)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+And Eq.&nbsp;<A HREF="#eq:p2">88</A> will have the described behavior.  The second Legendre polynomial evaluates
+to zero when <IMG
+ WIDTH="43" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img308.png"
+ ALT="$\cos^2\theta$"> is <IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img310.png"
+ ALT="$\frac13$">, which is indeed what <!-- MATH
+ $\left<\cos^\theta\right>$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img311.png"
+ ALT="$\left&lt;\cos^\theta\right&gt;$"> evaluates
+to when <IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$f$"> is a constant in <EM>three</EM> dimensions.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html317"
+  HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html315"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html309"
+  HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html318"
+  HREF="node19.html">Case Study 4 (F&amp;S</A>
+<B> Up:</B> <A NAME="tex2html316"
+  HREF="node7.html">Monte Carlo Simulation</A>
+<B> Previous:</B> <A NAME="tex2html310"
+  HREF="node17.html">Case Study 2: MC</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

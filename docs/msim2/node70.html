@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>The SARS-CoV-2 spike protein receptor binding domain (RBD)</TITLE>
+<META NAME="description" CONTENT="The SARS-CoV-2 spike protein receptor binding domain (RBD)">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="previous" HREF="node69.html">
+<LINK REL="up" HREF="node68.html">
+<LINK REL="next" HREF="node71.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html902"
+  HREF="node71.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html900"
+  HREF="node68.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html896"
+  HREF="node69.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html903"
+  HREF="node71.html">NAMD</A>
+<B> Up:</B> <A NAME="tex2html901"
+  HREF="node68.html">Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html897"
+  HREF="node69.html">A Box of Water</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00081200000000000000">
+The SARS-CoV-2 spike protein receptor binding domain (RBD)</A>
+</H3>
+
+<P>
+As a quick example of how to build a protein simulation system, we can consider a very recent example from the Protein Data Bank.  The SARS-CoV-2 spike glycoprotein complex is an enormous protein, but a really important part of it are the domains that bind to the ACE2 receptors on the surfaces of epithelial cells.  These are called Receptor Binding Domains (RBDs).  A lot of recent structural biology has gone into understanding the details of the RBD-ACE2 interface.  As an example, take a look at the PDB entry 7c8j, which is the X-ray crystallographic structure of a recombinant construct of the SARS-CoV-2 RBD and the ACE2 ectodomain of the bat&nbsp;[<A
+ HREF="node82.html#Liu2021Cross-speciesACE2">41</A>].  We can use simulations to answer a lot of interesting questions about this structure, but let's just use it now as a source of coordinates to run a simulation of just the RBD alone.
+
+<P>
+The first thing to do is to download the PDB file for this entry; there are several ways to do this, but I like to use an interactive VMD session and just put 7c8j in the new molecule file browser.  Once VMD has it loaded, the following TcL command in the terminal will create the stripped-down PDB file for just the RBD:
+
+<P>
+<PRE>
+[atomselect top "chain B"] writepdb my_7c8j.pdb
+</PRE>
+
+<P>
+Now we can pretty much follow Justin Lemkul's lysozyme tutorial here:
+<PRE>
+# generate the topology; use OPLS-AA force field (sel. 15)
+$ gmx pdb2gmx -f my_7c8j.pdb -o my_7c8j_processed.pdb -water spce
+# enlarge box
+$ gmx editconf -f my_7c8j_processed.pdb -o my_7c8j_newbox.gro \ 
+  -c -d 1.0 -bt cubic
+# solvate
+$ gmx solvate -cp my_7c8j_newbox.gro
+# copy JK's ions.mdp; add ions (replace group 13)
+$ gmx grompp -f ions.mdp -c my_7c8j_solv.gro -p topol.top \ 
+  -o ions.tpr
+$ gmx genion -s ions.tpr -o my_7c8j_solv.gro -p topol.top \ 
+  -pname NA -nname CL -neutral
+# minimize potential energy using JK's minim.mdp
+$ gmx grompp -f minim.mdp -c my_7c8j_solv.gro -p topol.top -o em.tpr
+$ gmx mdrun -v -deffnm em
+# have a look at the potential energy
+$ gmx energy -f em.edr -o potential.xvg
+# copy JK's nvt.mdp; run NVT MD for 50,000 steps -- this will take a few hours...
+$ gmx grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -o nvt.tpr
+$ gmx mdrun -v -deffnm nvt
+</PRE>
+
+<P>
+This system has about 60,000 atoms.  I show a couple of views from VMD in Fig.&nbsp;<A HREF="#fig:rbd_snaps">36</A>.  For such a large system, we won't be able to run very long on a laptop; 100 ps takes about 3 hours on mine.  Note that we'd typically want to simulate for hundreds of nanoseconds, which would be several thousand hours on my laptop, or a a day or so on a supercomputer.  After about 30 ps (an hour), I went ahead and made a plot of the energies (Fig.&nbsp;<A HREF="#fig:rbd-nvt-gmx">37</A>).
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:rbd_snaps"></A><A NAME="8381"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 36:</STRONG>
+(Left) Simulation box for the SARS-CoV-2 RBD simulation showing all waters. (Right) Just the protein.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="657" HEIGHT="557" ALIGN="BOTTOM" BORDER="0"
+ SRC="./rbd1.png"
+ ALT="Image rbd1">
+    <IMG
+  WIDTH="657" HEIGHT="557" ALIGN="BOTTOM" BORDER="0"
+ SRC="./rbd2.png"
+ ALT="Image rbd2"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:rbd-nvt-gmx"></A><A NAME="8386"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 37:</STRONG>
+Energies vs. time for a simulation of the SARS-CoV-2 S RBD in explicit water using Gromacs on a dinky little Dell laptop.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="461" HEIGHT="346" ALIGN="BOTTOM" BORDER="0"
+ SRC="./sars-cov-2-rbd-energies-partial-nvt.png"
+ ALT="Image sars-cov-2-rbd-energies-partial-nvt"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html902"
+  HREF="node71.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html900"
+  HREF="node68.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html896"
+  HREF="node69.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html903"
+  HREF="node71.html">NAMD</A>
+<B> Up:</B> <A NAME="tex2html901"
+  HREF="node68.html">Gromacs</A>
+<B> Previous:</B> <A NAME="tex2html897"
+  HREF="node69.html">A Box of Water</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

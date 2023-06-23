@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Long-Range Interactions: The Ewald Summation</TITLE>
+<META NAME="description" CONTENT="Long-Range Interactions: The Ewald Summation">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="next" HREF="node52.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node40.html">
+<LINK REL="next" HREF="node48.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html634"
+  HREF="node48.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html632"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html626"
+  HREF="node46.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html635"
+  HREF="node48.html">The Ewald Coulombic energy</A>
+<B> Up:</B> <A NAME="tex2html633"
+  HREF="node40.html">Advanced Topics</A>
+<B> Previous:</B> <A NAME="tex2html627"
+  HREF="node46.html">A Computational Model: Dimer</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00073000000000000000"></A>
+<A NAME="sec:ewald"></A>
+<BR>
+Long-Range Interactions: The Ewald Summation
+</H2>
+
+<P>
+So far, we have considered interparticle interactions that are <EM>short-ranged</EM> by construction.  Because the Lennard-Jones potential
+decays so strongly with distance (as <IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img877.png"
+ ALT="$r^{-6}$">), it is acceptable to
+cut off this interaction at moderate distances and, if desired, add a
+correction factor which is the result of integrating the potential
+over a uniform particle density out to <IMG
+ WIDTH="49" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img878.png"
+ ALT="$r = \infty$">.  However, Coulomb
+interactions, common in molecular simulation, decay relatively much
+more slowly (as <IMG
+ WIDTH="29" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img879.png"
+ ALT="$r^{-1}$">) and as a consequence, we cannot compute a
+correction factor; the integral diverges.  There are several ways to
+handle long-ranged interactions, but the most popular is the Ewald
+summation&nbsp;[<A
+ HREF="node63.html#Ewald1921">20</A>], which we discuss here.  This discussion is
+drawn primarily from F&amp;S chapter 12, and chapter 3 of the
+<A NAME="tex2html49"
+  HREF="http://www.mpip-mainz.mpg.de/theory/phd_work/phd-deserno.ps.gz">Ph.D. thesis of Marcus
+Deserno</A>&nbsp;[<A
+ HREF="node63.html#Deserno2000">21</A>]
+(Note, this link will download a gzipped PostScript version of
+Deserno's thesis.)
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html636"
+  HREF="node48.html">The Ewald Coulombic energy</A>
+<LI><A NAME="tex2html637"
+  HREF="node49.html">Ewald Forces</A>
+<LI><A NAME="tex2html638"
+  HREF="node50.html">Implementation and Evaluation</A>
+<LI><A NAME="tex2html639"
+  HREF="node51.html">Ewald Summation:  Suggested Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

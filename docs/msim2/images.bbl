@@ -1,0 +1,322 @@
+\begin{thebibliography}{10}
+
+\bibitem{Frenkel+Smit2002}
+D.~Frenkel and B.~Smit.
+\newblock {\em Understanding Molecular Simulation: From Algorithms to
+  Applications}.
+\newblock Academic Press, San Diego, 2 edition, 2002.
+
+\bibitem{Allen+Tildesley1987}
+M.~P. Allen and D.~J. Tildesley.
+\newblock {\em Computer Simulation of Liquids}.
+\newblock Oxford University Press, New York, 1987.
+
+\bibitem{Metropolis1953}
+Nicholas Metropolis, Arianna~W. Rosenbluth, Marshall~N. Rosenbluth, Augusta~H.
+  Teller, and Edward Teller.
+\newblock Equation of state calculations by fast computing machines.
+\newblock {\em The Journal of Chemical Physics}, 21(6):1087--1092, 1953.
+
+\bibitem{Verlet1967}
+Loup Verlet.
+\newblock {Computer "Experiments" on Classical Fluids. I. Thermodynamical
+  Properties of Lennard-Jones Molecules}.
+\newblock {\em Physical Review}, 159(1):98--103, 7 1967.
+
+\bibitem{Swope1982}
+William~C. Swope, Hans~C. Andersen, Peter~H. Berens, and Kent~R. Wilson.
+\newblock A computer simulation method for the calculation of equilibrium
+  constants for the formation of physical clusters of molecules: Application to
+  small water clusters.
+\newblock {\em The Journal of Chemical Physics}, 76(1):637--649, 1982.
+
+\bibitem{Tuckerman1992}
+M.~Tuckerman, B.~J. Berne, and G.~J. Martyna.
+\newblock {Reversible multiple time scale molecular dynamics}.
+\newblock {\em The Journal of Chemical Physics}, 97(3):1990, 1992.
+
+\bibitem{Flyvberg1989}
+H.~Flyvbjerg and H.~G. Petersen.
+\newblock Error estimates on averages of correlated data.
+\newblock {\em The Journal of Chemical Physics}, 91(1):461--466, 1989.
+
+\bibitem{Maginn2019}
+Edward~J. Maginn, Richard~A. Messerly, Daniel~J. Carlson, Daniel~R. Roe, and
+  J.~Richard Elliott.
+\newblock {Best Practices for Computing Transport Properties 1.
+  Self-Diffusivity and Viscosity from Equilibrium Molecular Dynamics [Article
+  v1.0]}.
+\newblock {\em Living Journal of Computational Molecular Science}, 1(1):1--20,
+  2019.
+
+\bibitem{Berendsen1984MolecularBath}
+H.~J.~C. Berendsen, J.~P.~M. Postma, W.~F. van Gunsteren, A.~DiNola, and J.~R.
+  Haak.
+\newblock {Molecular dynamics with coupling to an external bath}.
+\newblock {\em The Journal of Chemical Physics}, 81(8):3684--3690, 10 1984.
+
+\bibitem{Andersen1980MolecularTemperature}
+Hans~C. Andersen.
+\newblock {Molecular dynamics simulations at constant pressure and/or
+  temperature}.
+\newblock {\em The Journal of Chemical Physics}, 72(1980):2384, 1980.
+
+\bibitem{Grest1987StructureSimulation}
+GS~Grest and K~Kremer.
+\newblock {Structure of many arm star polymers: a molecular dynamics
+  simulation}.
+\newblock {\em Macromolecules}, 20:1376--1383, 1987.
+
+\bibitem{Nikunen2003HowSimulations}
+P~Nikunen.
+\newblock {How would you integrate the equations of motion in dissipative
+  particle dynamics simulations?}
+\newblock {\em Computer Physics Communications}, 153(3):407--423, 7 2003.
+
+\bibitem{Soddemann2003DissipativeSimulations}
+Thomas Soddemann, Burkhard D{\"{u}}nweg, and Kurt Kremer.
+\newblock {Dissipative particle dynamics: A useful thermostat for equilibrium
+  and nonequilibrium molecular dynamics simulations}.
+\newblock {\em Physical Review E}, 68(4):1--8, 10 2003.
+
+\bibitem{Ewald1921DieGitterpotentiale}
+P.~P. Ewald.
+\newblock {Die Berechnung optischer und elektrostatischer Gitterpotentiale}.
+\newblock {\em Annalen der Physik}, 369(3):253--287, 1921.
+
+\bibitem{Deserno1998HowRoutines}
+Markus Deserno and Christian Holm.
+\newblock {How to mesh up Ewald sums. I. A theoretical and numerical comparison
+  of various particle mesh routines}.
+\newblock {\em The Journal of chemical physics}, 109(18):7678, 1998.
+
+\bibitem{Deserno19993Algorithms}
+Markus Deserno.
+\newblock {\em {3 Efficient electrostatics : Ewald Sum and Particle Mesh Ewald
+  Algorithms}}.
+\newblock PhD thesis, 1999.
+
+\bibitem{Harrison2018ReviewResearch}
+Judith~A. Harrison, J.~David Schall, Sabina Maskey, Paul~T. Mikulski, M.~Todd
+  Knippenberg, and Brian~H. Morrow.
+\newblock {Review of force fields and intermolecular potentials used in
+  atomistic computational materials research}.
+\newblock {\em Applied Physics Reviews}, 5(3), 2018.
+
+\bibitem{Brooks1983CHARMM:Calculations}
+Bernard~R. Brooks, Robert~E. Bruccoleri, Barry~D. Olafson, David~J. States,
+  S.~Swaminathan, and Martin Karplus.
+\newblock {CHARMM: A program for macromolecular energy, minimization, and
+  dynamics calculations}.
+\newblock {\em Journal of Computational Chemistry}, 4(2):187--217, 1983.
+
+\bibitem{Brooks2009CHARMM:Program}
+B.~R. Brooks, C.~L. Brooks, A.~D. Mackerell, L.~Nilsson, R.~J. Petrella,
+  B.~Roux, Y.~Won, G.~Archontis, C.~Bartels, S.~Boresch, A.~Caflisch, L.~Caves,
+  Q.~Cui, A.~R. Dinner, M.~Feig, S.~Fischer, J.~Gao, M.~Hodoscek, W.~Im,
+  K.~Kuczera, T.~Lazaridis, J.~Ma, V.~Ovchinnikov, E.~Paci, R.~W. Pastor, C.~B.
+  Post, J.~Z. Pu, M.~Schaefer, B.~Tidor, R.~M. Venable, H.~L. Woodcock, X.~Wu,
+  W.~Yang, D.~M. York, and M.~Karplus.
+\newblock {CHARMM: The biomolecular simulation program}.
+\newblock {\em Journal of Computational Chemistry}, 30(10):1545--1614, 7 2009.
+
+\bibitem{MacKerell1998All-Atom}
+A.~D. MacKerell, D.~Bashford, M.~Bellott, R.~L. Dunbrack, J.~D. Evanseck, M.~J.
+  Field, S.~Fischer, J.~Gao, H.~Guo, S.~Ha, D.~Joseph-McCarthy, L.~Kuchnir,
+  K.~Kuczera, F.~T.~K. Lau, C.~Mattos, S.~Michnick, T.~Ngo, D.~T. Nguyen,
+  B.~Prodhom, W.~E. Reiher, B.~Roux, M.~Schlenkrich, J.~C. Smith, R.~Stote,
+  J.~Straub, M.~Watanabe, J.~Wi{\'{o}}rkiewicz-Kuczera, D.~Yin, and M.~Karplus.
+\newblock {All-Atom Empirical Potential for Molecular Modeling and Dynamics
+  Studies of Proteins †}.
+\newblock {\em The Journal of Physical Chemistry B}, 102(18):3586--3616, 4
+  1998.
+
+\bibitem{Weiner1981AMBER:Interactions}
+Paul~K. Weiner and Peter~A. Kollman.
+\newblock {AMBER: Assisted model building with energy refinement. A general
+  program for modeling molecules and their interactions}.
+\newblock {\em Journal of Computational Chemistry}, 2(3):287--303, 1981.
+
+\bibitem{Daura1998ParametrizationField}
+Xavier Daura, Alan~E. Mark, and Wilfred~F. Van~Gunsteren.
+\newblock {Parametrization of aliphatic CHn united atoms of GROMOS96 force
+  field}.
+\newblock {\em Journal of Computational Chemistry}, 19(5):535--547, 1998.
+
+\bibitem{Jorgensen1984OptimizedHydrocarbons}
+William~L. Jorgensen, Jeffry~D. Madura, and Carol~J. Swenson.
+\newblock {Optimized Intermolecular Potential Functions for Liquid
+  Hydrocarbons}.
+\newblock {\em Journal of the American Chemical Society}, 106(22):6638--6646,
+  1984.
+
+\bibitem{Jorgensen1996DevelopmentLiquids}
+William~L. Jorgensen, David~S. Maxwell, and Julian Tirado-Rives.
+\newblock {Development and testing of the OPLS all-atom force field on
+  conformational energetics and properties of organic liquids}.
+\newblock {\em Journal of the American Chemical Society}, 118(45):11225--11236,
+  1996.
+
+\bibitem{Martin1998TransferableN-alkanes}
+Marcus~G. Martin and J.~Ilja Siepmann.
+\newblock {Transferable potentials for phase equilibria. 1. United-atom
+  description of n-alkanes}.
+\newblock {\em Journal of Physical Chemistry B}, 102(14):2569--2577, 1998.
+
+\bibitem{Lopes2009MolecularApplications}
+Pedro~E.M. Lopes, Benoit Roux, and Alexander~D. MacKerell.
+\newblock {Molecular modeling and dynamics studies with explicit inclusion of
+  electronic polarizability: Theory and applications}.
+\newblock {\em Theoretical Chemistry Accounts}, 124(1-2):11--28, 2009.
+
+\bibitem{Vanommeslaeghe2015CHARMMDesign}
+K.~Vanommeslaeghe and A.~D. Mackerell.
+\newblock {CHARMM additive and polarizable force fields for biophysics and
+  computer-aided drug design}.
+\newblock {\em Biochimica et Biophysica Acta - General Subjects},
+  1850(5):861--871, 2015.
+
+\bibitem{Daw1984Embedded-atomMetals}
+Murray~S. Daw and M.~I. Baskes.
+\newblock {Embedded-atom method: Derivation and application to impurities,
+  surfaces, and other defects in metals}.
+\newblock {\em Physical Review B}, 29(12):6443--6453, 1984.
+
+\bibitem{Abrams1999Three-dimensionalSimulations}
+Cameron~F. Abrams and David~B. Graves.
+\newblock {Three-dimensional spatiokinetic distributions of sputtered and
+  scattered products of Ar+ and Cu+ impacts onto the Cu surface: Molecular
+  dynamics simulations}.
+\newblock {\em IEEE Transactions on Plasma Science}, 27(5):1426--1432, 1999.
+
+\bibitem{Abell1985EmpiricalBonding}
+G.~C. Abell.
+\newblock {Empirical chemical pseudopotential theory of molecular and metallic
+  bonding}.
+\newblock {\em Physical Review B}, 31(10):6184--6196, 5 1985.
+
+\bibitem{Tersoff1986NewSilicon}
+J.~Tersoff.
+\newblock {New empirical model for the structural properties of silicon}.
+\newblock {\em Physical Review Letters}, 56(6):632--635, 2 1986.
+
+\bibitem{Brenner1990EmpiricalFilms}
+Donald~W. Brenner.
+\newblock {Empirical potential for hydrocarbons for use in simulating the
+  chemical vapor deposition of diamond films}.
+\newblock {\em Physical Review B}, 42(15):9458--9471, 1990.
+
+\bibitem{Stuart2000AInteractions}
+Steven~J. Stuart, Alan~B. Tutein, and Judith~A. Harrison.
+\newblock {A reactive potential for hydrocarbons with intermolecular
+  interactions}.
+\newblock {\em Journal of Chemical Physics}, 112(14):6472--6486, 2000.
+
+\bibitem{Yu2007ChargeSystem}
+Jianguo Yu, Susan~B. Sinnott, and Simon~R. Phillpot.
+\newblock {Charge optimized many-body potential for the Si/SiO2 system}.
+\newblock {\em Physical Review B - Condensed Matter and Materials Physics},
+  75(8):1--13, 2007.
+
+\bibitem{Knippenberg2012Bond-orderSystems}
+M~Todd Knippenberg, Paul~T Mikulski, Kathleen~E Ryan, Steven~J Stuart, Guangtu
+  Gao, and Judith~A Harrison.
+\newblock {Bond-order potentials with split-charge equilibration: Application
+  to C-, H-, and O-containing systems}.
+\newblock {\em The Journal of Chemical Physics}, 136(16):164701, 4 2012.
+
+\bibitem{Senftle2016TheDirections}
+Thomas~P. Senftle, Sungwook Hong, Md~Mahbubul Islam, Sudhir~B. Kylasa, Yuanxia
+  Zheng, Yun~Kyung Shin, Chad Junkermeier, Roman Engel-Herbert, Michael~J.
+  Janik, Hasan~Metin Aktulga, Toon Verstraelen, Ananth Grama, and Adri~C.T.
+  Van~Duin.
+\newblock {The ReaxFF reactive force-field: Development, applications and
+  future directions}.
+\newblock {\em npj Computational Materials}, 2(September 2015), 2016.
+
+\bibitem{Russo2011Atomistic-scaleEngineering}
+Michael~F. Russo and Adri~C.T. van Duin.
+\newblock {Atomistic-scale simulations of chemical reactions: Bridging from
+  quantum chemistry to engineering}.
+\newblock {\em Nuclear Instruments and Methods in Physics Research Section B:
+  Beam Interactions with Materials and Atoms}, 269(14):1549--1554, 7 2011.
+
+\bibitem{Stillinger1985ComputerSilicon}
+F.H. Stillinger and T.A. Weber.
+\newblock {Computer simulation of local order in condensed phases of silicon}.
+\newblock {\em Physical Review B}, 31(8):5262, 1985.
+
+\bibitem{Gromacs}
+H~BEKKER, HJC BERENDSEN, EJ~DIJKSTRA, S~ACHTEROP, R~VONDRUMEN, D~VANDERSPOEL,
+  A~SIJBERS, H~Keegstra, and MKR RENARDUS.
+\newblock Gromacs - a parallel computer for molecular-dynamics simulations.
+\newblock In RA~DeGroot and J~Nadrchal, editors, {\em PHYSICS COMPUTING '92},
+  pages 252--256. World Scientific Publishing, 1993.
+\newblock 4th International Conference on Computational Physics (PC 92) ;
+  Conference date: 24-08-1992 Through 28-08-1992.
+
+\bibitem{Phillips2005ScalableNAMD.}
+James~C Phillips, Rosemary Braun, Wei Wang, James Gumbart, Emad Tajkhorshid,
+  Elizabeth Villa, Christophe Chipot, Robert~D Skeel, Laxmikant Kal{\'{e}}, and
+  Klaus Schulten.
+\newblock {Scalable molecular dynamics with NAMD.}
+\newblock {\em Journal of computational chemistry}, 26(16):1781--802, 12 2005.
+
+\bibitem{Liu2021Cross-speciesACE2}
+Kefang Liu, Shuguang Tan, Sheng Niu, Jia Wang, Lili Wu, Huan Sun, Yanfang
+  Zhang, Xiaoqian Pan, Xiao Qu, Pei Du, Yumin Meng, Yunfei Jia, Qian Chen,
+  Chuxia Deng, Jinghua Yan, Hong-Wei Wang, Qihui Wang, Jianxun Qi, and
+  George~Fu Gao.
+\newblock {Cross-species recognition of SARS-CoV-2 to bat ACE2}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  118(1):e2020216118, 1 2021.
+
+\bibitem{Abrams2013EnhancedTemperature-Acceleration}
+Cameron Abrams and Giovanni Bussi.
+\newblock {Enhanced Sampling in Molecular Dynamics Using Metadynamics,
+  Replica-Exchange, and Temperature-Acceleration}.
+\newblock {\em Entropy}, 16(1):163--199, 12 2013.
+
+\bibitem{Tironi1994AChloroform}
+Ilario~G. Tironi and Wilfred~F. Van~Gunsteren.
+\newblock {A molecular dynamics simulation study of chloroform}.
+\newblock {\em Molecular Physics}, 83(2):381--403, 10 1994.
+
+\bibitem{Bennett1976EfficientData}
+Charles~H. Bennett.
+\newblock {Efficient estimation of free energy differences from Monte Carlo
+  data}.
+\newblock {\em Journal of Computational Physics}, 22(2):245--268, 1976.
+
+\bibitem{Kumar1992THEMethod}
+Shankar Kumar, John~M Rosenberg, Djamal Bouzida, Robert~H Swendsen, and Peter~A
+  Kollman.
+\newblock {THE weighted histogram analysis method for free-energy calculations
+  on biomolecules. I. The method}.
+\newblock {\em Journal of Computational Chemistry}, 13(8):1011--1021, 1992.
+
+\bibitem{Bussi2020UsingLandscapes}
+Giovanni Bussi and Alessandro Laio.
+\newblock {Using metadynamics to explore complex free-energy landscapes}.
+\newblock {\em Nature Reviews Physics}, 2(4):200--212, 2020.
+
+\bibitem{Comer2015TheAsk}
+Jeffrey Comer, James~C. Gumbart, Jérôme H{\'{e}}nin, Tony Lelievre, Andrew
+  Pohorille, and Christophe Chipot.
+\newblock {The adaptive biasing force method: Everything you always wanted to
+  know but were afraid to ask}.
+\newblock {\em Journal of Physical Chemistry B}, 119(3):1129--1151, 2015.
+
+\bibitem{Laio2002EscapingMinima.}
+Alessandro Laio and Michele Parrinello.
+\newblock {Escaping free-energy minima.}
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 99(20):12562--6, 10 2002.
+
+\bibitem{Barducci2008Well-temperedMethod}
+Alessandro Barducci, Giovanni Bussi, and Michele Parrinello.
+\newblock {Well-tempered metadynamics: A smoothly converging and tunable
+  free-energy method}.
+\newblock {\em Physical Review Letters}, 100(2):1--4, 2008.
+
+\end{thebibliography}

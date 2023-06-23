@@ -1,0 +1,746 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Newtonian Mechanics and Numerical Integration</TITLE>
+<META NAME="description" CONTENT="Newtonian Mechanics and Numerical Integration">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node37.html">
+<LINK REL="previous" HREF="node35.html">
+<LINK REL="up" HREF="node35.html">
+<LINK REL="next" HREF="node37.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html546"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html544"
+  HREF="node35.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html538"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html547"
+  HREF="node37.html">The Liouville Operator Formalism</A>
+<B> Up:</B> <A NAME="tex2html545"
+  HREF="node35.html">MD: Theoretical Background</A>
+<B> Previous:</B> <A NAME="tex2html539"
+  HREF="node35.html">MD: Theoretical Background</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00041100000000000000"></A>
+<A NAME="sec:nmni"></A>
+<BR>
+Newtonian Mechanics and Numerical Integration
+</H3>
+
+<P>
+The Newtonian equations of motion can be expressed as
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+m \ddot{\bf r}_i + \nabla_i\mathscr{U} = 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="115" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img372.png"
+ ALT="$\displaystyle m \ddot{\bf r}_i + \nabla_i\mathscr{U} = 0$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">109</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $\ddot{\bf r}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img373.png"
+ ALT="$ \ddot{\bf r}_i$"></SPAN> is the acceleration of particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>, and the
+<EM>force</EM> acting on particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> is given by the negative gradient
+of the total potential, <!-- MATH
+ $\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img374.png"
+ ALT="$ \mathscr{U}$"></SPAN>, with respect to its position:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}_i = -\nabla_i\mathscr{U} = -\frac{\partial\mathscr{U}}{\partial{\bf r}_i}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="147" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img375.png"
+ ALT="$\displaystyle {\bf f}_i = -\nabla_i\mathscr{U} = -\frac{\partial\mathscr{U}}{\partial{\bf r}_i}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">110</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Whereas in a typical MC simulation, in which all we really need is the ability
+to evaluate the potential energy of a configuration, in MD we
+actually need to evaluate all interparticle <EM>forces</EM> for a
+configuration.
+
+<P>
+We first encountered interparticle forces in Sec.&nbsp;<A HREF="node33.html#sec:cs4">3.6</A> in a
+discussion of the <EM>virial</EM> in computing pressure in a standard
+Metropolis Monte Carlo simulation of the Lennard-Jones liquid.  
+At this point, it suffices to consider a system with generic
+pairwise interactions, for which the total potential is
+given by:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:tot"></A><!-- MATH
+ \begin{equation}
+\mathscr{U} = \sum_j\sum_{k>j} u_{jk}\left(r_{jk}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="152" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img376.png"
+ ALT="$\displaystyle \mathscr{U} = \sum_j\sum_{k&gt;j} u_{jk}\left(r_{jk}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">111</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img377.png"
+ ALT="$ r_{jk}$"></SPAN> is the scalar distance between particles <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img28.png"
+ ALT="$ k$"></SPAN>,
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img378.png"
+ ALT="$ u_{jk}$"></SPAN> is the pair potential specific to pair <SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img379.png"
+ ALT="$ (j,k)$"></SPAN>.
+For a system of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> identical particles, Eq.&nbsp;<A HREF="#eq:md:tot">111</A>
+is a summation of <!-- MATH
+ $\frac{1}{2}N\left(N-1\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="85" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img380.png"
+ ALT="$ \frac{1}{2}N\left(N-1\right)$"></SPAN> terms.
+So, the force on any particular particle, <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>, selects <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> terms from the
+above summation; that is, those terms involving particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:frci"></A><!-- MATH
+ \begin{equation}
+{\bf f}_i = - \sum_{j=1}^{N} \frac{\partial u_{ij}\left(r_{ij}\right)}{\partial {\bf r}_i} = \sum_{j=1}^{N} {\bf f}_{ij}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="207" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img381.png"
+ ALT="$\displaystyle {\bf f}_i = - \sum_{j=1}^{N} \frac{\partial u_{ij}\left(r_{ij}\right)}{\partial {\bf r}_i} = \sum_{j=1}^{N} {\bf f}_{ij}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">112</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where we can define the quantity <!-- MATH
+ ${\bf f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$ {\bf f}_{ij}$"></SPAN> is the force exerted
+on particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> by virtue of the fact that it interacts with particle
+<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.  Because <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img383.png"
+ ALT="$ u_{ij}$"></SPAN> is a function of a scalar quantity, we can break
+the derivative up:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:fij"></A><!-- MATH
+ \begin{eqnarray}
+{\bf f}_{ij}\left(r_{ij}\right) & = & -\frac{\partial U_{LJ}\left(r_{ij}\right)}{\partial {\bf r}_i}\\
+ & = & -\frac{{\bf r}_{ij}}{r_{ij}}\frac{\partial U_{LJ}\left(r_{ij}\right)}{\partial r_{ij}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="54" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img384.png"
+ ALT="$\displaystyle {\bf f}_{ij}\left(r_{ij}\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="91" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img385.png"
+ ALT="$\displaystyle -\frac{\partial U_{LJ}\left(r_{ij}\right)}{\partial {\bf r}_i}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">113</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="114" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img386.png"
+ ALT="$\displaystyle -\frac{{\bf r}_{ij}}{r_{ij}}\frac{\partial U_{LJ}\left(r_{ij}\right)}{\partial r_{ij}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">114</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+Eq.&nbsp;<A HREF="#eq:md:fij">114</A> illustrates that, because <!-- MATH
+ ${\bf r}_{ij} = -{\bf r}_{ji}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="75" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img387.png"
+ ALT="$ {\bf r}_{ij} = -{\bf r}_{ji}$"></SPAN>, 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}_{ij} = -{\bf f}_{ji}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="71" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img388.png"
+ ALT="$\displaystyle {\bf f}_{ij} = -{\bf f}_{ji}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">115</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This leads us to the comforting result that
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf F} = \sum_i {\bf f}_i = 0
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="102" HEIGHT="48" ALIGN="MIDDLE" BORDER="0"
+ SRC="img389.png"
+ ALT="$\displaystyle {\bf F} = \sum_i {\bf f}_i = 0$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">116</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+That is, the total force on the collection of particles is zero.  (The
+same result holds identically for all potentials which are functions
+of <EM>relative</EM> interatomic positions only.)  But the practical
+advantage of this result is that, when we visit the pair <SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$ (i,j)$"></SPAN> and
+compute the force on <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> due to its interaction with <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>, <!-- MATH
+ ${\bf
+f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$ {\bf f}_{ij}$"></SPAN>, we automatically have the force on <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> due to its
+interaction with <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>, <!-- MATH
+ $-{\bf f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img390.png"
+ ALT="$ -{\bf f}_{ij}$"></SPAN>.  Some refer to this as
+&ldquo;Newton's Third Law.&rdquo;
+
+<P>
+The other key aspect of a simple MD program is a means of <EM>numerical integration</EM> of the equations of motion of each particle.
+We first consider the &ldquo;simple Verlet&rdquo;
+algorithm, which is an explicit integration scheme.  Let us consider a
+Taylor-expanded version of one coordinate of the position of a
+particular particle, <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img391.png"
+ ALT="$ r(t)$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+r\left(t+\Delta t\right) = r\left(t\right) + v\left(t\right)\Delta t
+	+\frac{f\left(t\right)}{2m}\left(\Delta t\right)^2
+	+ \frac{\left(\Delta t\right)^3}{3!}\stackrel{\dots}{r} + \mathscr{O}\left[\left(\Delta t\right)^4\right],
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="456" HEIGHT="59" ALIGN="MIDDLE" BORDER="0"
+ SRC="img392.png"
+ ALT="$\displaystyle r\left(t+\Delta t\right) = r\left(t\right) + v\left(t\right)\Delt...
+...t)^3}{3!}\stackrel{\dots}{r} + \mathscr{O}\left[\left(\Delta t\right)^4\right],$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">117</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and, letting <!-- MATH
+ $\Delta t \rightarrow -\Delta t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="79" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img393.png"
+ ALT="$ \Delta t \rightarrow -\Delta t$"></SPAN>,
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+r\left(t-\Delta t\right) = r\left(t\right) - v\left(t\right)\Delta t
+	+ \frac{f\left(t\right)}{2m}\left(\Delta t\right)^2
+	- \frac{\left(\Delta t\right)^3}{3!}\stackrel{\dots}{r} + \mathscr{O}\left[\left(\Delta t\right)^4\right].
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="456" HEIGHT="59" ALIGN="MIDDLE" BORDER="0"
+ SRC="img394.png"
+ ALT="$\displaystyle r\left(t-\Delta t\right) = r\left(t\right) - v\left(t\right)\Delt...
+...t)^3}{3!}\stackrel{\dots}{r} + \mathscr{O}\left[\left(\Delta t\right)^4\right].$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">118</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+When we add these together, we obtain:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:verlet1"></A><!-- MATH
+ \begin{equation}
+r\left(t+\Delta t\right) \approx 2r\left(t\right) - r\left(t-\Delta t\right)
+	+ \frac{f\left(t\right)}{2m}\left(\Delta t\right)^2.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="316" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img395.png"
+ ALT="$\displaystyle r\left(t+\Delta t\right) \approx 2r\left(t\right) - r\left(t-\Delta t\right) + \frac{f\left(t\right)}{2m}\left(\Delta t\right)^2.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">119</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Eq.&nbsp;<A HREF="#eq:verlet1">119</A> is termed the &ldquo;Verlet&rdquo; algorithm (going back to
+Verlet's simulations of liquid argon&nbsp;[<A
+ HREF="node82.html#Verlet1967">4</A>]).  Notice that,
+when one chooses a small <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN>, one can predict the position of a
+particle at time <!-- MATH
+ $t + \Delta t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img396.png"
+ ALT="$ t + \Delta t$"></SPAN> given its position at time <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ t$"></SPAN> and the
+force acting on it at time <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ t$"></SPAN>.  We see that the new position
+coordinate has an error of order <!-- MATH
+ $\left(\Delta t\right)^4$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img397.png"
+ ALT="$ \left(\Delta t\right)^4$"></SPAN>.  <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> is
+called the &ldquo;time step&rdquo; in a molecular dynamics simulation.
+
+<P>
+A system obeying Newtonian mechanics conserves total energy.  For a
+dynamical system (i.e., a system of interacting particles) obeying
+Newtonian mechanics, the configurations generated by integration are
+members of the <EM>microcanonical ensemble</EM>; that is, the ensemble of
+configurations for which <SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img398.png"
+ ALT="$ NVE$"></SPAN> is constant, constrained to a subvolume
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img84.png"
+ ALT="$ \Omega$"></SPAN> in phase space.  The &ldquo;natural&rdquo; ensemble for Metropolis
+Monte Carlo, you will recall, is canonical; for MD, it is
+microcanonical.  Later, we will consider techniques for conducting MD
+simulations in other ensembles (at constant temperature and/or
+pressure, for example).
+
+<P>
+When the Verlet algorithm is used to integrate Newtonian equations of
+motion, the total energy of the system is conserved to within a finite
+error, so long as <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN> is &ldquo;small enough.&rdquo;  How does one
+determine a reasonable value for <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \Delta t$"></SPAN>?  Basically the same way
+we determined reasonable maximum displacements in continuous-space MC
+simulation: trial and error.  We will play with time-step values in
+the next section, in which we consider MD simulation of the
+Lennard-Jones liquid.
+
+<P>
+In saying that the total energy is conserved, we realize that total
+energy is the sum of potential and kinetic energy.  To integrate the
+equations of motion, we need to compute neither the potential or
+kinetic energy, so we have to take extra steps in an MD program to
+make sure total energy is being conserved.  Potential energy is easily
+accumulated during the calculation of forces, but kinetic energy has
+to be computed using particle <EM>velocities</EM>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{K} = \frac{1}{2}\sum_i m_i\left|{\bf v}_i\right|^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="137" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img399.png"
+ ALT="$\displaystyle \mathscr{K} = \frac{1}{2}\sum_i m_i\left\vert{\bf v}_i\right\vert^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">120</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+But where are velocities in the Verlet algorithm?  They are not
+necessary for updating positions, but can be easily &ldquo;generated&rdquo;
+provided one stores previous, current, and next-time-step positions in
+implementing the algorithm:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:verlet_vel"></A><!-- MATH
+ \begin{equation}
+v\left(t\right) = \frac{r\left(t+\Delta t\right) - r\left(t-\Delta t\right)}{2\Delta t} + \mathscr{O}\left[\left(\Delta t\right)^2\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="300" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img400.png"
+ ALT="$\displaystyle v\left(t\right) = \frac{r\left(t+\Delta t\right) - r\left(t-\Delta t\right)}{2\Delta t} + \mathscr{O}\left[\left(\Delta t\right)^2\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">121</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Eq.&nbsp;<A HREF="#eq:verlet_vel">121</A> is used in Algorithm 6 in F&amp;S (Integration of
+the Equations of Motion) simply in order to compute <!-- MATH
+ $\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \mathscr{K}$"></SPAN>.
+Energy consservation can be checked by tracking the total energy,
+<!-- MATH
+ $\mathscr{U}+\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="60" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img401.png"
+ ALT="$ \mathscr{U}+\mathscr{K}$"></SPAN>.
+
+<P>
+While we are considering the instantaneous kinetic energy,
+<!-- MATH
+ $\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \mathscr{K}$"></SPAN>, it is useful to recognize a working definition of
+instantaneous temperature, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{3}{2}Nk_BT = \mathscr{K} = \frac{1}{2}\sum_{i=1}^{N}m_i\left|{\bf v}_i\right|^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="216" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img402.png"
+ ALT="$\displaystyle \frac{3}{2}Nk_BT = \mathscr{K} = \frac{1}{2}\sum_{i=1}^{N}m_i\left\vert{\bf v}_i\right\vert^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">122</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Because <!-- MATH
+ $\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \mathscr{K}$"></SPAN> fluctuates in time as the system evolves, so
+does the temperature.  So, the actual temperature of a system  
+in a microcanonical MD simulation is a time-average.  
+
+<P>
+Perhaps the most popular integrator is the &ldquo;velocity Verlet&rdquo;
+algorithm&nbsp;[<A
+ HREF="node82.html#Swope1982">5</A>].  Every MD code I have ever written or
+used (this totals a dozen or so) has used the velocity Verlet
+algorithm, so I feel at least it is worth explaining here.  The
+velocity Verlet algorithm requires updates of both positions and
+velocities:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+r\left(t+\Delta t\right) & = & r\left(t\right) + v\left(t\right)\Delta t +
+	\frac{f\left(t\right)}{2m}\left(\Delta t\right)^2\\
+v\left(t+\Delta t\right) & = & v\left(t\right) +
+		\frac{f\left(t+\Delta t\right)+f\left(t\right)}{2m}\Delta t
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="71" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img403.png"
+ ALT="$\displaystyle r\left(t+\Delta t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="197" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img404.png"
+ ALT="$\displaystyle r\left(t\right) + v\left(t\right)\Delta t +
+\frac{f\left(t\right)}{2m}\left(\Delta t\right)^2$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">123</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="71" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img405.png"
+ ALT="$\displaystyle v\left(t+\Delta t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="194" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img406.png"
+ ALT="$\displaystyle v\left(t\right) +
+\frac{f\left(t+\Delta t\right)+f\left(t\right)}{2m}\Delta t$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">124</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+The update of velocities uses an arithmetic average of the force at
+time <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ t$"></SPAN> and <!-- MATH
+ $t+\Delta t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img396.png"
+ ALT="$ t + \Delta t$"></SPAN>.  This results in a slightly more stable
+integrator compared to the simple Verlet algorithm, in that one may
+use slightly larger time-steps to achieve the same level of energy
+conservation.  (Aside:  a nice project idea is to quantify this statement.)
+This might imply that one has to maintain <EM>two</EM> parallel force arrays.  In practice, this is not necessary, because the velocity update can be split to either side of the force computation, forming a so-called &ldquo;leapfrog&rdquo; algorithm:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:vv:pos"></A><A NAME="eq:vv:first_half"></A><A NAME="eq:vv:second_half"></A><!-- MATH
+ \begin{eqnarray}
+r\left(t+\Delta t\right) & =  & r\left(t\right) + v\left(t\right)\Delta t +
+	\frac{f\left(t\right)}{2m}\left(\Delta t\right)^2\ \ \mbox{Update positions}\\
+v\left(t+\frac{1}{2}\Delta t\right) & = & v\left(t\right) +
+		\frac{f\left(t\right)}{2m}\Delta t\ \ \mbox{Half-update velocities} \\
+\nonumber
+r\left(t+\Delta t\right) & \rightarrow & f\left(t+\Delta t\right)\ \mbox{Compute forces.}\\
+v\left(t+\Delta t\right) & = & v\left(t+\frac{1}{2}\Delta t\right) +
+		\frac{f\left(t+\Delta t\right)}{2m}\Delta t\ \ \mbox{Half-update velocities}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="71" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img403.png"
+ ALT="$\displaystyle r\left(t+\Delta t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="197" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img404.png"
+ ALT="$\displaystyle r\left(t\right) + v\left(t\right)\Delta t +
+\frac{f\left(t\right)}{2m}\left(\Delta t\right)^2$">&nbsp; &nbsp;Update positions</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">125</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="94" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img407.png"
+ ALT="$\displaystyle v\left(t+\frac{1}{2}\Delta t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="111" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img408.png"
+ ALT="$\displaystyle v\left(t\right) +
+\frac{f\left(t\right)}{2m}\Delta t $">&nbsp; &nbsp;Half-update velocities</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">126</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="71" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img403.png"
+ ALT="$\displaystyle r\left(t+\Delta t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img409.png"
+ ALT="$\displaystyle \rightarrow$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="78" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img410.png"
+ ALT="$\displaystyle f\left(t+\Delta t\right) $">&nbsp; &nbsp;Compute forces.</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="71" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img405.png"
+ ALT="$\displaystyle v\left(t+\Delta t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="210" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img411.png"
+ ALT="$\displaystyle v\left(t+\frac{1}{2}\Delta t\right) +
+\frac{f\left(t+\Delta t\right)}{2m}\Delta t $">&nbsp; &nbsp;Half-update velocities</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">127</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+In the next section (Sec.&nbsp;<A HREF="node38.html#sec:md:mdlj">4.2</A>), we will consider the
+velocity Verlet algorithm in the context of an MD simulation of the
+Lennard-Jones fluid.
+
+<P>
+As a final tidbit, we must consider periodic boundaries applied in a
+molecular dynamics simulation.  Consider <EM>modes</EM> of a system.  Think of a mode as a
+concerted vibration of collections of particles with a characteristic
+wavelength.  A dense system will have short wavelength (local) modes,
+and long wavelength modes, like large-scale concerted &ldquo;sloshing&rdquo; of
+the particles in the system.  These modes exist naturally in matter,
+and the partitioning of energy among these various modes is important
+to understand in describing some transport properties.  The key caveat
+is that modes with wavelengths that are incommensurate with the box
+size are not permitted in a periodic system because they cancel themselves.  A mode
+is commensurate with the box so long as an integer multiple of its wavelength is the box length.  This can actually be very restrictive in systems with a wide span of wavelengths, like amorphous unstructured solids, but is not that important for amorphous liquids.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html546"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html544"
+  HREF="node35.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html538"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html547"
+  HREF="node37.html">The Liouville Operator Formalism</A>
+<B> Up:</B> <A NAME="tex2html545"
+  HREF="node35.html">MD: Theoretical Background</A>
+<B> Previous:</B> <A NAME="tex2html539"
+  HREF="node35.html">MD: Theoretical Background</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

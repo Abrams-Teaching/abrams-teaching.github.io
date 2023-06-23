@@ -1,0 +1,155 @@
+\begin{thebibliography}{10}
+
+\bibitem{Frenkel+Smit2002}
+D.~Frenkel and B.~Smit.
+\newblock {\em Understanding Molecular Simulation: From Algorithms to
+  Applications}.
+\newblock Academic Press, San Diego, 2 edition, 2002.
+
+\bibitem{Allen+Tildesley1987}
+M.~P. Allen and D.~J. Tildesley.
+\newblock {\em Computer Simulation of Liquids}.
+\newblock Oxford University Press, New York, 1987.
+
+\bibitem{Rapaport1995}
+D.~C. Rapaport.
+\newblock {\em The Art of Molecular Dynamics Simulation}.
+\newblock Cambridge University Press, Cambridge, 1995.
+
+\bibitem{Leach2001}
+Andrew~R. Leach.
+\newblock {\em Molecular Modelling: {P}rinciples and Applications}.
+\newblock Prentice-Hall, 2001.
+
+\bibitem{Chandler1987}
+D.~Chandler.
+\newblock {\em An Introduction to Modern Statistical Mechanics}.
+\newblock Oxford University Press, New York, 1987.
+
+\bibitem{Metropolis1953}
+N.~Metropolis, A.~W. Rosenbluth, M.~N. Rosenbluth, A.~N. Teller, and E.~Teller.
+\newblock Equation of state calculations by fast computing methods.
+\newblock {\em J. Chem. Phys.}, 21:1087--1092, 1953.
+
+\bibitem{Verlet1967}
+Loup Verlet.
+\newblock Computer ``experiments'' on classical fluids. {I}. {T}hermodynamical
+  properties of {L}ennard-{J}ones molecules.
+\newblock {\em Physical Review}, 159(1):98--103, 1967.
+
+\bibitem{Swope1982}
+W.~C. Swope, H.~C. Andersen, P.~H. Berens, and K.~R. Wilson.
+\newblock A computer simulation method for the calculation of equilibrium
+  constants for the formation of physical clusters of molecules: {A}pplications
+  to small water clusters.
+\newblock {\em J. Chem. Phys.}, 76(1):637--649, 1982.
+
+\bibitem{Tuckerman1992}
+M.~Tuckerman, B.~J. Berne, and G.~J. Martyna.
+\newblock Reversible multiple time scale molecular dynamics.
+\newblock {\em J. Chem. Phys.}, 97(3):1990--2001, 1992.
+
+\bibitem{Berendsen84}
+H.~J.~C. Berendsen, J.~P.~M. Postma, W.~F. van Gunsteren, A.~DiNola, and J.~R.
+  Haak.
+\newblock Molecular dynamics with coupling to an external bath.
+\newblock {\em J. Chem. Phys.}, 81(8):3684--90, 1984.
+
+\bibitem{Andersen80}
+H.~C. Andersen.
+\newblock Molecular dynamics at constant pressure and/or temperature.
+\newblock {\em J. Chem. Phys.}, 72:2384--2393, 1980.
+
+\bibitem{Grest1986}
+G.~S. Grest and K.~Kremer.
+\newblock Molecular-dynamics simulation for polymers in the presence of a heat
+  bath.
+\newblock {\em Phys. Rev. A}, 33(5):3628--3631, 1986.
+
+\bibitem{Nikunen2003}
+P.~Nikunen, M.~Karttunen, and I.~Vattulainen.
+\newblock How would you integrate the equations of motion in dissipative
+  particle dynamics simulations?
+\newblock {\em Comput. Phys. Comm.}, 153(3):407--423, 2003.
+
+\bibitem{Soddemann2003}
+T.~Soddemann, B.~D\"unweg, and K.~Kremer.
+\newblock Dissipative particle dynamics: A useful thermostat for equilibrium
+  and nonequilibrium molecular dynamics simulations.
+\newblock {\em Phys. Rev. E}, 68(4):046702, 2003.
+
+\bibitem{Tironi1994}
+I.~G. Tironi and W.~F. van Gunsteren.
+\newblock A molecular-dynamics simulation study of chloroform.
+\newblock {\em Mol. Phys.}, 83(2):381--403, 1994.
+
+\bibitem{Stillinger85}
+F.~H. Stillinger and T.~A. Weber.
+\newblock Computer simulation of local order in condensed phases of silicon.
+\newblock {\em Phys. Rev. B}, 31(8):5262--71, 1985.
+
+\bibitem{Dellago1998}
+C.~Dellago, P.~G. Bolhuis, F.~S. Csajka, and D.~Chandler.
+\newblock Transition path sampling and the calculation of rate constants.
+\newblock {\em J. Chem. Phys}, 108(5):1964--1977, 1998.
+
+\bibitem{Dellago1999}
+C.~Dellago, P.~G. Bolhuis, and D.~Chandler.
+\newblock On the calculation of reaction rate constants in the transition path
+  ensemble.
+\newblock {\em J. Chem. Phys.}, 110(14):6617--6625, 1999.
+
+\bibitem{Bolhuis2003}
+P.~G. Bolhuis.
+\newblock Transition-path sampling of $\beta$-hairpin folding.
+\newblock {\em Proc. Nat. Acad. Sci.}, 100(21):12129--12134, 2003.
+
+\bibitem{Ewald1921}
+P.~Ewald.
+\newblock {\em Ann. Phys. (Leipzig)}, 64:253, 1921.
+
+\bibitem{Deserno2000}
+M.~Deserno.
+\newblock {\em Counterion condensation for rigid linear polyelectrolytes}.
+\newblock PhD thesis, Johannes Gutenberg-Universit\"at, Mainz, Germany, 2000.
+
+\bibitem{Wang2001a}
+F.~Wang and D.~P. Landau.
+\newblock Efficient, multiple-range random walk algorithm to calculate the
+  density of states.
+\newblock {\em Phys. Rev. Lett.}, 86(10):2050--2053, 2001.
+
+\bibitem{Wang2001b}
+F.~Wang and D.~P. Landau.
+\newblock Determining the density of states for classical statistical models: A
+  random walk algorithm to produce a flat histogram.
+\newblock {\em Phys. Rev. E}, 64:056101, 2001.
+
+\bibitem{Shell2003}
+M.~S. Shell, P.~G. Debenedetti, and A.~Z. Panagiotopoulos.
+\newblock An improved {M}onte-{C}arlo for direct calculation of the density of
+  states.
+\newblock {\em J. Chem. Phys.}, 119(18):9406--9411, 2003.
+
+\bibitem{Rathore2003}
+N.~Rathore, T.~A.~Knotts {IV}, and J.~J. de~Pablo.
+\newblock Configurational temperature density of states simulations of
+  proteins.
+\newblock {\em Biophys. J.}, 85:3963--3968, 2003.
+
+\bibitem{Shell2002}
+M.~S. Shell, P.~G. Debenedetti, and A.~Z. Panagiotopoulos.
+\newblock Generalization of the wang-landau method for off-lattice simulations.
+\newblock {\em Phys. Rev. E}, 66:056703, 2002.
+
+\bibitem{Wu1982}
+F.~Y. Wu.
+\newblock The potts model.
+\newblock {\em Rev. Mod. Phys.}, 54:235--268, 1982.
+
+\bibitem{Dwight1961}
+H.~B. Dwight.
+\newblock {\em Tables of Integrals and Other Mathematical Data}.
+\newblock MacMillan, 1961.
+
+\end{thebibliography}

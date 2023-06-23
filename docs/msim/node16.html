@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Trial Moves</TITLE>
+<META NAME="description" CONTENT="Trial Moves">
+<META NAME="keywords" CONTENT="msim">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim.css">
+
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html297"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html295"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html291"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html298"
+  HREF="node17.html">Case Study 2: MC</A>
+<B> Up:</B> <A NAME="tex2html296"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html292"
+  HREF="node15.html">Analytical Potentials</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00033300000000000000"></A>
+<A NAME="sec:trialmoves"></A>
+<BR>
+Trial Moves
+</H3>
+
+<P>
+<EM>Particle Displacement.</EM>  The most common trial move in
+continuous-space MC is a particle displacement.  First, a small
+number <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$">, representing a maximum displacement, is set.  A
+trial move consists of
+
+<OL>
+<LI>Randomly select a particle, <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$">.
+</LI>
+<LI>Displace x-position coordinate of particle <IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img71.png"
+ ALT="$i$"> by a 
+random amount, <IMG
+ WIDTH="21" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img268.png"
+ ALT="$\delta x$">, which is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\delta x = \Delta R \xi_x
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="76" HEIGHT="27" BORDER="0"
+ SRC="img269.png"
+ ALT="\begin{displaymath}
+\delta x = \Delta R \xi_x
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(84)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img270.png"
+ ALT="$\xi_x$"> is a uniform random variate on the interval [-0.5:0.5].
+</LI>
+<LI>Repeat for the <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img271.png"
+ ALT="$y$"> and <IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$z$"> coordinates, if applicable.
+</LI>
+</OL>
+
+<P>
+This move guarantees detailed balance, provided that the random
+particle selection is uniform; for any given move, selection of all
+possible particles is equally likely.  This means that probability of
+suggesting a move that displaces a particle, going from a state <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img203.png"
+ ALT="$n$"> to
+a new state <IMG
+ WIDTH="18" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="$m$">, has the same probability of selecting the same
+particle while in state <IMG
+ WIDTH="18" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="$m$"> and giving it a displacement that will
+return the configuration to state <IMG
+ WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img203.png"
+ ALT="$n$">.  (Do you think such sequential
+moves ever actually happen?)
+
+<P>
+For a system of simple particles, random displacements are the only
+necessary trial moves; thus, <IMG
+ WIDTH="34" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img272.png"
+ ALT="$\alpha_{nm}$"> is always unity.  For more
+complicated systems, there are zoos of trial moves all over the
+literature.  We will consider some more complicated
+systems and trial moves later in the course; one that we consider next is
+<EM>rigid rotation</EM>.
+
+<P>
+The question at this point is, how does one choose an appropriate
+value for <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$">?  If <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> is too small, the system will not
+explore phase space given a reasonable amount of computational effort.
+If it is too large, displacements will rarely result in new
+configurations which will be accepted in a Metropolis MC scheme.  So
+it takes a bit of trial and error to find a good value for <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$">,
+and the rule of thumb is to set <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> such that the average
+probability of accepting a new configuration <EM>during a run</EM> is
+about 30%.  This is termed ``tuning <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> to achieve a 30%
+acceptance ratio.''  We will go through the exercise of determining
+such an appropriate value for <IMG
+ WIDTH="29" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\Delta R$"> for a simple continuous-space
+system; namely, 2D hard disks confined to a circle.
+
+<P>
+<EM>Rigid rotation.</EM> A second common type of trial move is used in
+systems of more structured molecules than just simple, single-center
+spheres.  Consider a diatomic with a rigid bond length <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$r_0$">.
+Clearly, attempting to move one of the two members of the diatomic by
+a random displacement is likely to result in a new bond length with
+may be significantly different from <IMG
+ WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$r_0$">.  So, for a system of
+diatomics, a reasonable <EM>set</EM> of trial moves would include
+
+<P>
+
+<OL>
+<LI>Small displacement of molecule center of mass; and
+</LI>
+<LI>Small rotation around molecule center of mass.
+</LI>
+</OL>
+
+<P>
+With more than one kind of move, an attempt to generate a new state
+must be preceded by a random selection of the trial move.  We can
+weight each kind of move and then use a random number to decide which
+move to attempt.  For example, let's say that we choose that 80% of
+all trial moves be displacements, and the balance rotations (we will
+see later whether or not this is a good choice).  Prior to an
+attempted move, we select a uniform random variate, <IMG
+ WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img274.png"
+ ALT="$\xi$">, on the
+interval <IMG
+ WIDTH="36" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img228.png"
+ ALT="$[0,1]$">.  If <IMG
+ WIDTH="53" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$\xi &lt; 0.8$">, which it will be 80% of the time,
+we execute a displacement of a randomly chosen molecule; otherwise, we
+execute a rotation of a randomly chosen molecule.
+
+<P>
+Details of the rigid body rotation implementation are presented in the
+text, in Sec.&nbsp;3.3.2.  The two techniques described are <EM>vector
+addition</EM> for linear molecules, and <EM>quaternions</EM> for nonlinear
+molecules.  For the purposes of one of our simple 2D case-studies, we
+will consider rotation by a small angle, which is effectively
+equivalent to the vector addition method described by Frenkel and
+Smit.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html297"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html295"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html291"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html298"
+  HREF="node17.html">Case Study 2: MC</A>
+<B> Up:</B> <A NAME="tex2html296"
+  HREF="node13.html">Elements of a Continuous-Space</A>
+<B> Previous:</B> <A NAME="tex2html292"
+  HREF="node15.html">Analytical Potentials</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

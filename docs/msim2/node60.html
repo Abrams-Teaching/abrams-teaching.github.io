@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>All-atom Potential Energy Functions</TITLE>
+<META NAME="description" CONTENT="All-atom Potential Energy Functions">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node67.html">
+<LINK REL="previous" HREF="node56.html">
+<LINK REL="up" HREF="msim2.html">
+<LINK REL="next" HREF="node61.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html793"
+  HREF="node61.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html791"
+  HREF="msim2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html785"
+  HREF="node59.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html794"
+  HREF="node61.html">Class-I Potentials</A>
+<B> Up:</B> <A NAME="tex2html792"
+  HREF="msim2.html">CHE T580: Modern Molecular</A>
+<B> Previous:</B> <A NAME="tex2html786"
+  HREF="node59.html">Implementation and Evaluation</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00070000000000000000">
+All-atom Potential Energy Functions</A>
+</H1>
+
+<P>
+The modeling of molecular structure and inter/intra-molecular interactions is the job of the potential energy function <!-- MATH
+ $\mathscr{U}({\boldsymbol r}^N)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="54" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img712.png"
+ ALT="$ \mathscr{U}({\boldsymbol r}^N)$"></SPAN>.  Modern potential energy functions are actively maintained and carefully curated and optimized by several devoted groups around the world, and for the most part they are made freely available to the research community.  In this section, we'll consider a few of the more popular potentials out there.  There are many good reviews out there about all-atom potential energy functions; most of what I present here is adapted from the recent review by Harrison et al.&nbsp;[<A
+ HREF="node82.html#Harrison2018ReviewResearch">17</A>]
+
+<P>
+First, a note on terminology.  A potential energy function, or just &ldquo;potential&rdquo;, is conceptually just a function that can compute potential energy from all atomic positions.  Pairwise Lennard-Jones is an example we have used extensively already.  When used specifically by MD simulations, potentials are often referred to as &ldquo;force-fields&rdquo;, since it is really their <EM>gradients</EM> that are used in MD; potential energy itself is more of a diagnostic in most standard MD simulations (though it is extremely important in some advanced free-energy methods).  Because of this, potentials that are used in MD simulations have to be differentiable, for the most part.  (There are a few MD methods that can use so-called &ldquo;discontinuous forces&rdquo; but no large-scale MD codes can.)
+
+<P>
+Second, a note on physical reality vs what potentials actually model.  Interactions among atoms are quantum-mechanical in nature.  Modeling them accurately involves in-depth quantum chemical calculations that can be very expensive.  Potentials used in most molecular simulations are <EM>empirical</EM> functions that generally only very roughly approximate true interatomic interactions.  Nuclei are treated as point masses and electrons aren't treated at all.  Because of this simplification, empirical potentials always have parameters that must be tuned against more accurate quantum chemical calculations and experimental observations.  Parameter tuning in potentials leads to specialization that reflects where such potentials are most in demand.  This will become evident as we start discussing important examples.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html795"
+  HREF="node61.html">Class-I Potentials</A>
+<LI><A NAME="tex2html796"
+  HREF="node62.html">Reactive Potentials</A>
+<UL>
+<LI><A NAME="tex2html797"
+  HREF="node63.html">Embedded Atom Method (EAM)</A>
+<LI><A NAME="tex2html798"
+  HREF="node64.html">Bond-Order Potentials</A>
+<LI><A NAME="tex2html799"
+  HREF="node65.html">ReaxFF</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html800"
+  HREF="node66.html">Case Study: Stillinger-Weber Silicon</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html793"
+  HREF="node61.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html791"
+  HREF="msim2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html785"
+  HREF="node59.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html794"
+  HREF="node61.html">Class-I Potentials</A>
+<B> Up:</B> <A NAME="tex2html792"
+  HREF="msim2.html">CHE T580: Modern Molecular</A>
+<B> Previous:</B> <A NAME="tex2html786"
+  HREF="node59.html">Implementation and Evaluation</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

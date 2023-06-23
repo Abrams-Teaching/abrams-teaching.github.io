@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Main Program: Monte Carlo Loop</TITLE>
+<META NAME="description" CONTENT="Main Program: Monte Carlo Loop">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node24.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node24.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html406"
+  HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html404"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html398"
+  HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html407"
+  HREF="node24.html">Main Program: Final Outputs</A>
+<B> Up:</B> <A NAME="tex2html405"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html399"
+  HREF="node22.html">Main Program: Initialization</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000321000000000000000">
+Main Program: Monte Carlo Loop</A>
+</H3>
+And now the loop.  Note the outer loop counts cycles, and the inner loops counts flip attempts in one cycle.  The variables <code>i</code> and <code>j</code> are randomly assigned between 0 and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN>-1, identifying a random spin.  This random spin is tagged and sent to our <code>dE()</code> function to calculate the change in energy we <EM>would</EM> expect if that spin were flipped (+1<!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img280.png"
+ ALT="$ \rightarrow$"></SPAN>-1 or -1<!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img280.png"
+ ALT="$ \rightarrow$"></SPAN>+1). We then calculate the Boltzmann factor in <code>b</code>, and then use the Metropolis criterion to decide whether to accept or reject this spin flip: choosing a random variable on [0,1] and accepting the move if the Boltzmann factor is <EM>greater</EM> than this number. If it is accepted, we actually peform the flip by multiplying the spin value by -1.  Finally, if the current cycle is one in which we collect a sample, we do so by calling the <code>samp()</code> function.  The logical expression <code></code>(c%fSamp)! evaluates to TRUE if the cycle counter <code>c</code> is divisible by <code>fSamp</code>.   In the call to <code>samp()</code>, the arguments <code>s</code> and <code>e</code> are <EM>passed by reference</EM>, signified by the <code>&amp;</code> qualifier. This is necessary because <EM>inside</EM> <code>samp()</code> we modify both variables.  Each of <code>s</code> and <code>e</code> are added to their respective tallies, <code>ssum</code> and <code>esum</code>, and the number of samples taken <code>nSamp</code> is incremented by 1.
+<PRE>
+  s = 0.0;
+  e = 0.0;
+  nSamp = 0;
+  for (c=0;c&lt;nCycles;c++) {
+    /* Make N flip attempts */
+    for (a=0;a&lt;N;a++) {
+      /* randomly select a spin */
+      i=(int)gsl_rng_uniform_int(r,L);
+      j=(int)gsl_rng_uniform_int(r,L);
+      /* get the "new" energy as the incremental change due
+         to flipping spin (i,j) */
+      de = dE(M,L,i,j);
+      /* compute the Boltzmann factor; recall T is now
+         reciprocal temperature */
+      b = exp(de*T);
+      /* pick a random number between 0 and 1 */
+      x = gsl_rng_uniform(r);
+      /* accept or reject this flip */
+      if (x&lt;b) { /* accept */
+	      /* flip it */
+	      M[i][j]*=-1;
+      }
+    }
+    /* Sample and accumulate averages */
+    if (!(c%fSamp)) {
+      samp(M,L,&amp;s,&amp;e);
+      fprintf(stdout,"%i %.5le %.5le\n",c,s,e);
+      fflush(stdout);
+      ssum+=s;
+      esum+=e;
+      nSamp++;
+    }
+  }
+</PRE>
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html406"
+  HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html404"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html398"
+  HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html407"
+  HREF="node24.html">Main Program: Final Outputs</A>
+<B> Up:</B> <A NAME="tex2html405"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html399"
+  HREF="node22.html">Main Program: Initialization</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

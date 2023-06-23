@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Thermodynamic Integration</TITLE>
+<META NAME="description" CONTENT="Thermodynamic Integration">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node75.html">
+<LINK REL="previous" HREF="node73.html">
+<LINK REL="up" HREF="node72.html">
+<LINK REL="next" HREF="node75.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html949"
+  HREF="node75.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html947"
+  HREF="node72.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html941"
+  HREF="node73.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html950"
+  HREF="node75.html">The Method of Overlapping</A>
+<B> Up:</B> <A NAME="tex2html948"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html942"
+  HREF="node73.html">Excess Chemical Potential via</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00092000000000000000">
+Thermodynamic Integration</A>
+</H2>
+
+<P>
+Thermodynamic integration is a conceptually simple, albeit expensive,
+way to calculate free energy differences from MC or MD simulations.
+In this example, we will consider the calculation (again) of chemical
+potential in a Lennard-Jones fluid at a given temperature and density,
+a task performed very well already by the Widom method (so long as the
+densities are not too high.)  More details of the method can be
+found in the work of Tironi and van&nbsp;Gunsteren&nbsp;[<A
+ HREF="node82.html#Tironi1994AChloroform">43</A>].
+
+<P>
+We begin with the relation derived in the book for a free energy
+difference, <!-- MATH
+ $F_{II} - F_{I}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="65" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img836.png"
+ ALT="$ F_{II} - F_{I}$"></SPAN>, between two systems which are identical
+(same number of particles, density, temperature, etc.) <EM>except</EM>
+that they obey two different potentials.  System I obeys
+<!-- MATH
+ $\mathscr{U}_I$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img837.png"
+ ALT="$ \mathscr{U}_I$"></SPAN> and System II <!-- MATH
+ $\mathscr{U}_{II}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img838.png"
+ ALT="$ \mathscr{U}_{II}$"></SPAN>.  To measure this
+free energy difference, we must integrate along a reversible path from
+I to II.  So let us suppose that we can write a &ldquo;metapotential&rdquo; that
+uses a switching parameter, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN>, to measure distance along this
+path. So, when <!-- MATH
+ $\lambda = 0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img839.png"
+ ALT="$ \lambda = 0$"></SPAN>, we are in System I, and when <!-- MATH
+ $\lambda = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img840.png"
+ ALT="$ \lambda = 1$"></SPAN> we
+are in System II.  One way we might encode this (though this is not
+necessarily a general splitting, as we shall see below) is
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{U}\left(\lambda\right) = \left(1-\lambda\right)\mathscr{U}_{I}  + \lambda\mathscr{U}_{II}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="193" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img841.png"
+ ALT="$\displaystyle \mathscr{U}\left(\lambda\right) = \left(1-\lambda\right)\mathscr{U}_{I} + \lambda\mathscr{U}_{II}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">317</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Let us consider the canonical partition function for a system obeying
+a general potential <!-- MATH
+ $\mathscr{U}\left(\lambda\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img842.png"
+ ALT="$ \mathscr{U}\left(\lambda\right)$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+Q\left(N,V,T,\lambda\right) = \frac{1}{\Lambda^{3N}N!}\int d{\bf r}^N\exp\left[-\beta\mathscr{U}\left(\lambda\right)\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="321" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img843.png"
+ ALT="$\displaystyle Q\left(N,V,T,\lambda\right) = \frac{1}{\Lambda^{3N}N!}\int d{\bf r}^N\exp\left[-\beta\mathscr{U}\left(\lambda\right)\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">318</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+Recalling that the free energy is given by <!-- MATH
+ $F = -k_BT\ln Q$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img844.png"
+ ALT="$ F = -k_BT\ln Q$"></SPAN>, we can
+express the derivative of the Helmholtz free energy with respect to
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN>:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\left(\frac{\partial F\left(\lambda\right)}{\partial\lambda}\right)_{N,V,T} & = &
+-\frac{1}{\beta}\frac{\partial}{\partial\lambda}\ln Q\left(N,V,T,\lambda\right)\\
+ & = & -\frac{1}{\beta Q\left(N,V,T,\lambda\right)}\frac{\partial Q\left(N,V,T,\lambda\right)}{\partial\lambda}\\
+& = & \frac{
+\begin{minipage}{6cm}
+\begin{displaymath}
+\int d{\bf r}^N \left(\partial\mathscr{U}\left(\lambda\right)/\partial\lambda\right)\exp\left[-\beta\mathscr{U}\left(\lambda\right)\right]
+\end{displaymath}
+\end{minipage}}{
+\begin{minipage}{6cm}
+\begin{displaymath}
+\int d{\bf r}^N\exp\left[-\beta\mathscr{U}\left(\lambda\right)\right]
+\end{displaymath}
+\end{minipage}}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="113" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img845.png"
+ ALT="$\displaystyle \left(\frac{\partial F\left(\lambda\right)}{\partial\lambda}\right)_{N,V,T}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="163" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img846.png"
+ ALT="$\displaystyle -\frac{1}{\beta}\frac{\partial}{\partial\lambda}\ln Q\left(N,V,T,\lambda\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">319</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="228" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img847.png"
+ ALT="$\displaystyle -\frac{1}{\beta Q\left(N,V,T,\lambda\right)}\frac{\partial Q\left(N,V,T,\lambda\right)}{\partial\lambda}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">320</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="279" HEIGHT="95" ALIGN="MIDDLE" BORDER="0"
+ SRC="img848.png"
+ ALT="$\displaystyle \frac{
+\begin{minipage}{6cm}
+\begin{displaymath}
+\int d{\bf r}^N ...
+...t[-\beta\mathscr{U}\left(\lambda\right)\right]
+\end{displaymath}\end{minipage}}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">321</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The free energy difference between I and II is given by:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+F_{II} - F_{I} = \int_{\lambda=0}^{\lambda=1}\left<\frac{\partial\mathscr{U}}{\partial\lambda}\right>_\lambda d\lambda
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="211" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="img849.png"
+ ALT="$\displaystyle F_{II} - F_{I} = \int_{\lambda=0}^{\lambda=1}\left&lt;\frac{\partial\mathscr{U}}{\partial\lambda}\right&gt;_\lambda d\lambda$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">322</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where,
+<!-- MATH
+ $\left<\frac{\partial\mathscr{U}}{\partial\lambda}\right>_\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img850.png"
+ ALT="$ \left&lt;\frac{\partial\mathscr{U}}{\partial\lambda}\right&gt;_\lambda$"></SPAN> is
+the ensemble average of the derivative of <!-- MATH
+ $\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img374.png"
+ ALT="$ \mathscr{U}$"></SPAN> with respect
+to <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN>.
+
+<P>
+To compute <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN>, we imagine two systems: System I has <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ N-1$"></SPAN>
+&ldquo;real&rdquo; particles, and 1 ideal gas particle, and system II has <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>
+real particles.  The two free energies can be written:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+F_{\rm I} & = & F_{\rm id}\left(N,V,T\right) + F_{\rm ex}\left(N-1,V,T\right)\\
+F_{\rm II} & = & F_{\rm id}\left(N,V,T\right) + F_{\rm ex}\left(N,V,T\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="19" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img851.png"
+ ALT="$\displaystyle F_{\rm I}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="225" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img852.png"
+ ALT="$\displaystyle F_{\rm id}\left(N,V,T\right) + F_{\rm ex}\left(N-1,V,T\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">323</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="24" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img853.png"
+ ALT="$\displaystyle F_{\rm II}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="197" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img821.png"
+ ALT="$\displaystyle F_{\rm id}\left(N,V,T\right) + F_{\rm ex}\left(N,V,T\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">324</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+For large values of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>, we see that <!-- MATH
+ $\mu_{\rm ex} = F_{\rm II} -
+F_{\rm I}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="103" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img854.png"
+ ALT="$ \mu_{\rm ex} = F_{\rm II} -
+F_{\rm I}$"></SPAN>.  So, we have another route to compute <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN>.
+First, we tag a particle <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img855.png"
+ ALT="$ i_\lambda$"></SPAN>, call it the
+&ldquo;<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN>-particle&rdquo;, and apply the following modified potential to
+its pairwise interactions:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:lambda_lj"></A><!-- MATH
+ \begin{equation}
+U_{\rm LJ,\lambda}\left(r;\lambda\right) =
+4\left(\lambda^5r^{-12} - \lambda^3r^{-6}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="235" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img856.png"
+ ALT="$\displaystyle U_{\rm LJ,\lambda}\left(r;\lambda\right) = 4\left(\lambda^5r^{-12} - \lambda^3r^{-6}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">325</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+So, the total potential is given by 
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{U} = {\sum_{i<j}} ^\prime U_{\rm LJ}\left(r_{ij}\right)
++ \sum_i U_{\rm LJ,\lambda}\left(r_{i,i_\lambda};\lambda\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="271" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img857.png"
+ ALT="$\displaystyle \mathscr{U} = {\sum_{i&lt;j}} ^\prime U_{\rm LJ}\left(r_{ij}\right) + \sum_i U_{\rm LJ,\lambda}\left(r_{i,i_\lambda};\lambda\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">326</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where the prime denotes that we ignore particle <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img855.png"
+ ALT="$ i_\lambda$"></SPAN> in the
+sum.  When <!-- MATH
+ $\lambda = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img840.png"
+ ALT="$ \lambda = 1$"></SPAN>, all particles interact fully, and we have
+System II.
+
+<P>
+Next, we conduct many independent MC simulations at various values of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> and a given value of <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>, generating for each
+<!-- MATH
+ $\left(T,\rho\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img858.png"
+ ALT="$ \left(T,\rho\right)$"></SPAN> a table of
+<!-- MATH
+ $\left<\partial\mathscr{U}/\partial\lambda\right>_\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img859.png"
+ ALT="$ \left&lt;\partial\mathscr{U}/\partial\lambda\right&gt;_\lambda$"></SPAN>
+vs. <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> which can be integrated to yield a single value for
+<!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN>.  The code <code>mclj_ti.c</code> implements this sampling when 
+a value for <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> is specified.  To demonstrate its use to compute <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN>, the following protocol was used:
+
+<P>
+
+<OL>
+<LI>Run 600,000-cycle NVT <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN>-MC simulations at given density <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> and temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> (with <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> = 216 particles) for values of <!-- MATH
+ $\lambda\in\left\{0,0.1,0.2,\dots,1\right\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="154" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img860.png"
+ ALT="$ \lambda\in\left\{0,0.1,0.2,\dots,1\right\}$"></SPAN> to compute <!-- MATH
+ $\langle d\mathscr{U}/d\lambda\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img861.png"
+ ALT="$ \langle d\mathscr{U}/d\lambda\rangle$"></SPAN>.  Three independent simulations are run for each <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN>-<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> point, and <!-- MATH
+ $\langle d\mathscr{U}/d\lambda\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img861.png"
+ ALT="$ \langle d\mathscr{U}/d\lambda\rangle$"></SPAN> is an average over these three.
+</LI>
+<LI>Use Simpson's rule in <code>scipy.integrate.simpson</code> to numerically integrate <!-- MATH
+ $\langle d\mathscr{U}/d\lambda\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img861.png"
+ ALT="$ \langle d\mathscr{U}/d\lambda\rangle$"></SPAN> vs. <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> to obtain <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN>.
+</LI>
+</OL>
+
+<P>
+This turns out to be an expensive way to compute the
+chemical potential for a Lennard-Jones fluid, compared to the Widom
+method (Sec.&nbsp;<A HREF="node73.html#sec:widom">9.1</A>) or grand canonical MC (Sec.&nbsp;<A HREF="node47.html#sec:ens:mc">5.1</A>), for at least low to moderate densities.  At very high densities, however, particle insertion moves in grand canonical and Widom-method simulations become difficult.  Fig.&nbsp;<A HREF="#fig:mcti">40</A> shows a plot of <!-- MATH
+ $\langle d\mathscr{U}/d\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$ \langle d\mathscr {U}/d\lambda $"></SPAN> vs. <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> for various densities, all at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 3.0 (left), with values of <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN> found from integrating those curves shown together with the data from Fig.&nbsp;<A HREF="node73.html#fig:widom">39</A> showing <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN> from both grand canonical MC and the Widom method.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:mcti"></A><A NAME="9119"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 40:</STRONG>
+(left) <!-- MATH
+ $\langle d\mathscr{U}/d\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$ \langle d\mathscr {U}/d\lambda $"></SPAN>
+vs. <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> for the Lennard-Jones fluid for three  values of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 3.0, computed from MC simulations of 216 particles for
+6<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$ \times $"></SPAN>10<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img43.png"
+ ALT="$ ^6$"></SPAN> cycles. Five independent simulations were run for each <!-- MATH
+ $(\rho,\lambda)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img44.png"
+ ALT="$ (\rho ,\lambda )$"></SPAN>, and values of <!-- MATH
+ $\langle d\mathscr{U}/d\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$ \langle d\mathscr {U}/d\lambda $"></SPAN> are averaged over these five.  Standard deviations a smaller than the symbol size.  (right) Overlay of <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN> vs <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> at <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="$ T$"></SPAN> = 3.0 using grand canonical MC, the Widom method, and thermodynamic integration.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV>    <IMG
+  WIDTH="471" HEIGHT="393" ALIGN="BOTTOM" BORDER="0"
+ SRC="./dudl-v-l.png"
+ ALT="Image dudl-v-l">
+    <IMG
+  WIDTH="544" HEIGHT="449" ALIGN="BOTTOM" BORDER="0"
+ SRC="./muvt-widom-ti.png"
+ ALT="Image muvt-widom-ti"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+The curves of <!-- MATH
+ $\langle d\mathscr{U}/d\lambda\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img861.png"
+ ALT="$ \langle d\mathscr{U}/d\lambda\rangle$"></SPAN> vs <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img42.png"
+ ALT="$ \lambda$"></SPAN> are not completely noise-free, but
+integrating each of these curves to produce a single value of <!-- MATH
+ $\mu_{\rm ex}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$ \mu _{\rm ex}$"></SPAN> produces values that are not too off from the grand canonical and Widom-method simulations.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html949"
+  HREF="node75.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html947"
+  HREF="node72.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html941"
+  HREF="node73.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html950"
+  HREF="node75.html">The Method of Overlapping</A>
+<B> Up:</B> <A NAME="tex2html948"
+  HREF="node72.html">Free Energy Methods</A>
+<B> Previous:</B> <A NAME="tex2html942"
+  HREF="node73.html">Excess Chemical Potential via</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

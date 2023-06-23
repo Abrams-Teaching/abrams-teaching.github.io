@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>The Change in Energy upon a Proposed Spin Flip</TITLE>
+<META NAME="description" CONTENT="The Change in Energy upon a Proposed Spin Flip">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html346"
+  HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html344"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html338"
+  HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html347"
+  HREF="node18.html">Initialize all Spin Values</A>
+<B> Up:</B> <A NAME="tex2html345"
+  HREF="node13.html">Case Study 1: The</A>
+<B> Previous:</B> <A NAME="tex2html339"
+  HREF="node16.html">Headers</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00032400000000000000">
+The Change in Energy upon a Proposed Spin Flip</A>
+</H3>
+<code>dE()</code> is function that accepts as arguments the 2D array of spins, <code>M</code>; the
+side-length, <code>L</code>, and a position <SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$ (i,j)$"></SPAN>, and returns the <EM>change</EM> in
+energy (in units of <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img261.png"
+ ALT="$ J$"></SPAN>) upon flipping spin <SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$ (i,j)$"></SPAN>, without <EM>actually</EM> flipping it.
+All variables are of integer type, <code>int</code>.  The syntax <code>** M</code>
+means that <code>M</code> is a pointer to a pointer to an <code>int</code>, signifying that <code>M</code> is a 2D array.  To access element in row <code>i</code> and column <code>j</code> in <code>M</code>, the syntax is <code>M[i][j]</code>.  In C, all array indices start at 0, so <code>M[0][0]</code> refers to the &ldquo;upper-left&rdquo; corner of the magnet (assuming row numbers increase going down the magnet).
+The inline conditional syntax <code>i?(i-1):(L-1)</code> expands as, &ldquo;If <code>i</code> is non-zero, return <code>i-1</code>;
+otherwise, return <code>L-1</code>.&rdquo;  This
+implements periodic boundaries when looking to the <EM>west</EM> of spin
+<code>M[i][j]</code>.  The syntax <code>(i+1)\%L</code> returns computes <!-- MATH
+ $(i+1)\mod L$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="106" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img276.png"
+ ALT="$ (i+1)\mod L$"></SPAN>,  which
+also implements periodic boundaries when looking to the <EM>east</EM> of
+spin <code>M[i][j]</code>.
+<PRE>
+int dE ( int ** M, int L, int i, int j ) {
+  return -2*(M[i][j])*(M[i?(i-1):(L-1)][j]+M[(i+1)%L][j]+
+		      M[i][j?(j-1):(L-1)]+M[i][(j+1)%L]);
+}
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Equilibration and Decorrelation</TITLE>
+<META NAME="description" CONTENT="Equilibration and Decorrelation">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node44.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node41.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html617"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html615"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html609"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html618"
+  HREF="node44.html">Radial Distribution Functions and</A>
+<B> Up:</B> <A NAME="tex2html616"
+  HREF="node41.html">Case Study 2: Static</A>
+<B> Previous:</B> <A NAME="tex2html610"
+  HREF="node42.html">Running the code</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00043200000000000000">
+Equilibration and Decorrelation</A>
+</H3>
+
+<P>
+An important purpose of this case study is to quantify the
+notion of &ldquo;equilibration&rdquo; of the system by assessing correlations in
+(apparently) randomly fluctuating quantities like potential energy.
+Remember, in order to perform accurate ensemble averaging over an MD
+trajectory, we have to be sure that correlations in the properties we
+are measuring have &ldquo;died out.&rdquo;  This is another way of saying that
+the length of the time interval over which we conduct the <EM>time
+average</EM> must be much longer than the correlation time.
+In this case study, we illustrate the &ldquo;block averaging&rdquo; technique of
+Flyvbjerg and Petersen&nbsp;[<A
+ HREF="node82.html#Flyvberg1989">7</A>] to determine the
+equilibration time-scale of the potential energy.
+
+<P>
+First, compute the variance of the <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN> samples of <!-- MATH
+ $\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img374.png"
+ ALT="$ \mathscr{U}$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\sigma^2_0\left({\mathscr{U}}\right) \approx \frac{1}{L}\sum_{i=1}^{L}\left[\mathscr{U}_i - \bar{\mathscr{U}}\right]^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="191" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img460.png"
+ ALT="$\displaystyle \sigma^2_0\left({\mathscr{U}}\right) \approx \frac{1}{L}\sum_{i=1}^{L}\left[\mathscr{U}_i - \bar{\mathscr{U}}\right]^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">155</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+This is approximate because of so far undetermined time-correlations
+in <!-- MATH
+ $\mathscr{U}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img374.png"
+ ALT="$ \mathscr{U}$"></SPAN>; that is, not all <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img274.png"
+ ALT="$ L$"></SPAN> samples are uncorrelated.  For
+example, two samples one time-step apart will likely be very close to
+one another.  Now, we block the data by averaging <SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ L/2$"></SPAN> pairs of adjacent
+values:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathscr{U}_i^{(1)} = \frac{\mathscr{U}_{2i-1} + \mathscr{U}_{2i}}{2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="147" HEIGHT="51" ALIGN="MIDDLE" BORDER="0"
+ SRC="img461.png"
+ ALT="$\displaystyle \mathscr{U}_i^{(1)} = \frac{\mathscr{U}_{2i-1} + \mathscr{U}_{2i}}{2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">156</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+The <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img462.png"
+ ALT="$ (1)$"></SPAN> superscript indicates that this is a &ldquo;first-generation&rdquo;
+coarsening of the potential energy trace.  The variance of this new
+set, <!-- MATH
+ $\sigma^2_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img463.png"
+ ALT="$ \sigma^2_1$"></SPAN> is computed.  Then the process is recursively
+carried out through many subsequent generations.  After many blocking
+operations, the coarsened samples, <!-- MATH
+ $\mathscr{U}_i^{(j)}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img464.png"
+ ALT="$ \mathscr{U}_i^{(j)}$"></SPAN>, become
+uncorrelated, and the variance saturates (temporarily).  This means we
+should observe a plateau in a plot of variance vs generation.  The Python program <code>flyvberg.py</code> implements this calculation using outputs of <code>mdlj.c</code> as inputs.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="3669"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 16:</STRONG>
+The standard deviation, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>, of
+potential energy per particle vs. number of blocking operations <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN>
+for a simulations of 150,000 and 600,000 time-steps: initial temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$ T_0$"></SPAN> = 0.729, density <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.8442, number of particles <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> = 108.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="485" HEIGHT="371" ALIGN="BOTTOM" BORDER="0"
+ SRC="./flyvberg-108.png"
+ ALT="Image flyvberg-108"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+According to the discussion of this blocking technique, the standard
+deviation shows a dependence on the blocking degree, <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ M$"></SPAN>, when the
+blocked averages are correlated, and plateaus at a blocking degree for
+which the averages become uncorrelated.  This blocking degree
+corresponds to a time interval of length <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img465.png"
+ ALT="$ 2^M$"></SPAN>.  This data indicates
+that potential energy decorrelates after a time of approximately
+<!-- MATH
+ $2^{10} \approx 1000$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="78" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img466.png"
+ ALT="$ 2^{10} \approx 1000$"></SPAN>&nbsp;steps.  This is a reassuring result, as we could
+have guessed that 1000 steps are required based on the initial
+transience in the energy traces seen in the previous figure.  I ran
+three independent simulations, each differing only in the random
+number seed used.  The results are shown in Table&nbsp;<A HREF="#tbl:mdlj_results1">1</A>.
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="3880"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table 1:</STRONG>
+ Average potential energy per particle <!-- MATH
+ $\mathscr{U}/N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.png"
+ ALT="$ \mathscr {U}/N$"></SPAN>, kinetic energy <!-- MATH
+ $\mathscr{K}/N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$ \mathscr {K}/N$"></SPAN>, total energy <!-- MATH
+ $\mathscr{T}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img19.png"
+ ALT="$ \mathscr {T}$"></SPAN>/N, and pressure <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ P$"></SPAN> (all in Lennard-Jones units) for three distinct <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN>=108 particle systems run for 600,000 time steps at number density <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$ \rho $"></SPAN> = 0.8442 and initial temperature <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$ T_0$"></SPAN> of 0.728.</CAPTION>
+<TR><TD ALIGN="LEFT">Run</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\left<\mathscr{U}\right>/N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img467.png"
+ ALT="$ \left&lt;\mathscr{U}\right&gt;/N$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\left<\mathscr{K}\right>/N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="60" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img468.png"
+ ALT="$ \left&lt;\mathscr{K}\right&gt;/N$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\left<\mathscr{T}\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img469.png"
+ ALT="$ \left&lt;\mathscr{T}\right&gt;$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\left<P\right>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img470.png"
+ ALT="$ \left&lt;P\right&gt;$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="LEFT">1</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $-4.4165 \pm 0.0012$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="124" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img471.png"
+ ALT="$ -4.4165 \pm 0.0012$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $2.2577 \pm 0.0012$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img472.png"
+ ALT="$ 2.2577 \pm 0.0012$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $1.5051 \pm 0.0008$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img473.png"
+ ALT="$ 1.5051 \pm 0.0008$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $5.1960 \pm 0.0057$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img474.png"
+ ALT="$ 5.1960 \pm 0.0057$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="LEFT">2</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $-4.4188 \pm 0.0010$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="124" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img475.png"
+ ALT="$ -4.4188 \pm 0.0010$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $2.2597 \pm 0.0010$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img476.png"
+ ALT="$ 2.2597 \pm 0.0010$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $1.5064 \pm 0.0007$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img477.png"
+ ALT="$ 1.5064 \pm 0.0007$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $5.1948 \pm 0.0050$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img478.png"
+ ALT="$ 5.1948 \pm 0.0050$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="LEFT">3</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $-4.4157 \pm 0.0011$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="124" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img479.png"
+ ALT="$ -4.4157 \pm 0.0011$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $2.2564 \pm 0.0011$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img480.png"
+ ALT="$ 2.2564 \pm 0.0011$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $1.5043 \pm 0.0008$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img481.png"
+ ALT="$ 1.5043 \pm 0.0008$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $5.2022 \pm 0.0055$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img482.png"
+ ALT="$ 5.2022 \pm 0.0055$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="LEFT">Avg.</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $-4.4170 \pm 0.0011$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="124" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img483.png"
+ ALT="$ -4.4170 \pm 0.0011$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $2.2579 \pm 0.0011$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img484.png"
+ ALT="$ 2.2579 \pm 0.0011$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $1.5053 \pm 0.0008$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img485.png"
+ ALT="$ 1.5053 \pm 0.0008$"></SPAN></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $5.1977 \pm 0.0054$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="112" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img486.png"
+ ALT="$ 5.1977 \pm 0.0054$"></SPAN></TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html617"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html615"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html609"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html618"
+  HREF="node44.html">Radial Distribution Functions and</A>
+<B> Up:</B> <A NAME="tex2html616"
+  HREF="node41.html">Case Study 2: Static</A>
+<B> Previous:</B> <A NAME="tex2html610"
+  HREF="node42.html">Running the code</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>

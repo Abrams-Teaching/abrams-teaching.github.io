@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2017.2 (Released Jan 23, 2017) -->
+<HTML>
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="msim2">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2017.2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="msim2.css">
+
+<LINK REL="next" HREF="node40.html">
+<LINK REL="previous" HREF="node38.html">
+<LINK REL="up" HREF="node38.html">
+<LINK REL="next" HREF="node40.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html576"
+  HREF="node40.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html574"
+  HREF="node38.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html568"
+  HREF="node38.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html577"
+  HREF="node40.html">The Code</A>
+<B> Up:</B> <A NAME="tex2html575"
+  HREF="node38.html">Case Study 1: An</A>
+<B> Previous:</B> <A NAME="tex2html569"
+  HREF="node38.html">Case Study 1: An</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00042100000000000000">
+Introduction</A>
+</H3>
+
+<P>
+Let us consider a few of the important elements of any MD program:
+
+<OL>
+<LI>Force evaluation;
+</LI>
+<LI>Integration; and
+</LI>
+<LI>Configuration output.
+</LI>
+</OL>
+
+<P>
+We will understand these elements by manipulating an existing
+simulation program that implements the <EM>Lennard-Jones fluid</EM>
+(which you may recall was analyzed using Metropolis Monte-Carlo
+simulation in Sec.&nbsp;<A HREF="node11.html#sec:mc">3</A>).  The program is called <code>mdlj.c</code> in the
+instructional codes repository.  
+
+<P>
+Recall the Lennard-Jones pair
+potential:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:lj"></A><!-- MATH
+ \begin{equation}
+u\left(r\right) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12}-
+	\left(\frac{\sigma}{r}\right)^{6}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="196" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img450.png"
+ ALT="$\displaystyle u\left(r\right) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12}- \left(\frac{\sigma}{r}\right)^{6}\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">150</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+When implementing this in an MD code, similar to its implementation in
+MC, we adopt a reduced unit system, in which we measure length in
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \sigma $"></SPAN>, and energy in <SPAN CLASS="MATH"><IMG
+ WIDTH="10" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img296.png"
+ ALT="$ \epsilon$"></SPAN>.  Additionally, for MD, we need to
+measure mass, and we adopt units of particle mass, <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN>.  This
+convention makes the force on a particle <EM>numerically equivalent</EM>
+to its acceleration.  With these conventions, time is a derived unit:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+t [=] \sigma\sqrt{m/\epsilon}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="85" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="img451.png"
+ ALT="$\displaystyle t [=] \sigma\sqrt{m/\epsilon}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">151</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We also measure reduced temperature in units of <!-- MATH
+ $\epsilon/k_B$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img452.png"
+ ALT="$ \epsilon/k_B$"></SPAN>; so for
+a system of identical Lennard-Jones particles:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:md:T"></A><!-- MATH
+ \begin{equation}
+\frac{3}{2}NT = \mathscr{K} = \frac{1}{2}\sum_{i=1}^{N}\left|{\bf v}_i\right|^2
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="174" HEIGHT="67" ALIGN="MIDDLE" BORDER="0"
+ SRC="img453.png"
+ ALT="$\displaystyle \frac{3}{2}NT = \mathscr{K} = \frac{1}{2}\sum_{i=1}^{N}\left\vert{\bf v}_i\right\vert^2$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">152</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+(Recall that the mass <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="$ m$"></SPAN> is 1 in Lennard-Jones reduced units.)
+These conventions obviate the need to perform unit conversions in the code.
+
+<P>
+We have already encountered interparticle forces for the Lennard-Jones
+pair potential in the context of computing the pressure from the
+virial in the MC simulation of the LJ fluid (Sec.&nbsp;<A HREF="node33.html#sec:cs4">3.6</A>).  Briefly,
+the force exerted on particle <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> by virtue of its Lennard-Jones interaction
+with particle <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>, <!-- MATH
+ ${\bf f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$ {\bf f}_{ij}$"></SPAN>, is given by:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+{\bf f}_{ij}\left(r_{ij}\right) = \frac{{\bf r}_{ij}}{r_{ij}^2}\left\{48\epsilon\left[\left(\frac{\sigma}{r_{ij}}\right)^{12} - \frac{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right]\right\} \equiv {\bf r}_{ij}f.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="368" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img454.png"
+ ALT="$\displaystyle {\bf f}_{ij}\left(r_{ij}\right) = \frac{{\bf r}_{ij}}{r_{ij}^2}\l...
+...{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right]\right\} \equiv {\bf r}_{ij}f.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">153</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+And, as shown in the previous section, once we have computed the
+vector <!-- MATH
+ ${\bf f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$ {\bf f}_{ij}$"></SPAN>, we automatically have <!-- MATH
+ ${\bf f}_{ji}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img455.png"
+ ALT="$ {\bf f}_{ji}$"></SPAN>, because
+<!-- MATH
+ ${\bf f}_{ij} = -{\bf f}_{ji}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="71" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img456.png"
+ ALT="$ {\bf f}_{ij} = -{\bf f}_{ji}$"></SPAN>.  The scalar <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN> is called a &ldquo;force
+factor.&rdquo;  If <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN> is negative, the force vector <!-- MATH
+ ${\bf f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$ {\bf f}_{ij}$"></SPAN> points
+from <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>, meaning <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> is <EM>attracted</EM> to <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.  Likewise, if
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN> is positive, the force vector <!-- MATH
+ ${\bf f}_{ij}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$ {\bf f}_{ij}$"></SPAN> points from <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN> to
+<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN>, meaning that <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img22.png"
+ ALT="$ i$"></SPAN> is being forced <EM>away</EM> from <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$ j$"></SPAN>.
+
+<P>
+Below is a C-code fragment for computing both the total potential
+energy <EM>and</EM> interparticle forces:
+<PRE>
+ double forces ( double * rx, double * ry, double * rz, 
+ 	             double * fx, double * fy, double * fz, 
+ 	             int n ) {
+  int i,j;
+  double dx, dy, dz, r2, r6, r12;
+  double e = 0.0, f = 0.0;
+ 
+  for (i=0;i&lt;n;i++) {
+    fx[i] = 0.0;
+    fy[i] = 0.0;
+    fz[i] = 0.0;
+  }
+  for (i=0;i&lt;(n-1);i++) {
+    for (j=i+1;j&lt;n;j++) {
+      dx     = rx[i]-rx[j];
+      dy     = ry[i]-ry[j];
+      dz     = rz[i]-rz[j];
+      r2     = dx*dx + dy*dy + dz*dz;
+      r6i    = 1.0/(r2*r2*r2);
+      r12i   = r6i*r6i;
+      e     += 4*(r12i - r6i);
+      f      = 48/r2*(r6i*r6i-0.5*r6i);
+      fx[i] += dx*f;
+      fx[j] -= dx*f;
+      fy[i] += dy*f;
+      fy[j] -= dy*f;
+      fz[i] += dz*f;
+      fz[j] -= dz*f;
+    }
+  }
+  return e;
+}
+</PRE>
+Notice that the argument list now includes arrays for the forces, and
+because force is a vector quantity, we have three parallel arrays for
+a three-dimensional system.  These forces must of course be
+initialized, shown in lines 6-10.  The <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img298.png"
+ ALT="$ N^2$"></SPAN> loop for visiting all
+unique pairs of particles is opened on lines 11-12.  The inside of
+this loop is very similar to the evaluation of potential first
+presented in the MC simulation of the Lennard-Jones fluid; the only
+real difference is the computation of the &ldquo;force factor,&rdquo; <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ f$"></SPAN>, on
+line 20, and the subsequent increment of force vector components
+on lines 21-26.  Notice as well that there is no implementation of
+periodic boundary conditions in this code fragment; it was left out
+for simplicity.  What would this &ldquo;missing&rdquo; code do?  (Hint:  look
+at the code <EM>mdlj.c</EM> for the answer.)
+
+<P>
+The second major aspect of MD is the integrator.  As discussed in
+class, we will primarily use Verlet-style (explicit) integrators.  The
+most common version is the velocity-Verlet algorithm&nbsp;[<A
+ HREF="node82.html#Swope1982">5</A>],
+first presented in Sec.&nbsp;<A HREF="node36.html#sec:nmni">4.1.1</A>.  Below is a fragment of C-code
+for executing one time step of integration for a system of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="$ N$"></SPAN> particles:
+<PRE>
+for (i=0;i&lt;N;i++) {
+  rx[i]+=vx[i]*dt+0.5*dt2*fx[i];
+  ry[i]+=vy[i]*dt+0.5*dt2*fy[i];
+  rz[i]+=vz[i]*dt+0.5*dt2*fz[i];
+  vx[i]+=0.5*dt*fx[i];
+  vy[i]+=0.5*dt*fy[i];
+  vz[i]+=0.5*dt*fz[i];
+}
+
+PE = total_e(rx,ry,rz,fx,fy,fz,N,L,rc2,ecor,ecut,&amp;vir);
+      
+KE = 0.0;
+for (i=0;i&lt;N;i++) {
+  vx[i]+=0.5*dt*fx[i];
+  vy[i]+=0.5*dt*fy[i];
+  vz[i]+=0.5*dt*fz[i];
+  KE+=vx[i]*vx[i]+vy[i]*vy[i]+vz[i]*vz[i];
+}
+KE*=0.5;
+</PRE>
+
+<P>
+Notice the update of positions 
+(Eq.&nbsp;<A HREF="node36.html#eq:vv:pos">125</A>), where <code>vx[i]</code> is the <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img255.png"
+ ALT="$ x$"></SPAN>-component of
+velocity, <code>fx[i]</code> is the <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img255.png"
+ ALT="$ x$"></SPAN>-component of force, <code>dt</code> and <TT>dt2</TT> are the time-step and squared time-step, respectively.  Notice
+that there is <EM>no</EM> implementation of periodic boundaries in this
+code fragment; what would this &ldquo;missing code&rdquo; look like?  (Hint: see
+<EM>mdlj.c</EM> for the answer!)  Lines 5-7 are the first half-update of
+velocities (Eq.&nbsp;<A HREF="node36.html#eq:vv:first_half">126</A>).  The force routine computes
+the new forces on the currently updated configuration on line 10.
+Then, lines 12-18 perform the second-half of the velocity update
+(Eq.&nbsp;<A HREF="node36.html#eq:vv:second_half">127</A>).  Also note that the kinetic energy,
+<!-- MATH
+ $\mathscr{K}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \mathscr{K}$"></SPAN>, is computed in this loop.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html576"
+  HREF="node40.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html574"
+  HREF="node38.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html568"
+  HREF="node38.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html577"
+  HREF="node40.html">The Code</A>
+<B> Up:</B> <A NAME="tex2html575"
+  HREF="node38.html">Case Study 1: An</A>
+<B> Previous:</B> <A NAME="tex2html569"
+  HREF="node38.html">Case Study 1: An</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+cfa22@drexel.edu
+</ADDRESS>
+</BODY>
+</HTML>
